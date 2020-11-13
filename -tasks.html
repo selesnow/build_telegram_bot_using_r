@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Решение задач (tasks) | Разработка telegram ботов на языке R</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Решение задач (tasks) | Разработка telegram ботов на языке R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Решение задач (tasks) | Разработка telegram ботов на языке R" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Алексей Селезнёв" />
+
+
+<meta name="date" content="2020-11-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="-6.html"/>
+
+<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Разработка Telegram ботов на языке R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Введение</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#предисловие"><i class="fa fa-check"></i>Предисловие</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#навыки-необходимые-для-прохождения-учебника"><i class="fa fa-check"></i>Навыки необходимые для прохождения учебника</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#об-авторе"><i class="fa fa-check"></i>Об авторе</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#правки-и-предложения"><i class="fa fa-check"></i>Правки и предложения</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#поддержать-проект"><i class="fa fa-check"></i>Поддержать проект</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="-telegram-1.html"><a href="-telegram-1.html"><i class="fa fa-check"></i><b>1</b> Создаём бота, и отправляем с его помощью сообщения в telegram (1)</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="-telegram-1.html"><a href="-telegram-1.html#создание-телеграм-бота"><i class="fa fa-check"></i><b>1.1</b> Создание телеграм бота</a></li>
+<li class="chapter" data-level="1.2" data-path="-telegram-1.html"><a href="-telegram-1.html#установка-пакета-для-работы-с-телеграм-ботом-на-r"><i class="fa fa-check"></i><b>1.2</b> Установка пакета для работы с телеграм ботом на R</a></li>
+<li class="chapter" data-level="1.3" data-path="-telegram-1.html"><a href="-telegram-1.html#отправка-сообщений-из-r-в-telegram"><i class="fa fa-check"></i><b>1.3</b> Отправка сообщений из R в Telegram</a></li>
+<li class="chapter" data-level="1.4" data-path="-telegram-1.html"><a href="-telegram-1.html#как-отправить-в-telegram-таблицу"><i class="fa fa-check"></i><b>1.4</b> Как отправить в telegram таблицу</a></li>
+<li class="chapter" data-level="1.5" data-path="-telegram-1.html"><a href="-telegram-1.html#как-добавить-в-сообщение-emoji"><i class="fa fa-check"></i><b>1.5</b> Как добавить в сообщение Emoji</a></li>
+<li class="chapter" data-level="1.6" data-path="-telegram-1.html"><a href="-telegram-1.html#проверка-планировщика-задач-windows-и-отправка-уведомления-о-задачах-работа-которых-была-завершена-аварийно"><i class="fa fa-check"></i><b>1.6</b> Проверка планировщика задач Windows, и отправка уведомления о задачах, работа которых была завершена аварийно</a></li>
+<li class="chapter" data-level="1.7" data-path="-telegram-1.html"><a href="-telegram-1.html#настраиваем-расписание-запуска-проверки-задач"><i class="fa fa-check"></i><b>1.7</b> Настраиваем расписание запуска проверки задач</a></li>
+<li class="chapter" data-level="1.8" data-path="-telegram-1.html"><a href="-telegram-1.html#заключение"><i class="fa fa-check"></i><b>1.8</b> Заключение</a></li>
+<li class="chapter" data-level="1.9" data-path="-telegram-1.html"><a href="-telegram-1.html#тесты-и-задания"><i class="fa fa-check"></i><b>1.9</b> Тесты и задания</a>
+<ul>
+<li class="chapter" data-level="1.9.1" data-path="-telegram-1.html"><a href="-telegram-1.html#тесты"><i class="fa fa-check"></i><b>1.9.1</b> Тесты</a></li>
+<li class="chapter" data-level="1.9.2" data-path="-telegram-1.html"><a href="-telegram-1.html#задания"><i class="fa fa-check"></i><b>1.9.2</b> Задания</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="-updater-2.html"><a href="-updater-2.html"><i class="fa fa-check"></i><b>2</b> Добавляем боту поддержку команд и фильтры сообщений, класс Updater (2)</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="-updater-2.html"><a href="-updater-2.html#класс-updater"><i class="fa fa-check"></i><b>2.1</b> Класс Updater</a></li>
+<li class="chapter" data-level="2.2" data-path="-updater-2.html"><a href="-updater-2.html#handlers---обработчики"><i class="fa fa-check"></i><b>2.2</b> Handlers - обработчики</a></li>
+<li class="chapter" data-level="2.3" data-path="-updater-2.html"><a href="-updater-2.html#добавляем-первую-команду-боту-обработчик-команд"><i class="fa fa-check"></i><b>2.3</b> Добавляем первую команду боту, обработчик команд</a></li>
+<li class="chapter" data-level="2.4" data-path="-updater-2.html"><a href="-updater-2.html#обработчик-текстовых-сообщений-и-фильтры"><i class="fa fa-check"></i><b>2.4</b> Обработчик текстовых сообщений и фильтры</a></li>
+<li class="chapter" data-level="2.5" data-path="-updater-2.html"><a href="-updater-2.html#добавление-команд-с-параметрами"><i class="fa fa-check"></i><b>2.5</b> Добавление команд с параметрами</a></li>
+<li class="chapter" data-level="2.6" data-path="-updater-2.html"><a href="-updater-2.html#запускаем-бота-в-фоновом-режиме"><i class="fa fa-check"></i><b>2.6</b> Запускаем бота в фоновом режиме</a></li>
+<li class="chapter" data-level="2.7" data-path="-updater-2.html"><a href="-updater-2.html#как-добавить-бота-в-группу"><i class="fa fa-check"></i><b>2.7</b> Как добавить бота в группу</a></li>
+<li class="chapter" data-level="2.8" data-path="-updater-2.html"><a href="-updater-2.html#как-добавить-описание-команд-в-интерфейс-бота"><i class="fa fa-check"></i><b>2.8</b> Как добавить описание команд в интерфейс бота</a></li>
+<li class="chapter" data-level="2.9" data-path="-updater-2.html"><a href="-updater-2.html#заключение-1"><i class="fa fa-check"></i><b>2.9</b> Заключение</a></li>
+<li class="chapter" data-level="2.10" data-path="-updater-2.html"><a href="-updater-2.html#тесты-и-задания-1"><i class="fa fa-check"></i><b>2.10</b> Тесты и задания</a>
+<ul>
+<li class="chapter" data-level="2.10.1" data-path="-updater-2.html"><a href="-updater-2.html#тесты-1"><i class="fa fa-check"></i><b>2.10.1</b> Тесты</a></li>
+<li class="chapter" data-level="2.10.2" data-path="-updater-2.html"><a href="-updater-2.html#задания-1"><i class="fa fa-check"></i><b>2.10.2</b> Задания</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="-3.html"><a href="-3.html"><i class="fa fa-check"></i><b>3</b> Как добавить боту поддержку клавиатуры (3)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="-3.html"><a href="-3.html#какие-типы-клавиатур-поддерживает-телеграм-бот"><i class="fa fa-check"></i><b>3.1</b> Какие типы клавиатур поддерживает телеграм бот</a></li>
+<li class="chapter" data-level="3.2" data-path="-3.html"><a href="-3.html#reply-клавиатура"><i class="fa fa-check"></i><b>3.2</b> Reply клавиатура</a></li>
+<li class="chapter" data-level="3.3" data-path="-3.html"><a href="-3.html#inline-клавиатура"><i class="fa fa-check"></i><b>3.3</b> Inline клавиатура</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="-3.html"><a href="-3.html#пример-простейшего-бота-с-поддержкой-inline-кнопок"><i class="fa fa-check"></i><b>3.3.1</b> Пример простейшего бота с поддержкой InLine кнопок</a></li>
+<li class="chapter" data-level="3.3.2" data-path="-3.html"><a href="-3.html#пример-бота-который-сообщает-текущую-погоду-по-выбранному-городу"><i class="fa fa-check"></i><b>3.3.2</b> Пример бота, который сообщает текущую погоду по выбранному городу</a></li>
+<li class="chapter" data-level="3.3.3" data-path="-3.html"><a href="-3.html#пример-бота-который-выводит-список-самых-свежих-статей-со-ссылками-по-указанному-хабу-из-habr.com."><i class="fa fa-check"></i><b>3.3.3</b> Пример бота, который выводит список самых свежих статей со ссылками по-указанному Хабу из <span>habr.com</span>.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="-3.html"><a href="-3.html#заключение-2"><i class="fa fa-check"></i><b>3.4</b> Заключение</a></li>
+<li class="chapter" data-level="3.5" data-path="-3.html"><a href="-3.html#тесты-и-задания-2"><i class="fa fa-check"></i><b>3.5</b> Тесты и задания</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="-3.html"><a href="-3.html#тесты-2"><i class="fa fa-check"></i><b>3.5.1</b> Тесты</a></li>
+<li class="chapter" data-level="3.5.2" data-path="-3.html"><a href="-3.html#задания-2"><i class="fa fa-check"></i><b>3.5.2</b> Задания</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="-4.html"><a href="-4.html"><i class="fa fa-check"></i><b>4</b> Построение последовательного, логического диалога с ботом (4)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="-4.html"><a href="-4.html#введение-1"><i class="fa fa-check"></i><b>4.1</b> Введение</a></li>
+<li class="chapter" data-level="4.2" data-path="-4.html"><a href="-4.html#процесс-построения-бота"><i class="fa fa-check"></i><b>4.2</b> Процесс построения бота</a></li>
+<li class="chapter" data-level="4.3" data-path="-4.html"><a href="-4.html#структура-проекта-бота"><i class="fa fa-check"></i><b>4.3</b> Структура проекта бота</a></li>
+<li class="chapter" data-level="4.4" data-path="-4.html"><a href="-4.html#конфиг-бота"><i class="fa fa-check"></i><b>4.4</b> Конфиг бота</a></li>
+<li class="chapter" data-level="4.5" data-path="-4.html"><a href="-4.html#создаём-переменную-среды"><i class="fa fa-check"></i><b>4.5</b> Создаём переменную среды</a></li>
+<li class="chapter" data-level="4.6" data-path="-4.html"><a href="-4.html#создаём-базу-данных"><i class="fa fa-check"></i><b>4.6</b> Создаём базу данных</a></li>
+<li class="chapter" data-level="4.7" data-path="-4.html"><a href="-4.html#пишем-функции-для-работы-с-базой-данных"><i class="fa fa-check"></i><b>4.7</b> Пишем функции для работы с базой данных</a></li>
+<li class="chapter" data-level="4.8" data-path="-4.html"><a href="-4.html#методы-бота"><i class="fa fa-check"></i><b>4.8</b> Методы бота</a></li>
+<li class="chapter" data-level="4.9" data-path="-4.html"><a href="-4.html#фильтры-сообщений"><i class="fa fa-check"></i><b>4.9</b> Фильтры сообщений</a></li>
+<li class="chapter" data-level="4.10" data-path="-4.html"><a href="-4.html#обработчики"><i class="fa fa-check"></i><b>4.10</b> Обработчики</a></li>
+<li class="chapter" data-level="4.11" data-path="-4.html"><a href="-4.html#код-запуска-бота"><i class="fa fa-check"></i><b>4.11</b> Код запуска бота</a></li>
+<li class="chapter" data-level="4.12" data-path="-4.html"><a href="-4.html#заключение-3"><i class="fa fa-check"></i><b>4.12</b> Заключение</a></li>
+<li class="chapter" data-level="4.13" data-path="-4.html"><a href="-4.html#тесты-и-задания-3"><i class="fa fa-check"></i><b>4.13</b> Тесты и задания</a>
+<ul>
+<li class="chapter" data-level="4.13.1" data-path="-4.html"><a href="-4.html#тесты-3"><i class="fa fa-check"></i><b>4.13.1</b> Тесты</a></li>
+<li class="chapter" data-level="4.13.2" data-path="-4.html"><a href="-4.html#задания-3"><i class="fa fa-check"></i><b>4.13.2</b> Задания</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="-5.html"><a href="-5.html"><i class="fa fa-check"></i><b>5</b> Управление правами пользователей бота (5)</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="-5.html"><a href="-5.html#введение-2"><i class="fa fa-check"></i><b>5.1</b> Введение</a></li>
+<li class="chapter" data-level="5.2" data-path="-5.html"><a href="-5.html#ограничиваем-права-пользователя-с-помощью-фильтров-сообщений"><i class="fa fa-check"></i><b>5.2</b> Ограничиваем права пользователя с помощью фильтров сообщений</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="-5.html"><a href="-5.html#ограничиваем-права-на-уровне-имени-пользователя"><i class="fa fa-check"></i><b>5.2.1</b> Ограничиваем права на уровне имени пользователя</a></li>
+<li class="chapter" data-level="5.2.2" data-path="-5.html"><a href="-5.html#ограничиваем-права-на-уровне-чата"><i class="fa fa-check"></i><b>5.2.2</b> Ограничиваем права на уровне чата</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="-5.html"><a href="-5.html#ограничиваем-права-пользователя-внутри-кода-методов"><i class="fa fa-check"></i><b>5.3</b> Ограничиваем права пользователя внутри кода методов</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="-5.html"><a href="-5.html#ограничиваем-права-на-уровне-имени-пользователя-1"><i class="fa fa-check"></i><b>5.3.1</b> Ограничиваем права на уровне имени пользователя</a></li>
+<li class="chapter" data-level="5.3.2" data-path="-5.html"><a href="-5.html#ограничиваем-права-на-уровне-чата-1"><i class="fa fa-check"></i><b>5.3.2</b> Ограничиваем права на уровне чата</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="-5.html"><a href="-5.html#заключение-4"><i class="fa fa-check"></i><b>5.4</b> Заключение</a></li>
+<li class="chapter" data-level="5.5" data-path="-5.html"><a href="-5.html#тесты-и-задания-4"><i class="fa fa-check"></i><b>5.5</b> Тесты и задания</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="-5.html"><a href="-5.html#тесты-4"><i class="fa fa-check"></i><b>5.5.1</b> Тесты</a></li>
+<li class="chapter" data-level="5.5.2" data-path="-5.html"><a href="-5.html#задания-4"><i class="fa fa-check"></i><b>5.5.2</b> Задания</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="-6.html"><a href="-6.html"><i class="fa fa-check"></i><b>6</b> Повышаем стабильность работы бота (6)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="-6.html"><a href="-6.html#конструкция-trycatch"><i class="fa fa-check"></i><b>6.1</b> Конструкция tryCatch()</a></li>
+<li class="chapter" data-level="6.2" data-path="-6.html"><a href="-6.html#логика-работы-конструкции-trycatch"><i class="fa fa-check"></i><b>6.2</b> Логика работы конструкции tryCatch()</a></li>
+<li class="chapter" data-level="6.3" data-path="-6.html"><a href="-6.html#используем-trycatch-внутри-бота"><i class="fa fa-check"></i><b>6.3</b> Используем tryCatch() внутри бота</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач (tasks)</a>
+<ul>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-1.1"><i class="fa fa-check"></i>Задача 1.1</a></li>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-2.1"><i class="fa fa-check"></i>Задача 2.1</a></li>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-3.1"><i class="fa fa-check"></i>Задача 3.1</a></li>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-4.1"><i class="fa fa-check"></i>Задача 4.1</a></li>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-5.1"><i class="fa fa-check"></i>Задача 5.1</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://t.me/R4marketing" target="blank">Канал R4marketing</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Разработка telegram ботов на языке R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="решение-задач-tasks" class="section level1 unnumbered">
+<h1>Решение задач (tasks)</h1>
+<p>В этом разделе книги приведены решения всех, представленных в учебнике задач.</p>
+<div id="задача-1.1" class="section level2 unnumbered">
+<h2>Задача 1.1</h2>
+<ol style="list-style-type: decimal">
+<li>Создайте с помощью <a href="http://t.me/BotFather">BotFather</a> бота.</li>
+<li>Перейдите к диалогу с ботом, и узнайте идентификатор вашего с ботом чата.</li>
+<li>Отправьте с помощью созданного бота в telegram первые 20 строк из встроенного в R набора данных <code>ToothGrowth</code>.</li>
+</ol>
+<p><em>Решение:</em></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="-tasks.html#cb68-1" aria-hidden="true"></a><span class="kw">library</span>(purrr)</span>
+<span id="cb68-2"><a href="-tasks.html#cb68-2" aria-hidden="true"></a><span class="kw">library</span>(tidyr)</span>
+<span id="cb68-3"><a href="-tasks.html#cb68-3" aria-hidden="true"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb68-4"><a href="-tasks.html#cb68-4" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
+<span id="cb68-5"><a href="-tasks.html#cb68-5" aria-hidden="true"></a></span>
+<span id="cb68-6"><a href="-tasks.html#cb68-6" aria-hidden="true"></a><span class="co"># функция для перевода data.frame в telegram таблицу </span></span>
+<span id="cb68-7"><a href="-tasks.html#cb68-7" aria-hidden="true"></a>to_tg_table &lt;-<span class="st"> </span><span class="cf">function</span>( table, <span class="dt">align =</span> <span class="ot">NULL</span>, <span class="dt">indents =</span> <span class="dv">3</span>, <span class="dt">parse_mode =</span> <span class="st">&#39;Markdown&#39;</span> ) {</span>
+<span id="cb68-8"><a href="-tasks.html#cb68-8" aria-hidden="true"></a>  </span>
+<span id="cb68-9"><a href="-tasks.html#cb68-9" aria-hidden="true"></a>  <span class="co"># если выравнивание не задано то выравниваем по левому краю</span></span>
+<span id="cb68-10"><a href="-tasks.html#cb68-10" aria-hidden="true"></a>  <span class="cf">if</span> ( <span class="kw">is.null</span>(align) ) {</span>
+<span id="cb68-11"><a href="-tasks.html#cb68-11" aria-hidden="true"></a>    </span>
+<span id="cb68-12"><a href="-tasks.html#cb68-12" aria-hidden="true"></a>    col_num &lt;-<span class="st"> </span><span class="kw">length</span>(table)</span>
+<span id="cb68-13"><a href="-tasks.html#cb68-13" aria-hidden="true"></a>    align   &lt;-<span class="st"> </span><span class="kw">str_c</span>( <span class="kw">rep</span>(<span class="st">&#39;l&#39;</span>, col_num), <span class="dt">collapse =</span> <span class="st">&#39;&#39;</span> )</span>
+<span id="cb68-14"><a href="-tasks.html#cb68-14" aria-hidden="true"></a>    </span>
+<span id="cb68-15"><a href="-tasks.html#cb68-15" aria-hidden="true"></a>  }</span>
+<span id="cb68-16"><a href="-tasks.html#cb68-16" aria-hidden="true"></a>  </span>
+<span id="cb68-17"><a href="-tasks.html#cb68-17" aria-hidden="true"></a>  <span class="co"># проверяем правильно ли заданно выравнивание</span></span>
+<span id="cb68-18"><a href="-tasks.html#cb68-18" aria-hidden="true"></a>  <span class="cf">if</span> ( <span class="kw">length</span>(table) <span class="op">!=</span><span class="st"> </span><span class="kw">nchar</span>(align) ) {</span>
+<span id="cb68-19"><a href="-tasks.html#cb68-19" aria-hidden="true"></a>    </span>
+<span id="cb68-20"><a href="-tasks.html#cb68-20" aria-hidden="true"></a>    align &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb68-21"><a href="-tasks.html#cb68-21" aria-hidden="true"></a>    </span>
+<span id="cb68-22"><a href="-tasks.html#cb68-22" aria-hidden="true"></a>  }</span>
+<span id="cb68-23"><a href="-tasks.html#cb68-23" aria-hidden="true"></a>  </span>
+<span id="cb68-24"><a href="-tasks.html#cb68-24" aria-hidden="true"></a>  <span class="co"># новое выравнивание столбцов </span></span>
+<span id="cb68-25"><a href="-tasks.html#cb68-25" aria-hidden="true"></a>  side &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nchar</span>(align), </span>
+<span id="cb68-26"><a href="-tasks.html#cb68-26" aria-hidden="true"></a>                 <span class="cf">function</span>(x) { </span>
+<span id="cb68-27"><a href="-tasks.html#cb68-27" aria-hidden="true"></a>                   letter &lt;-<span class="st"> </span><span class="kw">substr</span>(align, x, x)</span>
+<span id="cb68-28"><a href="-tasks.html#cb68-28" aria-hidden="true"></a>                   <span class="cf">switch</span> (letter,</span>
+<span id="cb68-29"><a href="-tasks.html#cb68-29" aria-hidden="true"></a>                           <span class="st">&#39;l&#39;</span> =<span class="st"> &#39;right&#39;</span>,</span>
+<span id="cb68-30"><a href="-tasks.html#cb68-30" aria-hidden="true"></a>                           <span class="st">&#39;r&#39;</span> =<span class="st"> &#39;left&#39;</span>,</span>
+<span id="cb68-31"><a href="-tasks.html#cb68-31" aria-hidden="true"></a>                           <span class="st">&#39;c&#39;</span> =<span class="st"> &#39;both&#39;</span>,</span>
+<span id="cb68-32"><a href="-tasks.html#cb68-32" aria-hidden="true"></a>                           <span class="st">&#39;left&#39;</span></span>
+<span id="cb68-33"><a href="-tasks.html#cb68-33" aria-hidden="true"></a>                   )</span>
+<span id="cb68-34"><a href="-tasks.html#cb68-34" aria-hidden="true"></a>                 })</span>
+<span id="cb68-35"><a href="-tasks.html#cb68-35" aria-hidden="true"></a>  </span>
+<span id="cb68-36"><a href="-tasks.html#cb68-36" aria-hidden="true"></a>  <span class="co"># сохраняем имена</span></span>
+<span id="cb68-37"><a href="-tasks.html#cb68-37" aria-hidden="true"></a>  t_names      &lt;-<span class="st"> </span><span class="kw">names</span>(table)</span>
+<span id="cb68-38"><a href="-tasks.html#cb68-38" aria-hidden="true"></a>  </span>
+<span id="cb68-39"><a href="-tasks.html#cb68-39" aria-hidden="true"></a>  <span class="co"># вычисляем ширину столбцов</span></span>
+<span id="cb68-40"><a href="-tasks.html#cb68-40" aria-hidden="true"></a>  names_length &lt;-<span class="st"> </span><span class="kw">sapply</span>(t_names, nchar) </span>
+<span id="cb68-41"><a href="-tasks.html#cb68-41" aria-hidden="true"></a>  value_length &lt;-<span class="st"> </span><span class="kw">sapply</span>(table, <span class="cf">function</span>(x) <span class="kw">max</span>(<span class="kw">nchar</span>(<span class="kw">as.character</span>(x))))</span>
+<span id="cb68-42"><a href="-tasks.html#cb68-42" aria-hidden="true"></a>  max_length   &lt;-<span class="st"> </span><span class="kw">ifelse</span>(value_length <span class="op">&gt;</span><span class="st"> </span>names_length, value_length, names_length)</span>
+<span id="cb68-43"><a href="-tasks.html#cb68-43" aria-hidden="true"></a>  </span>
+<span id="cb68-44"><a href="-tasks.html#cb68-44" aria-hidden="true"></a>  <span class="co"># подгоняем размер имён столбцов под их ширину + указанное в indents к-во пробелов </span></span>
+<span id="cb68-45"><a href="-tasks.html#cb68-45" aria-hidden="true"></a>  t_names &lt;-<span class="st"> </span><span class="kw">mapply</span>(str_pad, </span>
+<span id="cb68-46"><a href="-tasks.html#cb68-46" aria-hidden="true"></a>                    <span class="dt">string =</span> t_names, </span>
+<span id="cb68-47"><a href="-tasks.html#cb68-47" aria-hidden="true"></a>                    <span class="dt">width  =</span> max_length <span class="op">+</span><span class="st"> </span>indents, </span>
+<span id="cb68-48"><a href="-tasks.html#cb68-48" aria-hidden="true"></a>                    <span class="dt">side   =</span> side)</span>
+<span id="cb68-49"><a href="-tasks.html#cb68-49" aria-hidden="true"></a>  </span>
+<span id="cb68-50"><a href="-tasks.html#cb68-50" aria-hidden="true"></a>  <span class="co"># объединяем названия столбцов</span></span>
+<span id="cb68-51"><a href="-tasks.html#cb68-51" aria-hidden="true"></a>  str_names &lt;-<span class="st"> </span><span class="kw">str_c</span>(t_names, <span class="dt">collapse =</span> <span class="st">&#39;&#39;</span>)</span>
+<span id="cb68-52"><a href="-tasks.html#cb68-52" aria-hidden="true"></a>  </span>
+<span id="cb68-53"><a href="-tasks.html#cb68-53" aria-hidden="true"></a>  <span class="co"># аргументы для фукнции str_pad</span></span>
+<span id="cb68-54"><a href="-tasks.html#cb68-54" aria-hidden="true"></a>  rules &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">string =</span> table, <span class="dt">width =</span> max_length <span class="op">+</span><span class="st"> </span>indents, <span class="dt">side =</span> side)</span>
+<span id="cb68-55"><a href="-tasks.html#cb68-55" aria-hidden="true"></a>  </span>
+<span id="cb68-56"><a href="-tasks.html#cb68-56" aria-hidden="true"></a>  <span class="co"># поочереди переводим каждый столбец к нужному виду</span></span>
+<span id="cb68-57"><a href="-tasks.html#cb68-57" aria-hidden="true"></a>  t_str &lt;-<span class="st">   </span><span class="kw">pmap_df</span>( rules, str_pad )<span class="op">%&gt;%</span></span>
+<span id="cb68-58"><a href="-tasks.html#cb68-58" aria-hidden="true"></a><span class="st">    </span><span class="kw">unite</span>(<span class="st">&quot;data&quot;</span>, <span class="kw">everything</span>(), <span class="dt">remove =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&#39;&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb68-59"><a href="-tasks.html#cb68-59" aria-hidden="true"></a><span class="st">    </span><span class="kw">unlist</span>(data) <span class="op">%&gt;%</span></span>
+<span id="cb68-60"><a href="-tasks.html#cb68-60" aria-hidden="true"></a><span class="st">    </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>) </span>
+<span id="cb68-61"><a href="-tasks.html#cb68-61" aria-hidden="true"></a>  </span>
+<span id="cb68-62"><a href="-tasks.html#cb68-62" aria-hidden="true"></a>  <span class="co"># если таблица занимает более 4096 символов обрезаем её</span></span>
+<span id="cb68-63"><a href="-tasks.html#cb68-63" aria-hidden="true"></a>  <span class="cf">if</span> ( <span class="kw">nchar</span>(t_str) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4021</span> ) {</span>
+<span id="cb68-64"><a href="-tasks.html#cb68-64" aria-hidden="true"></a>    </span>
+<span id="cb68-65"><a href="-tasks.html#cb68-65" aria-hidden="true"></a>    <span class="kw">warning</span>(<span class="st">&#39;Таблица составляет более 4096 символов!&#39;</span>)</span>
+<span id="cb68-66"><a href="-tasks.html#cb68-66" aria-hidden="true"></a>    t_str &lt;-<span class="st"> </span><span class="kw">substr</span>(t_str, <span class="dv">1</span>, <span class="dv">4021</span>)</span>
+<span id="cb68-67"><a href="-tasks.html#cb68-67" aria-hidden="true"></a>    </span>
+<span id="cb68-68"><a href="-tasks.html#cb68-68" aria-hidden="true"></a>  }</span>
+<span id="cb68-69"><a href="-tasks.html#cb68-69" aria-hidden="true"></a>  </span>
+<span id="cb68-70"><a href="-tasks.html#cb68-70" aria-hidden="true"></a>  <span class="co"># символы выделения блока кода согласно выбранной разметке</span></span>
+<span id="cb68-71"><a href="-tasks.html#cb68-71" aria-hidden="true"></a>  code_block &lt;-<span class="st"> </span><span class="cf">switch</span>(parse_mode, </span>
+<span id="cb68-72"><a href="-tasks.html#cb68-72" aria-hidden="true"></a>                       <span class="st">&#39;Markdown&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;```&#39;</span>, <span class="st">&#39;```&#39;</span>),</span>
+<span id="cb68-73"><a href="-tasks.html#cb68-73" aria-hidden="true"></a>                       <span class="st">&#39;HTML&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;&lt;code&gt;&#39;</span>, <span class="st">&#39;&lt;/code&gt;&#39;</span>))</span>
+<span id="cb68-74"><a href="-tasks.html#cb68-74" aria-hidden="true"></a>  </span>
+<span id="cb68-75"><a href="-tasks.html#cb68-75" aria-hidden="true"></a>  <span class="co"># переводим в code</span></span>
+<span id="cb68-76"><a href="-tasks.html#cb68-76" aria-hidden="true"></a>  res &lt;-<span class="st"> </span><span class="kw">str_c</span>(code_block[<span class="dv">1</span>], str_names, t_str, code_block[<span class="dv">2</span>], <span class="dt">sep =</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb68-77"><a href="-tasks.html#cb68-77" aria-hidden="true"></a>  </span>
+<span id="cb68-78"><a href="-tasks.html#cb68-78" aria-hidden="true"></a>  <span class="kw">return</span>(res)</span>
+<span id="cb68-79"><a href="-tasks.html#cb68-79" aria-hidden="true"></a>}</span>
+<span id="cb68-80"><a href="-tasks.html#cb68-80" aria-hidden="true"></a></span>
+<span id="cb68-81"><a href="-tasks.html#cb68-81" aria-hidden="true"></a><span class="co"># создаём экземпляр бота</span></span>
+<span id="cb68-82"><a href="-tasks.html#cb68-82" aria-hidden="true"></a>bot &lt;-<span class="st"> </span><span class="kw">Bot</span>(<span class="st">&#39;1165649194:AAFkDqIzQ6Wq5GV0YU7PmEZcv1gmWIFIB_8&#39;</span>)</span>
+<span id="cb68-83"><a href="-tasks.html#cb68-83" aria-hidden="true"></a></span>
+<span id="cb68-84"><a href="-tasks.html#cb68-84" aria-hidden="true"></a><span class="co"># получаем ID чата </span></span>
+<span id="cb68-85"><a href="-tasks.html#cb68-85" aria-hidden="true"></a><span class="co"># (предварительно отправьте боту любое сообщение)</span></span>
+<span id="cb68-86"><a href="-tasks.html#cb68-86" aria-hidden="true"></a>chat_id &lt;-<span class="st"> </span>bot<span class="op">$</span><span class="kw">getUpdates</span>()[[<span class="dv">1</span>]]<span class="op">$</span><span class="kw">from_chat_id</span>()</span>
+<span id="cb68-87"><a href="-tasks.html#cb68-87" aria-hidden="true"></a></span>
+<span id="cb68-88"><a href="-tasks.html#cb68-88" aria-hidden="true"></a><span class="co"># преоразуем таблицу ToothGrowth</span></span>
+<span id="cb68-89"><a href="-tasks.html#cb68-89" aria-hidden="true"></a>TG &lt;-<span class="st"> </span><span class="kw">to_tg_table</span>( <span class="kw">head</span>(ToothGrowth, <span class="dv">20</span>) )</span>
+<span id="cb68-90"><a href="-tasks.html#cb68-90" aria-hidden="true"></a></span>
+<span id="cb68-91"><a href="-tasks.html#cb68-91" aria-hidden="true"></a><span class="co"># отправляем таблицу в Telegram</span></span>
+<span id="cb68-92"><a href="-tasks.html#cb68-92" aria-hidden="true"></a>bot<span class="op">$</span><span class="kw">sendMessage</span>(chat_id, </span>
+<span id="cb68-93"><a href="-tasks.html#cb68-93" aria-hidden="true"></a>                TG,</span>
+<span id="cb68-94"><a href="-tasks.html#cb68-94" aria-hidden="true"></a>                <span class="st">&#39;Markdown&#39;</span>)</span></code></pre></div>
+</div>
+<div id="задача-2.1" class="section level2 unnumbered">
+<h2>Задача 2.1</h2>
+<p>Создайте бота, который будет по команде <code>/sum</code> и переданное в качестве дополнительных параметров произвольное количество перечисленных через пробел чисел, возвращать их сумму.</p>
+<p><em>Решение:</em></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="-tasks.html#cb69-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
+<span id="cb69-2"><a href="-tasks.html#cb69-2" aria-hidden="true"></a></span>
+<span id="cb69-3"><a href="-tasks.html#cb69-3" aria-hidden="true"></a><span class="co"># Создаём жкземпляр класса Updater</span></span>
+<span id="cb69-4"><a href="-tasks.html#cb69-4" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb69-5"><a href="-tasks.html#cb69-5" aria-hidden="true"></a></span>
+<span id="cb69-6"><a href="-tasks.html#cb69-6" aria-hidden="true"></a><span class="co"># Создаём функцию, которая будет суммировать переданные числа</span></span>
+<span id="cb69-7"><a href="-tasks.html#cb69-7" aria-hidden="true"></a>summing &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update, args) {</span>
+<span id="cb69-8"><a href="-tasks.html#cb69-8" aria-hidden="true"></a></span>
+<span id="cb69-9"><a href="-tasks.html#cb69-9" aria-hidden="true"></a>  <span class="co"># Переводим полученный вектор параметров в числа и суммируем</span></span>
+<span id="cb69-10"><a href="-tasks.html#cb69-10" aria-hidden="true"></a>  x &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">as.integer</span>(args))</span>
+<span id="cb69-11"><a href="-tasks.html#cb69-11" aria-hidden="true"></a></span>
+<span id="cb69-12"><a href="-tasks.html#cb69-12" aria-hidden="true"></a>  <span class="co"># создаём сообщение</span></span>
+<span id="cb69-13"><a href="-tasks.html#cb69-13" aria-hidden="true"></a>  msg &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;Сумма переданных чисел: &#39;</span>, x)</span>
+<span id="cb69-14"><a href="-tasks.html#cb69-14" aria-hidden="true"></a></span>
+<span id="cb69-15"><a href="-tasks.html#cb69-15" aria-hidden="true"></a>  <span class="co"># отправляем результат</span></span>
+<span id="cb69-16"><a href="-tasks.html#cb69-16" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, msg, <span class="st">&#39;Markdown&#39;</span>)</span>
+<span id="cb69-17"><a href="-tasks.html#cb69-17" aria-hidden="true"></a></span>
+<span id="cb69-18"><a href="-tasks.html#cb69-18" aria-hidden="true"></a>}</span>
+<span id="cb69-19"><a href="-tasks.html#cb69-19" aria-hidden="true"></a></span>
+<span id="cb69-20"><a href="-tasks.html#cb69-20" aria-hidden="true"></a><span class="co"># создаём обработчик</span></span>
+<span id="cb69-21"><a href="-tasks.html#cb69-21" aria-hidden="true"></a>h_sum &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;sum&#39;</span>, summing, <span class="dt">pass_args =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb69-22"><a href="-tasks.html#cb69-22" aria-hidden="true"></a></span>
+<span id="cb69-23"><a href="-tasks.html#cb69-23" aria-hidden="true"></a><span class="co"># добавляем обработчик в диспетчер</span></span>
+<span id="cb69-24"><a href="-tasks.html#cb69-24" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span><span class="st"> </span>h_sum</span>
+<span id="cb69-25"><a href="-tasks.html#cb69-25" aria-hidden="true"></a></span>
+<span id="cb69-26"><a href="-tasks.html#cb69-26" aria-hidden="true"></a><span class="co"># запускаем бота</span></span>
+<span id="cb69-27"><a href="-tasks.html#cb69-27" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+</div>
+<div id="задача-3.1" class="section level2 unnumbered">
+<h2>Задача 3.1</h2>
+<ol style="list-style-type: decimal">
+<li>Создайте бота, который будет поддерживать Reply клавиатуру. На Reply клавиатуре будет всего одна кнопка “Время”. По нажатию на неё будет появляться Inline клавиатура с выбором из 6 часовых поясов.</li>
+</ol>
+<ul>
+<li>Africa/Cairo</li>
+<li>America/Chicago</li>
+<li>Europe/Moscow</li>
+<li>Asia/Bangkok</li>
+<li>Europe/Kiev</li>
+<li>Australia/Sydney</li>
+</ul>
+<p>Кнопки Inline клавиатуры необходимо расположить по 2 в ряд, соответвенно в три ряда.</p>
+<p>По нажатию на одну из кнопки Inline клавиатуры бот будет запрашивать информацию по текущему времени из API <a href="http://worldtimeapi.org/">worldtimeapi.org</a>.</p>
+<p>Формат запроса к API: <code>http://worldtimeapi.org/api/timezone/{area}/:{location}</code>.</p>
+<p>Где <code>{area}</code> это континент, например Europe, а <code>{location}</code> это город, например Kiev. Дату и время надо брать в ответе из компонента <code>datetime</code>.</p>
+<p><em>Решение:</em></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="-tasks.html#cb70-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
+<span id="cb70-2"><a href="-tasks.html#cb70-2" aria-hidden="true"></a><span class="kw">library</span>(httr)</span>
+<span id="cb70-3"><a href="-tasks.html#cb70-3" aria-hidden="true"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb70-4"><a href="-tasks.html#cb70-4" aria-hidden="true"></a></span>
+<span id="cb70-5"><a href="-tasks.html#cb70-5" aria-hidden="true"></a><span class="co"># Создаём жкземпляр класса Updater</span></span>
+<span id="cb70-6"><a href="-tasks.html#cb70-6" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb70-7"><a href="-tasks.html#cb70-7" aria-hidden="true"></a></span>
+<span id="cb70-8"><a href="-tasks.html#cb70-8" aria-hidden="true"></a><span class="co"># Запуск клавиатуры</span></span>
+<span id="cb70-9"><a href="-tasks.html#cb70-9" aria-hidden="true"></a>start &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb70-10"><a href="-tasks.html#cb70-10" aria-hidden="true"></a>  </span>
+<span id="cb70-11"><a href="-tasks.html#cb70-11" aria-hidden="true"></a>  <span class="co"># строим Reply клавиатуру</span></span>
+<span id="cb70-12"><a href="-tasks.html#cb70-12" aria-hidden="true"></a>  RKM &lt;-<span class="st"> </span><span class="kw">ReplyKeyboardMarkup</span>(</span>
+<span id="cb70-13"><a href="-tasks.html#cb70-13" aria-hidden="true"></a>    <span class="dt">keyboard =</span> <span class="kw">list</span>(</span>
+<span id="cb70-14"><a href="-tasks.html#cb70-14" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
+<span id="cb70-15"><a href="-tasks.html#cb70-15" aria-hidden="true"></a>        <span class="kw">KeyboardButton</span>(<span class="st">&#39;Время&#39;</span>)</span>
+<span id="cb70-16"><a href="-tasks.html#cb70-16" aria-hidden="true"></a>      )</span>
+<span id="cb70-17"><a href="-tasks.html#cb70-17" aria-hidden="true"></a>    ))</span>
+<span id="cb70-18"><a href="-tasks.html#cb70-18" aria-hidden="true"></a>  </span>
+<span id="cb70-19"><a href="-tasks.html#cb70-19" aria-hidden="true"></a>  <span class="co"># отпралвяем Reply клавиатуру</span></span>
+<span id="cb70-20"><a href="-tasks.html#cb70-20" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb70-21"><a href="-tasks.html#cb70-21" aria-hidden="true"></a>                  <span class="st">&#39;Выберите команду&#39;</span>, </span>
+<span id="cb70-22"><a href="-tasks.html#cb70-22" aria-hidden="true"></a>                  <span class="st">&#39;Markdown&#39;</span>,</span>
+<span id="cb70-23"><a href="-tasks.html#cb70-23" aria-hidden="true"></a>                  <span class="dt">reply_markup =</span> RKM)</span>
+<span id="cb70-24"><a href="-tasks.html#cb70-24" aria-hidden="true"></a>  </span>
+<span id="cb70-25"><a href="-tasks.html#cb70-25" aria-hidden="true"></a>}</span>
+<span id="cb70-26"><a href="-tasks.html#cb70-26" aria-hidden="true"></a></span>
+<span id="cb70-27"><a href="-tasks.html#cb70-27" aria-hidden="true"></a><span class="co"># Отправляем inline клавиатуру</span></span>
+<span id="cb70-28"><a href="-tasks.html#cb70-28" aria-hidden="true"></a>inline &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb70-29"><a href="-tasks.html#cb70-29" aria-hidden="true"></a>  </span>
+<span id="cb70-30"><a href="-tasks.html#cb70-30" aria-hidden="true"></a>  IKM &lt;-<span class="st"> </span><span class="kw">InlineKeyboardMarkup</span>(</span>
+<span id="cb70-31"><a href="-tasks.html#cb70-31" aria-hidden="true"></a>              <span class="dt">inline_keyboard =</span> </span>
+<span id="cb70-32"><a href="-tasks.html#cb70-32" aria-hidden="true"></a>                <span class="kw">list</span>(</span>
+<span id="cb70-33"><a href="-tasks.html#cb70-33" aria-hidden="true"></a>                  <span class="kw">list</span>(</span>
+<span id="cb70-34"><a href="-tasks.html#cb70-34" aria-hidden="true"></a>                    <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Africa/Cairo&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Africa/Cairo&#39;</span>),</span>
+<span id="cb70-35"><a href="-tasks.html#cb70-35" aria-hidden="true"></a>                    <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;America/Chicago&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;America/Chicago&#39;</span>)</span>
+<span id="cb70-36"><a href="-tasks.html#cb70-36" aria-hidden="true"></a>                  ),</span>
+<span id="cb70-37"><a href="-tasks.html#cb70-37" aria-hidden="true"></a>                  <span class="kw">list</span>(</span>
+<span id="cb70-38"><a href="-tasks.html#cb70-38" aria-hidden="true"></a>                    <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Europe/Moscow&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Europe/Moscow&#39;</span>),</span>
+<span id="cb70-39"><a href="-tasks.html#cb70-39" aria-hidden="true"></a>                    <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Asia/Bangkok&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Asia/Bangkok&#39;</span>)</span>
+<span id="cb70-40"><a href="-tasks.html#cb70-40" aria-hidden="true"></a>                  ),</span>
+<span id="cb70-41"><a href="-tasks.html#cb70-41" aria-hidden="true"></a>                  <span class="kw">list</span>(</span>
+<span id="cb70-42"><a href="-tasks.html#cb70-42" aria-hidden="true"></a>                    <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Europe/Kiev&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Europe/Kiev&#39;</span>),</span>
+<span id="cb70-43"><a href="-tasks.html#cb70-43" aria-hidden="true"></a>                    <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Australia/Sydney&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Australia/Sydney&#39;</span>)</span>
+<span id="cb70-44"><a href="-tasks.html#cb70-44" aria-hidden="true"></a>                  )</span>
+<span id="cb70-45"><a href="-tasks.html#cb70-45" aria-hidden="true"></a>                ))</span>
+<span id="cb70-46"><a href="-tasks.html#cb70-46" aria-hidden="true"></a>  </span>
+<span id="cb70-47"><a href="-tasks.html#cb70-47" aria-hidden="true"></a>  <span class="co"># отпралвяем Reply клавиатуру</span></span>
+<span id="cb70-48"><a href="-tasks.html#cb70-48" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb70-49"><a href="-tasks.html#cb70-49" aria-hidden="true"></a>                  <span class="st">&#39;Выберите регион&#39;</span>, </span>
+<span id="cb70-50"><a href="-tasks.html#cb70-50" aria-hidden="true"></a>                  <span class="st">&#39;Markdown&#39;</span>,</span>
+<span id="cb70-51"><a href="-tasks.html#cb70-51" aria-hidden="true"></a>                  <span class="dt">reply_markup =</span> IKM)</span>
+<span id="cb70-52"><a href="-tasks.html#cb70-52" aria-hidden="true"></a>  </span>
+<span id="cb70-53"><a href="-tasks.html#cb70-53" aria-hidden="true"></a>}</span>
+<span id="cb70-54"><a href="-tasks.html#cb70-54" aria-hidden="true"></a></span>
+<span id="cb70-55"><a href="-tasks.html#cb70-55" aria-hidden="true"></a><span class="co"># обрабатываем нажатие на кнопку</span></span>
+<span id="cb70-56"><a href="-tasks.html#cb70-56" aria-hidden="true"></a>curtime &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb70-57"><a href="-tasks.html#cb70-57" aria-hidden="true"></a>  </span>
+<span id="cb70-58"><a href="-tasks.html#cb70-58" aria-hidden="true"></a>  <span class="co"># сообщаем боту, что запрос с кнопки принят</span></span>
+<span id="cb70-59"><a href="-tasks.html#cb70-59" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">answerCallbackQuery</span>(<span class="dt">callback_query_id =</span> update<span class="op">$</span>callback_query<span class="op">$</span>id) </span>
+<span id="cb70-60"><a href="-tasks.html#cb70-60" aria-hidden="true"></a>  </span>
+<span id="cb70-61"><a href="-tasks.html#cb70-61" aria-hidden="true"></a>  <span class="co"># данные с кнопки</span></span>
+<span id="cb70-62"><a href="-tasks.html#cb70-62" aria-hidden="true"></a>  data &lt;-<span class="st"> </span>update<span class="op">$</span>callback_query<span class="op">$</span>data</span>
+<span id="cb70-63"><a href="-tasks.html#cb70-63" aria-hidden="true"></a>  </span>
+<span id="cb70-64"><a href="-tasks.html#cb70-64" aria-hidden="true"></a>  <span class="co"># разбиваем на регион и город</span></span>
+<span id="cb70-65"><a href="-tasks.html#cb70-65" aria-hidden="true"></a>  geo &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">strsplit</span>(data, <span class="dt">split =</span> <span class="st">&#39;/&#39;</span>))</span>
+<span id="cb70-66"><a href="-tasks.html#cb70-66" aria-hidden="true"></a>  </span>
+<span id="cb70-67"><a href="-tasks.html#cb70-67" aria-hidden="true"></a>  <span class="co"># компонуем URL</span></span>
+<span id="cb70-68"><a href="-tasks.html#cb70-68" aria-hidden="true"></a>  url &lt;-<span class="st"> </span><span class="kw">str_glue</span>(<span class="st">&#39;http://worldtimeapi.org/api/timezone/{geo[1]}/{geo[2]}&#39;</span>)</span>
+<span id="cb70-69"><a href="-tasks.html#cb70-69" aria-hidden="true"></a>  </span>
+<span id="cb70-70"><a href="-tasks.html#cb70-70" aria-hidden="true"></a>  <span class="co"># запрос к API</span></span>
+<span id="cb70-71"><a href="-tasks.html#cb70-71" aria-hidden="true"></a>  answer &lt;-<span class="st"> </span><span class="kw">GET</span>(url)</span>
+<span id="cb70-72"><a href="-tasks.html#cb70-72" aria-hidden="true"></a>  </span>
+<span id="cb70-73"><a href="-tasks.html#cb70-73" aria-hidden="true"></a>  <span class="co"># парсим ответ</span></span>
+<span id="cb70-74"><a href="-tasks.html#cb70-74" aria-hidden="true"></a>  res &lt;-<span class="st"> </span><span class="kw">content</span>(answer)</span>
+<span id="cb70-75"><a href="-tasks.html#cb70-75" aria-hidden="true"></a>  </span>
+<span id="cb70-76"><a href="-tasks.html#cb70-76" aria-hidden="true"></a>  <span class="co"># создаём сообщение</span></span>
+<span id="cb70-77"><a href="-tasks.html#cb70-77" aria-hidden="true"></a>  msg &lt;-<span class="st"> </span><span class="kw">str_glue</span>(<span class="st">&#39;Текущее время в {data}: {res$datetime}&#39;</span>)</span>
+<span id="cb70-78"><a href="-tasks.html#cb70-78" aria-hidden="true"></a>  </span>
+<span id="cb70-79"><a href="-tasks.html#cb70-79" aria-hidden="true"></a>  <span class="co"># отправляем сообщение</span></span>
+<span id="cb70-80"><a href="-tasks.html#cb70-80" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span><span class="kw">from_chat_id</span>(), </span>
+<span id="cb70-81"><a href="-tasks.html#cb70-81" aria-hidden="true"></a>                  msg, </span>
+<span id="cb70-82"><a href="-tasks.html#cb70-82" aria-hidden="true"></a>                  <span class="st">&#39;Markdown&#39;</span>)</span>
+<span id="cb70-83"><a href="-tasks.html#cb70-83" aria-hidden="true"></a>}</span>
+<span id="cb70-84"><a href="-tasks.html#cb70-84" aria-hidden="true"></a></span>
+<span id="cb70-85"><a href="-tasks.html#cb70-85" aria-hidden="true"></a><span class="co"># Фильтр для Reply клавиатуры</span></span>
+<span id="cb70-86"><a href="-tasks.html#cb70-86" aria-hidden="true"></a>MessageFilters<span class="op">$</span>start &lt;-<span class="st"> </span></span>
+<span id="cb70-87"><a href="-tasks.html#cb70-87" aria-hidden="true"></a><span class="st">  </span><span class="kw">BaseFilter</span>(</span>
+<span id="cb70-88"><a href="-tasks.html#cb70-88" aria-hidden="true"></a>    <span class="cf">function</span>(message) {</span>
+<span id="cb70-89"><a href="-tasks.html#cb70-89" aria-hidden="true"></a>      message<span class="op">$</span>text <span class="op">==</span><span class="st"> &#39;Время&#39;</span></span>
+<span id="cb70-90"><a href="-tasks.html#cb70-90" aria-hidden="true"></a>    }</span>
+<span id="cb70-91"><a href="-tasks.html#cb70-91" aria-hidden="true"></a>  )</span>
+<span id="cb70-92"><a href="-tasks.html#cb70-92" aria-hidden="true"></a></span>
+<span id="cb70-93"><a href="-tasks.html#cb70-93" aria-hidden="true"></a><span class="co"># Обработчики</span></span>
+<span id="cb70-94"><a href="-tasks.html#cb70-94" aria-hidden="true"></a>h_start &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;start&#39;</span>, start)</span>
+<span id="cb70-95"><a href="-tasks.html#cb70-95" aria-hidden="true"></a>h_time  &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(inline, MessageFilters<span class="op">$</span>start)</span>
+<span id="cb70-96"><a href="-tasks.html#cb70-96" aria-hidden="true"></a>h_cb    &lt;-<span class="st"> </span><span class="kw">CallbackQueryHandler</span>(curtime)</span>
+<span id="cb70-97"><a href="-tasks.html#cb70-97" aria-hidden="true"></a></span>
+<span id="cb70-98"><a href="-tasks.html#cb70-98" aria-hidden="true"></a><span class="co"># Добавляем обработчики в диспетчер</span></span>
+<span id="cb70-99"><a href="-tasks.html#cb70-99" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span><span class="st"> </span>h_start <span class="op">+</span><span class="st"> </span>h_time <span class="op">+</span><span class="st"> </span>h_cb</span>
+<span id="cb70-100"><a href="-tasks.html#cb70-100" aria-hidden="true"></a></span>
+<span id="cb70-101"><a href="-tasks.html#cb70-101" aria-hidden="true"></a><span class="co"># Запускаем бота</span></span>
+<span id="cb70-102"><a href="-tasks.html#cb70-102" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+</div>
+<div id="задача-4.1" class="section level2 unnumbered">
+<h2>Задача 4.1</h2>
+<p>Постройте бота который будет поддерживать игру угадай число. Т.е. по команде <code>/start</code> бот будет загадывать число от 1 до 50. Далее у вас будет 5 попыток угадать это число.</p>
+<p>Вы по очереди в каждой из попыток вводите числа, если введённое число меньше чем то, которое загадал бот то бот пишет “моё число больше”, иначе бот пишет “моё число меньше”. Если вы ввели правильное число то бот пишет что вы выйграли, и переводит диалог в исходное состояние.</p>
+<p><em>Решение:</em></p>
+<p>Создаём таблицу в базе данных для хранеия числа и текущей попытки.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb71-1"><a href="-tasks.html#cb71-1" aria-hidden="true"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> chat_data (</span>
+<span id="cb71-2"><a href="-tasks.html#cb71-2" aria-hidden="true"></a>    chat_id BIGINT  <span class="kw">PRIMARY</span> <span class="kw">KEY</span></span>
+<span id="cb71-3"><a href="-tasks.html#cb71-3" aria-hidden="true"></a>                    <span class="kw">UNIQUE</span>,</span>
+<span id="cb71-4"><a href="-tasks.html#cb71-4" aria-hidden="true"></a>    attempt    <span class="dt">INTEGER</span>,</span>
+<span id="cb71-5"><a href="-tasks.html#cb71-5" aria-hidden="true"></a>    <span class="dt">number</span>     <span class="dt">INTEGER</span></span>
+<span id="cb71-6"><a href="-tasks.html#cb71-6" aria-hidden="true"></a>);</span></code></pre></div>
+<p>Далее создаём функции для работы с бахой данных.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="-tasks.html#cb72-1" aria-hidden="true"></a><span class="co"># write chat data</span></span>
+<span id="cb72-2"><a href="-tasks.html#cb72-2" aria-hidden="true"></a><span class="co"># write chat data</span></span>
+<span id="cb72-3"><a href="-tasks.html#cb72-3" aria-hidden="true"></a>set_chat_data &lt;-<span class="st"> </span><span class="cf">function</span>(chat_id, field, value) {</span>
+<span id="cb72-4"><a href="-tasks.html#cb72-4" aria-hidden="true"></a>  </span>
+<span id="cb72-5"><a href="-tasks.html#cb72-5" aria-hidden="true"></a>  </span>
+<span id="cb72-6"><a href="-tasks.html#cb72-6" aria-hidden="true"></a>  con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw">SQLite</span>(), db)</span>
+<span id="cb72-7"><a href="-tasks.html#cb72-7" aria-hidden="true"></a>  </span>
+<span id="cb72-8"><a href="-tasks.html#cb72-8" aria-hidden="true"></a>  <span class="co"># upsert состояние чата</span></span>
+<span id="cb72-9"><a href="-tasks.html#cb72-9" aria-hidden="true"></a>  <span class="kw">dbExecute</span>(con, </span>
+<span id="cb72-10"><a href="-tasks.html#cb72-10" aria-hidden="true"></a>            <span class="kw">str_interp</span>(<span class="st">&quot;</span></span>
+<span id="cb72-11"><a href="-tasks.html#cb72-11" aria-hidden="true"></a><span class="st">            INSERT INTO chat_data (chat_id, ${field})</span></span>
+<span id="cb72-12"><a href="-tasks.html#cb72-12" aria-hidden="true"></a><span class="st">                VALUES(${chat_id}, &#39;${value}&#39;) </span></span>
+<span id="cb72-13"><a href="-tasks.html#cb72-13" aria-hidden="true"></a><span class="st">                ON CONFLICT(chat_id) </span></span>
+<span id="cb72-14"><a href="-tasks.html#cb72-14" aria-hidden="true"></a><span class="st">                DO UPDATE SET ${field}=&#39;${value}&#39;;</span></span>
+<span id="cb72-15"><a href="-tasks.html#cb72-15" aria-hidden="true"></a><span class="st">            &quot;</span>)</span>
+<span id="cb72-16"><a href="-tasks.html#cb72-16" aria-hidden="true"></a>  )</span>
+<span id="cb72-17"><a href="-tasks.html#cb72-17" aria-hidden="true"></a>  </span>
+<span id="cb72-18"><a href="-tasks.html#cb72-18" aria-hidden="true"></a>  <span class="kw">dbDisconnect</span>(con)</span>
+<span id="cb72-19"><a href="-tasks.html#cb72-19" aria-hidden="true"></a>  </span>
+<span id="cb72-20"><a href="-tasks.html#cb72-20" aria-hidden="true"></a>}</span>
+<span id="cb72-21"><a href="-tasks.html#cb72-21" aria-hidden="true"></a></span>
+<span id="cb72-22"><a href="-tasks.html#cb72-22" aria-hidden="true"></a><span class="co"># read chat data</span></span>
+<span id="cb72-23"><a href="-tasks.html#cb72-23" aria-hidden="true"></a>get_chat_data &lt;-<span class="st"> </span><span class="cf">function</span>(chat_id, field) {</span>
+<span id="cb72-24"><a href="-tasks.html#cb72-24" aria-hidden="true"></a>  </span>
+<span id="cb72-25"><a href="-tasks.html#cb72-25" aria-hidden="true"></a>  </span>
+<span id="cb72-26"><a href="-tasks.html#cb72-26" aria-hidden="true"></a>  con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw">SQLite</span>(), db)</span>
+<span id="cb72-27"><a href="-tasks.html#cb72-27" aria-hidden="true"></a>  </span>
+<span id="cb72-28"><a href="-tasks.html#cb72-28" aria-hidden="true"></a>  <span class="co"># upsert состояние чата</span></span>
+<span id="cb72-29"><a href="-tasks.html#cb72-29" aria-hidden="true"></a>  data &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(con, </span>
+<span id="cb72-30"><a href="-tasks.html#cb72-30" aria-hidden="true"></a>                     <span class="kw">str_interp</span>(<span class="st">&quot;</span></span>
+<span id="cb72-31"><a href="-tasks.html#cb72-31" aria-hidden="true"></a><span class="st">            SELECT ${field}</span></span>
+<span id="cb72-32"><a href="-tasks.html#cb72-32" aria-hidden="true"></a><span class="st">            FROM chat_data</span></span>
+<span id="cb72-33"><a href="-tasks.html#cb72-33" aria-hidden="true"></a><span class="st">            WHERE chat_id = ${chat_id};</span></span>
+<span id="cb72-34"><a href="-tasks.html#cb72-34" aria-hidden="true"></a><span class="st">            &quot;</span>)</span>
+<span id="cb72-35"><a href="-tasks.html#cb72-35" aria-hidden="true"></a>  )</span>
+<span id="cb72-36"><a href="-tasks.html#cb72-36" aria-hidden="true"></a>  </span>
+<span id="cb72-37"><a href="-tasks.html#cb72-37" aria-hidden="true"></a>  <span class="kw">dbDisconnect</span>(con)</span>
+<span id="cb72-38"><a href="-tasks.html#cb72-38" aria-hidden="true"></a>  </span>
+<span id="cb72-39"><a href="-tasks.html#cb72-39" aria-hidden="true"></a>  <span class="kw">return</span>(data[[field]])</span>
+<span id="cb72-40"><a href="-tasks.html#cb72-40" aria-hidden="true"></a>  </span>
+<span id="cb72-41"><a href="-tasks.html#cb72-41" aria-hidden="true"></a>}</span></code></pre></div>
+<p>Основной код бота выглядит так:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="-tasks.html#cb73-1" aria-hidden="true"></a><span class="kw">library</span>(RSQLite)</span>
+<span id="cb73-2"><a href="-tasks.html#cb73-2" aria-hidden="true"></a><span class="kw">library</span>(DBI)</span>
+<span id="cb73-3"><a href="-tasks.html#cb73-3" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
+<span id="cb73-4"><a href="-tasks.html#cb73-4" aria-hidden="true"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb73-5"><a href="-tasks.html#cb73-5" aria-hidden="true"></a></span>
+<span id="cb73-6"><a href="-tasks.html#cb73-6" aria-hidden="true"></a><span class="co"># Создаём жкземпляр класса Updater</span></span>
+<span id="cb73-7"><a href="-tasks.html#cb73-7" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb73-8"><a href="-tasks.html#cb73-8" aria-hidden="true"></a></span>
+<span id="cb73-9"><a href="-tasks.html#cb73-9" aria-hidden="true"></a><span class="co"># путь к базе</span></span>
+<span id="cb73-10"><a href="-tasks.html#cb73-10" aria-hidden="true"></a>db &lt;-<span class="st"> &quot;ПУСТЬ К БАЗЕ ДАННЫХ/bot.db&quot;</span></span>
+<span id="cb73-11"><a href="-tasks.html#cb73-11" aria-hidden="true"></a></span>
+<span id="cb73-12"><a href="-tasks.html#cb73-12" aria-hidden="true"></a>start &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb73-13"><a href="-tasks.html#cb73-13" aria-hidden="true"></a>  </span>
+<span id="cb73-14"><a href="-tasks.html#cb73-14" aria-hidden="true"></a>  <span class="co"># бот загадывает число</span></span>
+<span id="cb73-15"><a href="-tasks.html#cb73-15" aria-hidden="true"></a>  num &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">50</span>), <span class="dv">0</span>)</span>
+<span id="cb73-16"><a href="-tasks.html#cb73-16" aria-hidden="true"></a>  </span>
+<span id="cb73-17"><a href="-tasks.html#cb73-17" aria-hidden="true"></a>  <span class="co"># записываем данные в базу о начале игры</span></span>
+<span id="cb73-18"><a href="-tasks.html#cb73-18" aria-hidden="true"></a>  <span class="kw">set_chat_data</span>( update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="st">&#39;number&#39;</span>, num)</span>
+<span id="cb73-19"><a href="-tasks.html#cb73-19" aria-hidden="true"></a>  <span class="kw">set_chat_data</span>( update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="st">&#39;attempt&#39;</span>, <span class="dv">1</span>)</span>
+<span id="cb73-20"><a href="-tasks.html#cb73-20" aria-hidden="true"></a>  </span>
+<span id="cb73-21"><a href="-tasks.html#cb73-21" aria-hidden="true"></a>  <span class="co"># отпралвяем Reply клавиатуру</span></span>
+<span id="cb73-22"><a href="-tasks.html#cb73-22" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb73-23"><a href="-tasks.html#cb73-23" aria-hidden="true"></a>                  <span class="st">&#39;Число загаданно, начинаем игру, ваша первая попытка.&#39;</span>, </span>
+<span id="cb73-24"><a href="-tasks.html#cb73-24" aria-hidden="true"></a>                  <span class="st">&#39;Markdown&#39;</span>)</span>
+<span id="cb73-25"><a href="-tasks.html#cb73-25" aria-hidden="true"></a>  </span>
+<span id="cb73-26"><a href="-tasks.html#cb73-26" aria-hidden="true"></a>}</span>
+<span id="cb73-27"><a href="-tasks.html#cb73-27" aria-hidden="true"></a></span>
+<span id="cb73-28"><a href="-tasks.html#cb73-28" aria-hidden="true"></a>attempt &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb73-29"><a href="-tasks.html#cb73-29" aria-hidden="true"></a>  </span>
+<span id="cb73-30"><a href="-tasks.html#cb73-30" aria-hidden="true"></a>  num &lt;-<span class="st"> </span><span class="kw">get_chat_data</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="st">&#39;number&#39;</span>)</span>
+<span id="cb73-31"><a href="-tasks.html#cb73-31" aria-hidden="true"></a>  att &lt;-<span class="st"> </span><span class="kw">get_chat_data</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="st">&#39;attempt&#39;</span>)</span>
+<span id="cb73-32"><a href="-tasks.html#cb73-32" aria-hidden="true"></a>  </span>
+<span id="cb73-33"><a href="-tasks.html#cb73-33" aria-hidden="true"></a>  user_num &lt;-<span class="st"> </span>update<span class="op">$</span>message<span class="op">$</span>text</span>
+<span id="cb73-34"><a href="-tasks.html#cb73-34" aria-hidden="true"></a>  </span>
+<span id="cb73-35"><a href="-tasks.html#cb73-35" aria-hidden="true"></a>  <span class="cf">if</span> ( user_num <span class="op">&lt;</span><span class="st"> </span>num ) {</span>
+<span id="cb73-36"><a href="-tasks.html#cb73-36" aria-hidden="true"></a>    </span>
+<span id="cb73-37"><a href="-tasks.html#cb73-37" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb73-38"><a href="-tasks.html#cb73-38" aria-hidden="true"></a>                    <span class="kw">paste0</span>(<span class="st">&#39;Номер попытки: &#39;</span>, att, <span class="st">&quot;. Моё число больше&quot;</span>),</span>
+<span id="cb73-39"><a href="-tasks.html#cb73-39" aria-hidden="true"></a>                    <span class="st">&#39;Markdown&#39;</span>)</span>
+<span id="cb73-40"><a href="-tasks.html#cb73-40" aria-hidden="true"></a>    </span>
+<span id="cb73-41"><a href="-tasks.html#cb73-41" aria-hidden="true"></a>  } <span class="cf">else</span> <span class="cf">if</span> ( user_num <span class="op">&gt;</span><span class="st"> </span>num ) {</span>
+<span id="cb73-42"><a href="-tasks.html#cb73-42" aria-hidden="true"></a>    </span>
+<span id="cb73-43"><a href="-tasks.html#cb73-43" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb73-44"><a href="-tasks.html#cb73-44" aria-hidden="true"></a>                    <span class="kw">paste0</span>(<span class="st">&#39;Номер попытки: &#39;</span>, att, <span class="st">&quot;. Моё число меньше&quot;</span>),</span>
+<span id="cb73-45"><a href="-tasks.html#cb73-45" aria-hidden="true"></a>                    <span class="st">&#39;Markdown&#39;</span>)</span>
+<span id="cb73-46"><a href="-tasks.html#cb73-46" aria-hidden="true"></a>    </span>
+<span id="cb73-47"><a href="-tasks.html#cb73-47" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
+<span id="cb73-48"><a href="-tasks.html#cb73-48" aria-hidden="true"></a>    </span>
+<span id="cb73-49"><a href="-tasks.html#cb73-49" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb73-50"><a href="-tasks.html#cb73-50" aria-hidden="true"></a>                    <span class="kw">paste0</span>(<span class="st">&#39;Номер попытки: &#39;</span>, att, <span class="st">&quot;. Поздравляю, вы угадали число!&quot;</span>),</span>
+<span id="cb73-51"><a href="-tasks.html#cb73-51" aria-hidden="true"></a>                    <span class="st">&#39;Markdown&#39;</span>)</span>
+<span id="cb73-52"><a href="-tasks.html#cb73-52" aria-hidden="true"></a>    </span>
+<span id="cb73-53"><a href="-tasks.html#cb73-53" aria-hidden="true"></a>    <span class="kw">set_chat_data</span>( update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="st">&#39;attempt&#39;</span>, <span class="dv">0</span>)</span>
+<span id="cb73-54"><a href="-tasks.html#cb73-54" aria-hidden="true"></a>    </span>
+<span id="cb73-55"><a href="-tasks.html#cb73-55" aria-hidden="true"></a>  }</span>
+<span id="cb73-56"><a href="-tasks.html#cb73-56" aria-hidden="true"></a>  </span>
+<span id="cb73-57"><a href="-tasks.html#cb73-57" aria-hidden="true"></a>  <span class="cf">if</span> ( att <span class="op">==</span><span class="st"> </span><span class="dv">5</span> <span class="op">&amp;</span><span class="st">  </span>user_num <span class="op">!=</span><span class="st"> </span>num )  {</span>
+<span id="cb73-58"><a href="-tasks.html#cb73-58" aria-hidden="true"></a>    </span>
+<span id="cb73-59"><a href="-tasks.html#cb73-59" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb73-60"><a href="-tasks.html#cb73-60" aria-hidden="true"></a>                    <span class="kw">paste0</span>(<span class="st">&quot;Вы проиграли, я загадал число &quot;</span>, num),</span>
+<span id="cb73-61"><a href="-tasks.html#cb73-61" aria-hidden="true"></a>                    <span class="st">&#39;Markdown&#39;</span>)</span>
+<span id="cb73-62"><a href="-tasks.html#cb73-62" aria-hidden="true"></a>    <span class="kw">set_chat_data</span>( update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="st">&#39;attempt&#39;</span>, <span class="dv">0</span>)</span>
+<span id="cb73-63"><a href="-tasks.html#cb73-63" aria-hidden="true"></a>    </span>
+<span id="cb73-64"><a href="-tasks.html#cb73-64" aria-hidden="true"></a>  }</span>
+<span id="cb73-65"><a href="-tasks.html#cb73-65" aria-hidden="true"></a>  </span>
+<span id="cb73-66"><a href="-tasks.html#cb73-66" aria-hidden="true"></a>  <span class="kw">set_chat_data</span>( update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="st">&#39;attempt&#39;</span>, att <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb73-67"><a href="-tasks.html#cb73-67" aria-hidden="true"></a>  </span>
+<span id="cb73-68"><a href="-tasks.html#cb73-68" aria-hidden="true"></a>}</span>
+<span id="cb73-69"><a href="-tasks.html#cb73-69" aria-hidden="true"></a></span>
+<span id="cb73-70"><a href="-tasks.html#cb73-70" aria-hidden="true"></a></span>
+<span id="cb73-71"><a href="-tasks.html#cb73-71" aria-hidden="true"></a><span class="co"># фильтр сообщение в состоянии ожидания имени</span></span>
+<span id="cb73-72"><a href="-tasks.html#cb73-72" aria-hidden="true"></a>MessageFilters<span class="op">$</span>attempt &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
+<span id="cb73-73"><a href="-tasks.html#cb73-73" aria-hidden="true"></a></span>
+<span id="cb73-74"><a href="-tasks.html#cb73-74" aria-hidden="true"></a>  att &lt;-<span class="st"> </span><span class="kw">get_chat_data</span>(message<span class="op">$</span>chat_id, <span class="st">&#39;attempt&#39;</span>) </span>
+<span id="cb73-75"><a href="-tasks.html#cb73-75" aria-hidden="true"></a>  <span class="dv">0</span> <span class="op">&lt;</span><span class="st"> </span>att <span class="op">&amp;</span><span class="st"> </span>att <span class="op">&lt;</span><span class="st"> </span><span class="dv">6</span></span>
+<span id="cb73-76"><a href="-tasks.html#cb73-76" aria-hidden="true"></a>}</span>
+<span id="cb73-77"><a href="-tasks.html#cb73-77" aria-hidden="true"></a>)</span>
+<span id="cb73-78"><a href="-tasks.html#cb73-78" aria-hidden="true"></a></span>
+<span id="cb73-79"><a href="-tasks.html#cb73-79" aria-hidden="true"></a><span class="co"># обработчики</span></span>
+<span id="cb73-80"><a href="-tasks.html#cb73-80" aria-hidden="true"></a>h_start   &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;start&#39;</span>, start)</span>
+<span id="cb73-81"><a href="-tasks.html#cb73-81" aria-hidden="true"></a>h_attempt &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(attempt, MessageFilters<span class="op">$</span>attempt <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>MessageFilters<span class="op">$</span>command)</span>
+<span id="cb73-82"><a href="-tasks.html#cb73-82" aria-hidden="true"></a></span>
+<span id="cb73-83"><a href="-tasks.html#cb73-83" aria-hidden="true"></a><span class="co"># диспетчер</span></span>
+<span id="cb73-84"><a href="-tasks.html#cb73-84" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span><span class="st"> </span>h_start <span class="op">+</span><span class="st"> </span>h_attempt</span>
+<span id="cb73-85"><a href="-tasks.html#cb73-85" aria-hidden="true"></a></span>
+<span id="cb73-86"><a href="-tasks.html#cb73-86" aria-hidden="true"></a><span class="co"># запуск</span></span>
+<span id="cb73-87"><a href="-tasks.html#cb73-87" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+</div>
+<div id="задача-5.1" class="section level2 unnumbered">
+<h2>Задача 5.1</h2>
+<p>Возьмите <a href="-updater.html#задания-1">задачу 2.1</a> из второй главы, и ограничьте использование единственного метода, доступного в созданном боте, так, что бы он работал только когда его запрашиваете вы.</p>
+<p><em>Решение:</em></p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="-tasks.html#cb74-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
+<span id="cb74-2"><a href="-tasks.html#cb74-2" aria-hidden="true"></a></span>
+<span id="cb74-3"><a href="-tasks.html#cb74-3" aria-hidden="true"></a><span class="co"># Создаём жкземпляр класса Updater</span></span>
+<span id="cb74-4"><a href="-tasks.html#cb74-4" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb74-5"><a href="-tasks.html#cb74-5" aria-hidden="true"></a></span>
+<span id="cb74-6"><a href="-tasks.html#cb74-6" aria-hidden="true"></a><span class="co"># Создаём функцию, которая будет суммировать переданные числа</span></span>
+<span id="cb74-7"><a href="-tasks.html#cb74-7" aria-hidden="true"></a>summing &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update, args) {</span>
+<span id="cb74-8"><a href="-tasks.html#cb74-8" aria-hidden="true"></a>  </span>
+<span id="cb74-9"><a href="-tasks.html#cb74-9" aria-hidden="true"></a>  <span class="cf">if</span> ( update<span class="op">$</span>message<span class="op">$</span>from<span class="op">$</span>username <span class="op">==</span><span class="st"> &#39;YourUsername&#39;</span> ) {</span>
+<span id="cb74-10"><a href="-tasks.html#cb74-10" aria-hidden="true"></a></span>
+<span id="cb74-11"><a href="-tasks.html#cb74-11" aria-hidden="true"></a>    <span class="co"># Переводим полученный вектор параметров в числа и суммируем</span></span>
+<span id="cb74-12"><a href="-tasks.html#cb74-12" aria-hidden="true"></a>    x &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">as.integer</span>(args))</span>
+<span id="cb74-13"><a href="-tasks.html#cb74-13" aria-hidden="true"></a>  </span>
+<span id="cb74-14"><a href="-tasks.html#cb74-14" aria-hidden="true"></a>    <span class="co"># создаём сообщение</span></span>
+<span id="cb74-15"><a href="-tasks.html#cb74-15" aria-hidden="true"></a>    msg &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;Сумма переданных чисел: &#39;</span>, x)</span>
+<span id="cb74-16"><a href="-tasks.html#cb74-16" aria-hidden="true"></a>  </span>
+<span id="cb74-17"><a href="-tasks.html#cb74-17" aria-hidden="true"></a>    <span class="co"># отправляем результат</span></span>
+<span id="cb74-18"><a href="-tasks.html#cb74-18" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, msg, <span class="st">&#39;Markdown&#39;</span>)</span>
+<span id="cb74-19"><a href="-tasks.html#cb74-19" aria-hidden="true"></a>    </span>
+<span id="cb74-20"><a href="-tasks.html#cb74-20" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
+<span id="cb74-21"><a href="-tasks.html#cb74-21" aria-hidden="true"></a>    </span>
+<span id="cb74-22"><a href="-tasks.html#cb74-22" aria-hidden="true"></a>    <span class="co"># отправляем результат</span></span>
+<span id="cb74-23"><a href="-tasks.html#cb74-23" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb74-24"><a href="-tasks.html#cb74-24" aria-hidden="true"></a>                    <span class="st">&#39;У вас не достаточно прав на использование этой функции бота!&#39;</span>, </span>
+<span id="cb74-25"><a href="-tasks.html#cb74-25" aria-hidden="true"></a>                    <span class="st">&#39;Markdown&#39;</span>)</span>
+<span id="cb74-26"><a href="-tasks.html#cb74-26" aria-hidden="true"></a>    </span>
+<span id="cb74-27"><a href="-tasks.html#cb74-27" aria-hidden="true"></a>  }</span>
+<span id="cb74-28"><a href="-tasks.html#cb74-28" aria-hidden="true"></a></span>
+<span id="cb74-29"><a href="-tasks.html#cb74-29" aria-hidden="true"></a>}</span>
+<span id="cb74-30"><a href="-tasks.html#cb74-30" aria-hidden="true"></a></span>
+<span id="cb74-31"><a href="-tasks.html#cb74-31" aria-hidden="true"></a><span class="co"># создаём обработчик</span></span>
+<span id="cb74-32"><a href="-tasks.html#cb74-32" aria-hidden="true"></a>h_sum &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;sum&#39;</span>, summing, <span class="dt">pass_args =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb74-33"><a href="-tasks.html#cb74-33" aria-hidden="true"></a></span>
+<span id="cb74-34"><a href="-tasks.html#cb74-34" aria-hidden="true"></a><span class="co"># добавляем обработчик в диспетчер</span></span>
+<span id="cb74-35"><a href="-tasks.html#cb74-35" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span><span class="st"> </span>h_sum</span>
+<span id="cb74-36"><a href="-tasks.html#cb74-36" aria-hidden="true"></a></span>
+<span id="cb74-37"><a href="-tasks.html#cb74-37" aria-hidden="true"></a><span class="co"># запускаем бота</span></span>
+<span id="cb74-38"><a href="-tasks.html#cb74-38" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="-6.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/99-solution.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

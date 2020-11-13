@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Глава 5 Управление правами пользователей бота  | Разработка telegram ботов на языке R</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Глава 5 Управление правами пользователей бота  | Разработка telegram ботов на языке R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Глава 5 Управление правами пользователей бота  | Разработка telegram ботов на языке R" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Алексей Селезнёв" />
+
+
+<meta name="date" content="2020-11-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="-4.html"/>
+<link rel="next" href="-6.html"/>
+<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Разработка Telegram ботов на языке R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Введение</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#предисловие"><i class="fa fa-check"></i>Предисловие</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#навыки-необходимые-для-прохождения-учебника"><i class="fa fa-check"></i>Навыки необходимые для прохождения учебника</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#об-авторе"><i class="fa fa-check"></i>Об авторе</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#правки-и-предложения"><i class="fa fa-check"></i>Правки и предложения</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#поддержать-проект"><i class="fa fa-check"></i>Поддержать проект</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="-telegram-1.html"><a href="-telegram-1.html"><i class="fa fa-check"></i><b>1</b> Создаём бота, и отправляем с его помощью сообщения в telegram </a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="-telegram-1.html"><a href="-telegram-1.html#создание-телеграм-бота"><i class="fa fa-check"></i><b>1.1</b> Создание телеграм бота</a></li>
+<li class="chapter" data-level="1.2" data-path="-telegram-1.html"><a href="-telegram-1.html#установка-пакета-для-работы-с-телеграм-ботом-на-r"><i class="fa fa-check"></i><b>1.2</b> Установка пакета для работы с телеграм ботом на R</a></li>
+<li class="chapter" data-level="1.3" data-path="-telegram-1.html"><a href="-telegram-1.html#отправка-сообщений-из-r-в-telegram"><i class="fa fa-check"></i><b>1.3</b> Отправка сообщений из R в Telegram</a></li>
+<li class="chapter" data-level="1.4" data-path="-telegram-1.html"><a href="-telegram-1.html#как-отправить-в-telegram-таблицу"><i class="fa fa-check"></i><b>1.4</b> Как отправить в telegram таблицу</a></li>
+<li class="chapter" data-level="1.5" data-path="-telegram-1.html"><a href="-telegram-1.html#как-добавить-в-сообщение-emoji"><i class="fa fa-check"></i><b>1.5</b> Как добавить в сообщение Emoji</a></li>
+<li class="chapter" data-level="1.6" data-path="-telegram-1.html"><a href="-telegram-1.html#проверка-планировщика-задач-windows-и-отправка-уведомления-о-задачах-работа-которых-была-завершена-аварийно"><i class="fa fa-check"></i><b>1.6</b> Проверка планировщика задач Windows, и отправка уведомления о задачах, работа которых была завершена аварийно</a></li>
+<li class="chapter" data-level="1.7" data-path="-telegram-1.html"><a href="-telegram-1.html#настраиваем-расписание-запуска-проверки-задач"><i class="fa fa-check"></i><b>1.7</b> Настраиваем расписание запуска проверки задач</a></li>
+<li class="chapter" data-level="1.8" data-path="-telegram-1.html"><a href="-telegram-1.html#заключение"><i class="fa fa-check"></i><b>1.8</b> Заключение</a></li>
+<li class="chapter" data-level="1.9" data-path="-telegram-1.html"><a href="-telegram-1.html#тесты-и-задания"><i class="fa fa-check"></i><b>1.9</b> Тесты и задания</a>
+<ul>
+<li class="chapter" data-level="1.9.1" data-path="-telegram-1.html"><a href="-telegram-1.html#тесты"><i class="fa fa-check"></i><b>1.9.1</b> Тесты</a></li>
+<li class="chapter" data-level="1.9.2" data-path="-telegram-1.html"><a href="-telegram-1.html#задания"><i class="fa fa-check"></i><b>1.9.2</b> Задания</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="-updater-2.html"><a href="-updater-2.html"><i class="fa fa-check"></i><b>2</b> Добавляем боту поддержку команд и фильтры сообщений, класс Updater </a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="-updater-2.html"><a href="-updater-2.html#класс-updater"><i class="fa fa-check"></i><b>2.1</b> Класс Updater</a></li>
+<li class="chapter" data-level="2.2" data-path="-updater-2.html"><a href="-updater-2.html#handlers---обработчики"><i class="fa fa-check"></i><b>2.2</b> Handlers - обработчики</a></li>
+<li class="chapter" data-level="2.3" data-path="-updater-2.html"><a href="-updater-2.html#добавляем-первую-команду-боту-обработчик-команд"><i class="fa fa-check"></i><b>2.3</b> Добавляем первую команду боту, обработчик команд</a></li>
+<li class="chapter" data-level="2.4" data-path="-updater-2.html"><a href="-updater-2.html#обработчик-текстовых-сообщений-и-фильтры"><i class="fa fa-check"></i><b>2.4</b> Обработчик текстовых сообщений и фильтры</a></li>
+<li class="chapter" data-level="2.5" data-path="-updater-2.html"><a href="-updater-2.html#добавление-команд-с-параметрами"><i class="fa fa-check"></i><b>2.5</b> Добавление команд с параметрами</a></li>
+<li class="chapter" data-level="2.6" data-path="-updater-2.html"><a href="-updater-2.html#запускаем-бота-в-фоновом-режиме"><i class="fa fa-check"></i><b>2.6</b> Запускаем бота в фоновом режиме</a></li>
+<li class="chapter" data-level="2.7" data-path="-updater-2.html"><a href="-updater-2.html#как-добавить-бота-в-группу"><i class="fa fa-check"></i><b>2.7</b> Как добавить бота в группу</a></li>
+<li class="chapter" data-level="2.8" data-path="-updater-2.html"><a href="-updater-2.html#как-добавить-описание-команд-в-интерфейс-бота"><i class="fa fa-check"></i><b>2.8</b> Как добавить описание команд в интерфейс бота</a></li>
+<li class="chapter" data-level="2.9" data-path="-updater-2.html"><a href="-updater-2.html#заключение-1"><i class="fa fa-check"></i><b>2.9</b> Заключение</a></li>
+<li class="chapter" data-level="2.10" data-path="-updater-2.html"><a href="-updater-2.html#тесты-и-задания-1"><i class="fa fa-check"></i><b>2.10</b> Тесты и задания</a>
+<ul>
+<li class="chapter" data-level="2.10.1" data-path="-updater-2.html"><a href="-updater-2.html#тесты-1"><i class="fa fa-check"></i><b>2.10.1</b> Тесты</a></li>
+<li class="chapter" data-level="2.10.2" data-path="-updater-2.html"><a href="-updater-2.html#задания-1"><i class="fa fa-check"></i><b>2.10.2</b> Задания</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="-3.html"><a href="-3.html"><i class="fa fa-check"></i><b>3</b> Как добавить боту поддержку клавиатуры </a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="-3.html"><a href="-3.html#какие-типы-клавиатур-поддерживает-телеграм-бот"><i class="fa fa-check"></i><b>3.1</b> Какие типы клавиатур поддерживает телеграм бот</a></li>
+<li class="chapter" data-level="3.2" data-path="-3.html"><a href="-3.html#reply-клавиатура"><i class="fa fa-check"></i><b>3.2</b> Reply клавиатура</a></li>
+<li class="chapter" data-level="3.3" data-path="-3.html"><a href="-3.html#inline-клавиатура"><i class="fa fa-check"></i><b>3.3</b> Inline клавиатура</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="-3.html"><a href="-3.html#пример-простейшего-бота-с-поддержкой-inline-кнопок"><i class="fa fa-check"></i><b>3.3.1</b> Пример простейшего бота с поддержкой InLine кнопок</a></li>
+<li class="chapter" data-level="3.3.2" data-path="-3.html"><a href="-3.html#пример-бота-который-сообщает-текущую-погоду-по-выбранному-городу"><i class="fa fa-check"></i><b>3.3.2</b> Пример бота, который сообщает текущую погоду по выбранному городу</a></li>
+<li class="chapter" data-level="3.3.3" data-path="-3.html"><a href="-3.html#пример-бота-который-выводит-список-самых-свежих-статей-со-ссылками-по-указанному-хабу-из-habr.com."><i class="fa fa-check"></i><b>3.3.3</b> Пример бота, который выводит список самых свежих статей со ссылками по-указанному Хабу из <span>habr.com</span>.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="-3.html"><a href="-3.html#заключение-2"><i class="fa fa-check"></i><b>3.4</b> Заключение</a></li>
+<li class="chapter" data-level="3.5" data-path="-3.html"><a href="-3.html#тесты-и-задания-2"><i class="fa fa-check"></i><b>3.5</b> Тесты и задания</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="-3.html"><a href="-3.html#тесты-2"><i class="fa fa-check"></i><b>3.5.1</b> Тесты</a></li>
+<li class="chapter" data-level="3.5.2" data-path="-3.html"><a href="-3.html#задания-2"><i class="fa fa-check"></i><b>3.5.2</b> Задания</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="-4.html"><a href="-4.html"><i class="fa fa-check"></i><b>4</b> Построение последовательного, логического диалога с ботом </a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="-4.html"><a href="-4.html#введение-1"><i class="fa fa-check"></i><b>4.1</b> Введение</a></li>
+<li class="chapter" data-level="4.2" data-path="-4.html"><a href="-4.html#процесс-построения-бота"><i class="fa fa-check"></i><b>4.2</b> Процесс построения бота</a></li>
+<li class="chapter" data-level="4.3" data-path="-4.html"><a href="-4.html#структура-проекта-бота"><i class="fa fa-check"></i><b>4.3</b> Структура проекта бота</a></li>
+<li class="chapter" data-level="4.4" data-path="-4.html"><a href="-4.html#конфиг-бота"><i class="fa fa-check"></i><b>4.4</b> Конфиг бота</a></li>
+<li class="chapter" data-level="4.5" data-path="-4.html"><a href="-4.html#создаём-переменную-среды"><i class="fa fa-check"></i><b>4.5</b> Создаём переменную среды</a></li>
+<li class="chapter" data-level="4.6" data-path="-4.html"><a href="-4.html#создаём-базу-данных"><i class="fa fa-check"></i><b>4.6</b> Создаём базу данных</a></li>
+<li class="chapter" data-level="4.7" data-path="-4.html"><a href="-4.html#пишем-функции-для-работы-с-базой-данных"><i class="fa fa-check"></i><b>4.7</b> Пишем функции для работы с базой данных</a></li>
+<li class="chapter" data-level="4.8" data-path="-4.html"><a href="-4.html#методы-бота"><i class="fa fa-check"></i><b>4.8</b> Методы бота</a></li>
+<li class="chapter" data-level="4.9" data-path="-4.html"><a href="-4.html#фильтры-сообщений"><i class="fa fa-check"></i><b>4.9</b> Фильтры сообщений</a></li>
+<li class="chapter" data-level="4.10" data-path="-4.html"><a href="-4.html#обработчики"><i class="fa fa-check"></i><b>4.10</b> Обработчики</a></li>
+<li class="chapter" data-level="4.11" data-path="-4.html"><a href="-4.html#код-запуска-бота"><i class="fa fa-check"></i><b>4.11</b> Код запуска бота</a></li>
+<li class="chapter" data-level="4.12" data-path="-4.html"><a href="-4.html#заключение-3"><i class="fa fa-check"></i><b>4.12</b> Заключение</a></li>
+<li class="chapter" data-level="4.13" data-path="-4.html"><a href="-4.html#тесты-и-задания-3"><i class="fa fa-check"></i><b>4.13</b> Тесты и задания</a>
+<ul>
+<li class="chapter" data-level="4.13.1" data-path="-4.html"><a href="-4.html#тесты-3"><i class="fa fa-check"></i><b>4.13.1</b> Тесты</a></li>
+<li class="chapter" data-level="4.13.2" data-path="-4.html"><a href="-4.html#задания-3"><i class="fa fa-check"></i><b>4.13.2</b> Задания</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="-5.html"><a href="-5.html"><i class="fa fa-check"></i><b>5</b> Управление правами пользователей бота </a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="-5.html"><a href="-5.html#введение-2"><i class="fa fa-check"></i><b>5.1</b> Введение</a></li>
+<li class="chapter" data-level="5.2" data-path="-5.html"><a href="-5.html#ограничиваем-права-пользователя-с-помощью-фильтров-сообщений"><i class="fa fa-check"></i><b>5.2</b> Ограничиваем права пользователя с помощью фильтров сообщений</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="-5.html"><a href="-5.html#ограничиваем-права-на-уровне-имени-пользователя"><i class="fa fa-check"></i><b>5.2.1</b> Ограничиваем права на уровне имени пользователя</a></li>
+<li class="chapter" data-level="5.2.2" data-path="-5.html"><a href="-5.html#ограничиваем-права-на-уровне-чата"><i class="fa fa-check"></i><b>5.2.2</b> Ограничиваем права на уровне чата</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="-5.html"><a href="-5.html#ограничиваем-права-пользователя-внутри-кода-методов"><i class="fa fa-check"></i><b>5.3</b> Ограничиваем права пользователя внутри кода методов</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="-5.html"><a href="-5.html#ограничиваем-права-на-уровне-имени-пользователя-1"><i class="fa fa-check"></i><b>5.3.1</b> Ограничиваем права на уровне имени пользователя</a></li>
+<li class="chapter" data-level="5.3.2" data-path="-5.html"><a href="-5.html#ограничиваем-права-на-уровне-чата-1"><i class="fa fa-check"></i><b>5.3.2</b> Ограничиваем права на уровне чата</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="-5.html"><a href="-5.html#заключение-4"><i class="fa fa-check"></i><b>5.4</b> Заключение</a></li>
+<li class="chapter" data-level="5.5" data-path="-5.html"><a href="-5.html#тесты-и-задания-4"><i class="fa fa-check"></i><b>5.5</b> Тесты и задания</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="-5.html"><a href="-5.html#тесты-4"><i class="fa fa-check"></i><b>5.5.1</b> Тесты</a></li>
+<li class="chapter" data-level="5.5.2" data-path="-5.html"><a href="-5.html#задания-4"><i class="fa fa-check"></i><b>5.5.2</b> Задания</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="-6.html"><a href="-6.html"><i class="fa fa-check"></i><b>6</b> Повышаем стабильность работы бота </a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="-6.html"><a href="-6.html#конструкция-trycatch"><i class="fa fa-check"></i><b>6.1</b> Конструкция tryCatch()</a></li>
+<li class="chapter" data-level="6.2" data-path="-6.html"><a href="-6.html#логика-работы-конструкции-trycatch"><i class="fa fa-check"></i><b>6.2</b> Логика работы конструкции tryCatch()</a></li>
+<li class="chapter" data-level="6.3" data-path="-6.html"><a href="-6.html#используем-trycatch-внутри-бота"><i class="fa fa-check"></i><b>6.3</b> Используем tryCatch() внутри бота</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач</a>
+<ul>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-1.1"><i class="fa fa-check"></i>Задача 1.1</a></li>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-2.1"><i class="fa fa-check"></i>Задача 2.1</a></li>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-3.1"><i class="fa fa-check"></i>Задача 3.1</a></li>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-4.1"><i class="fa fa-check"></i>Задача 4.1</a></li>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-5.1"><i class="fa fa-check"></i>Задача 5.1</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://t.me/R4marketing" target="blank">Канал R4marketing</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Разработка telegram ботов на языке R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="управление-правами-пользователей-бота-5" class="section level1" number="5">
+<h1><span class="header-section-number">Глава 5</span> Управление правами пользователей бота </h1>
+<p>В этой главе мы разберёмся с тем, как управлять правами использования отдельных методов бота на различных уровнях.</p>
+<p><img src="https://habrastorage.org/webt/zx/1m/k2/zx1mk2dp30i1bh61-bf4iodlrra.png" align="center" width="80%" /></p>
+<div id="введение-2" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Введение</h2>
+<p>Ваш бот может выполнять совершенно любые задачи, и автоматизировать как некоторые внутренние процессы, так и наладить коммуникации с клиентами.</p>
+<p>Т.е. бот может использоваться в многопользовательском режиме. При этом, вам может понадобиться разграничить права на использование бота. Например, некоторые пользователи смогут использовать абсолютно все возможности бота, а некоторым вы предоставите ограниченные права.</p>
+<p>Ограничить права можно не только на уровне пользователя, но и на уровне отдельных чатов.</p>
+<p>Мы создадим простейшего бота, у которого в арсенале будет всего 2 метода:</p>
+<ul>
+<li><code>say_hello</code> - команда приветствия</li>
+<li><code>what_time</code> - команда, по которой бот сообщает текущую дату и время</li>
+</ul>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="-5.html#cb56-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
+<span id="cb56-2"><a href="-5.html#cb56-2" aria-hidden="true"></a></span>
+<span id="cb56-3"><a href="-5.html#cb56-3" aria-hidden="true"></a><span class="co"># создаём экземпляр класса Updater</span></span>
+<span id="cb56-4"><a href="-5.html#cb56-4" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb56-5"><a href="-5.html#cb56-5" aria-hidden="true"></a></span>
+<span id="cb56-6"><a href="-5.html#cb56-6" aria-hidden="true"></a><span class="co"># Пишем метод для приветсвия</span></span>
+<span id="cb56-7"><a href="-5.html#cb56-7" aria-hidden="true"></a><span class="co">## команда приветствия</span></span>
+<span id="cb56-8"><a href="-5.html#cb56-8" aria-hidden="true"></a>say_hello &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb56-9"><a href="-5.html#cb56-9" aria-hidden="true"></a>  </span>
+<span id="cb56-10"><a href="-5.html#cb56-10" aria-hidden="true"></a>  <span class="co"># Имя пользователя с которым надо поздароваться</span></span>
+<span id="cb56-11"><a href="-5.html#cb56-11" aria-hidden="true"></a>  user_name &lt;-<span class="st"> </span>update<span class="op">$</span>message<span class="op">$</span>from<span class="op">$</span>first_name</span>
+<span id="cb56-12"><a href="-5.html#cb56-12" aria-hidden="true"></a>  </span>
+<span id="cb56-13"><a href="-5.html#cb56-13" aria-hidden="true"></a>  <span class="co"># Отправка сообщения</span></span>
+<span id="cb56-14"><a href="-5.html#cb56-14" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb56-15"><a href="-5.html#cb56-15" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Моё почтение, &quot;</span>, user_name, <span class="st">&quot;!&quot;</span>),</span>
+<span id="cb56-16"><a href="-5.html#cb56-16" aria-hidden="true"></a>                  <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb56-17"><a href="-5.html#cb56-17" aria-hidden="true"></a>                  <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
+<span id="cb56-18"><a href="-5.html#cb56-18" aria-hidden="true"></a></span>
+<span id="cb56-19"><a href="-5.html#cb56-19" aria-hidden="true"></a>}</span>
+<span id="cb56-20"><a href="-5.html#cb56-20" aria-hidden="true"></a></span>
+<span id="cb56-21"><a href="-5.html#cb56-21" aria-hidden="true"></a><span class="co">## команда по которой бот возвращает системную дату и время</span></span>
+<span id="cb56-22"><a href="-5.html#cb56-22" aria-hidden="true"></a>what_time &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb56-23"><a href="-5.html#cb56-23" aria-hidden="true"></a>  </span>
+<span id="cb56-24"><a href="-5.html#cb56-24" aria-hidden="true"></a>  <span class="co"># Запрашиваем текущее время</span></span>
+<span id="cb56-25"><a href="-5.html#cb56-25" aria-hidden="true"></a>  cur_time &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">Sys.time</span>())</span>
+<span id="cb56-26"><a href="-5.html#cb56-26" aria-hidden="true"></a>  </span>
+<span id="cb56-27"><a href="-5.html#cb56-27" aria-hidden="true"></a>  <span class="co"># Отправка сообщения</span></span>
+<span id="cb56-28"><a href="-5.html#cb56-28" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb56-29"><a href="-5.html#cb56-29" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Текущее время, &quot;</span>, cur_time),</span>
+<span id="cb56-30"><a href="-5.html#cb56-30" aria-hidden="true"></a>                                <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb56-31"><a href="-5.html#cb56-31" aria-hidden="true"></a>                                <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
+<span id="cb56-32"><a href="-5.html#cb56-32" aria-hidden="true"></a>                  </span>
+<span id="cb56-33"><a href="-5.html#cb56-33" aria-hidden="true"></a>  </span>
+<span id="cb56-34"><a href="-5.html#cb56-34" aria-hidden="true"></a>}</span>
+<span id="cb56-35"><a href="-5.html#cb56-35" aria-hidden="true"></a></span>
+<span id="cb56-36"><a href="-5.html#cb56-36" aria-hidden="true"></a><span class="co"># обработчики</span></span>
+<span id="cb56-37"><a href="-5.html#cb56-37" aria-hidden="true"></a>h_hello &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;say_hello&#39;</span>, say_hello)</span>
+<span id="cb56-38"><a href="-5.html#cb56-38" aria-hidden="true"></a>h_time  &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;what_time&#39;</span>, what_time)</span>
+<span id="cb56-39"><a href="-5.html#cb56-39" aria-hidden="true"></a></span>
+<span id="cb56-40"><a href="-5.html#cb56-40" aria-hidden="true"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span id="cb56-41"><a href="-5.html#cb56-41" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span><span class="st"> </span>h_hello <span class="op">+</span><span class="st"> </span>h_time</span>
+<span id="cb56-42"><a href="-5.html#cb56-42" aria-hidden="true"></a></span>
+<span id="cb56-43"><a href="-5.html#cb56-43" aria-hidden="true"></a><span class="co"># запускаем бота </span></span>
+<span id="cb56-44"><a href="-5.html#cb56-44" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+<blockquote>
+<p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em> (о создании бота я рассказывал в <a href="https://habr.com/ru/post/511222/#sozdanie-telegram-bota">первой статье</a>).</p>
+</blockquote>
+<p>В данной главе мы разберёмся с тем, как разными способами, и на разных уровнях ограничить использование методов этого бота.</p>
+</div>
+<div id="ограничиваем-права-пользователя-с-помощью-фильтров-сообщений" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Ограничиваем права пользователя с помощью фильтров сообщений</h2>
+<p>Из предыдущих публикаций мы уже разобрались с тем, что такое фильтры сообщений. Но ранее мы использовали их в основном для, того, что бы вызывать какие-то методы бота через обычное сообщение, а не команду и для прослушиваний сообщений в определённом состоянии чата.</p>
+<p>В этот раз мы научимся с помощью фильтров ограничивать возможности по использованию методов бота, на разных уровнях.</p>
+<div id="ограничиваем-права-на-уровне-имени-пользователя" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Ограничиваем права на уровне имени пользователя</h3>
+<p>Для создания собственных фильтров вам необходимо с помощью функции <code>BaseFilter()</code> добавить новый элемент в объект <code>MessageFilters</code>. Более подробно об этом я рассказывал во <a href="https://habr.com/ru/post/515148/">второй статье</a> из данной серии.</p>
+<p>В анонимную функцию, которую вы прописываете внутри <code>BaseFilter()</code> передаётся всего один аргумент - <code>message</code>. Это сообщение которое вы, или другой пользователей отправляет боту, со всеми его метаданными. Данный объект имеет следующую структуру:</p>
+<pre><code>$message_id
+[1] 1174
+
+$from
+$from$id
+[1] 194336771
+
+$from$is_bot
+[1] FALSE
+
+$from$first_name
+[1] &quot;Alexey&quot;
+
+$from$last_name
+[1] &quot;Seleznev&quot;
+
+$from$username
+[1] &quot;AlexeySeleznev&quot;
+
+$from$language_code
+[1] &quot;ru&quot;
+
+
+$chat
+$chat$id
+[1] 194336771
+
+$chat$first_name
+[1] &quot;Alexey&quot;
+
+$chat$last_name
+[1] &quot;Seleznev&quot;
+
+$chat$username
+[1] &quot;AlexeySeleznev&quot;
+
+$chat$type
+[1] &quot;private&quot;
+
+
+$date
+[1] 1601295189
+
+$text
+[1] &quot;отправленный пользователем текст&quot;
+
+$chat_id
+[1] 194336771
+
+$from_user
+[1] 194336771</code></pre>
+<p>Более подробно описание ответа и всех его компонентов можно узнать из официальной документации:</p>
+<ul>
+<li><a href="https://tlgrm.ru/docs/bots/api#user">User</a> - Этот объект представляет бота или пользователя Telegram.</li>
+<li><a href="https://tlgrm.ru/docs/bots/api#chat">Chat</a> - Этот объект представляет собой чат.</li>
+<li><a href="https://tlgrm.ru/docs/bots/api#message">Message</a> - Этот объект представляет собой сообщение.</li>
+</ul>
+<p>Соответственно вы можете разделять права пользователей бота, и его методов используя любую, отправляемую с сообщением информацию, т.е. любые элементы объекта <code>message</code>. Для того, что бы ограничить круг пользователей которые могут использовать методы вашего бота достаточно создать фильтр:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="-5.html#cb58-1" aria-hidden="true"></a><span class="co">## список пользователей, с полными правами</span></span>
+<span id="cb58-2"><a href="-5.html#cb58-2" aria-hidden="true"></a>MessageFilters<span class="op">$</span>admins &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(</span>
+<span id="cb58-3"><a href="-5.html#cb58-3" aria-hidden="true"></a>  <span class="cf">function</span>(message) {</span>
+<span id="cb58-4"><a href="-5.html#cb58-4" aria-hidden="true"></a>    </span>
+<span id="cb58-5"><a href="-5.html#cb58-5" aria-hidden="true"></a>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
+<span id="cb58-6"><a href="-5.html#cb58-6" aria-hidden="true"></a>    message<span class="op">$</span>from<span class="op">$</span>username <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;AlexeySeleznev&#39;</span>, <span class="st">&#39;user1&#39;</span>, <span class="st">&#39;user2&#39;</span>)</span>
+<span id="cb58-7"><a href="-5.html#cb58-7" aria-hidden="true"></a>    </span>
+<span id="cb58-8"><a href="-5.html#cb58-8" aria-hidden="true"></a> }</span>
+<span id="cb58-9"><a href="-5.html#cb58-9" aria-hidden="true"></a>)</span></code></pre></div>
+<p>Где <code>c('AlexeySeleznev', 'user1', 'user2')</code> - вектор, с именами пользователей, которые могут использовать все функции бота. Далее этот фильтр мы используем при создании обработчиков.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="-5.html#cb59-1" aria-hidden="true"></a><span class="co">## фильтр для вызова команды say_hello</span></span>
+<span id="cb59-2"><a href="-5.html#cb59-2" aria-hidden="true"></a>MessageFilters<span class="op">$</span>say_hello &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(</span>
+<span id="cb59-3"><a href="-5.html#cb59-3" aria-hidden="true"></a>  <span class="cf">function</span>(message) {</span>
+<span id="cb59-4"><a href="-5.html#cb59-4" aria-hidden="true"></a>    </span>
+<span id="cb59-5"><a href="-5.html#cb59-5" aria-hidden="true"></a>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
+<span id="cb59-6"><a href="-5.html#cb59-6" aria-hidden="true"></a>    message<span class="op">$</span>text <span class="op">==</span><span class="st"> &#39;/say_hallo&#39;</span></span>
+<span id="cb59-7"><a href="-5.html#cb59-7" aria-hidden="true"></a>    </span>
+<span id="cb59-8"><a href="-5.html#cb59-8" aria-hidden="true"></a>  }</span>
+<span id="cb59-9"><a href="-5.html#cb59-9" aria-hidden="true"></a>)</span>
+<span id="cb59-10"><a href="-5.html#cb59-10" aria-hidden="true"></a></span>
+<span id="cb59-11"><a href="-5.html#cb59-11" aria-hidden="true"></a><span class="co">## фильтр для вызова команды what_time</span></span>
+<span id="cb59-12"><a href="-5.html#cb59-12" aria-hidden="true"></a>MessageFilters<span class="op">$</span>what_time &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(</span>
+<span id="cb59-13"><a href="-5.html#cb59-13" aria-hidden="true"></a>  <span class="cf">function</span>(message) {</span>
+<span id="cb59-14"><a href="-5.html#cb59-14" aria-hidden="true"></a>    </span>
+<span id="cb59-15"><a href="-5.html#cb59-15" aria-hidden="true"></a>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
+<span id="cb59-16"><a href="-5.html#cb59-16" aria-hidden="true"></a>    message<span class="op">$</span>text <span class="op">==</span><span class="st"> &#39;/what_time&#39;</span></span>
+<span id="cb59-17"><a href="-5.html#cb59-17" aria-hidden="true"></a>    </span>
+<span id="cb59-18"><a href="-5.html#cb59-18" aria-hidden="true"></a>  }</span>
+<span id="cb59-19"><a href="-5.html#cb59-19" aria-hidden="true"></a>)</span>
+<span id="cb59-20"><a href="-5.html#cb59-20" aria-hidden="true"></a></span>
+<span id="cb59-21"><a href="-5.html#cb59-21" aria-hidden="true"></a></span>
+<span id="cb59-22"><a href="-5.html#cb59-22" aria-hidden="true"></a><span class="co"># обработчики</span></span>
+<span id="cb59-23"><a href="-5.html#cb59-23" aria-hidden="true"></a>h_hello &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(say_hello, MessageFilters<span class="op">$</span>admins <span class="op">&amp;</span><span class="st"> </span>MessageFilters<span class="op">$</span>say_hello)</span>
+<span id="cb59-24"><a href="-5.html#cb59-24" aria-hidden="true"></a>h_time  &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(what_time, MessageFilters<span class="op">$</span>admins <span class="op">&amp;</span><span class="st"> </span>MessageFilters<span class="op">$</span>what_time)</span></code></pre></div>
+<p>Теперь нашего бота могут использовать пользователи с логинами AlexeySeleznev, user1, user2. На сообщения отправленные боту другими пользователями он никак не будет реагировать.</p>
+<p>Изменённый код нашего бота на данный момент выглядит вот так:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="-5.html#cb60-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
+<span id="cb60-2"><a href="-5.html#cb60-2" aria-hidden="true"></a></span>
+<span id="cb60-3"><a href="-5.html#cb60-3" aria-hidden="true"></a></span>
+<span id="cb60-4"><a href="-5.html#cb60-4" aria-hidden="true"></a><span class="co"># создаём экземпляр класса Updater</span></span>
+<span id="cb60-5"><a href="-5.html#cb60-5" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb60-6"><a href="-5.html#cb60-6" aria-hidden="true"></a></span>
+<span id="cb60-7"><a href="-5.html#cb60-7" aria-hidden="true"></a><span class="co"># Пишем метод для приветсвия</span></span>
+<span id="cb60-8"><a href="-5.html#cb60-8" aria-hidden="true"></a><span class="co">## команда приветствия</span></span>
+<span id="cb60-9"><a href="-5.html#cb60-9" aria-hidden="true"></a>say_hello &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb60-10"><a href="-5.html#cb60-10" aria-hidden="true"></a>  </span>
+<span id="cb60-11"><a href="-5.html#cb60-11" aria-hidden="true"></a>  <span class="co"># Имя пользователя с которым надо поздароваться</span></span>
+<span id="cb60-12"><a href="-5.html#cb60-12" aria-hidden="true"></a>  user_name &lt;-<span class="st"> </span>update<span class="op">$</span>message<span class="op">$</span>from<span class="op">$</span>first_name</span>
+<span id="cb60-13"><a href="-5.html#cb60-13" aria-hidden="true"></a>  </span>
+<span id="cb60-14"><a href="-5.html#cb60-14" aria-hidden="true"></a>  <span class="co"># Отправка сообщения</span></span>
+<span id="cb60-15"><a href="-5.html#cb60-15" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb60-16"><a href="-5.html#cb60-16" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Моё почтение, &quot;</span>, user_name, <span class="st">&quot;!&quot;</span>),</span>
+<span id="cb60-17"><a href="-5.html#cb60-17" aria-hidden="true"></a>                  <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb60-18"><a href="-5.html#cb60-18" aria-hidden="true"></a>                  <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
+<span id="cb60-19"><a href="-5.html#cb60-19" aria-hidden="true"></a></span>
+<span id="cb60-20"><a href="-5.html#cb60-20" aria-hidden="true"></a>}</span>
+<span id="cb60-21"><a href="-5.html#cb60-21" aria-hidden="true"></a></span>
+<span id="cb60-22"><a href="-5.html#cb60-22" aria-hidden="true"></a><span class="co">## команда по которой бот возвращает системную дату и время</span></span>
+<span id="cb60-23"><a href="-5.html#cb60-23" aria-hidden="true"></a>what_time &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb60-24"><a href="-5.html#cb60-24" aria-hidden="true"></a>  </span>
+<span id="cb60-25"><a href="-5.html#cb60-25" aria-hidden="true"></a>  <span class="co"># Запрашиваем текущее время</span></span>
+<span id="cb60-26"><a href="-5.html#cb60-26" aria-hidden="true"></a>  cur_time &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">Sys.time</span>())</span>
+<span id="cb60-27"><a href="-5.html#cb60-27" aria-hidden="true"></a>  </span>
+<span id="cb60-28"><a href="-5.html#cb60-28" aria-hidden="true"></a>  <span class="co"># Отправка сообщения</span></span>
+<span id="cb60-29"><a href="-5.html#cb60-29" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb60-30"><a href="-5.html#cb60-30" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Текущее время, &quot;</span>, cur_time),</span>
+<span id="cb60-31"><a href="-5.html#cb60-31" aria-hidden="true"></a>                                <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb60-32"><a href="-5.html#cb60-32" aria-hidden="true"></a>                                <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
+<span id="cb60-33"><a href="-5.html#cb60-33" aria-hidden="true"></a>                  </span>
+<span id="cb60-34"><a href="-5.html#cb60-34" aria-hidden="true"></a>  </span>
+<span id="cb60-35"><a href="-5.html#cb60-35" aria-hidden="true"></a>}</span>
+<span id="cb60-36"><a href="-5.html#cb60-36" aria-hidden="true"></a></span>
+<span id="cb60-37"><a href="-5.html#cb60-37" aria-hidden="true"></a><span class="co"># фильтры</span></span>
+<span id="cb60-38"><a href="-5.html#cb60-38" aria-hidden="true"></a><span class="co">## список пользователей, с полными правами</span></span>
+<span id="cb60-39"><a href="-5.html#cb60-39" aria-hidden="true"></a>MessageFilters<span class="op">$</span>admins &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(</span>
+<span id="cb60-40"><a href="-5.html#cb60-40" aria-hidden="true"></a>  <span class="cf">function</span>(message) {</span>
+<span id="cb60-41"><a href="-5.html#cb60-41" aria-hidden="true"></a>    </span>
+<span id="cb60-42"><a href="-5.html#cb60-42" aria-hidden="true"></a>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
+<span id="cb60-43"><a href="-5.html#cb60-43" aria-hidden="true"></a>    message<span class="op">$</span>from<span class="op">$</span>username <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;AlexeySeleznev&#39;</span>, <span class="st">&#39;user1&#39;</span>, <span class="st">&#39;user2&#39;</span>)</span>
+<span id="cb60-44"><a href="-5.html#cb60-44" aria-hidden="true"></a>    </span>
+<span id="cb60-45"><a href="-5.html#cb60-45" aria-hidden="true"></a> }</span>
+<span id="cb60-46"><a href="-5.html#cb60-46" aria-hidden="true"></a>)</span>
+<span id="cb60-47"><a href="-5.html#cb60-47" aria-hidden="true"></a></span>
+<span id="cb60-48"><a href="-5.html#cb60-48" aria-hidden="true"></a><span class="co">## фильтр для вызова команды say_hello</span></span>
+<span id="cb60-49"><a href="-5.html#cb60-49" aria-hidden="true"></a>MessageFilters<span class="op">$</span>say_hello &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(</span>
+<span id="cb60-50"><a href="-5.html#cb60-50" aria-hidden="true"></a>  <span class="cf">function</span>(message) {</span>
+<span id="cb60-51"><a href="-5.html#cb60-51" aria-hidden="true"></a>    </span>
+<span id="cb60-52"><a href="-5.html#cb60-52" aria-hidden="true"></a>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
+<span id="cb60-53"><a href="-5.html#cb60-53" aria-hidden="true"></a>    message<span class="op">$</span>text <span class="op">==</span><span class="st"> &#39;/say_hallo&#39;</span></span>
+<span id="cb60-54"><a href="-5.html#cb60-54" aria-hidden="true"></a>    </span>
+<span id="cb60-55"><a href="-5.html#cb60-55" aria-hidden="true"></a>  }</span>
+<span id="cb60-56"><a href="-5.html#cb60-56" aria-hidden="true"></a>)</span>
+<span id="cb60-57"><a href="-5.html#cb60-57" aria-hidden="true"></a></span>
+<span id="cb60-58"><a href="-5.html#cb60-58" aria-hidden="true"></a><span class="co">## фильтр для вызова команды what_time</span></span>
+<span id="cb60-59"><a href="-5.html#cb60-59" aria-hidden="true"></a>MessageFilters<span class="op">$</span>what_time &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(</span>
+<span id="cb60-60"><a href="-5.html#cb60-60" aria-hidden="true"></a>  <span class="cf">function</span>(message) {</span>
+<span id="cb60-61"><a href="-5.html#cb60-61" aria-hidden="true"></a>    </span>
+<span id="cb60-62"><a href="-5.html#cb60-62" aria-hidden="true"></a>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
+<span id="cb60-63"><a href="-5.html#cb60-63" aria-hidden="true"></a>    message<span class="op">$</span>text <span class="op">==</span><span class="st"> &#39;/what_time&#39;</span></span>
+<span id="cb60-64"><a href="-5.html#cb60-64" aria-hidden="true"></a>    </span>
+<span id="cb60-65"><a href="-5.html#cb60-65" aria-hidden="true"></a>  }</span>
+<span id="cb60-66"><a href="-5.html#cb60-66" aria-hidden="true"></a>)</span>
+<span id="cb60-67"><a href="-5.html#cb60-67" aria-hidden="true"></a></span>
+<span id="cb60-68"><a href="-5.html#cb60-68" aria-hidden="true"></a></span>
+<span id="cb60-69"><a href="-5.html#cb60-69" aria-hidden="true"></a><span class="co"># обработчики</span></span>
+<span id="cb60-70"><a href="-5.html#cb60-70" aria-hidden="true"></a>h_hello &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(say_hello, MessageFilters<span class="op">$</span>admins <span class="op">&amp;</span><span class="st"> </span>MessageFilters<span class="op">$</span>say_hello)</span>
+<span id="cb60-71"><a href="-5.html#cb60-71" aria-hidden="true"></a>h_time  &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(what_time, MessageFilters<span class="op">$</span>admins <span class="op">&amp;</span><span class="st"> </span>MessageFilters<span class="op">$</span>what_time)</span>
+<span id="cb60-72"><a href="-5.html#cb60-72" aria-hidden="true"></a></span>
+<span id="cb60-73"><a href="-5.html#cb60-73" aria-hidden="true"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span id="cb60-74"><a href="-5.html#cb60-74" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span><span class="st"> </span>h_hello <span class="op">+</span><span class="st"> </span>h_time</span>
+<span id="cb60-75"><a href="-5.html#cb60-75" aria-hidden="true"></a></span>
+<span id="cb60-76"><a href="-5.html#cb60-76" aria-hidden="true"></a><span class="co"># запускаем бота </span></span>
+<span id="cb60-77"><a href="-5.html#cb60-77" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+</div>
+<div id="ограничиваем-права-на-уровне-чата" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Ограничиваем права на уровне чата</h3>
+<p>Тем же способом мы можем создать фильтр не только по списку пользователей, но и по конкретному чату. Для этого достаточно создать ещё один фильтр:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="-5.html#cb61-1" aria-hidden="true"></a><span class="co">## список чатов в которых разрешено использовать бота</span></span>
+<span id="cb61-2"><a href="-5.html#cb61-2" aria-hidden="true"></a>MessageFilters<span class="op">$</span>chats &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(</span>
+<span id="cb61-3"><a href="-5.html#cb61-3" aria-hidden="true"></a>  <span class="cf">function</span>(message) {</span>
+<span id="cb61-4"><a href="-5.html#cb61-4" aria-hidden="true"></a>    </span>
+<span id="cb61-5"><a href="-5.html#cb61-5" aria-hidden="true"></a>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
+<span id="cb61-6"><a href="-5.html#cb61-6" aria-hidden="true"></a>    message<span class="op">$</span>chat_id <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">194336771</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb61-7"><a href="-5.html#cb61-7" aria-hidden="true"></a>    </span>
+<span id="cb61-8"><a href="-5.html#cb61-8" aria-hidden="true"></a>  }</span>
+<span id="cb61-9"><a href="-5.html#cb61-9" aria-hidden="true"></a>)</span>
+<span id="cb61-10"><a href="-5.html#cb61-10" aria-hidden="true"></a></span>
+<span id="cb61-11"><a href="-5.html#cb61-11" aria-hidden="true"></a></span>
+<span id="cb61-12"><a href="-5.html#cb61-12" aria-hidden="true"></a><span class="co">## фильтр для вызова команды say_hello</span></span>
+<span id="cb61-13"><a href="-5.html#cb61-13" aria-hidden="true"></a>MessageFilters<span class="op">$</span>say_hello &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(</span>
+<span id="cb61-14"><a href="-5.html#cb61-14" aria-hidden="true"></a>  <span class="cf">function</span>(message) {</span>
+<span id="cb61-15"><a href="-5.html#cb61-15" aria-hidden="true"></a>    </span>
+<span id="cb61-16"><a href="-5.html#cb61-16" aria-hidden="true"></a>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
+<span id="cb61-17"><a href="-5.html#cb61-17" aria-hidden="true"></a>    message<span class="op">$</span>text <span class="op">==</span><span class="st"> &#39;/say_hallo&#39;</span></span>
+<span id="cb61-18"><a href="-5.html#cb61-18" aria-hidden="true"></a>    </span>
+<span id="cb61-19"><a href="-5.html#cb61-19" aria-hidden="true"></a>  }</span>
+<span id="cb61-20"><a href="-5.html#cb61-20" aria-hidden="true"></a>)</span>
+<span id="cb61-21"><a href="-5.html#cb61-21" aria-hidden="true"></a></span>
+<span id="cb61-22"><a href="-5.html#cb61-22" aria-hidden="true"></a><span class="co">## фильтр для вызова команды what_time</span></span>
+<span id="cb61-23"><a href="-5.html#cb61-23" aria-hidden="true"></a>MessageFilters<span class="op">$</span>what_time &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(</span>
+<span id="cb61-24"><a href="-5.html#cb61-24" aria-hidden="true"></a>  <span class="cf">function</span>(message) {</span>
+<span id="cb61-25"><a href="-5.html#cb61-25" aria-hidden="true"></a>    </span>
+<span id="cb61-26"><a href="-5.html#cb61-26" aria-hidden="true"></a>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
+<span id="cb61-27"><a href="-5.html#cb61-27" aria-hidden="true"></a>    message<span class="op">$</span>text <span class="op">==</span><span class="st"> &#39;/what_time&#39;</span></span>
+<span id="cb61-28"><a href="-5.html#cb61-28" aria-hidden="true"></a>    </span>
+<span id="cb61-29"><a href="-5.html#cb61-29" aria-hidden="true"></a>  }</span>
+<span id="cb61-30"><a href="-5.html#cb61-30" aria-hidden="true"></a>)</span>
+<span id="cb61-31"><a href="-5.html#cb61-31" aria-hidden="true"></a></span>
+<span id="cb61-32"><a href="-5.html#cb61-32" aria-hidden="true"></a></span>
+<span id="cb61-33"><a href="-5.html#cb61-33" aria-hidden="true"></a><span class="co"># обработчики</span></span>
+<span id="cb61-34"><a href="-5.html#cb61-34" aria-hidden="true"></a>h_hello &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(say_hello, MessageFilters<span class="op">$</span>admins <span class="op">&amp;</span><span class="st"> </span>MessageFilters<span class="op">$</span>chats <span class="op">&amp;</span><span class="st"> </span>MessageFilters<span class="op">$</span>say_hello)</span>
+<span id="cb61-35"><a href="-5.html#cb61-35" aria-hidden="true"></a>h_time  &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(what_time, MessageFilters<span class="op">$</span>admins <span class="op">&amp;</span><span class="st"> </span>MessageFilters<span class="op">$</span>chats <span class="op">&amp;</span><span class="st"> </span>MessageFilters<span class="op">$</span>what_time)</span></code></pre></div>
+</div>
+</div>
+<div id="ограничиваем-права-пользователя-внутри-кода-методов" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Ограничиваем права пользователя внутри кода методов</h2>
+<p>Так же вы можете ограничить использование методов не прибегая к созданию дополнительных фильтров, а прописав все условия внутри каждого метода.</p>
+<div id="ограничиваем-права-на-уровне-имени-пользователя-1" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Ограничиваем права на уровне имени пользователя</h3>
+<p>Давайте создадим функцию, которая будет принимать данные для проверки имени пользователя.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="-5.html#cb62-1" aria-hidden="true"></a><span class="co"># функция для проверки прав пользователя</span></span>
+<span id="cb62-2"><a href="-5.html#cb62-2" aria-hidden="true"></a>bot_check_usernames &lt;-<span class="st"> </span></span>
+<span id="cb62-3"><a href="-5.html#cb62-3" aria-hidden="true"></a><span class="st">  </span><span class="cf">function</span>(admins, username) {</span>
+<span id="cb62-4"><a href="-5.html#cb62-4" aria-hidden="true"></a>  </span>
+<span id="cb62-5"><a href="-5.html#cb62-5" aria-hidden="true"></a>   username <span class="op">%in%</span><span class="st"> </span>admins </span>
+<span id="cb62-6"><a href="-5.html#cb62-6" aria-hidden="true"></a>  </span>
+<span id="cb62-7"><a href="-5.html#cb62-7" aria-hidden="true"></a>}</span></code></pre></div>
+<p>В аргумент <code>admins</code> далее нам надо передавать список пользователей, которым разрешено использовать данный метод, а в аргумент <code>username</code> имя пользователя, которого надо проверить в списке.</p>
+<p>Далее в каждый метод, который мы хотим защитить с помощью конструкции <code>IF</code> добавляем проверку, разрешено пользователю использовать данный метод или нет. В случае если у пользователя нет таких прав бот будет сообщать об этом в чате.</p>
+<p>Давайте, для примера, я исключу себя из списка пользователей, которым разрешено использовать метод <code>what_time</code>.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="-5.html#cb63-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
+<span id="cb63-2"><a href="-5.html#cb63-2" aria-hidden="true"></a></span>
+<span id="cb63-3"><a href="-5.html#cb63-3" aria-hidden="true"></a><span class="co"># создаём экземпляр класса Updater</span></span>
+<span id="cb63-4"><a href="-5.html#cb63-4" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb63-5"><a href="-5.html#cb63-5" aria-hidden="true"></a></span>
+<span id="cb63-6"><a href="-5.html#cb63-6" aria-hidden="true"></a><span class="co"># Пишем метод для приветсвия</span></span>
+<span id="cb63-7"><a href="-5.html#cb63-7" aria-hidden="true"></a><span class="co">## команда приветствия</span></span>
+<span id="cb63-8"><a href="-5.html#cb63-8" aria-hidden="true"></a>say_hello &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb63-9"><a href="-5.html#cb63-9" aria-hidden="true"></a>  </span>
+<span id="cb63-10"><a href="-5.html#cb63-10" aria-hidden="true"></a>  <span class="co"># Имя пользователя с которым надо поздароваться</span></span>
+<span id="cb63-11"><a href="-5.html#cb63-11" aria-hidden="true"></a>  user_name &lt;-<span class="st"> </span>update<span class="op">$</span>message<span class="op">$</span>from<span class="op">$</span>username</span>
+<span id="cb63-12"><a href="-5.html#cb63-12" aria-hidden="true"></a>  </span>
+<span id="cb63-13"><a href="-5.html#cb63-13" aria-hidden="true"></a>  <span class="co"># проверяем разрешено ли использовать данному пользователю этот метод</span></span>
+<span id="cb63-14"><a href="-5.html#cb63-14" aria-hidden="true"></a>  <span class="cf">if</span> ( <span class="kw">bot_check_usernames</span>(<span class="kw">c</span>(<span class="st">&#39;AlexeySeleznev&#39;</span>, <span class="st">&#39;user1&#39;</span>, <span class="st">&#39;user2&#39;</span>), user_name) ) {</span>
+<span id="cb63-15"><a href="-5.html#cb63-15" aria-hidden="true"></a>    </span>
+<span id="cb63-16"><a href="-5.html#cb63-16" aria-hidden="true"></a>    <span class="co"># Отправка сообщения</span></span>
+<span id="cb63-17"><a href="-5.html#cb63-17" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb63-18"><a href="-5.html#cb63-18" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Моё почтение, &quot;</span>, user_name, <span class="st">&quot;!&quot;</span>),</span>
+<span id="cb63-19"><a href="-5.html#cb63-19" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb63-20"><a href="-5.html#cb63-20" aria-hidden="true"></a>                    <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
+<span id="cb63-21"><a href="-5.html#cb63-21" aria-hidden="true"></a>      </span>
+<span id="cb63-22"><a href="-5.html#cb63-22" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
+<span id="cb63-23"><a href="-5.html#cb63-23" aria-hidden="true"></a>    </span>
+<span id="cb63-24"><a href="-5.html#cb63-24" aria-hidden="true"></a>    <span class="co"># Отправка сообщения</span></span>
+<span id="cb63-25"><a href="-5.html#cb63-25" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb63-26"><a href="-5.html#cb63-26" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;У вас нет прав для использования этого метода!&quot;</span>),</span>
+<span id="cb63-27"><a href="-5.html#cb63-27" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb63-28"><a href="-5.html#cb63-28" aria-hidden="true"></a>                    <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
+<span id="cb63-29"><a href="-5.html#cb63-29" aria-hidden="true"></a>    </span>
+<span id="cb63-30"><a href="-5.html#cb63-30" aria-hidden="true"></a>  }</span>
+<span id="cb63-31"><a href="-5.html#cb63-31" aria-hidden="true"></a></span>
+<span id="cb63-32"><a href="-5.html#cb63-32" aria-hidden="true"></a>}</span>
+<span id="cb63-33"><a href="-5.html#cb63-33" aria-hidden="true"></a></span>
+<span id="cb63-34"><a href="-5.html#cb63-34" aria-hidden="true"></a><span class="co">## команда по которой бот возвращает системную дату и время</span></span>
+<span id="cb63-35"><a href="-5.html#cb63-35" aria-hidden="true"></a>what_time &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb63-36"><a href="-5.html#cb63-36" aria-hidden="true"></a>  </span>
+<span id="cb63-37"><a href="-5.html#cb63-37" aria-hidden="true"></a>  <span class="co"># проверяем разрешено ли использовать данному пользователю этот метод</span></span>
+<span id="cb63-38"><a href="-5.html#cb63-38" aria-hidden="true"></a>  <span class="cf">if</span> ( <span class="kw">bot_check_usernames</span>(<span class="kw">c</span>(<span class="st">&#39;user1&#39;</span>, <span class="st">&#39;user2&#39;</span>), update<span class="op">$</span>message<span class="op">$</span>from<span class="op">$</span>username) ) {</span>
+<span id="cb63-39"><a href="-5.html#cb63-39" aria-hidden="true"></a>      </span>
+<span id="cb63-40"><a href="-5.html#cb63-40" aria-hidden="true"></a>    <span class="co"># Запрашиваем текущее время</span></span>
+<span id="cb63-41"><a href="-5.html#cb63-41" aria-hidden="true"></a>    cur_time &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">Sys.time</span>())</span>
+<span id="cb63-42"><a href="-5.html#cb63-42" aria-hidden="true"></a>    </span>
+<span id="cb63-43"><a href="-5.html#cb63-43" aria-hidden="true"></a>    <span class="co"># Отправка сообщения о том что у пользователя не достаточно прав</span></span>
+<span id="cb63-44"><a href="-5.html#cb63-44" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb63-45"><a href="-5.html#cb63-45" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Текущее время, &quot;</span>, cur_time),</span>
+<span id="cb63-46"><a href="-5.html#cb63-46" aria-hidden="true"></a>                                  <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb63-47"><a href="-5.html#cb63-47" aria-hidden="true"></a>                                  <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
+<span id="cb63-48"><a href="-5.html#cb63-48" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
+<span id="cb63-49"><a href="-5.html#cb63-49" aria-hidden="true"></a>    </span>
+<span id="cb63-50"><a href="-5.html#cb63-50" aria-hidden="true"></a>    <span class="co"># Отправка сообщения о том что у пользователя не достаточно прав</span></span>
+<span id="cb63-51"><a href="-5.html#cb63-51" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb63-52"><a href="-5.html#cb63-52" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;У вас нет прав для использования этого метода!&quot;</span>),</span>
+<span id="cb63-53"><a href="-5.html#cb63-53" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb63-54"><a href="-5.html#cb63-54" aria-hidden="true"></a>                    <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
+<span id="cb63-55"><a href="-5.html#cb63-55" aria-hidden="true"></a>    </span>
+<span id="cb63-56"><a href="-5.html#cb63-56" aria-hidden="true"></a>  }</span>
+<span id="cb63-57"><a href="-5.html#cb63-57" aria-hidden="true"></a>                  </span>
+<span id="cb63-58"><a href="-5.html#cb63-58" aria-hidden="true"></a>  </span>
+<span id="cb63-59"><a href="-5.html#cb63-59" aria-hidden="true"></a>}</span>
+<span id="cb63-60"><a href="-5.html#cb63-60" aria-hidden="true"></a></span>
+<span id="cb63-61"><a href="-5.html#cb63-61" aria-hidden="true"></a><span class="co"># обработчики</span></span>
+<span id="cb63-62"><a href="-5.html#cb63-62" aria-hidden="true"></a>h_hello &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;say_hello&#39;</span>, say_hello)</span>
+<span id="cb63-63"><a href="-5.html#cb63-63" aria-hidden="true"></a>h_time  &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;what_time&#39;</span>, what_time)</span>
+<span id="cb63-64"><a href="-5.html#cb63-64" aria-hidden="true"></a></span>
+<span id="cb63-65"><a href="-5.html#cb63-65" aria-hidden="true"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span id="cb63-66"><a href="-5.html#cb63-66" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span><span class="st"> </span>h_hello <span class="op">+</span><span class="st"> </span>h_time</span>
+<span id="cb63-67"><a href="-5.html#cb63-67" aria-hidden="true"></a></span>
+<span id="cb63-68"><a href="-5.html#cb63-68" aria-hidden="true"></a><span class="co"># запускаем бота </span></span>
+<span id="cb63-69"><a href="-5.html#cb63-69" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+<p>Результат будет следующим:</p>
+<p><img src="http://img.netpeak.ua/alsey/160130833437_kiss_162kb.png" /></p>
+<p>Теперь бот не просто игнорирует сообщения от обычных пользователей, а сообщает им, что у них недостаточно прав использовать какой либо метод.</p>
+</div>
+<div id="ограничиваем-права-на-уровне-чата-1" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Ограничиваем права на уровне чата</h3>
+<p>Думаю у вас уже не возникнет трудностей при доработке ваших методов, таким образом, что бы их можно было использовать только в определённых чатах, тем не менее приведу пример.</p>
+<p>Напишем функцию, которая будет проверять входит ли текущий чат в список разрешенных.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="-5.html#cb64-1" aria-hidden="true"></a>bot_check_chat_id &lt;-<span class="st"> </span></span>
+<span id="cb64-2"><a href="-5.html#cb64-2" aria-hidden="true"></a><span class="st">  </span><span class="cf">function</span>(allowed_chats, current_chat) {</span>
+<span id="cb64-3"><a href="-5.html#cb64-3" aria-hidden="true"></a></span>
+<span id="cb64-4"><a href="-5.html#cb64-4" aria-hidden="true"></a>     current_chat <span class="op">%in%</span><span class="st"> </span>allowed_chats </span>
+<span id="cb64-5"><a href="-5.html#cb64-5" aria-hidden="true"></a>    </span>
+<span id="cb64-6"><a href="-5.html#cb64-6" aria-hidden="true"></a>}</span></code></pre></div>
+<p>Далее используем эту функции внутри наших методов:</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="-5.html#cb65-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
+<span id="cb65-2"><a href="-5.html#cb65-2" aria-hidden="true"></a></span>
+<span id="cb65-3"><a href="-5.html#cb65-3" aria-hidden="true"></a></span>
+<span id="cb65-4"><a href="-5.html#cb65-4" aria-hidden="true"></a><span class="co"># создаём экземпляр класса Updater</span></span>
+<span id="cb65-5"><a href="-5.html#cb65-5" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb65-6"><a href="-5.html#cb65-6" aria-hidden="true"></a></span>
+<span id="cb65-7"><a href="-5.html#cb65-7" aria-hidden="true"></a><span class="co"># Пишем метод для приветсвия</span></span>
+<span id="cb65-8"><a href="-5.html#cb65-8" aria-hidden="true"></a><span class="co">## команда приветствия</span></span>
+<span id="cb65-9"><a href="-5.html#cb65-9" aria-hidden="true"></a>say_hello &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb65-10"><a href="-5.html#cb65-10" aria-hidden="true"></a>  </span>
+<span id="cb65-11"><a href="-5.html#cb65-11" aria-hidden="true"></a>  <span class="co"># Имя пользователя с которым надо поздароваться</span></span>
+<span id="cb65-12"><a href="-5.html#cb65-12" aria-hidden="true"></a>  user_name &lt;-<span class="st"> </span>update<span class="op">$</span>message<span class="op">$</span>from<span class="op">$</span>username</span>
+<span id="cb65-13"><a href="-5.html#cb65-13" aria-hidden="true"></a>  </span>
+<span id="cb65-14"><a href="-5.html#cb65-14" aria-hidden="true"></a>  <span class="co"># проверяем разрешено ли использовать данному пользователю этот метод</span></span>
+<span id="cb65-15"><a href="-5.html#cb65-15" aria-hidden="true"></a>  <span class="cf">if</span> ( <span class="kw">bot_check_usernames</span>(<span class="kw">c</span>(<span class="st">&#39;AlexeySeleznev&#39;</span>, <span class="st">&#39;user1&#39;</span>, <span class="st">&#39;user2&#39;</span>), user_name) </span>
+<span id="cb65-16"><a href="-5.html#cb65-16" aria-hidden="true"></a>       <span class="op">&amp;</span></span>
+<span id="cb65-17"><a href="-5.html#cb65-17" aria-hidden="true"></a><span class="st">       </span><span class="kw">bot_check_chat_id</span>(<span class="kw">c</span>(<span class="dv">194336771</span>, <span class="dv">1</span>, <span class="dv">2</span>), update<span class="op">$</span>message<span class="op">$</span>chat_id)) {</span>
+<span id="cb65-18"><a href="-5.html#cb65-18" aria-hidden="true"></a>    </span>
+<span id="cb65-19"><a href="-5.html#cb65-19" aria-hidden="true"></a>    <span class="co"># Отправка сообщения</span></span>
+<span id="cb65-20"><a href="-5.html#cb65-20" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb65-21"><a href="-5.html#cb65-21" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Моё почтение, &quot;</span>, user_name, <span class="st">&quot;!&quot;</span>),</span>
+<span id="cb65-22"><a href="-5.html#cb65-22" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb65-23"><a href="-5.html#cb65-23" aria-hidden="true"></a>                    <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
+<span id="cb65-24"><a href="-5.html#cb65-24" aria-hidden="true"></a>      </span>
+<span id="cb65-25"><a href="-5.html#cb65-25" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
+<span id="cb65-26"><a href="-5.html#cb65-26" aria-hidden="true"></a>    </span>
+<span id="cb65-27"><a href="-5.html#cb65-27" aria-hidden="true"></a>    <span class="co"># Отправка сообщения</span></span>
+<span id="cb65-28"><a href="-5.html#cb65-28" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb65-29"><a href="-5.html#cb65-29" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;У вас нет прав для использования этого метода!&quot;</span>),</span>
+<span id="cb65-30"><a href="-5.html#cb65-30" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb65-31"><a href="-5.html#cb65-31" aria-hidden="true"></a>                    <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
+<span id="cb65-32"><a href="-5.html#cb65-32" aria-hidden="true"></a>    </span>
+<span id="cb65-33"><a href="-5.html#cb65-33" aria-hidden="true"></a>  }</span>
+<span id="cb65-34"><a href="-5.html#cb65-34" aria-hidden="true"></a></span>
+<span id="cb65-35"><a href="-5.html#cb65-35" aria-hidden="true"></a>}</span>
+<span id="cb65-36"><a href="-5.html#cb65-36" aria-hidden="true"></a></span>
+<span id="cb65-37"><a href="-5.html#cb65-37" aria-hidden="true"></a><span class="co">## команда по которой бот возвращает системную дату и время</span></span>
+<span id="cb65-38"><a href="-5.html#cb65-38" aria-hidden="true"></a>what_time &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
+<span id="cb65-39"><a href="-5.html#cb65-39" aria-hidden="true"></a>  </span>
+<span id="cb65-40"><a href="-5.html#cb65-40" aria-hidden="true"></a>  <span class="co"># проверяем разрешено ли использовать данному пользователю этот метод</span></span>
+<span id="cb65-41"><a href="-5.html#cb65-41" aria-hidden="true"></a>  <span class="cf">if</span> ( <span class="kw">bot_check_usernames</span>(<span class="kw">c</span>(<span class="st">&#39;AlexeySeleznev&#39;</span>, <span class="st">&#39;user1&#39;</span>, <span class="st">&#39;user2&#39;</span>), update<span class="op">$</span>message<span class="op">$</span>from<span class="op">$</span>username)</span>
+<span id="cb65-42"><a href="-5.html#cb65-42" aria-hidden="true"></a>       <span class="op">&amp;</span></span>
+<span id="cb65-43"><a href="-5.html#cb65-43" aria-hidden="true"></a><span class="st">       </span><span class="kw">bot_check_chat_id</span>(<span class="kw">c</span>(<span class="dv">194336771</span>, <span class="dv">1</span>, <span class="dv">2</span>), update<span class="op">$</span>message<span class="op">$</span>chat_id)) {</span>
+<span id="cb65-44"><a href="-5.html#cb65-44" aria-hidden="true"></a>      </span>
+<span id="cb65-45"><a href="-5.html#cb65-45" aria-hidden="true"></a>    <span class="co"># Запрашиваем текущее время</span></span>
+<span id="cb65-46"><a href="-5.html#cb65-46" aria-hidden="true"></a>    cur_time &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">Sys.time</span>())</span>
+<span id="cb65-47"><a href="-5.html#cb65-47" aria-hidden="true"></a>    </span>
+<span id="cb65-48"><a href="-5.html#cb65-48" aria-hidden="true"></a>    <span class="co"># Отправка сообщения о том что у пользователя не достаточно прав</span></span>
+<span id="cb65-49"><a href="-5.html#cb65-49" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb65-50"><a href="-5.html#cb65-50" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Текущее время, &quot;</span>, cur_time),</span>
+<span id="cb65-51"><a href="-5.html#cb65-51" aria-hidden="true"></a>                                  <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb65-52"><a href="-5.html#cb65-52" aria-hidden="true"></a>                                  <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
+<span id="cb65-53"><a href="-5.html#cb65-53" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
+<span id="cb65-54"><a href="-5.html#cb65-54" aria-hidden="true"></a>    </span>
+<span id="cb65-55"><a href="-5.html#cb65-55" aria-hidden="true"></a>    <span class="co"># Отправка сообщения о том что у пользователя не достаточно прав</span></span>
+<span id="cb65-56"><a href="-5.html#cb65-56" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
+<span id="cb65-57"><a href="-5.html#cb65-57" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;У вас нет прав для использования этого метода!&quot;</span>),</span>
+<span id="cb65-58"><a href="-5.html#cb65-58" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb65-59"><a href="-5.html#cb65-59" aria-hidden="true"></a>                    <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
+<span id="cb65-60"><a href="-5.html#cb65-60" aria-hidden="true"></a>    </span>
+<span id="cb65-61"><a href="-5.html#cb65-61" aria-hidden="true"></a>  }</span>
+<span id="cb65-62"><a href="-5.html#cb65-62" aria-hidden="true"></a>                  </span>
+<span id="cb65-63"><a href="-5.html#cb65-63" aria-hidden="true"></a>  </span>
+<span id="cb65-64"><a href="-5.html#cb65-64" aria-hidden="true"></a>}</span>
+<span id="cb65-65"><a href="-5.html#cb65-65" aria-hidden="true"></a></span>
+<span id="cb65-66"><a href="-5.html#cb65-66" aria-hidden="true"></a><span class="co"># обработчики</span></span>
+<span id="cb65-67"><a href="-5.html#cb65-67" aria-hidden="true"></a>h_hello &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;say_hello&#39;</span>, say_hello)</span>
+<span id="cb65-68"><a href="-5.html#cb65-68" aria-hidden="true"></a>h_time  &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;what_time&#39;</span>, what_time)</span>
+<span id="cb65-69"><a href="-5.html#cb65-69" aria-hidden="true"></a></span>
+<span id="cb65-70"><a href="-5.html#cb65-70" aria-hidden="true"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span id="cb65-71"><a href="-5.html#cb65-71" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span><span class="st"> </span>h_hello <span class="op">+</span><span class="st"> </span>h_time</span>
+<span id="cb65-72"><a href="-5.html#cb65-72" aria-hidden="true"></a></span>
+<span id="cb65-73"><a href="-5.html#cb65-73" aria-hidden="true"></a><span class="co"># запускаем бота </span></span>
+<span id="cb65-74"><a href="-5.html#cb65-74" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+</div>
+</div>
+<div id="заключение-4" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Заключение</h2>
+<p>На этом серия статей о построении telegram ботов завершается. Я старался структурировать и подавать материал достаточно сжато, убрав всю воду, но при этом сделать так, что бы материал был вам понятен. Очень надеюсь на то, что мне это удалось.</p>
+<p>Успехов вам в ботостроении. В комментариях можете написать примеры ваших ботов, и как вы их на практике используете.</p>
+</div>
+<div id="тесты-и-задания-4" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Тесты и задания</h2>
+<div id="тесты-4" class="section level3" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Тесты</h3>
+<p>Для закрепления материла рекомендую вам пройти тест доступный по <a href="https://onlinetestpad.com/t/build-tg-bot-in-r-5">ссылке</a>.</p>
+</div>
+<div id="задания-4" class="section level3" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Задания</h3>
+<p>Возьмите <a href="-updater.html#задания-1">задачу</a> из второй главы, и ограничьте использование единственного метода, доступного в созданном боте, так, что бы он работал только когда его запрашиваете вы.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="-6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05-privilegies.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
