@@ -24,7 +24,7 @@
 <meta name="author" content="Алексей Селезнёв" />
 
 
-<meta name="date" content="2020-11-13" />
+<meta name="date" content="2020-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,15 @@
 
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114798296-1');
+</script>
 
 
 <style type="text/css">
@@ -237,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="-6.html"><a href="-6.html#логика-работы-конструкции-trycatch"><i class="fa fa-check"></i><b>6.2</b> Логика работы конструкции tryCatch()</a></li>
 <li class="chapter" data-level="6.3" data-path="-6.html"><a href="-6.html#используем-trycatch-внутри-бота"><i class="fa fa-check"></i><b>6.3</b> Используем tryCatch() внутри бота</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач</a>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач </a>
 <ul>
 <li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-1.1"><i class="fa fa-check"></i>Задача 1.1</a></li>
 <li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-2.1"><i class="fa fa-check"></i>Задача 2.1</a></li>
@@ -267,11 +276,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="повышаем-стабильность-работы-бота-6" class="section level1" number="6">
 <h1><span class="header-section-number">Глава 6</span> Повышаем стабильность работы бота </h1>
-<p>К этому моменту вы знаете уже достаточно для того, что бы решить значительную часть своих задач по ботостроению. Простой бот будет работать достаточно стабильно, но всё равно иногда сервера API Telegram могут давать сбои, и даже если в вашем коде нет ошибок, и пользователи используют его правильно, иногда он может падать.</p>
+<p>К этому моменту вы знаете уже достаточно для того, что бы решить значительную часть своих задач по ботостроению. Простой бот будет работать достаточно стабильно, но всё равно иногда сервера API Telegram могут давать сбой. Даже если в вашем коде нет ошибок, и пользователи используют его правильно, иногда он может падать.</p>
 <p>В этой главе мы поговорим о том, как повысить работоспособность бота за счёт отлавливания и обработки ошибок пуллинга.</p>
 <div id="конструкция-trycatch" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Конструкция tryCatch()</h2>
-<p>Помочь повысить работоспособность вашего бота поможет конструкция <code>tryCatch()</code>. Данная конструкция имеет следующий синтаксис:</p>
+<p>Повысить работоспособность вашего бота поможет конструкция <code>tryCatch()</code>. Данная конструкция имеет следующий синтаксис:</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="-6.html#cb66-1" aria-hidden="true"></a><span class="kw">tryCatch</span>(<span class="dt">expr =</span> {</span>
 <span id="cb66-2"><a href="-6.html#cb66-2" aria-hidden="true"></a>  </span>
 <span id="cb66-3"><a href="-6.html#cb66-3" aria-hidden="true"></a>    <span class="op">~</span><span class="st"> </span>Тут код который будет выполняться <span class="op">~</span></span>
@@ -292,13 +301,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.2</span> Логика работы конструкции tryCatch()</h2>
 <p>Из описанного синтаксиса понятно, что вам необходимо завернуть выражение в фигурные скобки в аргументе <code>expr</code>. Это выражение будет выполняться либо до тех пор, пока не встретится ошибка, либо если ошибки нет, оно будет выполнено полностью.</p>
 <p>Если в выражении переданном в <code>expr</code> встречается ошибка, то конструкция <code>tryCath()</code> запустит анонимную функцию, которую вы передали в блоке <code>error</code>.</p>
-<p>В любом случае не зависимо от того встретилась в выражении <code>expr</code> ошибка или нет, в завершении выполнения будет выполнен код, переданный в аргумент <code>finnaly</code>.</p>
+<p>В любом случае, не зависимо от того, встретилась в выражении <code>expr</code> ошибка или нет, в завершении выполнения будет выполнен код, переданный в аргумент <code>finally</code>.</p>
 <p>Если вы хотите более подробно узнать про конструкцию <code>tryCatch()</code> посмотрите этот <a href="https://youtu.be/GvmjW34IHu8">видео урок</a>.</p>
 </div>
 <div id="используем-trycatch-внутри-бота" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Используем tryCatch() внутри бота</h2>
 <p>По большому счёту вы можете использовать <code>tryCatch()</code> внутри каждой функции вашего бота. Но можно убить всех зайцев одним выстрелом.</p>
-<p>В разработке ботов слабым местом является пуллинг, т.е. метод <code>updater$start_polling()</code>, именно он выполняется всё время работы бота, и даёт сбои если пользователь неправильно использовал бота, или API Telegram дал сбой. Соответственно если завернуть пуллинг в <code>tryCatch()</code>, и перезапускать вашего бота в бота в блоке <code>finally</code> то при любой ошибке он будет самостоятельно перезапускаться.</p>
+<p>В разработке ботов слабым местом является пуллинг, т.е. метод <code>updater$start_polling()</code>. Пуллинг - это бесконечный цикл, именно он выполняется всё время работы бота, и даёт сбой если пользователь неправильно использовал бота, или API Telegram не отправил вам ответ. Соответственно если завернуть пуллинг в <code>tryCatch()</code>, и перезапускать вашего бота в бота в блоке <code>finally</code> то при любой ошибке он будет самостоятельно перезапускаться.</p>
 <p>Перед перезапуском бота не забывайте очистить его апдейты, что бы избавиться от ошибки, которая вызвала падение бота.</p>
 <p>Выглядеть такой пуллинг будет следующим образом:</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="-6.html#cb67-1" aria-hidden="true"></a><span class="kw">tryCatch</span>(</span>
@@ -309,49 +318,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb67-6"><a href="-6.html#cb67-6" aria-hidden="true"></a>  <span class="co"># действия при ошибке пуллинга</span></span>
 <span id="cb67-7"><a href="-6.html#cb67-7" aria-hidden="true"></a>  <span class="dt">error =</span> <span class="cf">function</span>(err) {</span>
 <span id="cb67-8"><a href="-6.html#cb67-8" aria-hidden="true"></a>    </span>
-<span id="cb67-9"><a href="-6.html#cb67-9" aria-hidden="true"></a>    <span class="co"># время падения бота</span></span>
-<span id="cb67-10"><a href="-6.html#cb67-10" aria-hidden="true"></a>    bot_crash_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</span>
-<span id="cb67-11"><a href="-6.html#cb67-11" aria-hidden="true"></a>    bot_work_time  &lt;-<span class="st"> </span><span class="kw">difftime</span>(bot_crash_time, bot_start_time,<span class="dt">units =</span>  <span class="st">&#39;hours&#39;</span>)</span>
-<span id="cb67-12"><a href="-6.html#cb67-12" aria-hidden="true"></a>    </span>
-<span id="cb67-13"><a href="-6.html#cb67-13" aria-hidden="true"></a>    <span class="co"># бот для оповещения</span></span>
-<span id="cb67-14"><a href="-6.html#cb67-14" aria-hidden="true"></a>    bot &lt;-<span class="st"> </span><span class="kw">Bot</span>(<span class="dt">token =</span> <span class="kw">bot_token</span>(<span class="st">&quot;Токен вашего бота&quot;</span>))</span>
-<span id="cb67-15"><a href="-6.html#cb67-15" aria-hidden="true"></a>    </span>
-<span id="cb67-16"><a href="-6.html#cb67-16" aria-hidden="true"></a>    <span class="co"># чат для оповещения</span></span>
-<span id="cb67-17"><a href="-6.html#cb67-17" aria-hidden="true"></a>    chat_id &lt;-<span class="st"> &quot;Идентификатор чата в который необходимо отправить сообщение&quot;</span></span>
-<span id="cb67-18"><a href="-6.html#cb67-18" aria-hidden="true"></a>    </span>
-<span id="cb67-19"><a href="-6.html#cb67-19" aria-hidden="true"></a>    <span class="co"># сообщение</span></span>
-<span id="cb67-20"><a href="-6.html#cb67-20" aria-hidden="true"></a>    msg &lt;-<span class="st"> </span><span class="kw">str_glue</span>(<span class="st">&quot;*Бот упал*: Ошибка (_{err$message}_).&quot;</span>)</span>
+<span id="cb67-9"><a href="-6.html#cb67-9" aria-hidden="true"></a>    <span class="co"># бот для оповещения</span></span>
+<span id="cb67-10"><a href="-6.html#cb67-10" aria-hidden="true"></a>    bot &lt;-<span class="st"> </span><span class="kw">Bot</span>(<span class="dt">token =</span> <span class="kw">bot_token</span>(<span class="st">&quot;Токен вашего бота&quot;</span>))</span>
+<span id="cb67-11"><a href="-6.html#cb67-11" aria-hidden="true"></a>    </span>
+<span id="cb67-12"><a href="-6.html#cb67-12" aria-hidden="true"></a>    <span class="co"># чат для оповещения</span></span>
+<span id="cb67-13"><a href="-6.html#cb67-13" aria-hidden="true"></a>    chat_id &lt;-<span class="st"> &quot;Идентификатор чата в который необходимо отправить сообщение&quot;</span></span>
+<span id="cb67-14"><a href="-6.html#cb67-14" aria-hidden="true"></a>    </span>
+<span id="cb67-15"><a href="-6.html#cb67-15" aria-hidden="true"></a>    <span class="co"># сообщение</span></span>
+<span id="cb67-16"><a href="-6.html#cb67-16" aria-hidden="true"></a>    msg &lt;-<span class="st"> </span><span class="kw">str_glue</span>(<span class="st">&quot;*Бот упал*: Ошибка (_{err$message}_).&quot;</span>)</span>
+<span id="cb67-17"><a href="-6.html#cb67-17" aria-hidden="true"></a>    </span>
+<span id="cb67-18"><a href="-6.html#cb67-18" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> chat_id, </span>
+<span id="cb67-19"><a href="-6.html#cb67-19" aria-hidden="true"></a>                    <span class="dt">text =</span> msg,</span>
+<span id="cb67-20"><a href="-6.html#cb67-20" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&#39;Markdown&#39;</span>)</span>
 <span id="cb67-21"><a href="-6.html#cb67-21" aria-hidden="true"></a>    </span>
-<span id="cb67-22"><a href="-6.html#cb67-22" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> chat_id, </span>
-<span id="cb67-23"><a href="-6.html#cb67-23" aria-hidden="true"></a>                    <span class="dt">text =</span> msg,</span>
-<span id="cb67-24"><a href="-6.html#cb67-24" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&#39;Markdown&#39;</span>)</span>
-<span id="cb67-25"><a href="-6.html#cb67-25" aria-hidden="true"></a>    </span>
-<span id="cb67-26"><a href="-6.html#cb67-26" aria-hidden="true"></a>    <span class="co"># очищаем всё чтов бота прилетело</span></span>
-<span id="cb67-27"><a href="-6.html#cb67-27" aria-hidden="true"></a>    updater<span class="op">$</span>bot<span class="op">$</span><span class="kw">clean_updates</span>()</span>
-<span id="cb67-28"><a href="-6.html#cb67-28" aria-hidden="true"></a>    </span>
-<span id="cb67-29"><a href="-6.html#cb67-29" aria-hidden="true"></a>    <span class="co"># информация о том, что бот будет перезапущен</span></span>
-<span id="cb67-30"><a href="-6.html#cb67-30" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> chat_id, </span>
-<span id="cb67-31"><a href="-6.html#cb67-31" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">str_glue</span>(<span class="st">&#39;*Перезапускаю бота* в {Sys.time()}&#39;</span>),</span>
-<span id="cb67-32"><a href="-6.html#cb67-32" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&#39;Markdown&#39;</span>)</span>
-<span id="cb67-33"><a href="-6.html#cb67-33" aria-hidden="true"></a></span>
+<span id="cb67-22"><a href="-6.html#cb67-22" aria-hidden="true"></a>    <span class="co"># очищаем полученный апдейт бота, который вызвал ошибку</span></span>
+<span id="cb67-23"><a href="-6.html#cb67-23" aria-hidden="true"></a>    updater<span class="op">$</span>bot<span class="op">$</span><span class="kw">clean_updates</span>()</span>
+<span id="cb67-24"><a href="-6.html#cb67-24" aria-hidden="true"></a>    </span>
+<span id="cb67-25"><a href="-6.html#cb67-25" aria-hidden="true"></a>    <span class="co"># информация о том, что бот будет перезапущен</span></span>
+<span id="cb67-26"><a href="-6.html#cb67-26" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> chat_id, </span>
+<span id="cb67-27"><a href="-6.html#cb67-27" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">str_glue</span>(<span class="st">&#39;*Перезапускаю бота* в {Sys.time()}&#39;</span>),</span>
+<span id="cb67-28"><a href="-6.html#cb67-28" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&#39;Markdown&#39;</span>)</span>
+<span id="cb67-29"><a href="-6.html#cb67-29" aria-hidden="true"></a></span>
+<span id="cb67-30"><a href="-6.html#cb67-30" aria-hidden="true"></a>    </span>
+<span id="cb67-31"><a href="-6.html#cb67-31" aria-hidden="true"></a>  }, </span>
+<span id="cb67-32"><a href="-6.html#cb67-32" aria-hidden="true"></a>  <span class="co"># действия которые будут выполненны в любом случае</span></span>
+<span id="cb67-33"><a href="-6.html#cb67-33" aria-hidden="true"></a>  <span class="dt">finally =</span> {</span>
 <span id="cb67-34"><a href="-6.html#cb67-34" aria-hidden="true"></a>    </span>
-<span id="cb67-35"><a href="-6.html#cb67-35" aria-hidden="true"></a>  }, </span>
-<span id="cb67-36"><a href="-6.html#cb67-36" aria-hidden="true"></a>  <span class="co"># действия которые будут выполненны в любом случае</span></span>
-<span id="cb67-37"><a href="-6.html#cb67-37" aria-hidden="true"></a>  <span class="dt">finally =</span> {</span>
-<span id="cb67-38"><a href="-6.html#cb67-38" aria-hidden="true"></a>    </span>
-<span id="cb67-39"><a href="-6.html#cb67-39" aria-hidden="true"></a>    <span class="co"># останавливаем пулинг</span></span>
-<span id="cb67-40"><a href="-6.html#cb67-40" aria-hidden="true"></a>    updater<span class="op">$</span><span class="kw">stop_polling</span>()</span>
-<span id="cb67-41"><a href="-6.html#cb67-41" aria-hidden="true"></a>        </span>
-<span id="cb67-42"><a href="-6.html#cb67-42" aria-hidden="true"></a>    <span class="co"># перезапускаем скрипт бота</span></span>
-<span id="cb67-43"><a href="-6.html#cb67-43" aria-hidden="true"></a>    <span class="kw">source</span>(<span class="st">&#39;C:</span><span class="ch">\\</span><span class="st">telegram_bot</span><span class="ch">\\</span><span class="st">my_bot.R&#39;</span>) </span>
-<span id="cb67-44"><a href="-6.html#cb67-44" aria-hidden="true"></a></span>
-<span id="cb67-45"><a href="-6.html#cb67-45" aria-hidden="true"></a>  }</span>
-<span id="cb67-46"><a href="-6.html#cb67-46" aria-hidden="true"></a>)</span></code></pre></div>
+<span id="cb67-35"><a href="-6.html#cb67-35" aria-hidden="true"></a>    <span class="co"># останавливаем пулинг</span></span>
+<span id="cb67-36"><a href="-6.html#cb67-36" aria-hidden="true"></a>    updater<span class="op">$</span><span class="kw">stop_polling</span>()</span>
+<span id="cb67-37"><a href="-6.html#cb67-37" aria-hidden="true"></a>        </span>
+<span id="cb67-38"><a href="-6.html#cb67-38" aria-hidden="true"></a>    <span class="co"># перезапускаем скрипт бота</span></span>
+<span id="cb67-39"><a href="-6.html#cb67-39" aria-hidden="true"></a>    <span class="kw">source</span>(<span class="st">&#39;C:</span><span class="ch">\\</span><span class="st">telegram_bot</span><span class="ch">\\</span><span class="st">my_bot.R&#39;</span>) </span>
+<span id="cb67-40"><a href="-6.html#cb67-40" aria-hidden="true"></a></span>
+<span id="cb67-41"><a href="-6.html#cb67-41" aria-hidden="true"></a>  }</span>
+<span id="cb67-42"><a href="-6.html#cb67-42" aria-hidden="true"></a>)</span></code></pre></div>
 <p>В приведённом выше коде вам необходимо подставить токен созданного вами бота, и указать ID чата, в который бот будет отправлять уведомление о падении пуллинга.</p>
 <p>В блок <code>expr</code> мы завернули процесс пуллинга, таким образом он постоянно контролируется конструкцией <code>tryCatch</code>.</p>
 <p>Далее в блок <code>error</code> мы передали безымянную функцию, которая принимает всего один аргумент <code>err</code>, т.е. саму ошибку. Сообщение об ошибке мы получаем через <code>err$message</code>, и отправляем в указанный чат. С помощью <code>updater$bot$clean_updates()</code> мы очищаем очередь апдейтов бота, т.к. последний апдейт вызвал ошибку и падение нашего бота.</p>
-<p>В блоке finally мы останавливаем пуллинг, и командой <code>source('C:\\telegram_bot\\my_bot.R')</code> занова запускаем скрипт с ботом.</p>
+<p>В блоке <code>finally</code> мы останавливаем пуллинг, и командой <code>source('C:\\telegram_bot\\my_bot.R')</code> занова запускаем скрипт с ботом.</p>
 <p>Такая схема позволяет боту очищаться и подниматься при любой ошибке пуллинга.</p>
+<p>Очищать апдейты бота с помощью комманды <code>updater$bot$clean_updates()</code> можно так же и при запуске бота, указав эту команду сразу, после инициализации объекта бота.</p>
 
 </div>
 </div>
