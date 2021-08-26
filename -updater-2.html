@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Глава 2 Добавляем боту поддержку команд и фильтры сообщений, класс Updater  | Разработка telegram ботов на языке R</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Глава 2 Добавляем боту поддержку команд и фильтры сообщений, класс Updater | Разработка telegram ботов на языке R</title>
+  <meta name="description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Глава 2 Добавляем боту поддержку команд и фильтры сообщений, класс Updater  | Разработка telegram ботов на языке R" />
+  <meta property="og:title" content="Глава 2 Добавляем боту поддержку команд и фильтры сообщений, класс Updater | Разработка telegram ботов на языке R" />
   <meta property="og:type" content="book" />
   
-  
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:image" content="/cover.png" />
+  <meta property="og:description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="github-repo" content="selesnow/build_telegram_bot_using_r" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Глава 2 Добавляем боту поддержку команд и фильтры сообщений, класс Updater  | Разработка telegram ботов на языке R" />
+  <meta name="twitter:title" content="Глава 2 Добавляем боту поддержку команд и фильтры сообщений, класс Updater | Разработка telegram ботов на языке R" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  
+  <meta name="twitter:description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="twitter:image" content="/cover.png" />
 
 <meta name="author" content="Алексей Селезнёв" />
 
 
-<meta name="date" content="2020-11-18" />
+<meta name="date" content="2021-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="-telegram-1.html"/>
 <link rel="next" href="-3.html"/>
-<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script>
 <script>
@@ -66,6 +68,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -126,6 +129,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -150,7 +154,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#правки-и-предложения"><i class="fa fa-check"></i>Правки и предложения</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#поддержать-проект"><i class="fa fa-check"></i>Поддержать проект</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="-telegram-1.html"><a href="-telegram-1.html"><i class="fa fa-check"></i><b>1</b> Создаём бота, и отправляем с его помощью сообщения в telegram </a>
+<li class="chapter" data-level="1" data-path="-telegram-1.html"><a href="-telegram-1.html"><i class="fa fa-check"></i><b>1</b> Создаём бота, и отправляем с его помощью сообщения в telegram (1)</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="-telegram-1.html"><a href="-telegram-1.html#создание-телеграм-бота"><i class="fa fa-check"></i><b>1.1</b> Создание телеграм бота</a></li>
 <li class="chapter" data-level="1.2" data-path="-telegram-1.html"><a href="-telegram-1.html#установка-пакета-для-работы-с-телеграм-ботом-на-r"><i class="fa fa-check"></i><b>1.2</b> Установка пакета для работы с телеграм ботом на R</a></li>
@@ -183,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10.2" data-path="-updater-2.html"><a href="-updater-2.html#задания-1"><i class="fa fa-check"></i><b>2.10.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="-3.html"><a href="-3.html"><i class="fa fa-check"></i><b>3</b> Как добавить боту поддержку клавиатуры </a>
+<li class="chapter" data-level="3" data-path="-3.html"><a href="-3.html"><i class="fa fa-check"></i><b>3</b> Как добавить боту поддержку клавиатуры (3)</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="-3.html"><a href="-3.html#какие-типы-клавиатур-поддерживает-телеграм-бот"><i class="fa fa-check"></i><b>3.1</b> Какие типы клавиатур поддерживает телеграм бот</a></li>
 <li class="chapter" data-level="3.2" data-path="-3.html"><a href="-3.html#reply-клавиатура"><i class="fa fa-check"></i><b>3.2</b> Reply клавиатура</a></li>
@@ -200,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.2" data-path="-3.html"><a href="-3.html#задания-2"><i class="fa fa-check"></i><b>3.5.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="-4.html"><a href="-4.html"><i class="fa fa-check"></i><b>4</b> Построение последовательного, логического диалога с ботом </a>
+<li class="chapter" data-level="4" data-path="-4.html"><a href="-4.html"><i class="fa fa-check"></i><b>4</b> Построение последовательного, логического диалога с ботом (4)</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="-4.html"><a href="-4.html#введение-1"><i class="fa fa-check"></i><b>4.1</b> Введение</a></li>
 <li class="chapter" data-level="4.2" data-path="-4.html"><a href="-4.html#процесс-построения-бота"><i class="fa fa-check"></i><b>4.2</b> Процесс построения бота</a></li>
@@ -220,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.13.2" data-path="-4.html"><a href="-4.html#задания-3"><i class="fa fa-check"></i><b>4.13.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="-5.html"><a href="-5.html"><i class="fa fa-check"></i><b>5</b> Управление правами пользователей бота </a>
+<li class="chapter" data-level="5" data-path="-5.html"><a href="-5.html"><i class="fa fa-check"></i><b>5</b> Управление правами пользователей бота (5)</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="-5.html"><a href="-5.html#введение-2"><i class="fa fa-check"></i><b>5.1</b> Введение</a></li>
 <li class="chapter" data-level="5.2" data-path="-5.html"><a href="-5.html#ограничиваем-права-пользователя-с-помощью-фильтров-сообщений"><i class="fa fa-check"></i><b>5.2</b> Ограничиваем права пользователя с помощью фильтров сообщений</a>
@@ -240,13 +244,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.2" data-path="-5.html"><a href="-5.html#задания-4"><i class="fa fa-check"></i><b>5.5.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="-6.html"><a href="-6.html"><i class="fa fa-check"></i><b>6</b> Повышаем стабильность работы бота </a>
+<li class="chapter" data-level="6" data-path="-6.html"><a href="-6.html"><i class="fa fa-check"></i><b>6</b> Повышаем стабильность работы бота (6)</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="-6.html"><a href="-6.html#конструкция-trycatch"><i class="fa fa-check"></i><b>6.1</b> Конструкция tryCatch()</a></li>
 <li class="chapter" data-level="6.2" data-path="-6.html"><a href="-6.html#логика-работы-конструкции-trycatch"><i class="fa fa-check"></i><b>6.2</b> Логика работы конструкции tryCatch()</a></li>
 <li class="chapter" data-level="6.3" data-path="-6.html"><a href="-6.html#используем-trycatch-внутри-бота"><i class="fa fa-check"></i><b>6.3</b> Используем tryCatch() внутри бота</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач </a>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач (tasks)</a>
 <ul>
 <li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-1.1"><i class="fa fa-check"></i>Задача 1.1</a></li>
 <li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-2.1"><i class="fa fa-check"></i>Задача 2.1</a></li>
@@ -298,32 +302,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.3</span> Добавляем первую команду боту, обработчик команд</h2>
 <p>Если вы никогда ранее не использовали ботов, и не в курсе, что такое команда, то команды боту необходимо отправлять с помощью прямого слеша <code>/</code> в качестве префикса.</p>
 <p>Начнём мы с простых команд, т.е. научим нашего бота здороваться по команде <code>/hi</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="-updater-2.html#cb22-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
-<span id="cb22-2"><a href="-updater-2.html#cb22-2" aria-hidden="true"></a></span>
-<span id="cb22-3"><a href="-updater-2.html#cb22-3" aria-hidden="true"></a><span class="co"># создаём экземпляр класса Updater</span></span>
-<span id="cb22-4"><a href="-updater-2.html#cb22-4" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
-<span id="cb22-5"><a href="-updater-2.html#cb22-5" aria-hidden="true"></a></span>
-<span id="cb22-6"><a href="-updater-2.html#cb22-6" aria-hidden="true"></a><span class="co"># Пишем метод для приветсвия</span></span>
-<span id="cb22-7"><a href="-updater-2.html#cb22-7" aria-hidden="true"></a>say_hello &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb22-8"><a href="-updater-2.html#cb22-8" aria-hidden="true"></a></span>
-<span id="cb22-9"><a href="-updater-2.html#cb22-9" aria-hidden="true"></a>  <span class="co"># Имя пользователя с которым надо поздароваться</span></span>
-<span id="cb22-10"><a href="-updater-2.html#cb22-10" aria-hidden="true"></a>  user_name &lt;-<span class="st"> </span>update<span class="op">$</span>message<span class="op">$</span>from<span class="op">$</span>first_name</span>
-<span id="cb22-11"><a href="-updater-2.html#cb22-11" aria-hidden="true"></a></span>
-<span id="cb22-12"><a href="-updater-2.html#cb22-12" aria-hidden="true"></a>  <span class="co"># Отправка приветственного сообщения</span></span>
-<span id="cb22-13"><a href="-updater-2.html#cb22-13" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb22-14"><a href="-updater-2.html#cb22-14" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Моё почтение, &quot;</span>, user_name, <span class="st">&quot;!&quot;</span>),</span>
-<span id="cb22-15"><a href="-updater-2.html#cb22-15" aria-hidden="true"></a>                  <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
-<span id="cb22-16"><a href="-updater-2.html#cb22-16" aria-hidden="true"></a></span>
-<span id="cb22-17"><a href="-updater-2.html#cb22-17" aria-hidden="true"></a>}</span>
-<span id="cb22-18"><a href="-updater-2.html#cb22-18" aria-hidden="true"></a></span>
-<span id="cb22-19"><a href="-updater-2.html#cb22-19" aria-hidden="true"></a><span class="co"># создаём обработчик</span></span>
-<span id="cb22-20"><a href="-updater-2.html#cb22-20" aria-hidden="true"></a>hi_hendler &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;hi&#39;</span>, say_hello)</span>
-<span id="cb22-21"><a href="-updater-2.html#cb22-21" aria-hidden="true"></a></span>
-<span id="cb22-22"><a href="-updater-2.html#cb22-22" aria-hidden="true"></a><span class="co"># добаляем обработчик в диспетчер</span></span>
-<span id="cb22-23"><a href="-updater-2.html#cb22-23" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span><span class="st"> </span>hi_hendler</span>
-<span id="cb22-24"><a href="-updater-2.html#cb22-24" aria-hidden="true"></a></span>
-<span id="cb22-25"><a href="-updater-2.html#cb22-25" aria-hidden="true"></a><span class="co"># запускаем бота</span></span>
-<span id="cb22-26"><a href="-updater-2.html#cb22-26" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="-updater-2.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(telegram.bot)</span>
+<span id="cb22-2"><a href="-updater-2.html#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="-updater-2.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём экземпляр класса Updater</span></span>
+<span id="cb22-4"><a href="-updater-2.html#cb22-4" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> <span class="fu">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb22-5"><a href="-updater-2.html#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="-updater-2.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Пишем метод для приветсвия</span></span>
+<span id="cb22-7"><a href="-updater-2.html#cb22-7" aria-hidden="true" tabindex="-1"></a>say_hello <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb22-8"><a href="-updater-2.html#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="-updater-2.html#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Имя пользователя с которым надо поздароваться</span></span>
+<span id="cb22-10"><a href="-updater-2.html#cb22-10" aria-hidden="true" tabindex="-1"></a>  user_name <span class="ot">&lt;-</span> update<span class="sc">$</span>message<span class="sc">$</span>from<span class="sc">$</span>first_name</span>
+<span id="cb22-11"><a href="-updater-2.html#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="-updater-2.html#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Отправка приветственного сообщения</span></span>
+<span id="cb22-13"><a href="-updater-2.html#cb22-13" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb22-14"><a href="-updater-2.html#cb22-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="fu">paste0</span>(<span class="st">&quot;Моё почтение, &quot;</span>, user_name, <span class="st">&quot;!&quot;</span>),</span>
+<span id="cb22-15"><a href="-updater-2.html#cb22-15" aria-hidden="true" tabindex="-1"></a>                  <span class="at">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
+<span id="cb22-16"><a href="-updater-2.html#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="-updater-2.html#cb22-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-18"><a href="-updater-2.html#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="-updater-2.html#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём обработчик</span></span>
+<span id="cb22-20"><a href="-updater-2.html#cb22-20" aria-hidden="true" tabindex="-1"></a>hi_hendler <span class="ot">&lt;-</span> <span class="fu">CommandHandler</span>(<span class="st">&#39;hi&#39;</span>, say_hello)</span>
+<span id="cb22-21"><a href="-updater-2.html#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="-updater-2.html#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co"># добаляем обработчик в диспетчер</span></span>
+<span id="cb22-23"><a href="-updater-2.html#cb22-23" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> updater <span class="sc">+</span> hi_hendler</span>
+<span id="cb22-24"><a href="-updater-2.html#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-25"><a href="-updater-2.html#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co"># запускаем бота</span></span>
+<span id="cb22-26"><a href="-updater-2.html#cb22-26" aria-hidden="true" tabindex="-1"></a>updater<span class="sc">$</span><span class="fu">start_polling</span>()</span></code></pre></div>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
 </blockquote>
@@ -346,47 +350,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Как отправлять боту команды мы разобрались, но иногда нам требуется, что бы бот реагировал не только на команды, но и на какие-то обычные, текстовые сообщения. Для этого необходимо использовать обработчики сообщений - <strong>MessageHandler</strong>.</p>
 <p>Обычный <strong>MessageHandler</strong> будет реагировать на абсолютно все входящие сообщения. Поэтому зачастую обработчики сообщений используются вместе с фильтрами. Давайте научим бота здороваться не только по команде <code>/hi</code>, но и всегда, когда в сообщении отправленном боту встречается одно из следующих слов: привет, здравствуй, салют, хай, бонжур.</p>
 <p>Пока мы не будем писать какие-то новые методы, т.к. у нас уже есть метод с помощью которого бот с нами здоровается. От нас требуется только создать нужный фильтр и обработчик сообщений.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="-updater-2.html#cb23-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
-<span id="cb23-2"><a href="-updater-2.html#cb23-2" aria-hidden="true"></a></span>
-<span id="cb23-3"><a href="-updater-2.html#cb23-3" aria-hidden="true"></a><span class="co"># создаём экземпляр класса Updater</span></span>
-<span id="cb23-4"><a href="-updater-2.html#cb23-4" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
-<span id="cb23-5"><a href="-updater-2.html#cb23-5" aria-hidden="true"></a></span>
-<span id="cb23-6"><a href="-updater-2.html#cb23-6" aria-hidden="true"></a><span class="co"># Пишем метод для приветсвия</span></span>
-<span id="cb23-7"><a href="-updater-2.html#cb23-7" aria-hidden="true"></a><span class="co">## команда приветвия</span></span>
-<span id="cb23-8"><a href="-updater-2.html#cb23-8" aria-hidden="true"></a>say_hello &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb23-9"><a href="-updater-2.html#cb23-9" aria-hidden="true"></a></span>
-<span id="cb23-10"><a href="-updater-2.html#cb23-10" aria-hidden="true"></a>  <span class="co"># Имя пользователя с которым надо поздароваться</span></span>
-<span id="cb23-11"><a href="-updater-2.html#cb23-11" aria-hidden="true"></a>  user_name &lt;-<span class="st"> </span>update<span class="op">$</span>message<span class="op">$</span>from<span class="op">$</span>first_name</span>
-<span id="cb23-12"><a href="-updater-2.html#cb23-12" aria-hidden="true"></a></span>
-<span id="cb23-13"><a href="-updater-2.html#cb23-13" aria-hidden="true"></a>  <span class="co"># Отправляем приветсвенное сообщение</span></span>
-<span id="cb23-14"><a href="-updater-2.html#cb23-14" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb23-15"><a href="-updater-2.html#cb23-15" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Моё почтение, &quot;</span>, user_name, <span class="st">&quot;!&quot;</span>),</span>
-<span id="cb23-16"><a href="-updater-2.html#cb23-16" aria-hidden="true"></a>                  <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
-<span id="cb23-17"><a href="-updater-2.html#cb23-17" aria-hidden="true"></a>                  <span class="dt">reply_to_message_id =</span> update<span class="op">$</span>message<span class="op">$</span>message_id)</span>
-<span id="cb23-18"><a href="-updater-2.html#cb23-18" aria-hidden="true"></a></span>
-<span id="cb23-19"><a href="-updater-2.html#cb23-19" aria-hidden="true"></a>}</span>
-<span id="cb23-20"><a href="-updater-2.html#cb23-20" aria-hidden="true"></a></span>
-<span id="cb23-21"><a href="-updater-2.html#cb23-21" aria-hidden="true"></a><span class="co"># создаём фильтры</span></span>
-<span id="cb23-22"><a href="-updater-2.html#cb23-22" aria-hidden="true"></a>MessageFilters<span class="op">$</span>hi &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
-<span id="cb23-23"><a href="-updater-2.html#cb23-23" aria-hidden="true"></a></span>
-<span id="cb23-24"><a href="-updater-2.html#cb23-24" aria-hidden="true"></a>  <span class="co"># проверяем, встречается ли в тексте сообщения слова: привет, здравствуй, салют, хай, бонжур</span></span>
-<span id="cb23-25"><a href="-updater-2.html#cb23-25" aria-hidden="true"></a>  <span class="kw">grepl</span>(<span class="dt">x           =</span> message<span class="op">$</span>text,</span>
-<span id="cb23-26"><a href="-updater-2.html#cb23-26" aria-hidden="true"></a>        <span class="dt">pattern     =</span> <span class="st">&#39;привет|здравствуй|салют|хай|бонжур&#39;</span>,</span>
-<span id="cb23-27"><a href="-updater-2.html#cb23-27" aria-hidden="true"></a>        <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb23-28"><a href="-updater-2.html#cb23-28" aria-hidden="true"></a>  }</span>
-<span id="cb23-29"><a href="-updater-2.html#cb23-29" aria-hidden="true"></a>)</span>
-<span id="cb23-30"><a href="-updater-2.html#cb23-30" aria-hidden="true"></a></span>
-<span id="cb23-31"><a href="-updater-2.html#cb23-31" aria-hidden="true"></a><span class="co"># создаём обработчик</span></span>
-<span id="cb23-32"><a href="-updater-2.html#cb23-32" aria-hidden="true"></a>hi_hendler &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;hi&#39;</span>, say_hello) <span class="co"># обработчик команды hi</span></span>
-<span id="cb23-33"><a href="-updater-2.html#cb23-33" aria-hidden="true"></a>hi_txt_hnd &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(say_hello, <span class="dt">filters =</span> MessageFilters<span class="op">$</span>hi)</span>
-<span id="cb23-34"><a href="-updater-2.html#cb23-34" aria-hidden="true"></a></span>
-<span id="cb23-35"><a href="-updater-2.html#cb23-35" aria-hidden="true"></a><span class="co"># добаляем обработчики в диспетчер</span></span>
-<span id="cb23-36"><a href="-updater-2.html#cb23-36" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span></span>
-<span id="cb23-37"><a href="-updater-2.html#cb23-37" aria-hidden="true"></a><span class="st">             </span>hi_hendler <span class="op">+</span></span>
-<span id="cb23-38"><a href="-updater-2.html#cb23-38" aria-hidden="true"></a><span class="st">             </span>hi_txt_hnd</span>
-<span id="cb23-39"><a href="-updater-2.html#cb23-39" aria-hidden="true"></a></span>
-<span id="cb23-40"><a href="-updater-2.html#cb23-40" aria-hidden="true"></a><span class="co"># запускаем бота</span></span>
-<span id="cb23-41"><a href="-updater-2.html#cb23-41" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="-updater-2.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(telegram.bot)</span>
+<span id="cb23-2"><a href="-updater-2.html#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="-updater-2.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём экземпляр класса Updater</span></span>
+<span id="cb23-4"><a href="-updater-2.html#cb23-4" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> <span class="fu">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb23-5"><a href="-updater-2.html#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="-updater-2.html#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Пишем метод для приветсвия</span></span>
+<span id="cb23-7"><a href="-updater-2.html#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="do">## команда приветвия</span></span>
+<span id="cb23-8"><a href="-updater-2.html#cb23-8" aria-hidden="true" tabindex="-1"></a>say_hello <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb23-9"><a href="-updater-2.html#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="-updater-2.html#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Имя пользователя с которым надо поздароваться</span></span>
+<span id="cb23-11"><a href="-updater-2.html#cb23-11" aria-hidden="true" tabindex="-1"></a>  user_name <span class="ot">&lt;-</span> update<span class="sc">$</span>message<span class="sc">$</span>from<span class="sc">$</span>first_name</span>
+<span id="cb23-12"><a href="-updater-2.html#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="-updater-2.html#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Отправляем приветсвенное сообщение</span></span>
+<span id="cb23-14"><a href="-updater-2.html#cb23-14" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb23-15"><a href="-updater-2.html#cb23-15" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="fu">paste0</span>(<span class="st">&quot;Моё почтение, &quot;</span>, user_name, <span class="st">&quot;!&quot;</span>),</span>
+<span id="cb23-16"><a href="-updater-2.html#cb23-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>,</span>
+<span id="cb23-17"><a href="-updater-2.html#cb23-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">reply_to_message_id =</span> update<span class="sc">$</span>message<span class="sc">$</span>message_id)</span>
+<span id="cb23-18"><a href="-updater-2.html#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="-updater-2.html#cb23-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-20"><a href="-updater-2.html#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-21"><a href="-updater-2.html#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём фильтры</span></span>
+<span id="cb23-22"><a href="-updater-2.html#cb23-22" aria-hidden="true" tabindex="-1"></a>MessageFilters<span class="sc">$</span>hi <span class="ot">&lt;-</span> <span class="fu">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
+<span id="cb23-23"><a href="-updater-2.html#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="-updater-2.html#cb23-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># проверяем, встречается ли в тексте сообщения слова: привет, здравствуй, салют, хай, бонжур</span></span>
+<span id="cb23-25"><a href="-updater-2.html#cb23-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="at">x           =</span> message<span class="sc">$</span>text,</span>
+<span id="cb23-26"><a href="-updater-2.html#cb23-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">pattern     =</span> <span class="st">&#39;привет|здравствуй|салют|хай|бонжур&#39;</span>,</span>
+<span id="cb23-27"><a href="-updater-2.html#cb23-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-28"><a href="-updater-2.html#cb23-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-29"><a href="-updater-2.html#cb23-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-30"><a href="-updater-2.html#cb23-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-31"><a href="-updater-2.html#cb23-31" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём обработчик</span></span>
+<span id="cb23-32"><a href="-updater-2.html#cb23-32" aria-hidden="true" tabindex="-1"></a>hi_hendler <span class="ot">&lt;-</span> <span class="fu">CommandHandler</span>(<span class="st">&#39;hi&#39;</span>, say_hello) <span class="co"># обработчик команды hi</span></span>
+<span id="cb23-33"><a href="-updater-2.html#cb23-33" aria-hidden="true" tabindex="-1"></a>hi_txt_hnd <span class="ot">&lt;-</span> <span class="fu">MessageHandler</span>(say_hello, <span class="at">filters =</span> MessageFilters<span class="sc">$</span>hi)</span>
+<span id="cb23-34"><a href="-updater-2.html#cb23-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-35"><a href="-updater-2.html#cb23-35" aria-hidden="true" tabindex="-1"></a><span class="co"># добаляем обработчики в диспетчер</span></span>
+<span id="cb23-36"><a href="-updater-2.html#cb23-36" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> updater <span class="sc">+</span></span>
+<span id="cb23-37"><a href="-updater-2.html#cb23-37" aria-hidden="true" tabindex="-1"></a>             hi_hendler <span class="sc">+</span></span>
+<span id="cb23-38"><a href="-updater-2.html#cb23-38" aria-hidden="true" tabindex="-1"></a>             hi_txt_hnd</span>
+<span id="cb23-39"><a href="-updater-2.html#cb23-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-40"><a href="-updater-2.html#cb23-40" aria-hidden="true" tabindex="-1"></a><span class="co"># запускаем бота</span></span>
+<span id="cb23-41"><a href="-updater-2.html#cb23-41" aria-hidden="true" tabindex="-1"></a>updater<span class="sc">$</span><span class="fu">start_polling</span>()</span></code></pre></div>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
 </blockquote>
@@ -394,26 +398,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="https://img.netpeak.ua/alsey/159787794513_kiss_226kb.png" /></p>
 <p>Итак, в первую очередь мы научили бота не просто здороваться, а отвечать на приветствие. Сделали мы это с помощью аргумента <em>reply_to_message_id</em>, который доступен в методе <code>sendMessage()</code>, в который необходимо передать id сообщения на которое требуется ответить. Получить id сообщения можно вот так: <code>update$message$message_id</code>.</p>
 <p>Но главное, что мы сделали - добавили боту фильтр с помощью функции <code>BaseFilter()</code>:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="-updater-2.html#cb24-1" aria-hidden="true"></a><span class="co"># создаём фильтры</span></span>
-<span id="cb24-2"><a href="-updater-2.html#cb24-2" aria-hidden="true"></a>MessageFilters<span class="op">$</span>hi &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(</span>
-<span id="cb24-3"><a href="-updater-2.html#cb24-3" aria-hidden="true"></a></span>
-<span id="cb24-4"><a href="-updater-2.html#cb24-4" aria-hidden="true"></a>  <span class="co"># анонимная фильтрующая функция</span></span>
-<span id="cb24-5"><a href="-updater-2.html#cb24-5" aria-hidden="true"></a>  <span class="cf">function</span>(message) {</span>
-<span id="cb24-6"><a href="-updater-2.html#cb24-6" aria-hidden="true"></a></span>
-<span id="cb24-7"><a href="-updater-2.html#cb24-7" aria-hidden="true"></a>    <span class="co"># проверяем, встречается ли в тексте сообщения слова приветствия</span></span>
-<span id="cb24-8"><a href="-updater-2.html#cb24-8" aria-hidden="true"></a>    <span class="kw">grepl</span>(<span class="dt">x           =</span> message<span class="op">$</span>text,</span>
-<span id="cb24-9"><a href="-updater-2.html#cb24-9" aria-hidden="true"></a>          <span class="dt">pattern     =</span> <span class="st">&#39;привет|здравствуй|салют|хай|бонжур&#39;</span>,</span>
-<span id="cb24-10"><a href="-updater-2.html#cb24-10" aria-hidden="true"></a>          <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb24-11"><a href="-updater-2.html#cb24-11" aria-hidden="true"></a>  }</span>
-<span id="cb24-12"><a href="-updater-2.html#cb24-12" aria-hidden="true"></a></span>
-<span id="cb24-13"><a href="-updater-2.html#cb24-13" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="-updater-2.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём фильтры</span></span>
+<span id="cb24-2"><a href="-updater-2.html#cb24-2" aria-hidden="true" tabindex="-1"></a>MessageFilters<span class="sc">$</span>hi <span class="ot">&lt;-</span> <span class="fu">BaseFilter</span>(</span>
+<span id="cb24-3"><a href="-updater-2.html#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="-updater-2.html#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># анонимная фильтрующая функция</span></span>
+<span id="cb24-5"><a href="-updater-2.html#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(message) {</span>
+<span id="cb24-6"><a href="-updater-2.html#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="-updater-2.html#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># проверяем, встречается ли в тексте сообщения слова приветствия</span></span>
+<span id="cb24-8"><a href="-updater-2.html#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grepl</span>(<span class="at">x           =</span> message<span class="sc">$</span>text,</span>
+<span id="cb24-9"><a href="-updater-2.html#cb24-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">pattern     =</span> <span class="st">&#39;привет|здравствуй|салют|хай|бонжур&#39;</span>,</span>
+<span id="cb24-10"><a href="-updater-2.html#cb24-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb24-11"><a href="-updater-2.html#cb24-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-12"><a href="-updater-2.html#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="-updater-2.html#cb24-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Как вы могли заметить, фильтры необходимо добавлять в объект <strong>MessageFilters</strong>, в котором изначально уже есть небольшой набор готовых фильтров. В нашем примере в объект <strong>MessageFilters</strong> мы добавили элемент <em>hi</em>, это новый фильтр.</p>
 <p>В функцию <code>BaseFilter()</code> вам необходимо передать фильтрующую функцию. По сути, фильтр - это просто функция, которая получает экземпляр сообщения и возвращает <em>TRUE</em> или <em>FALSE</em>. В нашем примере, мы написали простейшую функцию, которая с помощью базовой функции <code>grepl()</code> проверяет текст сообщения, и если он соответствует регулярному выражению <code>привет|здравствуй|салют|хай|бонжур</code> возвращает <em>TRUE</em>.</p>
 <p>Далее мы создаём обработчик сообщений <code>hi_txt_hnd &lt;- MessageHandler(say_hello, filters = MessageFilters$hi)</code>. Первый аргумент функции <code>MessageHandler()</code> - метод, который будет вызывать обработчик, а второй аргумент - это фильтр по которому он будет вызываться. В нашем случае это созданный нами фильтр <code>MessageFilters$hi</code>.</p>
 <p>Ну и в итоге, мы добавляем в диспетчер созданный только, что обработчик <em>hi_txt_hnd</em>.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="-updater-2.html#cb25-1" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span></span>
-<span id="cb25-2"><a href="-updater-2.html#cb25-2" aria-hidden="true"></a><span class="st">             </span>hi_hendler <span class="op">+</span></span>
-<span id="cb25-3"><a href="-updater-2.html#cb25-3" aria-hidden="true"></a><span class="st">             </span>hi_txt_hnd</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="-updater-2.html#cb25-1" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> updater <span class="sc">+</span></span>
+<span id="cb25-2"><a href="-updater-2.html#cb25-2" aria-hidden="true" tabindex="-1"></a>             hi_hendler <span class="sc">+</span></span>
+<span id="cb25-3"><a href="-updater-2.html#cb25-3" aria-hidden="true" tabindex="-1"></a>             hi_txt_hnd</span></code></pre></div>
 <p>Как я уже писал выше, в пакете <code>telegram.bot</code> и объекте <strong>MessageFilters</strong> уже есть набор встроенных фильтров, которые вы можете использовать:</p>
 <ul>
 <li>all - Все сообщения</li>
@@ -432,9 +436,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>game - Игры</li>
 </ul>
 <p>Если вы хотите совместить некоторые фильтры в одном обработчике просто используйте знак <code>|</code> - в качестве логического <strong>ИЛИ</strong>, и знак <code>&amp;</code> в качестве логического <strong>И</strong>. Например, если вы хотите что бы бот вызывал один и тот же метод когда он получает видео, изображение или документ используйте следующий пример создания обработчика сообщений:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="-updater-2.html#cb26-1" aria-hidden="true"></a>handler &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(callback,</span>
-<span id="cb26-2"><a href="-updater-2.html#cb26-2" aria-hidden="true"></a>  MessageFilters<span class="op">$</span>video <span class="op">|</span><span class="st"> </span>MessageFilters<span class="op">$</span>photo <span class="op">|</span><span class="st"> </span>MessageFilters<span class="op">$</span>document</span>
-<span id="cb26-3"><a href="-updater-2.html#cb26-3" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="-updater-2.html#cb26-1" aria-hidden="true" tabindex="-1"></a>handler <span class="ot">&lt;-</span> <span class="fu">MessageHandler</span>(callback,</span>
+<span id="cb26-2"><a href="-updater-2.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  MessageFilters<span class="sc">$</span>video <span class="sc">|</span> MessageFilters<span class="sc">$</span>photo <span class="sc">|</span> MessageFilters<span class="sc">$</span>document</span>
+<span id="cb26-3"><a href="-updater-2.html#cb26-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="добавление-команд-с-параметрами" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> Добавление команд с параметрами</h2>
@@ -442,88 +446,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Ниже пример бота, который по заданной дате и стране возвращает вам тип дня из производственного календаря.</p>
 <p>Приведённый ниже бот использует API производственного календаря <a href="https://isdayoff.ru/">isdayoff.ru</a>.</p>
 <p><spoiler title="Код 3: Бот, который сообщает по дате и стране "></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="-updater-2.html#cb27-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
-<span id="cb27-2"><a href="-updater-2.html#cb27-2" aria-hidden="true"></a></span>
-<span id="cb27-3"><a href="-updater-2.html#cb27-3" aria-hidden="true"></a><span class="co"># создаём экземпляр класса Updater</span></span>
-<span id="cb27-4"><a href="-updater-2.html#cb27-4" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
-<span id="cb27-5"><a href="-updater-2.html#cb27-5" aria-hidden="true"></a></span>
-<span id="cb27-6"><a href="-updater-2.html#cb27-6" aria-hidden="true"></a><span class="co"># Пишем метод для приветсвия</span></span>
-<span id="cb27-7"><a href="-updater-2.html#cb27-7" aria-hidden="true"></a><span class="co">## команда приветвия</span></span>
-<span id="cb27-8"><a href="-updater-2.html#cb27-8" aria-hidden="true"></a>check_date &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update, args) {</span>
-<span id="cb27-9"><a href="-updater-2.html#cb27-9" aria-hidden="true"></a></span>
-<span id="cb27-10"><a href="-updater-2.html#cb27-10" aria-hidden="true"></a>  <span class="co"># входящие данные</span></span>
-<span id="cb27-11"><a href="-updater-2.html#cb27-11" aria-hidden="true"></a>  day     &lt;-<span class="st"> </span>args[<span class="dv">1</span>]  <span class="co"># дата</span></span>
-<span id="cb27-12"><a href="-updater-2.html#cb27-12" aria-hidden="true"></a>  country &lt;-<span class="st"> </span>args[<span class="dv">2</span>]  <span class="co"># страна</span></span>
-<span id="cb27-13"><a href="-updater-2.html#cb27-13" aria-hidden="true"></a></span>
-<span id="cb27-14"><a href="-updater-2.html#cb27-14" aria-hidden="true"></a>  <span class="co"># проверка введённых параметров</span></span>
-<span id="cb27-15"><a href="-updater-2.html#cb27-15" aria-hidden="true"></a>  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">grepl</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">d{4}-</span><span class="ch">\\</span><span class="st">d{2}-</span><span class="ch">\\</span><span class="st">d{2}&#39;</span>, day) ) {</span>
-<span id="cb27-16"><a href="-updater-2.html#cb27-16" aria-hidden="true"></a></span>
-<span id="cb27-17"><a href="-updater-2.html#cb27-17" aria-hidden="true"></a>    <span class="co"># Send Custom Keyboard</span></span>
-<span id="cb27-18"><a href="-updater-2.html#cb27-18" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb27-19"><a href="-updater-2.html#cb27-19" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">paste0</span>(day, <span class="st">&quot; - некорреткная дата, введите дату в формате ГГГГ-ММ-ДД&quot;</span>),</span>
-<span id="cb27-20"><a href="-updater-2.html#cb27-20" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
-<span id="cb27-21"><a href="-updater-2.html#cb27-21" aria-hidden="true"></a></span>
-<span id="cb27-22"><a href="-updater-2.html#cb27-22" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
-<span id="cb27-23"><a href="-updater-2.html#cb27-23" aria-hidden="true"></a>    day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(day)</span>
-<span id="cb27-24"><a href="-updater-2.html#cb27-24" aria-hidden="true"></a>    <span class="co"># переводим в формат POSIXtl</span></span>
-<span id="cb27-25"><a href="-updater-2.html#cb27-25" aria-hidden="true"></a>    y &lt;-<span class="st"> </span><span class="kw">format</span>(day, <span class="st">&quot;%Y&quot;</span>)</span>
-<span id="cb27-26"><a href="-updater-2.html#cb27-26" aria-hidden="true"></a>    m &lt;-<span class="st"> </span><span class="kw">format</span>(day, <span class="st">&quot;%m&quot;</span>)</span>
-<span id="cb27-27"><a href="-updater-2.html#cb27-27" aria-hidden="true"></a>    d &lt;-<span class="st"> </span><span class="kw">format</span>(day, <span class="st">&quot;%d&quot;</span>)</span>
-<span id="cb27-28"><a href="-updater-2.html#cb27-28" aria-hidden="true"></a></span>
-<span id="cb27-29"><a href="-updater-2.html#cb27-29" aria-hidden="true"></a>  }</span>
-<span id="cb27-30"><a href="-updater-2.html#cb27-30" aria-hidden="true"></a></span>
-<span id="cb27-31"><a href="-updater-2.html#cb27-31" aria-hidden="true"></a>  <span class="co"># страна для проверки</span></span>
-<span id="cb27-32"><a href="-updater-2.html#cb27-32" aria-hidden="true"></a>  <span class="co">## проверяем задана ли страна</span></span>
-<span id="cb27-33"><a href="-updater-2.html#cb27-33" aria-hidden="true"></a>  <span class="co">## если не задана устанавливаем ru</span></span>
-<span id="cb27-34"><a href="-updater-2.html#cb27-34" aria-hidden="true"></a>  <span class="cf">if</span> ( <span class="op">!</span><span class="st"> </span>country <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ru&#39;</span>, <span class="st">&#39;ua&#39;</span>, <span class="st">&#39;by&#39;</span>, <span class="st">&#39;kz&#39;</span>, <span class="st">&#39;us&#39;</span>) ) {</span>
-<span id="cb27-35"><a href="-updater-2.html#cb27-35" aria-hidden="true"></a></span>
-<span id="cb27-36"><a href="-updater-2.html#cb27-36" aria-hidden="true"></a>    <span class="co"># Send Custom Keyboard</span></span>
-<span id="cb27-37"><a href="-updater-2.html#cb27-37" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb27-38"><a href="-updater-2.html#cb27-38" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">paste0</span>(country, <span class="st">&quot; - некорретктный код страны, возможнные значения: ru, by, kz, ua, us. Запрошены данные по России.&quot;</span>),</span>
-<span id="cb27-39"><a href="-updater-2.html#cb27-39" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
-<span id="cb27-40"><a href="-updater-2.html#cb27-40" aria-hidden="true"></a></span>
-<span id="cb27-41"><a href="-updater-2.html#cb27-41" aria-hidden="true"></a>    country &lt;-<span class="st"> &#39;ru&#39;</span></span>
-<span id="cb27-42"><a href="-updater-2.html#cb27-42" aria-hidden="true"></a></span>
-<span id="cb27-43"><a href="-updater-2.html#cb27-43" aria-hidden="true"></a>  }</span>
-<span id="cb27-44"><a href="-updater-2.html#cb27-44" aria-hidden="true"></a></span>
-<span id="cb27-45"><a href="-updater-2.html#cb27-45" aria-hidden="true"></a>  <span class="co"># запрос данных из API</span></span>
-<span id="cb27-46"><a href="-updater-2.html#cb27-46" aria-hidden="true"></a>  <span class="co"># компоновка HTTP запроса</span></span>
-<span id="cb27-47"><a href="-updater-2.html#cb27-47" aria-hidden="true"></a>  url &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;https://isdayoff.ru/api/getdata?&quot;</span>,</span>
-<span id="cb27-48"><a href="-updater-2.html#cb27-48" aria-hidden="true"></a>                <span class="st">&quot;year=&quot;</span>,  y, <span class="st">&quot;&amp;&quot;</span>,</span>
-<span id="cb27-49"><a href="-updater-2.html#cb27-49" aria-hidden="true"></a>                <span class="st">&quot;month=&quot;</span>, m, <span class="st">&quot;&amp;&quot;</span>,</span>
-<span id="cb27-50"><a href="-updater-2.html#cb27-50" aria-hidden="true"></a>                <span class="st">&quot;day=&quot;</span>,   d, <span class="st">&quot;&amp;&quot;</span>,</span>
-<span id="cb27-51"><a href="-updater-2.html#cb27-51" aria-hidden="true"></a>                <span class="st">&quot;cc=&quot;</span>,    country, <span class="st">&quot;&amp;&quot;</span>,</span>
-<span id="cb27-52"><a href="-updater-2.html#cb27-52" aria-hidden="true"></a>                <span class="st">&quot;pre=1&amp;&quot;</span>,</span>
-<span id="cb27-53"><a href="-updater-2.html#cb27-53" aria-hidden="true"></a>                <span class="st">&quot;covid=1&quot;</span>)</span>
-<span id="cb27-54"><a href="-updater-2.html#cb27-54" aria-hidden="true"></a></span>
-<span id="cb27-55"><a href="-updater-2.html#cb27-55" aria-hidden="true"></a>  <span class="co"># получаем ответ</span></span>
-<span id="cb27-56"><a href="-updater-2.html#cb27-56" aria-hidden="true"></a>  res &lt;-<span class="st"> </span><span class="kw">readLines</span>(url)</span>
-<span id="cb27-57"><a href="-updater-2.html#cb27-57" aria-hidden="true"></a></span>
-<span id="cb27-58"><a href="-updater-2.html#cb27-58" aria-hidden="true"></a>  <span class="co"># интрепретация ответа</span></span>
-<span id="cb27-59"><a href="-updater-2.html#cb27-59" aria-hidden="true"></a>  out &lt;-<span class="st"> </span><span class="cf">switch</span>(res,</span>
-<span id="cb27-60"><a href="-updater-2.html#cb27-60" aria-hidden="true"></a>                <span class="st">&quot;0&quot;</span>   =<span class="st"> &quot;Рабочий день&quot;</span>,</span>
-<span id="cb27-61"><a href="-updater-2.html#cb27-61" aria-hidden="true"></a>                <span class="st">&quot;1&quot;</span>   =<span class="st"> &quot;Нерабочий день&quot;</span>,</span>
-<span id="cb27-62"><a href="-updater-2.html#cb27-62" aria-hidden="true"></a>                <span class="st">&quot;2&quot;</span>   =<span class="st"> &quot;Сокращённый рабочий день&quot;</span>,</span>
-<span id="cb27-63"><a href="-updater-2.html#cb27-63" aria-hidden="true"></a>                <span class="st">&quot;4&quot;</span>   =<span class="st"> &quot;covid-19&quot;</span>,</span>
-<span id="cb27-64"><a href="-updater-2.html#cb27-64" aria-hidden="true"></a>                <span class="st">&quot;100&quot;</span> =<span class="st"> &quot;Ошибка в дате&quot;</span>,</span>
-<span id="cb27-65"><a href="-updater-2.html#cb27-65" aria-hidden="true"></a>                <span class="st">&quot;101&quot;</span> =<span class="st"> &quot;Данные не найдены&quot;</span>,</span>
-<span id="cb27-66"><a href="-updater-2.html#cb27-66" aria-hidden="true"></a>                <span class="st">&quot;199&quot;</span> =<span class="st"> &quot;Ошибка сервиса&quot;</span>)</span>
-<span id="cb27-67"><a href="-updater-2.html#cb27-67" aria-hidden="true"></a></span>
-<span id="cb27-68"><a href="-updater-2.html#cb27-68" aria-hidden="true"></a>  <span class="co"># отправляем сообщение</span></span>
-<span id="cb27-69"><a href="-updater-2.html#cb27-69" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb27-70"><a href="-updater-2.html#cb27-70" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="kw">paste0</span>(day, <span class="st">&quot; - &quot;</span>, out),</span>
-<span id="cb27-71"><a href="-updater-2.html#cb27-71" aria-hidden="true"></a>                  <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
-<span id="cb27-72"><a href="-updater-2.html#cb27-72" aria-hidden="true"></a></span>
-<span id="cb27-73"><a href="-updater-2.html#cb27-73" aria-hidden="true"></a>}</span>
-<span id="cb27-74"><a href="-updater-2.html#cb27-74" aria-hidden="true"></a></span>
-<span id="cb27-75"><a href="-updater-2.html#cb27-75" aria-hidden="true"></a><span class="co"># создаём обработчик</span></span>
-<span id="cb27-76"><a href="-updater-2.html#cb27-76" aria-hidden="true"></a>date_hendler &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;check_date&#39;</span>, check_date, <span class="dt">pass_args =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb27-77"><a href="-updater-2.html#cb27-77" aria-hidden="true"></a></span>
-<span id="cb27-78"><a href="-updater-2.html#cb27-78" aria-hidden="true"></a><span class="co"># добаляем обработчик в диспетчер</span></span>
-<span id="cb27-79"><a href="-updater-2.html#cb27-79" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span><span class="st"> </span>date_hendler</span>
-<span id="cb27-80"><a href="-updater-2.html#cb27-80" aria-hidden="true"></a></span>
-<span id="cb27-81"><a href="-updater-2.html#cb27-81" aria-hidden="true"></a><span class="co"># запускаем бота</span></span>
-<span id="cb27-82"><a href="-updater-2.html#cb27-82" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="-updater-2.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(telegram.bot)</span>
+<span id="cb27-2"><a href="-updater-2.html#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="-updater-2.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём экземпляр класса Updater</span></span>
+<span id="cb27-4"><a href="-updater-2.html#cb27-4" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> <span class="fu">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb27-5"><a href="-updater-2.html#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="-updater-2.html#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Пишем метод для приветсвия</span></span>
+<span id="cb27-7"><a href="-updater-2.html#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="do">## команда приветвия</span></span>
+<span id="cb27-8"><a href="-updater-2.html#cb27-8" aria-hidden="true" tabindex="-1"></a>check_date <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update, args) {</span>
+<span id="cb27-9"><a href="-updater-2.html#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="-updater-2.html#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># входящие данные</span></span>
+<span id="cb27-11"><a href="-updater-2.html#cb27-11" aria-hidden="true" tabindex="-1"></a>  day     <span class="ot">&lt;-</span> args[<span class="dv">1</span>]  <span class="co"># дата</span></span>
+<span id="cb27-12"><a href="-updater-2.html#cb27-12" aria-hidden="true" tabindex="-1"></a>  country <span class="ot">&lt;-</span> args[<span class="dv">2</span>]  <span class="co"># страна</span></span>
+<span id="cb27-13"><a href="-updater-2.html#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="-updater-2.html#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># проверка введённых параметров</span></span>
+<span id="cb27-15"><a href="-updater-2.html#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> ( <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">&#39;</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{2}-</span><span class="sc">\\</span><span class="st">d{2}&#39;</span>, day) ) {</span>
+<span id="cb27-16"><a href="-updater-2.html#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="-updater-2.html#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Send Custom Keyboard</span></span>
+<span id="cb27-18"><a href="-updater-2.html#cb27-18" aria-hidden="true" tabindex="-1"></a>    bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb27-19"><a href="-updater-2.html#cb27-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">text =</span> <span class="fu">paste0</span>(day, <span class="st">&quot; - некорреткная дата, введите дату в формате ГГГГ-ММ-ДД&quot;</span>),</span>
+<span id="cb27-20"><a href="-updater-2.html#cb27-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
+<span id="cb27-21"><a href="-updater-2.html#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-22"><a href="-updater-2.html#cb27-22" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb27-23"><a href="-updater-2.html#cb27-23" aria-hidden="true" tabindex="-1"></a>    day <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(day)</span>
+<span id="cb27-24"><a href="-updater-2.html#cb27-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># переводим в формат POSIXtl</span></span>
+<span id="cb27-25"><a href="-updater-2.html#cb27-25" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="fu">format</span>(day, <span class="st">&quot;%Y&quot;</span>)</span>
+<span id="cb27-26"><a href="-updater-2.html#cb27-26" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">format</span>(day, <span class="st">&quot;%m&quot;</span>)</span>
+<span id="cb27-27"><a href="-updater-2.html#cb27-27" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> <span class="fu">format</span>(day, <span class="st">&quot;%d&quot;</span>)</span>
+<span id="cb27-28"><a href="-updater-2.html#cb27-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-29"><a href="-updater-2.html#cb27-29" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb27-30"><a href="-updater-2.html#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-31"><a href="-updater-2.html#cb27-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># страна для проверки</span></span>
+<span id="cb27-32"><a href="-updater-2.html#cb27-32" aria-hidden="true" tabindex="-1"></a>  <span class="do">## проверяем задана ли страна</span></span>
+<span id="cb27-33"><a href="-updater-2.html#cb27-33" aria-hidden="true" tabindex="-1"></a>  <span class="do">## если не задана устанавливаем ru</span></span>
+<span id="cb27-34"><a href="-updater-2.html#cb27-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> ( <span class="sc">!</span> country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;ru&#39;</span>, <span class="st">&#39;ua&#39;</span>, <span class="st">&#39;by&#39;</span>, <span class="st">&#39;kz&#39;</span>, <span class="st">&#39;us&#39;</span>) ) {</span>
+<span id="cb27-35"><a href="-updater-2.html#cb27-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-36"><a href="-updater-2.html#cb27-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Send Custom Keyboard</span></span>
+<span id="cb27-37"><a href="-updater-2.html#cb27-37" aria-hidden="true" tabindex="-1"></a>    bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb27-38"><a href="-updater-2.html#cb27-38" aria-hidden="true" tabindex="-1"></a>                    <span class="at">text =</span> <span class="fu">paste0</span>(country, <span class="st">&quot; - некорретктный код страны, возможнные значения: ru, by, kz, ua, us. Запрошены данные по России.&quot;</span>),</span>
+<span id="cb27-39"><a href="-updater-2.html#cb27-39" aria-hidden="true" tabindex="-1"></a>                    <span class="at">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
+<span id="cb27-40"><a href="-updater-2.html#cb27-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-41"><a href="-updater-2.html#cb27-41" aria-hidden="true" tabindex="-1"></a>    country <span class="ot">&lt;-</span> <span class="st">&#39;ru&#39;</span></span>
+<span id="cb27-42"><a href="-updater-2.html#cb27-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-43"><a href="-updater-2.html#cb27-43" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb27-44"><a href="-updater-2.html#cb27-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-45"><a href="-updater-2.html#cb27-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># запрос данных из API</span></span>
+<span id="cb27-46"><a href="-updater-2.html#cb27-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># компоновка HTTP запроса</span></span>
+<span id="cb27-47"><a href="-updater-2.html#cb27-47" aria-hidden="true" tabindex="-1"></a>  url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;https://isdayoff.ru/api/getdata?&quot;</span>,</span>
+<span id="cb27-48"><a href="-updater-2.html#cb27-48" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;year=&quot;</span>,  y, <span class="st">&quot;&amp;&quot;</span>,</span>
+<span id="cb27-49"><a href="-updater-2.html#cb27-49" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;month=&quot;</span>, m, <span class="st">&quot;&amp;&quot;</span>,</span>
+<span id="cb27-50"><a href="-updater-2.html#cb27-50" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;day=&quot;</span>,   d, <span class="st">&quot;&amp;&quot;</span>,</span>
+<span id="cb27-51"><a href="-updater-2.html#cb27-51" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;cc=&quot;</span>,    country, <span class="st">&quot;&amp;&quot;</span>,</span>
+<span id="cb27-52"><a href="-updater-2.html#cb27-52" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;pre=1&amp;&quot;</span>,</span>
+<span id="cb27-53"><a href="-updater-2.html#cb27-53" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;covid=1&quot;</span>)</span>
+<span id="cb27-54"><a href="-updater-2.html#cb27-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-55"><a href="-updater-2.html#cb27-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># получаем ответ</span></span>
+<span id="cb27-56"><a href="-updater-2.html#cb27-56" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">readLines</span>(url)</span>
+<span id="cb27-57"><a href="-updater-2.html#cb27-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-58"><a href="-updater-2.html#cb27-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># интрепретация ответа</span></span>
+<span id="cb27-59"><a href="-updater-2.html#cb27-59" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="cf">switch</span>(res,</span>
+<span id="cb27-60"><a href="-updater-2.html#cb27-60" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;0&quot;</span>   <span class="ot">=</span> <span class="st">&quot;Рабочий день&quot;</span>,</span>
+<span id="cb27-61"><a href="-updater-2.html#cb27-61" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;1&quot;</span>   <span class="ot">=</span> <span class="st">&quot;Нерабочий день&quot;</span>,</span>
+<span id="cb27-62"><a href="-updater-2.html#cb27-62" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;2&quot;</span>   <span class="ot">=</span> <span class="st">&quot;Сокращённый рабочий день&quot;</span>,</span>
+<span id="cb27-63"><a href="-updater-2.html#cb27-63" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;4&quot;</span>   <span class="ot">=</span> <span class="st">&quot;covid-19&quot;</span>,</span>
+<span id="cb27-64"><a href="-updater-2.html#cb27-64" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;100&quot;</span> <span class="ot">=</span> <span class="st">&quot;Ошибка в дате&quot;</span>,</span>
+<span id="cb27-65"><a href="-updater-2.html#cb27-65" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;101&quot;</span> <span class="ot">=</span> <span class="st">&quot;Данные не найдены&quot;</span>,</span>
+<span id="cb27-66"><a href="-updater-2.html#cb27-66" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;199&quot;</span> <span class="ot">=</span> <span class="st">&quot;Ошибка сервиса&quot;</span>)</span>
+<span id="cb27-67"><a href="-updater-2.html#cb27-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-68"><a href="-updater-2.html#cb27-68" aria-hidden="true" tabindex="-1"></a>  <span class="co"># отправляем сообщение</span></span>
+<span id="cb27-69"><a href="-updater-2.html#cb27-69" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb27-70"><a href="-updater-2.html#cb27-70" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="fu">paste0</span>(day, <span class="st">&quot; - &quot;</span>, out),</span>
+<span id="cb27-71"><a href="-updater-2.html#cb27-71" aria-hidden="true" tabindex="-1"></a>                  <span class="at">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
+<span id="cb27-72"><a href="-updater-2.html#cb27-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-73"><a href="-updater-2.html#cb27-73" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-74"><a href="-updater-2.html#cb27-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-75"><a href="-updater-2.html#cb27-75" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём обработчик</span></span>
+<span id="cb27-76"><a href="-updater-2.html#cb27-76" aria-hidden="true" tabindex="-1"></a>date_hendler <span class="ot">&lt;-</span> <span class="fu">CommandHandler</span>(<span class="st">&#39;check_date&#39;</span>, check_date, <span class="at">pass_args =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-77"><a href="-updater-2.html#cb27-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-78"><a href="-updater-2.html#cb27-78" aria-hidden="true" tabindex="-1"></a><span class="co"># добаляем обработчик в диспетчер</span></span>
+<span id="cb27-79"><a href="-updater-2.html#cb27-79" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> updater <span class="sc">+</span> date_hendler</span>
+<span id="cb27-80"><a href="-updater-2.html#cb27-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-81"><a href="-updater-2.html#cb27-81" aria-hidden="true" tabindex="-1"></a><span class="co"># запускаем бота</span></span>
+<span id="cb27-82"><a href="-updater-2.html#cb27-82" aria-hidden="true" tabindex="-1"></a>updater<span class="sc">$</span><span class="fu">start_polling</span>()</span></code></pre></div>
 <p></spoiler></p>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
@@ -543,11 +547,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Добавьте путь к папке bin, которая в свою очередь находится в папке в которую вы установили язык R в переменную Path, инструкция <a href="https://www.java.com/ru/download/help/path.xml">тут</a>.</li>
 <li>Создайте обычный текстовый файл, в котором пропишите 1 строку: <code>R CMD BATCH C:\Users\Alsey\Documents\my_bot.R</code>. Вместо *C:_bot.R* пропишите путь к своему скрипту бота. При этом важно, что бы в пути не встречалась кириллица и пробелы, т.к. это может вызвать проблемы при запуске бота. Сохраните его, и замените его расширение с <em>txt</em> на <em>bat</em>.</li>
 <li>Откройте планировщик заданий Windows, есть множество способов это сделать, например откройте любую папку и в адресс введите <code>%windir%\system32\taskschd.msc /s</code>. Другие способы запуска можно найти <a href="https://remontka.pro/open-task-scheduler-windows/">тут</a>.</li>
-<li>В верхнем правом меню планировщика нажмите “Создать задачу…”.</li>
-<li>На вкладке “Общие” задайте произвольное имя вашей задаче, и переключатель перевидите в состояние “Выполнять для всех пользователей”.</li>
-<li>Перейдите на вкладку “Действия”, нажмите “Создать”. В поле “Программа или сценарий” нажмите “Обзор”, найдите созданный на втором шаге <em>bat</em> файл, и нажмите ОК.</li>
+<li>В верхнем правом меню планировщика нажмите “Создать задачу….”</li>
+<li>На вкладке “Общие” задайте произвольное имя вашей задаче, и переключатель перевидите в состояние “Выполнять для всех пользователей.”</li>
+<li>Перейдите на вкладку “Действия,” нажмите “Создать.” В поле “Программа или сценарий” нажмите “Обзор,” найдите созданный на втором шаге <em>bat</em> файл, и нажмите ОК.</li>
 <li>Жмём ОК, при необходимости вводим пароль от вашей учётной записи операционной системы.</li>
-<li>Находим в планировщике созданную задачу, выделяем и в нижнем правом углу жмём кнопку “Выполнить”.</li>
+<li>Находим в планировщике созданную задачу, выделяем и в нижнем правом углу жмём кнопку “Выполнить.”</li>
 </ol>
 <p>Наш бот запущен в фоновом режиме, и будет работать до тех пор, пока вы не остановите задачу, или не выключите ваш ПК или сервер на котором его запустили.</p>
 </div>
@@ -619,6 +623,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -638,7 +643,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["build_telegram_bot_using_r.pdf", "build_telegram_bot_using_r.epub"],
 "toc": {
 "collapse": "subsection"
 }

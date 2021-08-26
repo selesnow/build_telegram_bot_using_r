@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Разработка telegram ботов на языке R</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Разработка telegram ботов на языке R" />
   <meta property="og:type" content="book" />
   
-  
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:image" content="/cover.png" />
+  <meta property="og:description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="github-repo" content="selesnow/build_telegram_bot_using_r" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Разработка telegram ботов на языке R" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  
+  <meta name="twitter:description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="twitter:image" content="/cover.png" />
 
 <meta name="author" content="Алексей Селезнёв" />
 
 
-<meta name="date" content="2020-11-18" />
+<meta name="date" content="2021-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 
 <link rel="next" href="-telegram-1.html"/>
-<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script>
 <script>
@@ -66,6 +68,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -126,6 +129,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -150,7 +154,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#правки-и-предложения"><i class="fa fa-check"></i>Правки и предложения</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#поддержать-проект"><i class="fa fa-check"></i>Поддержать проект</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="-telegram-1.html"><a href="-telegram-1.html"><i class="fa fa-check"></i><b>1</b> Создаём бота, и отправляем с его помощью сообщения в telegram </a>
+<li class="chapter" data-level="1" data-path="-telegram-1.html"><a href="-telegram-1.html"><i class="fa fa-check"></i><b>1</b> Создаём бота, и отправляем с его помощью сообщения в telegram (1)</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="-telegram-1.html"><a href="-telegram-1.html#создание-телеграм-бота"><i class="fa fa-check"></i><b>1.1</b> Создание телеграм бота</a></li>
 <li class="chapter" data-level="1.2" data-path="-telegram-1.html"><a href="-telegram-1.html#установка-пакета-для-работы-с-телеграм-ботом-на-r"><i class="fa fa-check"></i><b>1.2</b> Установка пакета для работы с телеграм ботом на R</a></li>
@@ -166,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.9.2" data-path="-telegram-1.html"><a href="-telegram-1.html#задания"><i class="fa fa-check"></i><b>1.9.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="-updater-2.html"><a href="-updater-2.html"><i class="fa fa-check"></i><b>2</b> Добавляем боту поддержку команд и фильтры сообщений, класс Updater </a>
+<li class="chapter" data-level="2" data-path="-updater-2.html"><a href="-updater-2.html"><i class="fa fa-check"></i><b>2</b> Добавляем боту поддержку команд и фильтры сообщений, класс Updater (2)</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="-updater-2.html"><a href="-updater-2.html#класс-updater"><i class="fa fa-check"></i><b>2.1</b> Класс Updater</a></li>
 <li class="chapter" data-level="2.2" data-path="-updater-2.html"><a href="-updater-2.html#handlers---обработчики"><i class="fa fa-check"></i><b>2.2</b> Handlers - обработчики</a></li>
@@ -183,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10.2" data-path="-updater-2.html"><a href="-updater-2.html#задания-1"><i class="fa fa-check"></i><b>2.10.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="-3.html"><a href="-3.html"><i class="fa fa-check"></i><b>3</b> Как добавить боту поддержку клавиатуры </a>
+<li class="chapter" data-level="3" data-path="-3.html"><a href="-3.html"><i class="fa fa-check"></i><b>3</b> Как добавить боту поддержку клавиатуры (3)</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="-3.html"><a href="-3.html#какие-типы-клавиатур-поддерживает-телеграм-бот"><i class="fa fa-check"></i><b>3.1</b> Какие типы клавиатур поддерживает телеграм бот</a></li>
 <li class="chapter" data-level="3.2" data-path="-3.html"><a href="-3.html#reply-клавиатура"><i class="fa fa-check"></i><b>3.2</b> Reply клавиатура</a></li>
@@ -200,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.2" data-path="-3.html"><a href="-3.html#задания-2"><i class="fa fa-check"></i><b>3.5.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="-4.html"><a href="-4.html"><i class="fa fa-check"></i><b>4</b> Построение последовательного, логического диалога с ботом </a>
+<li class="chapter" data-level="4" data-path="-4.html"><a href="-4.html"><i class="fa fa-check"></i><b>4</b> Построение последовательного, логического диалога с ботом (4)</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="-4.html"><a href="-4.html#введение-1"><i class="fa fa-check"></i><b>4.1</b> Введение</a></li>
 <li class="chapter" data-level="4.2" data-path="-4.html"><a href="-4.html#процесс-построения-бота"><i class="fa fa-check"></i><b>4.2</b> Процесс построения бота</a></li>
@@ -220,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.13.2" data-path="-4.html"><a href="-4.html#задания-3"><i class="fa fa-check"></i><b>4.13.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="-5.html"><a href="-5.html"><i class="fa fa-check"></i><b>5</b> Управление правами пользователей бота </a>
+<li class="chapter" data-level="5" data-path="-5.html"><a href="-5.html"><i class="fa fa-check"></i><b>5</b> Управление правами пользователей бота (5)</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="-5.html"><a href="-5.html#введение-2"><i class="fa fa-check"></i><b>5.1</b> Введение</a></li>
 <li class="chapter" data-level="5.2" data-path="-5.html"><a href="-5.html#ограничиваем-права-пользователя-с-помощью-фильтров-сообщений"><i class="fa fa-check"></i><b>5.2</b> Ограничиваем права пользователя с помощью фильтров сообщений</a>
@@ -240,13 +244,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.2" data-path="-5.html"><a href="-5.html#задания-4"><i class="fa fa-check"></i><b>5.5.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="-6.html"><a href="-6.html"><i class="fa fa-check"></i><b>6</b> Повышаем стабильность работы бота </a>
+<li class="chapter" data-level="6" data-path="-6.html"><a href="-6.html"><i class="fa fa-check"></i><b>6</b> Повышаем стабильность работы бота (6)</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="-6.html"><a href="-6.html#конструкция-trycatch"><i class="fa fa-check"></i><b>6.1</b> Конструкция tryCatch()</a></li>
 <li class="chapter" data-level="6.2" data-path="-6.html"><a href="-6.html#логика-работы-конструкции-trycatch"><i class="fa fa-check"></i><b>6.2</b> Логика работы конструкции tryCatch()</a></li>
 <li class="chapter" data-level="6.3" data-path="-6.html"><a href="-6.html#используем-trycatch-внутри-бота"><i class="fa fa-check"></i><b>6.3</b> Используем tryCatch() внутри бота</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач </a>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач (tasks)</a>
 <ul>
 <li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-1.1"><i class="fa fa-check"></i>Задача 1.1</a></li>
 <li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-2.1"><i class="fa fa-check"></i>Задача 2.1</a></li>
@@ -277,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Разработка telegram ботов на языке R</h1>
 <p class="author"><em>Алексей Селезнёв</em></p>
-<p class="date"><em>2020-11-18</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>2021-08-26</em></p>
 </div>
 <div id="введение" class="section level1 unnumbered">
 <h1>Введение</h1>
@@ -360,6 +364,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -379,7 +384,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["build_telegram_bot_using_r.pdf", "build_telegram_bot_using_r.epub"],
 "toc": {
 "collapse": "subsection"
 }

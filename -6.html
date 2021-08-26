@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Глава 6 Повышаем стабильность работы бота  | Разработка telegram ботов на языке R</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Глава 6 Повышаем стабильность работы бота | Разработка telegram ботов на языке R</title>
+  <meta name="description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Глава 6 Повышаем стабильность работы бота  | Разработка telegram ботов на языке R" />
+  <meta property="og:title" content="Глава 6 Повышаем стабильность работы бота | Разработка telegram ботов на языке R" />
   <meta property="og:type" content="book" />
   
-  
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:image" content="/cover.png" />
+  <meta property="og:description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="github-repo" content="selesnow/build_telegram_bot_using_r" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Глава 6 Повышаем стабильность работы бота  | Разработка telegram ботов на языке R" />
+  <meta name="twitter:title" content="Глава 6 Повышаем стабильность работы бота | Разработка telegram ботов на языке R" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  
+  <meta name="twitter:description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="twitter:image" content="/cover.png" />
 
 <meta name="author" content="Алексей Селезнёв" />
 
 
-<meta name="date" content="2020-11-18" />
+<meta name="date" content="2021-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="-5.html"/>
 <link rel="next" href="-tasks.html"/>
-<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script>
 <script>
@@ -66,6 +68,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -126,6 +129,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -150,7 +154,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#правки-и-предложения"><i class="fa fa-check"></i>Правки и предложения</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#поддержать-проект"><i class="fa fa-check"></i>Поддержать проект</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="-telegram-1.html"><a href="-telegram-1.html"><i class="fa fa-check"></i><b>1</b> Создаём бота, и отправляем с его помощью сообщения в telegram </a>
+<li class="chapter" data-level="1" data-path="-telegram-1.html"><a href="-telegram-1.html"><i class="fa fa-check"></i><b>1</b> Создаём бота, и отправляем с его помощью сообщения в telegram (1)</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="-telegram-1.html"><a href="-telegram-1.html#создание-телеграм-бота"><i class="fa fa-check"></i><b>1.1</b> Создание телеграм бота</a></li>
 <li class="chapter" data-level="1.2" data-path="-telegram-1.html"><a href="-telegram-1.html#установка-пакета-для-работы-с-телеграм-ботом-на-r"><i class="fa fa-check"></i><b>1.2</b> Установка пакета для работы с телеграм ботом на R</a></li>
@@ -166,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.9.2" data-path="-telegram-1.html"><a href="-telegram-1.html#задания"><i class="fa fa-check"></i><b>1.9.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="-updater-2.html"><a href="-updater-2.html"><i class="fa fa-check"></i><b>2</b> Добавляем боту поддержку команд и фильтры сообщений, класс Updater </a>
+<li class="chapter" data-level="2" data-path="-updater-2.html"><a href="-updater-2.html"><i class="fa fa-check"></i><b>2</b> Добавляем боту поддержку команд и фильтры сообщений, класс Updater (2)</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="-updater-2.html"><a href="-updater-2.html#класс-updater"><i class="fa fa-check"></i><b>2.1</b> Класс Updater</a></li>
 <li class="chapter" data-level="2.2" data-path="-updater-2.html"><a href="-updater-2.html#handlers---обработчики"><i class="fa fa-check"></i><b>2.2</b> Handlers - обработчики</a></li>
@@ -183,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10.2" data-path="-updater-2.html"><a href="-updater-2.html#задания-1"><i class="fa fa-check"></i><b>2.10.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="-3.html"><a href="-3.html"><i class="fa fa-check"></i><b>3</b> Как добавить боту поддержку клавиатуры </a>
+<li class="chapter" data-level="3" data-path="-3.html"><a href="-3.html"><i class="fa fa-check"></i><b>3</b> Как добавить боту поддержку клавиатуры (3)</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="-3.html"><a href="-3.html#какие-типы-клавиатур-поддерживает-телеграм-бот"><i class="fa fa-check"></i><b>3.1</b> Какие типы клавиатур поддерживает телеграм бот</a></li>
 <li class="chapter" data-level="3.2" data-path="-3.html"><a href="-3.html#reply-клавиатура"><i class="fa fa-check"></i><b>3.2</b> Reply клавиатура</a></li>
@@ -200,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.2" data-path="-3.html"><a href="-3.html#задания-2"><i class="fa fa-check"></i><b>3.5.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="-4.html"><a href="-4.html"><i class="fa fa-check"></i><b>4</b> Построение последовательного, логического диалога с ботом </a>
+<li class="chapter" data-level="4" data-path="-4.html"><a href="-4.html"><i class="fa fa-check"></i><b>4</b> Построение последовательного, логического диалога с ботом (4)</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="-4.html"><a href="-4.html#введение-1"><i class="fa fa-check"></i><b>4.1</b> Введение</a></li>
 <li class="chapter" data-level="4.2" data-path="-4.html"><a href="-4.html#процесс-построения-бота"><i class="fa fa-check"></i><b>4.2</b> Процесс построения бота</a></li>
@@ -220,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.13.2" data-path="-4.html"><a href="-4.html#задания-3"><i class="fa fa-check"></i><b>4.13.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="-5.html"><a href="-5.html"><i class="fa fa-check"></i><b>5</b> Управление правами пользователей бота </a>
+<li class="chapter" data-level="5" data-path="-5.html"><a href="-5.html"><i class="fa fa-check"></i><b>5</b> Управление правами пользователей бота (5)</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="-5.html"><a href="-5.html#введение-2"><i class="fa fa-check"></i><b>5.1</b> Введение</a></li>
 <li class="chapter" data-level="5.2" data-path="-5.html"><a href="-5.html#ограничиваем-права-пользователя-с-помощью-фильтров-сообщений"><i class="fa fa-check"></i><b>5.2</b> Ограничиваем права пользователя с помощью фильтров сообщений</a>
@@ -246,7 +250,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="-6.html"><a href="-6.html#логика-работы-конструкции-trycatch"><i class="fa fa-check"></i><b>6.2</b> Логика работы конструкции tryCatch()</a></li>
 <li class="chapter" data-level="6.3" data-path="-6.html"><a href="-6.html#используем-trycatch-внутри-бота"><i class="fa fa-check"></i><b>6.3</b> Используем tryCatch() внутри бота</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач </a>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач (tasks)</a>
 <ul>
 <li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-1.1"><i class="fa fa-check"></i>Задача 1.1</a></li>
 <li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-2.1"><i class="fa fa-check"></i>Задача 2.1</a></li>
@@ -281,21 +285,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="конструкция-trycatch" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Конструкция tryCatch()</h2>
 <p>Повысить работоспособность вашего бота поможет конструкция <code>tryCatch()</code>. Данная конструкция имеет следующий синтаксис:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="-6.html#cb66-1" aria-hidden="true"></a><span class="kw">tryCatch</span>(<span class="dt">expr =</span> {</span>
-<span id="cb66-2"><a href="-6.html#cb66-2" aria-hidden="true"></a>  </span>
-<span id="cb66-3"><a href="-6.html#cb66-3" aria-hidden="true"></a>    <span class="op">~</span><span class="st"> </span>Тут код который будет выполняться <span class="op">~</span></span>
-<span id="cb66-4"><a href="-6.html#cb66-4" aria-hidden="true"></a><span class="st">  </span></span>
-<span id="cb66-5"><a href="-6.html#cb66-5" aria-hidden="true"></a>}, </span>
-<span id="cb66-6"><a href="-6.html#cb66-6" aria-hidden="true"></a>  <span class="dt">error =</span> <span class="cf">function</span>(err) {</span>
-<span id="cb66-7"><a href="-6.html#cb66-7" aria-hidden="true"></a>    </span>
-<span id="cb66-8"><a href="-6.html#cb66-8" aria-hidden="true"></a>    <span class="op">~</span><span class="st"> </span>код который будет выполняться в случае возникновения ошибки в блоке expr <span class="op">~</span></span>
-<span id="cb66-9"><a href="-6.html#cb66-9" aria-hidden="true"></a><span class="st">    </span></span>
-<span id="cb66-10"><a href="-6.html#cb66-10" aria-hidden="true"></a><span class="st">  </span>}, </span>
-<span id="cb66-11"><a href="-6.html#cb66-11" aria-hidden="true"></a>  <span class="dt">finally =</span> {</span>
-<span id="cb66-12"><a href="-6.html#cb66-12" aria-hidden="true"></a>    </span>
-<span id="cb66-13"><a href="-6.html#cb66-13" aria-hidden="true"></a>    <span class="op">~</span><span class="st"> </span>Код который будет выполняться в любом случае, не зависимо от того закончилось выражение expr ошибкой или нет <span class="op">~</span></span>
-<span id="cb66-14"><a href="-6.html#cb66-14" aria-hidden="true"></a><span class="st">    </span></span>
-<span id="cb66-15"><a href="-6.html#cb66-15" aria-hidden="true"></a><span class="st">  </span>})</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="-6.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>(<span class="at">expr =</span> {</span>
+<span id="cb66-2"><a href="-6.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb66-3"><a href="-6.html#cb66-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> Тут код который будет выполняться <span class="sc">~</span></span>
+<span id="cb66-4"><a href="-6.html#cb66-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb66-5"><a href="-6.html#cb66-5" aria-hidden="true" tabindex="-1"></a>}, </span>
+<span id="cb66-6"><a href="-6.html#cb66-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">error =</span> <span class="cf">function</span>(err) {</span>
+<span id="cb66-7"><a href="-6.html#cb66-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb66-8"><a href="-6.html#cb66-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> код который будет выполняться в случае возникновения ошибки в блоке expr <span class="sc">~</span></span>
+<span id="cb66-9"><a href="-6.html#cb66-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb66-10"><a href="-6.html#cb66-10" aria-hidden="true" tabindex="-1"></a>  }, </span>
+<span id="cb66-11"><a href="-6.html#cb66-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">finally =</span> {</span>
+<span id="cb66-12"><a href="-6.html#cb66-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb66-13"><a href="-6.html#cb66-13" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> Код который будет выполняться в любом случае, не зависимо от того закончилось выражение expr ошибкой или нет <span class="sc">~</span></span>
+<span id="cb66-14"><a href="-6.html#cb66-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb66-15"><a href="-6.html#cb66-15" aria-hidden="true" tabindex="-1"></a>  })</span></code></pre></div>
 </div>
 <div id="логика-работы-конструкции-trycatch" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Логика работы конструкции tryCatch()</h2>
@@ -310,48 +314,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>В разработке ботов слабым местом является пуллинг, т.е. метод <code>updater$start_polling()</code>. Пуллинг - это бесконечный цикл, именно он выполняется всё время работы бота, и даёт сбой если пользователь неправильно использовал бота, или API Telegram не отправил вам ответ. Соответственно если завернуть пуллинг в <code>tryCatch()</code>, и перезапускать вашего бота в бота в блоке <code>finally</code> то при любой ошибке он будет самостоятельно перезапускаться.</p>
 <p>Перед перезапуском бота не забывайте очистить его апдейты, что бы избавиться от ошибки, которая вызвала падение бота.</p>
 <p>Выглядеть такой пуллинг будет следующим образом:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="-6.html#cb67-1" aria-hidden="true"></a><span class="kw">tryCatch</span>(</span>
-<span id="cb67-2"><a href="-6.html#cb67-2" aria-hidden="true"></a>  </span>
-<span id="cb67-3"><a href="-6.html#cb67-3" aria-hidden="true"></a>  <span class="co"># запускаем пуллинг</span></span>
-<span id="cb67-4"><a href="-6.html#cb67-4" aria-hidden="true"></a>  <span class="dt">expr =</span> updater<span class="op">$</span><span class="kw">start_polling</span>(), </span>
-<span id="cb67-5"><a href="-6.html#cb67-5" aria-hidden="true"></a>  </span>
-<span id="cb67-6"><a href="-6.html#cb67-6" aria-hidden="true"></a>  <span class="co"># действия при ошибке пуллинга</span></span>
-<span id="cb67-7"><a href="-6.html#cb67-7" aria-hidden="true"></a>  <span class="dt">error =</span> <span class="cf">function</span>(err) {</span>
-<span id="cb67-8"><a href="-6.html#cb67-8" aria-hidden="true"></a>    </span>
-<span id="cb67-9"><a href="-6.html#cb67-9" aria-hidden="true"></a>    <span class="co"># бот для оповещения</span></span>
-<span id="cb67-10"><a href="-6.html#cb67-10" aria-hidden="true"></a>    bot &lt;-<span class="st"> </span><span class="kw">Bot</span>(<span class="dt">token =</span> <span class="kw">bot_token</span>(<span class="st">&quot;Токен вашего бота&quot;</span>))</span>
-<span id="cb67-11"><a href="-6.html#cb67-11" aria-hidden="true"></a>    </span>
-<span id="cb67-12"><a href="-6.html#cb67-12" aria-hidden="true"></a>    <span class="co"># чат для оповещения</span></span>
-<span id="cb67-13"><a href="-6.html#cb67-13" aria-hidden="true"></a>    chat_id &lt;-<span class="st"> &quot;Идентификатор чата в который необходимо отправить сообщение&quot;</span></span>
-<span id="cb67-14"><a href="-6.html#cb67-14" aria-hidden="true"></a>    </span>
-<span id="cb67-15"><a href="-6.html#cb67-15" aria-hidden="true"></a>    <span class="co"># сообщение</span></span>
-<span id="cb67-16"><a href="-6.html#cb67-16" aria-hidden="true"></a>    msg &lt;-<span class="st"> </span><span class="kw">str_glue</span>(<span class="st">&quot;*Бот упал*: Ошибка (_{err$message}_).&quot;</span>)</span>
-<span id="cb67-17"><a href="-6.html#cb67-17" aria-hidden="true"></a>    </span>
-<span id="cb67-18"><a href="-6.html#cb67-18" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> chat_id, </span>
-<span id="cb67-19"><a href="-6.html#cb67-19" aria-hidden="true"></a>                    <span class="dt">text =</span> msg,</span>
-<span id="cb67-20"><a href="-6.html#cb67-20" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&#39;Markdown&#39;</span>)</span>
-<span id="cb67-21"><a href="-6.html#cb67-21" aria-hidden="true"></a>    </span>
-<span id="cb67-22"><a href="-6.html#cb67-22" aria-hidden="true"></a>    <span class="co"># очищаем полученный апдейт бота, который вызвал ошибку</span></span>
-<span id="cb67-23"><a href="-6.html#cb67-23" aria-hidden="true"></a>    updater<span class="op">$</span>bot<span class="op">$</span><span class="kw">clean_updates</span>()</span>
-<span id="cb67-24"><a href="-6.html#cb67-24" aria-hidden="true"></a>    </span>
-<span id="cb67-25"><a href="-6.html#cb67-25" aria-hidden="true"></a>    <span class="co"># информация о том, что бот будет перезапущен</span></span>
-<span id="cb67-26"><a href="-6.html#cb67-26" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> chat_id, </span>
-<span id="cb67-27"><a href="-6.html#cb67-27" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">str_glue</span>(<span class="st">&#39;*Перезапускаю бота* в {Sys.time()}&#39;</span>),</span>
-<span id="cb67-28"><a href="-6.html#cb67-28" aria-hidden="true"></a>                    <span class="dt">parse_mode =</span> <span class="st">&#39;Markdown&#39;</span>)</span>
-<span id="cb67-29"><a href="-6.html#cb67-29" aria-hidden="true"></a></span>
-<span id="cb67-30"><a href="-6.html#cb67-30" aria-hidden="true"></a>    </span>
-<span id="cb67-31"><a href="-6.html#cb67-31" aria-hidden="true"></a>  }, </span>
-<span id="cb67-32"><a href="-6.html#cb67-32" aria-hidden="true"></a>  <span class="co"># действия которые будут выполненны в любом случае</span></span>
-<span id="cb67-33"><a href="-6.html#cb67-33" aria-hidden="true"></a>  <span class="dt">finally =</span> {</span>
-<span id="cb67-34"><a href="-6.html#cb67-34" aria-hidden="true"></a>    </span>
-<span id="cb67-35"><a href="-6.html#cb67-35" aria-hidden="true"></a>    <span class="co"># останавливаем пулинг</span></span>
-<span id="cb67-36"><a href="-6.html#cb67-36" aria-hidden="true"></a>    updater<span class="op">$</span><span class="kw">stop_polling</span>()</span>
-<span id="cb67-37"><a href="-6.html#cb67-37" aria-hidden="true"></a>        </span>
-<span id="cb67-38"><a href="-6.html#cb67-38" aria-hidden="true"></a>    <span class="co"># перезапускаем скрипт бота</span></span>
-<span id="cb67-39"><a href="-6.html#cb67-39" aria-hidden="true"></a>    <span class="kw">source</span>(<span class="st">&#39;C:</span><span class="ch">\\</span><span class="st">telegram_bot</span><span class="ch">\\</span><span class="st">my_bot.R&#39;</span>) </span>
-<span id="cb67-40"><a href="-6.html#cb67-40" aria-hidden="true"></a></span>
-<span id="cb67-41"><a href="-6.html#cb67-41" aria-hidden="true"></a>  }</span>
-<span id="cb67-42"><a href="-6.html#cb67-42" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="-6.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>(</span>
+<span id="cb67-2"><a href="-6.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb67-3"><a href="-6.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># запускаем пуллинг</span></span>
+<span id="cb67-4"><a href="-6.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> updater<span class="sc">$</span><span class="fu">start_polling</span>(), </span>
+<span id="cb67-5"><a href="-6.html#cb67-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb67-6"><a href="-6.html#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># действия при ошибке пуллинга</span></span>
+<span id="cb67-7"><a href="-6.html#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">error =</span> <span class="cf">function</span>(err) {</span>
+<span id="cb67-8"><a href="-6.html#cb67-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb67-9"><a href="-6.html#cb67-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># бот для оповещения</span></span>
+<span id="cb67-10"><a href="-6.html#cb67-10" aria-hidden="true" tabindex="-1"></a>    bot <span class="ot">&lt;-</span> <span class="fu">Bot</span>(<span class="at">token =</span> <span class="fu">bot_token</span>(<span class="st">&quot;Токен вашего бота&quot;</span>))</span>
+<span id="cb67-11"><a href="-6.html#cb67-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb67-12"><a href="-6.html#cb67-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># чат для оповещения</span></span>
+<span id="cb67-13"><a href="-6.html#cb67-13" aria-hidden="true" tabindex="-1"></a>    chat_id <span class="ot">&lt;-</span> <span class="st">&quot;Идентификатор чата в который необходимо отправить сообщение&quot;</span></span>
+<span id="cb67-14"><a href="-6.html#cb67-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb67-15"><a href="-6.html#cb67-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># сообщение</span></span>
+<span id="cb67-16"><a href="-6.html#cb67-16" aria-hidden="true" tabindex="-1"></a>    msg <span class="ot">&lt;-</span> <span class="fu">str_glue</span>(<span class="st">&quot;*Бот упал*: Ошибка (_{err$message}_).&quot;</span>)</span>
+<span id="cb67-17"><a href="-6.html#cb67-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb67-18"><a href="-6.html#cb67-18" aria-hidden="true" tabindex="-1"></a>    bot<span class="sc">$</span><span class="fu">sendMessage</span>(<span class="at">chat_id =</span> chat_id, </span>
+<span id="cb67-19"><a href="-6.html#cb67-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">text =</span> msg,</span>
+<span id="cb67-20"><a href="-6.html#cb67-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">parse_mode =</span> <span class="st">&#39;Markdown&#39;</span>)</span>
+<span id="cb67-21"><a href="-6.html#cb67-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb67-22"><a href="-6.html#cb67-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># очищаем полученный апдейт бота, который вызвал ошибку</span></span>
+<span id="cb67-23"><a href="-6.html#cb67-23" aria-hidden="true" tabindex="-1"></a>    updater<span class="sc">$</span>bot<span class="sc">$</span><span class="fu">clean_updates</span>()</span>
+<span id="cb67-24"><a href="-6.html#cb67-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb67-25"><a href="-6.html#cb67-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># информация о том, что бот будет перезапущен</span></span>
+<span id="cb67-26"><a href="-6.html#cb67-26" aria-hidden="true" tabindex="-1"></a>    bot<span class="sc">$</span><span class="fu">sendMessage</span>(<span class="at">chat_id =</span> chat_id, </span>
+<span id="cb67-27"><a href="-6.html#cb67-27" aria-hidden="true" tabindex="-1"></a>                    <span class="at">text =</span> <span class="fu">str_glue</span>(<span class="st">&#39;*Перезапускаю бота* в {Sys.time()}&#39;</span>),</span>
+<span id="cb67-28"><a href="-6.html#cb67-28" aria-hidden="true" tabindex="-1"></a>                    <span class="at">parse_mode =</span> <span class="st">&#39;Markdown&#39;</span>)</span>
+<span id="cb67-29"><a href="-6.html#cb67-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-30"><a href="-6.html#cb67-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb67-31"><a href="-6.html#cb67-31" aria-hidden="true" tabindex="-1"></a>  }, </span>
+<span id="cb67-32"><a href="-6.html#cb67-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># действия которые будут выполненны в любом случае</span></span>
+<span id="cb67-33"><a href="-6.html#cb67-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">finally =</span> {</span>
+<span id="cb67-34"><a href="-6.html#cb67-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb67-35"><a href="-6.html#cb67-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># останавливаем пулинг</span></span>
+<span id="cb67-36"><a href="-6.html#cb67-36" aria-hidden="true" tabindex="-1"></a>    updater<span class="sc">$</span><span class="fu">stop_polling</span>()</span>
+<span id="cb67-37"><a href="-6.html#cb67-37" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb67-38"><a href="-6.html#cb67-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># перезапускаем скрипт бота</span></span>
+<span id="cb67-39"><a href="-6.html#cb67-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">source</span>(<span class="st">&#39;C:</span><span class="sc">\\</span><span class="st">telegram_bot</span><span class="sc">\\</span><span class="st">my_bot.R&#39;</span>) </span>
+<span id="cb67-40"><a href="-6.html#cb67-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-41"><a href="-6.html#cb67-41" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb67-42"><a href="-6.html#cb67-42" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>В приведённом выше коде вам необходимо подставить токен созданного вами бота, и указать ID чата, в который бот будет отправлять уведомление о падении пуллинга.</p>
 <p>В блок <code>expr</code> мы завернули процесс пуллинга, таким образом он постоянно контролируется конструкцией <code>tryCatch</code>.</p>
 <p>Далее в блок <code>error</code> мы передали безымянную функцию, которая принимает всего один аргумент <code>err</code>, т.е. саму ошибку. Сообщение об ошибке мы получаем через <code>err$message</code>, и отправляем в указанный чат. С помощью <code>updater$bot$clean_updates()</code> мы очищаем очередь апдейтов бота, т.к. последний апдейт вызвал ошибку и падение нашего бота.</p>
@@ -390,6 +394,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -409,7 +414,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["build_telegram_bot_using_r.pdf", "build_telegram_bot_using_r.epub"],
 "toc": {
 "collapse": "subsection"
 }

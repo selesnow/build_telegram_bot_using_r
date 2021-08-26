@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Глава 3 Как добавить боту поддержку клавиатуры  | Разработка telegram ботов на языке R</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Глава 3 Как добавить боту поддержку клавиатуры | Разработка telegram ботов на языке R</title>
+  <meta name="description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Глава 3 Как добавить боту поддержку клавиатуры  | Разработка telegram ботов на языке R" />
   <meta property="og:type" content="book" />
   
-  
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:image" content="/cover.png" />
+  <meta property="og:description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="github-repo" content="selesnow/build_telegram_bot_using_r" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Глава 3 Как добавить боту поддержку клавиатуры  | Разработка telegram ботов на языке R" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  
+  <meta name="twitter:description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="twitter:image" content="/cover.png" />
 
 <meta name="author" content="Алексей Селезнёв" />
 
 
-<meta name="date" content="2020-11-18" />
+<meta name="date" content="2021-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="-updater-2.html"/>
 <link rel="next" href="-4.html"/>
-<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script>
 <script>
@@ -66,6 +68,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -126,6 +129,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -150,7 +154,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#правки-и-предложения"><i class="fa fa-check"></i>Правки и предложения</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#поддержать-проект"><i class="fa fa-check"></i>Поддержать проект</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="-telegram-1.html"><a href="-telegram-1.html"><i class="fa fa-check"></i><b>1</b> Создаём бота, и отправляем с его помощью сообщения в telegram </a>
+<li class="chapter" data-level="1" data-path="-telegram-1.html"><a href="-telegram-1.html"><i class="fa fa-check"></i><b>1</b> Создаём бота, и отправляем с его помощью сообщения в telegram (1)</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="-telegram-1.html"><a href="-telegram-1.html#создание-телеграм-бота"><i class="fa fa-check"></i><b>1.1</b> Создание телеграм бота</a></li>
 <li class="chapter" data-level="1.2" data-path="-telegram-1.html"><a href="-telegram-1.html#установка-пакета-для-работы-с-телеграм-ботом-на-r"><i class="fa fa-check"></i><b>1.2</b> Установка пакета для работы с телеграм ботом на R</a></li>
@@ -166,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.9.2" data-path="-telegram-1.html"><a href="-telegram-1.html#задания"><i class="fa fa-check"></i><b>1.9.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="-updater-2.html"><a href="-updater-2.html"><i class="fa fa-check"></i><b>2</b> Добавляем боту поддержку команд и фильтры сообщений, класс Updater </a>
+<li class="chapter" data-level="2" data-path="-updater-2.html"><a href="-updater-2.html"><i class="fa fa-check"></i><b>2</b> Добавляем боту поддержку команд и фильтры сообщений, класс Updater (2)</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="-updater-2.html"><a href="-updater-2.html#класс-updater"><i class="fa fa-check"></i><b>2.1</b> Класс Updater</a></li>
 <li class="chapter" data-level="2.2" data-path="-updater-2.html"><a href="-updater-2.html#handlers---обработчики"><i class="fa fa-check"></i><b>2.2</b> Handlers - обработчики</a></li>
@@ -200,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.2" data-path="-3.html"><a href="-3.html#задания-2"><i class="fa fa-check"></i><b>3.5.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="-4.html"><a href="-4.html"><i class="fa fa-check"></i><b>4</b> Построение последовательного, логического диалога с ботом </a>
+<li class="chapter" data-level="4" data-path="-4.html"><a href="-4.html"><i class="fa fa-check"></i><b>4</b> Построение последовательного, логического диалога с ботом (4)</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="-4.html"><a href="-4.html#введение-1"><i class="fa fa-check"></i><b>4.1</b> Введение</a></li>
 <li class="chapter" data-level="4.2" data-path="-4.html"><a href="-4.html#процесс-построения-бота"><i class="fa fa-check"></i><b>4.2</b> Процесс построения бота</a></li>
@@ -220,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.13.2" data-path="-4.html"><a href="-4.html#задания-3"><i class="fa fa-check"></i><b>4.13.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="-5.html"><a href="-5.html"><i class="fa fa-check"></i><b>5</b> Управление правами пользователей бота </a>
+<li class="chapter" data-level="5" data-path="-5.html"><a href="-5.html"><i class="fa fa-check"></i><b>5</b> Управление правами пользователей бота (5)</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="-5.html"><a href="-5.html#введение-2"><i class="fa fa-check"></i><b>5.1</b> Введение</a></li>
 <li class="chapter" data-level="5.2" data-path="-5.html"><a href="-5.html#ограничиваем-права-пользователя-с-помощью-фильтров-сообщений"><i class="fa fa-check"></i><b>5.2</b> Ограничиваем права пользователя с помощью фильтров сообщений</a>
@@ -240,13 +244,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.2" data-path="-5.html"><a href="-5.html#задания-4"><i class="fa fa-check"></i><b>5.5.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="-6.html"><a href="-6.html"><i class="fa fa-check"></i><b>6</b> Повышаем стабильность работы бота </a>
+<li class="chapter" data-level="6" data-path="-6.html"><a href="-6.html"><i class="fa fa-check"></i><b>6</b> Повышаем стабильность работы бота (6)</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="-6.html"><a href="-6.html#конструкция-trycatch"><i class="fa fa-check"></i><b>6.1</b> Конструкция tryCatch()</a></li>
 <li class="chapter" data-level="6.2" data-path="-6.html"><a href="-6.html#логика-работы-конструкции-trycatch"><i class="fa fa-check"></i><b>6.2</b> Логика работы конструкции tryCatch()</a></li>
 <li class="chapter" data-level="6.3" data-path="-6.html"><a href="-6.html#используем-trycatch-внутри-бота"><i class="fa fa-check"></i><b>6.3</b> Используем tryCatch() внутри бота</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач </a>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач (tasks)</a>
 <ul>
 <li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-1.1"><i class="fa fa-check"></i>Задача 1.1</a></li>
 <li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-2.1"><i class="fa fa-check"></i>Задача 2.1</a></li>
@@ -291,23 +295,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="reply-клавиатура" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Reply клавиатура</h2>
 <p>Как я уже писал выше, это основная клавиатура управления ботом.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="-3.html#cb29-1" aria-hidden="true"></a>bot &lt;-<span class="st"> </span><span class="kw">Bot</span>(<span class="dt">token =</span> <span class="st">&quot;TOKEN&quot;</span>)</span>
-<span id="cb29-2"><a href="-3.html#cb29-2" aria-hidden="true"></a>chat_id &lt;-<span class="st"> &quot;CHAT_ID&quot;</span></span>
-<span id="cb29-3"><a href="-3.html#cb29-3" aria-hidden="true"></a></span>
-<span id="cb29-4"><a href="-3.html#cb29-4" aria-hidden="true"></a><span class="co"># Create Custom Keyboard</span></span>
-<span id="cb29-5"><a href="-3.html#cb29-5" aria-hidden="true"></a>text &lt;-<span class="st"> &quot;Aren&#39;t those custom keyboards cool?&quot;</span></span>
-<span id="cb29-6"><a href="-3.html#cb29-6" aria-hidden="true"></a>RKM &lt;-<span class="st"> </span><span class="kw">ReplyKeyboardMarkup</span>(</span>
-<span id="cb29-7"><a href="-3.html#cb29-7" aria-hidden="true"></a>  <span class="dt">keyboard =</span> <span class="kw">list</span>(</span>
-<span id="cb29-8"><a href="-3.html#cb29-8" aria-hidden="true"></a>    <span class="kw">list</span>(<span class="kw">KeyboardButton</span>(<span class="st">&quot;Yes, they certainly are!&quot;</span>)),</span>
-<span id="cb29-9"><a href="-3.html#cb29-9" aria-hidden="true"></a>    <span class="kw">list</span>(<span class="kw">KeyboardButton</span>(<span class="st">&quot;I&#39;m not quite sure&quot;</span>)),</span>
-<span id="cb29-10"><a href="-3.html#cb29-10" aria-hidden="true"></a>    <span class="kw">list</span>(<span class="kw">KeyboardButton</span>(<span class="st">&quot;No...&quot;</span>))</span>
-<span id="cb29-11"><a href="-3.html#cb29-11" aria-hidden="true"></a>  ),</span>
-<span id="cb29-12"><a href="-3.html#cb29-12" aria-hidden="true"></a>  <span class="dt">resize_keyboard =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb29-13"><a href="-3.html#cb29-13" aria-hidden="true"></a>  <span class="dt">one_time_keyboard =</span> <span class="ot">TRUE</span></span>
-<span id="cb29-14"><a href="-3.html#cb29-14" aria-hidden="true"></a>)</span>
-<span id="cb29-15"><a href="-3.html#cb29-15" aria-hidden="true"></a></span>
-<span id="cb29-16"><a href="-3.html#cb29-16" aria-hidden="true"></a><span class="co"># Send Custom Keyboard</span></span>
-<span id="cb29-17"><a href="-3.html#cb29-17" aria-hidden="true"></a>bot<span class="op">$</span><span class="kw">sendMessage</span>(chat_id, text, <span class="dt">reply_markup =</span> RKM)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="-3.html#cb29-1" aria-hidden="true" tabindex="-1"></a>bot <span class="ot">&lt;-</span> <span class="fu">Bot</span>(<span class="at">token =</span> <span class="st">&quot;TOKEN&quot;</span>)</span>
+<span id="cb29-2"><a href="-3.html#cb29-2" aria-hidden="true" tabindex="-1"></a>chat_id <span class="ot">&lt;-</span> <span class="st">&quot;CHAT_ID&quot;</span></span>
+<span id="cb29-3"><a href="-3.html#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="-3.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Custom Keyboard</span></span>
+<span id="cb29-5"><a href="-3.html#cb29-5" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="st">&quot;Aren&#39;t those custom keyboards cool?&quot;</span></span>
+<span id="cb29-6"><a href="-3.html#cb29-6" aria-hidden="true" tabindex="-1"></a>RKM <span class="ot">&lt;-</span> <span class="fu">ReplyKeyboardMarkup</span>(</span>
+<span id="cb29-7"><a href="-3.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">keyboard =</span> <span class="fu">list</span>(</span>
+<span id="cb29-8"><a href="-3.html#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="fu">KeyboardButton</span>(<span class="st">&quot;Yes, they certainly are!&quot;</span>)),</span>
+<span id="cb29-9"><a href="-3.html#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="fu">KeyboardButton</span>(<span class="st">&quot;I&#39;m not quite sure&quot;</span>)),</span>
+<span id="cb29-10"><a href="-3.html#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="fu">KeyboardButton</span>(<span class="st">&quot;No...&quot;</span>))</span>
+<span id="cb29-11"><a href="-3.html#cb29-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb29-12"><a href="-3.html#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">resize_keyboard =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb29-13"><a href="-3.html#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">one_time_keyboard =</span> <span class="cn">TRUE</span></span>
+<span id="cb29-14"><a href="-3.html#cb29-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-15"><a href="-3.html#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="-3.html#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Send Custom Keyboard</span></span>
+<span id="cb29-17"><a href="-3.html#cb29-17" aria-hidden="true" tabindex="-1"></a>bot<span class="sc">$</span><span class="fu">sendMessage</span>(chat_id, text, <span class="at">reply_markup =</span> RKM)</span></code></pre></div>
 <p>Выше приведён пример из официальной справки пакета <code>telegram.bot</code>. Для создания клавиатуры используется функция <code>ReplyKeyboardMarkup()</code>, которая в свою очередь принимает список списков кнопок, которые создаются функцией <code>KeyboardButton()</code>.</p>
 <p>Почему в <code>ReplyKeyboardMarkup()</code> необходимо передавать не просто список, а список списков? Дело в том, что вы передаёте основной список, и в нём отдельными списками вы задаёте каждый ряд кнопок, т.к. в один ряд можно расположить несколько кнопок.</p>
 <p>Аргумент <code>resize_keyboard</code> позволяет автоматически подбирать оптимальный размер кнопок клавиатуры, а аргумент <code>one_time_keyboard</code> позволяет скрывать клавиатуру после каждого нажатия на кнопку.</p>
@@ -315,101 +319,101 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 * Чат ID - Запросить чат ID диалога с ботом
 * Моё имя - Запросить своё имя
 * Мой логин - Запросить своё имя пользователя в телеграм</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="-3.html#cb30-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
-<span id="cb30-2"><a href="-3.html#cb30-2" aria-hidden="true"></a></span>
-<span id="cb30-3"><a href="-3.html#cb30-3" aria-hidden="true"></a><span class="co"># создаём экземпляр класса Updater</span></span>
-<span id="cb30-4"><a href="-3.html#cb30-4" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
-<span id="cb30-5"><a href="-3.html#cb30-5" aria-hidden="true"></a></span>
-<span id="cb30-6"><a href="-3.html#cb30-6" aria-hidden="true"></a><span class="co"># создаём методы</span></span>
-<span id="cb30-7"><a href="-3.html#cb30-7" aria-hidden="true"></a><span class="co">## метод для запуска клавиатуры</span></span>
-<span id="cb30-8"><a href="-3.html#cb30-8" aria-hidden="true"></a>start &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb30-9"><a href="-3.html#cb30-9" aria-hidden="true"></a></span>
-<span id="cb30-10"><a href="-3.html#cb30-10" aria-hidden="true"></a>  <span class="co"># создаём клавиатуру</span></span>
-<span id="cb30-11"><a href="-3.html#cb30-11" aria-hidden="true"></a>  RKM &lt;-<span class="st"> </span><span class="kw">ReplyKeyboardMarkup</span>(</span>
-<span id="cb30-12"><a href="-3.html#cb30-12" aria-hidden="true"></a>    <span class="dt">keyboard =</span> <span class="kw">list</span>(</span>
-<span id="cb30-13"><a href="-3.html#cb30-13" aria-hidden="true"></a>      <span class="kw">list</span>(<span class="kw">KeyboardButton</span>(<span class="st">&quot;Чат ID&quot;</span>)),</span>
-<span id="cb30-14"><a href="-3.html#cb30-14" aria-hidden="true"></a>      <span class="kw">list</span>(<span class="kw">KeyboardButton</span>(<span class="st">&quot;Моё имя&quot;</span>)),</span>
-<span id="cb30-15"><a href="-3.html#cb30-15" aria-hidden="true"></a>      <span class="kw">list</span>(<span class="kw">KeyboardButton</span>(<span class="st">&quot;Мой логин&quot;</span>))</span>
-<span id="cb30-16"><a href="-3.html#cb30-16" aria-hidden="true"></a>    ),</span>
-<span id="cb30-17"><a href="-3.html#cb30-17" aria-hidden="true"></a>    <span class="dt">resize_keyboard =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb30-18"><a href="-3.html#cb30-18" aria-hidden="true"></a>    <span class="dt">one_time_keyboard =</span> <span class="ot">TRUE</span></span>
-<span id="cb30-19"><a href="-3.html#cb30-19" aria-hidden="true"></a>  )</span>
-<span id="cb30-20"><a href="-3.html#cb30-20" aria-hidden="true"></a></span>
-<span id="cb30-21"><a href="-3.html#cb30-21" aria-hidden="true"></a>  <span class="co"># отправляем клавиатуру</span></span>
-<span id="cb30-22"><a href="-3.html#cb30-22" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb30-23"><a href="-3.html#cb30-23" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="st">&#39;Выберите команду&#39;</span>,</span>
-<span id="cb30-24"><a href="-3.html#cb30-24" aria-hidden="true"></a>                  <span class="dt">reply_markup =</span> RKM)</span>
-<span id="cb30-25"><a href="-3.html#cb30-25" aria-hidden="true"></a></span>
-<span id="cb30-26"><a href="-3.html#cb30-26" aria-hidden="true"></a>}</span>
-<span id="cb30-27"><a href="-3.html#cb30-27" aria-hidden="true"></a></span>
-<span id="cb30-28"><a href="-3.html#cb30-28" aria-hidden="true"></a><span class="co">## метод возвразающий id чата</span></span>
-<span id="cb30-29"><a href="-3.html#cb30-29" aria-hidden="true"></a>chat_id &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb30-30"><a href="-3.html#cb30-30" aria-hidden="true"></a></span>
-<span id="cb30-31"><a href="-3.html#cb30-31" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb30-32"><a href="-3.html#cb30-32" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Чат id этого диалога: &quot;</span>, update<span class="op">$</span>message<span class="op">$</span>chat_id),</span>
-<span id="cb30-33"><a href="-3.html#cb30-33" aria-hidden="true"></a>                  <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
-<span id="cb30-34"><a href="-3.html#cb30-34" aria-hidden="true"></a></span>
-<span id="cb30-35"><a href="-3.html#cb30-35" aria-hidden="true"></a>}</span>
-<span id="cb30-36"><a href="-3.html#cb30-36" aria-hidden="true"></a></span>
-<span id="cb30-37"><a href="-3.html#cb30-37" aria-hidden="true"></a><span class="co">## метод возвращающий имя</span></span>
-<span id="cb30-38"><a href="-3.html#cb30-38" aria-hidden="true"></a>my_name &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb30-39"><a href="-3.html#cb30-39" aria-hidden="true"></a></span>
-<span id="cb30-40"><a href="-3.html#cb30-40" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb30-41"><a href="-3.html#cb30-41" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Вас зовут &quot;</span>, update<span class="op">$</span>message<span class="op">$</span>from<span class="op">$</span>first_name),</span>
-<span id="cb30-42"><a href="-3.html#cb30-42" aria-hidden="true"></a>                  <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
-<span id="cb30-43"><a href="-3.html#cb30-43" aria-hidden="true"></a></span>
-<span id="cb30-44"><a href="-3.html#cb30-44" aria-hidden="true"></a>}</span>
-<span id="cb30-45"><a href="-3.html#cb30-45" aria-hidden="true"></a></span>
-<span id="cb30-46"><a href="-3.html#cb30-46" aria-hidden="true"></a><span class="co">## метод возвращающий логин</span></span>
-<span id="cb30-47"><a href="-3.html#cb30-47" aria-hidden="true"></a>my_username &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb30-48"><a href="-3.html#cb30-48" aria-hidden="true"></a></span>
-<span id="cb30-49"><a href="-3.html#cb30-49" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb30-50"><a href="-3.html#cb30-50" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Ваш логин &quot;</span>, update<span class="op">$</span>message<span class="op">$</span>from<span class="op">$</span>username),</span>
-<span id="cb30-51"><a href="-3.html#cb30-51" aria-hidden="true"></a>                  <span class="dt">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
-<span id="cb30-52"><a href="-3.html#cb30-52" aria-hidden="true"></a></span>
-<span id="cb30-53"><a href="-3.html#cb30-53" aria-hidden="true"></a>}</span>
-<span id="cb30-54"><a href="-3.html#cb30-54" aria-hidden="true"></a></span>
-<span id="cb30-55"><a href="-3.html#cb30-55" aria-hidden="true"></a><span class="co"># создаём фильтры</span></span>
-<span id="cb30-56"><a href="-3.html#cb30-56" aria-hidden="true"></a><span class="co">## сообщения с текстом Чат ID</span></span>
-<span id="cb30-57"><a href="-3.html#cb30-57" aria-hidden="true"></a>MessageFilters<span class="op">$</span>chat_id &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
-<span id="cb30-58"><a href="-3.html#cb30-58" aria-hidden="true"></a></span>
-<span id="cb30-59"><a href="-3.html#cb30-59" aria-hidden="true"></a>  <span class="co"># проверяем текст сообщения</span></span>
-<span id="cb30-60"><a href="-3.html#cb30-60" aria-hidden="true"></a>  message<span class="op">$</span>text <span class="op">==</span><span class="st"> &quot;Чат ID&quot;</span></span>
-<span id="cb30-61"><a href="-3.html#cb30-61" aria-hidden="true"></a></span>
-<span id="cb30-62"><a href="-3.html#cb30-62" aria-hidden="true"></a>}</span>
-<span id="cb30-63"><a href="-3.html#cb30-63" aria-hidden="true"></a>)</span>
-<span id="cb30-64"><a href="-3.html#cb30-64" aria-hidden="true"></a></span>
-<span id="cb30-65"><a href="-3.html#cb30-65" aria-hidden="true"></a><span class="co">## сообщения с текстом Моё имя</span></span>
-<span id="cb30-66"><a href="-3.html#cb30-66" aria-hidden="true"></a>MessageFilters<span class="op">$</span>name &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
-<span id="cb30-67"><a href="-3.html#cb30-67" aria-hidden="true"></a></span>
-<span id="cb30-68"><a href="-3.html#cb30-68" aria-hidden="true"></a>  <span class="co"># проверяем текст сообщения</span></span>
-<span id="cb30-69"><a href="-3.html#cb30-69" aria-hidden="true"></a>  message<span class="op">$</span>text <span class="op">==</span><span class="st"> &quot;Моё имя&quot;</span></span>
-<span id="cb30-70"><a href="-3.html#cb30-70" aria-hidden="true"></a></span>
-<span id="cb30-71"><a href="-3.html#cb30-71" aria-hidden="true"></a>}</span>
-<span id="cb30-72"><a href="-3.html#cb30-72" aria-hidden="true"></a>)</span>
-<span id="cb30-73"><a href="-3.html#cb30-73" aria-hidden="true"></a></span>
-<span id="cb30-74"><a href="-3.html#cb30-74" aria-hidden="true"></a><span class="co">## сообщения с текстом Мой логин</span></span>
-<span id="cb30-75"><a href="-3.html#cb30-75" aria-hidden="true"></a>MessageFilters<span class="op">$</span>username &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
-<span id="cb30-76"><a href="-3.html#cb30-76" aria-hidden="true"></a></span>
-<span id="cb30-77"><a href="-3.html#cb30-77" aria-hidden="true"></a>  <span class="co"># проверяем текст сообщения</span></span>
-<span id="cb30-78"><a href="-3.html#cb30-78" aria-hidden="true"></a>  message<span class="op">$</span>text <span class="op">==</span><span class="st"> &quot;Мой логин&quot;</span></span>
-<span id="cb30-79"><a href="-3.html#cb30-79" aria-hidden="true"></a><span class="er">)</span></span>
-<span id="cb30-80"><a href="-3.html#cb30-80" aria-hidden="true"></a></span>
-<span id="cb30-81"><a href="-3.html#cb30-81" aria-hidden="true"></a><span class="co"># создаём обработчики</span></span>
-<span id="cb30-82"><a href="-3.html#cb30-82" aria-hidden="true"></a>h_start    &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;start&#39;</span>, start)</span>
-<span id="cb30-83"><a href="-3.html#cb30-83" aria-hidden="true"></a>h_chat_id  &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(chat_id, <span class="dt">filters =</span> MessageFilters<span class="op">$</span>chat_id)</span>
-<span id="cb30-84"><a href="-3.html#cb30-84" aria-hidden="true"></a>h_name     &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(my_name, <span class="dt">filters =</span> MessageFilters<span class="op">$</span>name)</span>
-<span id="cb30-85"><a href="-3.html#cb30-85" aria-hidden="true"></a>h_username &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(my_username, <span class="dt">filters =</span> MessageFilters<span class="op">$</span>username)</span>
-<span id="cb30-86"><a href="-3.html#cb30-86" aria-hidden="true"></a></span>
-<span id="cb30-87"><a href="-3.html#cb30-87" aria-hidden="true"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
-<span id="cb30-88"><a href="-3.html#cb30-88" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span></span>
-<span id="cb30-89"><a href="-3.html#cb30-89" aria-hidden="true"></a><span class="st">            </span>h_start <span class="op">+</span></span>
-<span id="cb30-90"><a href="-3.html#cb30-90" aria-hidden="true"></a><span class="st">            </span>h_chat_id <span class="op">+</span></span>
-<span id="cb30-91"><a href="-3.html#cb30-91" aria-hidden="true"></a><span class="st">            </span>h_name <span class="op">+</span></span>
-<span id="cb30-92"><a href="-3.html#cb30-92" aria-hidden="true"></a><span class="st">            </span>h_username</span>
-<span id="cb30-93"><a href="-3.html#cb30-93" aria-hidden="true"></a></span>
-<span id="cb30-94"><a href="-3.html#cb30-94" aria-hidden="true"></a><span class="co"># запускаем бота</span></span>
-<span id="cb30-95"><a href="-3.html#cb30-95" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="-3.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(telegram.bot)</span>
+<span id="cb30-2"><a href="-3.html#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="-3.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём экземпляр класса Updater</span></span>
+<span id="cb30-4"><a href="-3.html#cb30-4" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> <span class="fu">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb30-5"><a href="-3.html#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="-3.html#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём методы</span></span>
+<span id="cb30-7"><a href="-3.html#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="do">## метод для запуска клавиатуры</span></span>
+<span id="cb30-8"><a href="-3.html#cb30-8" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb30-9"><a href="-3.html#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="-3.html#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># создаём клавиатуру</span></span>
+<span id="cb30-11"><a href="-3.html#cb30-11" aria-hidden="true" tabindex="-1"></a>  RKM <span class="ot">&lt;-</span> <span class="fu">ReplyKeyboardMarkup</span>(</span>
+<span id="cb30-12"><a href="-3.html#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">keyboard =</span> <span class="fu">list</span>(</span>
+<span id="cb30-13"><a href="-3.html#cb30-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="fu">KeyboardButton</span>(<span class="st">&quot;Чат ID&quot;</span>)),</span>
+<span id="cb30-14"><a href="-3.html#cb30-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="fu">KeyboardButton</span>(<span class="st">&quot;Моё имя&quot;</span>)),</span>
+<span id="cb30-15"><a href="-3.html#cb30-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="fu">KeyboardButton</span>(<span class="st">&quot;Мой логин&quot;</span>))</span>
+<span id="cb30-16"><a href="-3.html#cb30-16" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb30-17"><a href="-3.html#cb30-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">resize_keyboard =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb30-18"><a href="-3.html#cb30-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">one_time_keyboard =</span> <span class="cn">TRUE</span></span>
+<span id="cb30-19"><a href="-3.html#cb30-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb30-20"><a href="-3.html#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-21"><a href="-3.html#cb30-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># отправляем клавиатуру</span></span>
+<span id="cb30-22"><a href="-3.html#cb30-22" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb30-23"><a href="-3.html#cb30-23" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="st">&#39;Выберите команду&#39;</span>,</span>
+<span id="cb30-24"><a href="-3.html#cb30-24" aria-hidden="true" tabindex="-1"></a>                  <span class="at">reply_markup =</span> RKM)</span>
+<span id="cb30-25"><a href="-3.html#cb30-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-26"><a href="-3.html#cb30-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-27"><a href="-3.html#cb30-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-28"><a href="-3.html#cb30-28" aria-hidden="true" tabindex="-1"></a><span class="do">## метод возвразающий id чата</span></span>
+<span id="cb30-29"><a href="-3.html#cb30-29" aria-hidden="true" tabindex="-1"></a>chat_id <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb30-30"><a href="-3.html#cb30-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-31"><a href="-3.html#cb30-31" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb30-32"><a href="-3.html#cb30-32" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="fu">paste0</span>(<span class="st">&quot;Чат id этого диалога: &quot;</span>, update<span class="sc">$</span>message<span class="sc">$</span>chat_id),</span>
+<span id="cb30-33"><a href="-3.html#cb30-33" aria-hidden="true" tabindex="-1"></a>                  <span class="at">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
+<span id="cb30-34"><a href="-3.html#cb30-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-35"><a href="-3.html#cb30-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-36"><a href="-3.html#cb30-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-37"><a href="-3.html#cb30-37" aria-hidden="true" tabindex="-1"></a><span class="do">## метод возвращающий имя</span></span>
+<span id="cb30-38"><a href="-3.html#cb30-38" aria-hidden="true" tabindex="-1"></a>my_name <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb30-39"><a href="-3.html#cb30-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-40"><a href="-3.html#cb30-40" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb30-41"><a href="-3.html#cb30-41" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="fu">paste0</span>(<span class="st">&quot;Вас зовут &quot;</span>, update<span class="sc">$</span>message<span class="sc">$</span>from<span class="sc">$</span>first_name),</span>
+<span id="cb30-42"><a href="-3.html#cb30-42" aria-hidden="true" tabindex="-1"></a>                  <span class="at">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
+<span id="cb30-43"><a href="-3.html#cb30-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-44"><a href="-3.html#cb30-44" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-45"><a href="-3.html#cb30-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-46"><a href="-3.html#cb30-46" aria-hidden="true" tabindex="-1"></a><span class="do">## метод возвращающий логин</span></span>
+<span id="cb30-47"><a href="-3.html#cb30-47" aria-hidden="true" tabindex="-1"></a>my_username <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb30-48"><a href="-3.html#cb30-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-49"><a href="-3.html#cb30-49" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb30-50"><a href="-3.html#cb30-50" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="fu">paste0</span>(<span class="st">&quot;Ваш логин &quot;</span>, update<span class="sc">$</span>message<span class="sc">$</span>from<span class="sc">$</span>username),</span>
+<span id="cb30-51"><a href="-3.html#cb30-51" aria-hidden="true" tabindex="-1"></a>                  <span class="at">parse_mode =</span> <span class="st">&quot;Markdown&quot;</span>)</span>
+<span id="cb30-52"><a href="-3.html#cb30-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-53"><a href="-3.html#cb30-53" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-54"><a href="-3.html#cb30-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-55"><a href="-3.html#cb30-55" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём фильтры</span></span>
+<span id="cb30-56"><a href="-3.html#cb30-56" aria-hidden="true" tabindex="-1"></a><span class="do">## сообщения с текстом Чат ID</span></span>
+<span id="cb30-57"><a href="-3.html#cb30-57" aria-hidden="true" tabindex="-1"></a>MessageFilters<span class="sc">$</span>chat_id <span class="ot">&lt;-</span> <span class="fu">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
+<span id="cb30-58"><a href="-3.html#cb30-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-59"><a href="-3.html#cb30-59" aria-hidden="true" tabindex="-1"></a>  <span class="co"># проверяем текст сообщения</span></span>
+<span id="cb30-60"><a href="-3.html#cb30-60" aria-hidden="true" tabindex="-1"></a>  message<span class="sc">$</span>text <span class="sc">==</span> <span class="st">&quot;Чат ID&quot;</span></span>
+<span id="cb30-61"><a href="-3.html#cb30-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-62"><a href="-3.html#cb30-62" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-63"><a href="-3.html#cb30-63" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-64"><a href="-3.html#cb30-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-65"><a href="-3.html#cb30-65" aria-hidden="true" tabindex="-1"></a><span class="do">## сообщения с текстом Моё имя</span></span>
+<span id="cb30-66"><a href="-3.html#cb30-66" aria-hidden="true" tabindex="-1"></a>MessageFilters<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
+<span id="cb30-67"><a href="-3.html#cb30-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-68"><a href="-3.html#cb30-68" aria-hidden="true" tabindex="-1"></a>  <span class="co"># проверяем текст сообщения</span></span>
+<span id="cb30-69"><a href="-3.html#cb30-69" aria-hidden="true" tabindex="-1"></a>  message<span class="sc">$</span>text <span class="sc">==</span> <span class="st">&quot;Моё имя&quot;</span></span>
+<span id="cb30-70"><a href="-3.html#cb30-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-71"><a href="-3.html#cb30-71" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-72"><a href="-3.html#cb30-72" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-73"><a href="-3.html#cb30-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-74"><a href="-3.html#cb30-74" aria-hidden="true" tabindex="-1"></a><span class="do">## сообщения с текстом Мой логин</span></span>
+<span id="cb30-75"><a href="-3.html#cb30-75" aria-hidden="true" tabindex="-1"></a>MessageFilters<span class="sc">$</span>username <span class="ot">&lt;-</span> <span class="fu">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
+<span id="cb30-76"><a href="-3.html#cb30-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-77"><a href="-3.html#cb30-77" aria-hidden="true" tabindex="-1"></a>  <span class="co"># проверяем текст сообщения</span></span>
+<span id="cb30-78"><a href="-3.html#cb30-78" aria-hidden="true" tabindex="-1"></a>  message<span class="sc">$</span>text <span class="sc">==</span> <span class="st">&quot;Мой логин&quot;</span></span>
+<span id="cb30-79"><a href="-3.html#cb30-79" aria-hidden="true" tabindex="-1"></a><span class="er">)</span></span>
+<span id="cb30-80"><a href="-3.html#cb30-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-81"><a href="-3.html#cb30-81" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём обработчики</span></span>
+<span id="cb30-82"><a href="-3.html#cb30-82" aria-hidden="true" tabindex="-1"></a>h_start    <span class="ot">&lt;-</span> <span class="fu">CommandHandler</span>(<span class="st">&#39;start&#39;</span>, start)</span>
+<span id="cb30-83"><a href="-3.html#cb30-83" aria-hidden="true" tabindex="-1"></a>h_chat_id  <span class="ot">&lt;-</span> <span class="fu">MessageHandler</span>(chat_id, <span class="at">filters =</span> MessageFilters<span class="sc">$</span>chat_id)</span>
+<span id="cb30-84"><a href="-3.html#cb30-84" aria-hidden="true" tabindex="-1"></a>h_name     <span class="ot">&lt;-</span> <span class="fu">MessageHandler</span>(my_name, <span class="at">filters =</span> MessageFilters<span class="sc">$</span>name)</span>
+<span id="cb30-85"><a href="-3.html#cb30-85" aria-hidden="true" tabindex="-1"></a>h_username <span class="ot">&lt;-</span> <span class="fu">MessageHandler</span>(my_username, <span class="at">filters =</span> MessageFilters<span class="sc">$</span>username)</span>
+<span id="cb30-86"><a href="-3.html#cb30-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-87"><a href="-3.html#cb30-87" aria-hidden="true" tabindex="-1"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span id="cb30-88"><a href="-3.html#cb30-88" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> updater <span class="sc">+</span></span>
+<span id="cb30-89"><a href="-3.html#cb30-89" aria-hidden="true" tabindex="-1"></a>            h_start <span class="sc">+</span></span>
+<span id="cb30-90"><a href="-3.html#cb30-90" aria-hidden="true" tabindex="-1"></a>            h_chat_id <span class="sc">+</span></span>
+<span id="cb30-91"><a href="-3.html#cb30-91" aria-hidden="true" tabindex="-1"></a>            h_name <span class="sc">+</span></span>
+<span id="cb30-92"><a href="-3.html#cb30-92" aria-hidden="true" tabindex="-1"></a>            h_username</span>
+<span id="cb30-93"><a href="-3.html#cb30-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-94"><a href="-3.html#cb30-94" aria-hidden="true" tabindex="-1"></a><span class="co"># запускаем бота</span></span>
+<span id="cb30-95"><a href="-3.html#cb30-95" aria-hidden="true" tabindex="-1"></a>updater<span class="sc">$</span><span class="fu">start_polling</span>()</span></code></pre></div>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
 </blockquote>
@@ -430,38 +434,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>username - Сообщения с текстом <code>"Мой логин"</code></li>
 </ul>
 <p>И создали 4 обработчика, которые по заданным командам и фильтрам будут выполнять указанные методы.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="-3.html#cb31-1" aria-hidden="true"></a><span class="co"># создаём обработчики</span></span>
-<span id="cb31-2"><a href="-3.html#cb31-2" aria-hidden="true"></a>h_start    &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;start&#39;</span>, start)</span>
-<span id="cb31-3"><a href="-3.html#cb31-3" aria-hidden="true"></a>h_chat_id  &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(chat_id, <span class="dt">filters =</span> MessageFilters<span class="op">$</span>chat_id)</span>
-<span id="cb31-4"><a href="-3.html#cb31-4" aria-hidden="true"></a>h_name     &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(my_name, <span class="dt">filters =</span> MessageFilters<span class="op">$</span>name)</span>
-<span id="cb31-5"><a href="-3.html#cb31-5" aria-hidden="true"></a>h_username &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(my_username, <span class="dt">filters =</span> MessageFilters<span class="op">$</span>username)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="-3.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём обработчики</span></span>
+<span id="cb31-2"><a href="-3.html#cb31-2" aria-hidden="true" tabindex="-1"></a>h_start    <span class="ot">&lt;-</span> <span class="fu">CommandHandler</span>(<span class="st">&#39;start&#39;</span>, start)</span>
+<span id="cb31-3"><a href="-3.html#cb31-3" aria-hidden="true" tabindex="-1"></a>h_chat_id  <span class="ot">&lt;-</span> <span class="fu">MessageHandler</span>(chat_id, <span class="at">filters =</span> MessageFilters<span class="sc">$</span>chat_id)</span>
+<span id="cb31-4"><a href="-3.html#cb31-4" aria-hidden="true" tabindex="-1"></a>h_name     <span class="ot">&lt;-</span> <span class="fu">MessageHandler</span>(my_name, <span class="at">filters =</span> MessageFilters<span class="sc">$</span>name)</span>
+<span id="cb31-5"><a href="-3.html#cb31-5" aria-hidden="true" tabindex="-1"></a>h_username <span class="ot">&lt;-</span> <span class="fu">MessageHandler</span>(my_username, <span class="at">filters =</span> MessageFilters<span class="sc">$</span>username)</span></code></pre></div>
 <p>Сама клавиатура создаётся внутри метода <code>start()</code> командой <code>ReplyKeyboardMarkup()</code>.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="-3.html#cb32-1" aria-hidden="true"></a>RKM &lt;-<span class="st"> </span><span class="kw">ReplyKeyboardMarkup</span>(</span>
-<span id="cb32-2"><a href="-3.html#cb32-2" aria-hidden="true"></a>    <span class="dt">keyboard =</span> <span class="kw">list</span>(</span>
-<span id="cb32-3"><a href="-3.html#cb32-3" aria-hidden="true"></a>      <span class="kw">list</span>(<span class="kw">KeyboardButton</span>(<span class="st">&quot;Чат ID&quot;</span>)),</span>
-<span id="cb32-4"><a href="-3.html#cb32-4" aria-hidden="true"></a>      <span class="kw">list</span>(<span class="kw">KeyboardButton</span>(<span class="st">&quot;Моё имя&quot;</span>)),</span>
-<span id="cb32-5"><a href="-3.html#cb32-5" aria-hidden="true"></a>      <span class="kw">list</span>(<span class="kw">KeyboardButton</span>(<span class="st">&quot;Мой логин&quot;</span>))</span>
-<span id="cb32-6"><a href="-3.html#cb32-6" aria-hidden="true"></a>    ),</span>
-<span id="cb32-7"><a href="-3.html#cb32-7" aria-hidden="true"></a>    <span class="dt">resize_keyboard =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb32-8"><a href="-3.html#cb32-8" aria-hidden="true"></a>    <span class="dt">one_time_keyboard =</span> <span class="ot">TRUE</span></span>
-<span id="cb32-9"><a href="-3.html#cb32-9" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="-3.html#cb32-1" aria-hidden="true" tabindex="-1"></a>RKM <span class="ot">&lt;-</span> <span class="fu">ReplyKeyboardMarkup</span>(</span>
+<span id="cb32-2"><a href="-3.html#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">keyboard =</span> <span class="fu">list</span>(</span>
+<span id="cb32-3"><a href="-3.html#cb32-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="fu">KeyboardButton</span>(<span class="st">&quot;Чат ID&quot;</span>)),</span>
+<span id="cb32-4"><a href="-3.html#cb32-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="fu">KeyboardButton</span>(<span class="st">&quot;Моё имя&quot;</span>)),</span>
+<span id="cb32-5"><a href="-3.html#cb32-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="fu">KeyboardButton</span>(<span class="st">&quot;Мой логин&quot;</span>))</span>
+<span id="cb32-6"><a href="-3.html#cb32-6" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb32-7"><a href="-3.html#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">resize_keyboard =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb32-8"><a href="-3.html#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">one_time_keyboard =</span> <span class="cn">TRUE</span></span>
+<span id="cb32-9"><a href="-3.html#cb32-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>В нашем случае все кнопки мы расположили друг под другом, но мы можем расположить их в один ряд, внеся изменения в список списков кнопок. Т.к. один ряд внутри клавиатуры создаётся через вложенный список кнопок, то для того, что бы вывести наши кнопки в один ряд надо переписать часть кода по построению клавиатуры вот так:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="-3.html#cb33-1" aria-hidden="true"></a>RKM &lt;-<span class="st"> </span><span class="kw">ReplyKeyboardMarkup</span>(</span>
-<span id="cb33-2"><a href="-3.html#cb33-2" aria-hidden="true"></a>    <span class="dt">keyboard =</span> <span class="kw">list</span>(</span>
-<span id="cb33-3"><a href="-3.html#cb33-3" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb33-4"><a href="-3.html#cb33-4" aria-hidden="true"></a>          <span class="kw">KeyboardButton</span>(<span class="st">&quot;Чат ID&quot;</span>),</span>
-<span id="cb33-5"><a href="-3.html#cb33-5" aria-hidden="true"></a>          <span class="kw">KeyboardButton</span>(<span class="st">&quot;Моё имя&quot;</span>),</span>
-<span id="cb33-6"><a href="-3.html#cb33-6" aria-hidden="true"></a>          <span class="kw">KeyboardButton</span>(<span class="st">&quot;Мой логин&quot;</span>)</span>
-<span id="cb33-7"><a href="-3.html#cb33-7" aria-hidden="true"></a>     )</span>
-<span id="cb33-8"><a href="-3.html#cb33-8" aria-hidden="true"></a>    ),</span>
-<span id="cb33-9"><a href="-3.html#cb33-9" aria-hidden="true"></a>    <span class="dt">resize_keyboard =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb33-10"><a href="-3.html#cb33-10" aria-hidden="true"></a>    <span class="dt">one_time_keyboard =</span> <span class="ot">TRUE</span></span>
-<span id="cb33-11"><a href="-3.html#cb33-11" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="-3.html#cb33-1" aria-hidden="true" tabindex="-1"></a>RKM <span class="ot">&lt;-</span> <span class="fu">ReplyKeyboardMarkup</span>(</span>
+<span id="cb33-2"><a href="-3.html#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">keyboard =</span> <span class="fu">list</span>(</span>
+<span id="cb33-3"><a href="-3.html#cb33-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb33-4"><a href="-3.html#cb33-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">KeyboardButton</span>(<span class="st">&quot;Чат ID&quot;</span>),</span>
+<span id="cb33-5"><a href="-3.html#cb33-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">KeyboardButton</span>(<span class="st">&quot;Моё имя&quot;</span>),</span>
+<span id="cb33-6"><a href="-3.html#cb33-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">KeyboardButton</span>(<span class="st">&quot;Мой логин&quot;</span>)</span>
+<span id="cb33-7"><a href="-3.html#cb33-7" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb33-8"><a href="-3.html#cb33-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb33-9"><a href="-3.html#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">resize_keyboard =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb33-10"><a href="-3.html#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">one_time_keyboard =</span> <span class="cn">TRUE</span></span>
+<span id="cb33-11"><a href="-3.html#cb33-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="http://img.netpeak.ua/alsey/159861075655_kiss_153kb.png" /></p>
 <p>Отправляется клавиатура в чат методом <code>sendMessage()</code>, в аргументе <code>reply_markup</code>.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="-3.html#cb34-1" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb34-2"><a href="-3.html#cb34-2" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="st">&#39;Выберите команду&#39;</span>,</span>
-<span id="cb34-3"><a href="-3.html#cb34-3" aria-hidden="true"></a>                  <span class="dt">reply_markup =</span> RKM)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="-3.html#cb34-1" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb34-2"><a href="-3.html#cb34-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="st">&#39;Выберите команду&#39;</span>,</span>
+<span id="cb34-3"><a href="-3.html#cb34-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">reply_markup =</span> RKM)</span></code></pre></div>
 </div>
 <div id="inline-клавиатура" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Inline клавиатура</h2>
@@ -470,39 +474,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Для ответа на нажатие Inline кнопки также можно использовать метод бота <code>answerCallbackQuery()</code>, который может вывести уведомление в интерфейсе telegram, пользователю нажавшему Inline кнопку.</p>
 <p>Данные отправленные с Inline кнопки не являются текстом, поэтому для их обработки необходимо создать специальный обработчик с помощью команды <code>CallbackQueryHandler()</code>.</p>
 <p>Код построения Inline клавиатуры который приводится в официальной справке пакета <code>telegram.bot</code>.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="-3.html#cb35-1" aria-hidden="true"></a><span class="co"># Initialize bot</span></span>
-<span id="cb35-2"><a href="-3.html#cb35-2" aria-hidden="true"></a>bot &lt;-<span class="st"> </span><span class="kw">Bot</span>(<span class="dt">token =</span> <span class="st">&quot;TOKEN&quot;</span>)</span>
-<span id="cb35-3"><a href="-3.html#cb35-3" aria-hidden="true"></a>chat_id &lt;-<span class="st"> &quot;CHAT_ID&quot;</span></span>
-<span id="cb35-4"><a href="-3.html#cb35-4" aria-hidden="true"></a></span>
-<span id="cb35-5"><a href="-3.html#cb35-5" aria-hidden="true"></a><span class="co"># Create Inline Keyboard</span></span>
-<span id="cb35-6"><a href="-3.html#cb35-6" aria-hidden="true"></a>text &lt;-<span class="st"> &quot;Could you type their phone number, please?&quot;</span></span>
-<span id="cb35-7"><a href="-3.html#cb35-7" aria-hidden="true"></a>IKM &lt;-<span class="st"> </span><span class="kw">InlineKeyboardMarkup</span>(</span>
-<span id="cb35-8"><a href="-3.html#cb35-8" aria-hidden="true"></a>  <span class="dt">inline_keyboard =</span> <span class="kw">list</span>(</span>
-<span id="cb35-9"><a href="-3.html#cb35-9" aria-hidden="true"></a>    <span class="kw">list</span>(</span>
-<span id="cb35-10"><a href="-3.html#cb35-10" aria-hidden="true"></a>      <span class="kw">InlineKeyboardButton</span>(<span class="dv">1</span>),</span>
-<span id="cb35-11"><a href="-3.html#cb35-11" aria-hidden="true"></a>      <span class="kw">InlineKeyboardButton</span>(<span class="dv">2</span>),</span>
-<span id="cb35-12"><a href="-3.html#cb35-12" aria-hidden="true"></a>      <span class="kw">InlineKeyboardButton</span>(<span class="dv">3</span>)</span>
-<span id="cb35-13"><a href="-3.html#cb35-13" aria-hidden="true"></a>    ),</span>
-<span id="cb35-14"><a href="-3.html#cb35-14" aria-hidden="true"></a>    <span class="kw">list</span>(</span>
-<span id="cb35-15"><a href="-3.html#cb35-15" aria-hidden="true"></a>      <span class="kw">InlineKeyboardButton</span>(<span class="dv">4</span>),</span>
-<span id="cb35-16"><a href="-3.html#cb35-16" aria-hidden="true"></a>      <span class="kw">InlineKeyboardButton</span>(<span class="dv">5</span>),</span>
-<span id="cb35-17"><a href="-3.html#cb35-17" aria-hidden="true"></a>      <span class="kw">InlineKeyboardButton</span>(<span class="dv">6</span>)</span>
-<span id="cb35-18"><a href="-3.html#cb35-18" aria-hidden="true"></a>    ),</span>
-<span id="cb35-19"><a href="-3.html#cb35-19" aria-hidden="true"></a>    <span class="kw">list</span>(</span>
-<span id="cb35-20"><a href="-3.html#cb35-20" aria-hidden="true"></a>      <span class="kw">InlineKeyboardButton</span>(<span class="dv">7</span>),</span>
-<span id="cb35-21"><a href="-3.html#cb35-21" aria-hidden="true"></a>      <span class="kw">InlineKeyboardButton</span>(<span class="dv">8</span>),</span>
-<span id="cb35-22"><a href="-3.html#cb35-22" aria-hidden="true"></a>      <span class="kw">InlineKeyboardButton</span>(<span class="dv">9</span>)</span>
-<span id="cb35-23"><a href="-3.html#cb35-23" aria-hidden="true"></a>    ),</span>
-<span id="cb35-24"><a href="-3.html#cb35-24" aria-hidden="true"></a>    <span class="kw">list</span>(</span>
-<span id="cb35-25"><a href="-3.html#cb35-25" aria-hidden="true"></a>      <span class="kw">InlineKeyboardButton</span>(<span class="st">&quot;*&quot;</span>),</span>
-<span id="cb35-26"><a href="-3.html#cb35-26" aria-hidden="true"></a>      <span class="kw">InlineKeyboardButton</span>(<span class="dv">0</span>),</span>
-<span id="cb35-27"><a href="-3.html#cb35-27" aria-hidden="true"></a>      <span class="kw">InlineKeyboardButton</span>(<span class="st">&quot;#&quot;</span>)</span>
-<span id="cb35-28"><a href="-3.html#cb35-28" aria-hidden="true"></a>    )</span>
-<span id="cb35-29"><a href="-3.html#cb35-29" aria-hidden="true"></a>  )</span>
-<span id="cb35-30"><a href="-3.html#cb35-30" aria-hidden="true"></a>)</span>
-<span id="cb35-31"><a href="-3.html#cb35-31" aria-hidden="true"></a></span>
-<span id="cb35-32"><a href="-3.html#cb35-32" aria-hidden="true"></a><span class="co"># Send Inline Keyboard</span></span>
-<span id="cb35-33"><a href="-3.html#cb35-33" aria-hidden="true"></a>bot<span class="op">$</span><span class="kw">sendMessage</span>(chat_id, text, <span class="dt">reply_markup =</span> IKM)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="-3.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize bot</span></span>
+<span id="cb35-2"><a href="-3.html#cb35-2" aria-hidden="true" tabindex="-1"></a>bot <span class="ot">&lt;-</span> <span class="fu">Bot</span>(<span class="at">token =</span> <span class="st">&quot;TOKEN&quot;</span>)</span>
+<span id="cb35-3"><a href="-3.html#cb35-3" aria-hidden="true" tabindex="-1"></a>chat_id <span class="ot">&lt;-</span> <span class="st">&quot;CHAT_ID&quot;</span></span>
+<span id="cb35-4"><a href="-3.html#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="-3.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Inline Keyboard</span></span>
+<span id="cb35-6"><a href="-3.html#cb35-6" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="st">&quot;Could you type their phone number, please?&quot;</span></span>
+<span id="cb35-7"><a href="-3.html#cb35-7" aria-hidden="true" tabindex="-1"></a>IKM <span class="ot">&lt;-</span> <span class="fu">InlineKeyboardMarkup</span>(</span>
+<span id="cb35-8"><a href="-3.html#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">inline_keyboard =</span> <span class="fu">list</span>(</span>
+<span id="cb35-9"><a href="-3.html#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(</span>
+<span id="cb35-10"><a href="-3.html#cb35-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">InlineKeyboardButton</span>(<span class="dv">1</span>),</span>
+<span id="cb35-11"><a href="-3.html#cb35-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">InlineKeyboardButton</span>(<span class="dv">2</span>),</span>
+<span id="cb35-12"><a href="-3.html#cb35-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">InlineKeyboardButton</span>(<span class="dv">3</span>)</span>
+<span id="cb35-13"><a href="-3.html#cb35-13" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb35-14"><a href="-3.html#cb35-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(</span>
+<span id="cb35-15"><a href="-3.html#cb35-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">InlineKeyboardButton</span>(<span class="dv">4</span>),</span>
+<span id="cb35-16"><a href="-3.html#cb35-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">InlineKeyboardButton</span>(<span class="dv">5</span>),</span>
+<span id="cb35-17"><a href="-3.html#cb35-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">InlineKeyboardButton</span>(<span class="dv">6</span>)</span>
+<span id="cb35-18"><a href="-3.html#cb35-18" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb35-19"><a href="-3.html#cb35-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(</span>
+<span id="cb35-20"><a href="-3.html#cb35-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">InlineKeyboardButton</span>(<span class="dv">7</span>),</span>
+<span id="cb35-21"><a href="-3.html#cb35-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">InlineKeyboardButton</span>(<span class="dv">8</span>),</span>
+<span id="cb35-22"><a href="-3.html#cb35-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">InlineKeyboardButton</span>(<span class="dv">9</span>)</span>
+<span id="cb35-23"><a href="-3.html#cb35-23" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb35-24"><a href="-3.html#cb35-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(</span>
+<span id="cb35-25"><a href="-3.html#cb35-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">InlineKeyboardButton</span>(<span class="st">&quot;*&quot;</span>),</span>
+<span id="cb35-26"><a href="-3.html#cb35-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">InlineKeyboardButton</span>(<span class="dv">0</span>),</span>
+<span id="cb35-27"><a href="-3.html#cb35-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">InlineKeyboardButton</span>(<span class="st">&quot;#&quot;</span>)</span>
+<span id="cb35-28"><a href="-3.html#cb35-28" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb35-29"><a href="-3.html#cb35-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb35-30"><a href="-3.html#cb35-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-31"><a href="-3.html#cb35-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-32"><a href="-3.html#cb35-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Send Inline Keyboard</span></span>
+<span id="cb35-33"><a href="-3.html#cb35-33" aria-hidden="true" tabindex="-1"></a>bot<span class="sc">$</span><span class="fu">sendMessage</span>(chat_id, text, <span class="at">reply_markup =</span> IKM)</span></code></pre></div>
 <p>Строить Inline клавиатуру необходимо с помощью команды <code>InlineKeyboardMarkup()</code>, по такому же принципу, как и Reply клавиатуру. В <code>InlineKeyboardMarkup()</code> необходимо передать список, списков Inline кнопок, каждая отдельная кнопка создаётся функцией <code>InlineKeyboardButton()</code>.</p>
 <p>Inline кнопка может либо передавать боту какие-то данные с помощью аргумента <code>callback_data</code>, либо открывать какую-либо HTML страницу, заданную с помощью аргумента <code>url</code>.</p>
 <p>В результате будет список, в котором каждый элемент так же является списком Inline кнопок, которые необходимо объединить в один ряд.</p>
@@ -510,69 +514,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="пример-простейшего-бота-с-поддержкой-inline-кнопок" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Пример простейшего бота с поддержкой InLine кнопок</h3>
 <p>Для начала мы напишем бота для экспресс тестирования на covid-19. По команде <code>/test</code>, он будет отправлять вам клавиатуру с двумя кнопками, в зависимости от нажатой кнопки он будет присылать вам сообщение с результатами вашего тестирования.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="-3.html#cb36-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
-<span id="cb36-2"><a href="-3.html#cb36-2" aria-hidden="true"></a></span>
-<span id="cb36-3"><a href="-3.html#cb36-3" aria-hidden="true"></a><span class="co"># создаём экземпляр класса Updater</span></span>
-<span id="cb36-4"><a href="-3.html#cb36-4" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
-<span id="cb36-5"><a href="-3.html#cb36-5" aria-hidden="true"></a></span>
-<span id="cb36-6"><a href="-3.html#cb36-6" aria-hidden="true"></a><span class="co"># метод для отправки InLine клавиатуры</span></span>
-<span id="cb36-7"><a href="-3.html#cb36-7" aria-hidden="true"></a>test &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb36-8"><a href="-3.html#cb36-8" aria-hidden="true"></a></span>
-<span id="cb36-9"><a href="-3.html#cb36-9" aria-hidden="true"></a></span>
-<span id="cb36-10"><a href="-3.html#cb36-10" aria-hidden="true"></a>  <span class="co"># создаём InLine клавиатуру</span></span>
-<span id="cb36-11"><a href="-3.html#cb36-11" aria-hidden="true"></a>  IKM &lt;-<span class="st"> </span><span class="kw">InlineKeyboardMarkup</span>(</span>
-<span id="cb36-12"><a href="-3.html#cb36-12" aria-hidden="true"></a>    <span class="dt">inline_keyboard =</span> <span class="kw">list</span>(</span>
-<span id="cb36-13"><a href="-3.html#cb36-13" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb36-14"><a href="-3.html#cb36-14" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="st">&quot;Да&quot;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;yes&#39;</span>),</span>
-<span id="cb36-15"><a href="-3.html#cb36-15" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="st">&quot;Нет&quot;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;no&#39;</span>)</span>
-<span id="cb36-16"><a href="-3.html#cb36-16" aria-hidden="true"></a>      )</span>
-<span id="cb36-17"><a href="-3.html#cb36-17" aria-hidden="true"></a>    )</span>
-<span id="cb36-18"><a href="-3.html#cb36-18" aria-hidden="true"></a>  )</span>
-<span id="cb36-19"><a href="-3.html#cb36-19" aria-hidden="true"></a></span>
-<span id="cb36-20"><a href="-3.html#cb36-20" aria-hidden="true"></a>  <span class="co"># Отправляем клавиатуру в чат</span></span>
-<span id="cb36-21"><a href="-3.html#cb36-21" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb36-22"><a href="-3.html#cb36-22" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="st">&quot;Вы болете коронавирусом?&quot;</span>,</span>
-<span id="cb36-23"><a href="-3.html#cb36-23" aria-hidden="true"></a>                  <span class="dt">reply_markup =</span> IKM)</span>
-<span id="cb36-24"><a href="-3.html#cb36-24" aria-hidden="true"></a>}</span>
-<span id="cb36-25"><a href="-3.html#cb36-25" aria-hidden="true"></a></span>
-<span id="cb36-26"><a href="-3.html#cb36-26" aria-hidden="true"></a><span class="co"># метод для обработки нажатия кнопки</span></span>
-<span id="cb36-27"><a href="-3.html#cb36-27" aria-hidden="true"></a>answer_cb &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb36-28"><a href="-3.html#cb36-28" aria-hidden="true"></a></span>
-<span id="cb36-29"><a href="-3.html#cb36-29" aria-hidden="true"></a>  <span class="co"># полученные данные с кнопки</span></span>
-<span id="cb36-30"><a href="-3.html#cb36-30" aria-hidden="true"></a>  data &lt;-<span class="st"> </span>update<span class="op">$</span>callback_query<span class="op">$</span>data</span>
-<span id="cb36-31"><a href="-3.html#cb36-31" aria-hidden="true"></a></span>
-<span id="cb36-32"><a href="-3.html#cb36-32" aria-hidden="true"></a>  <span class="co"># получаем имя пользователя, нажавшего кнопку</span></span>
-<span id="cb36-33"><a href="-3.html#cb36-33" aria-hidden="true"></a>  uname &lt;-<span class="st"> </span>update<span class="op">$</span><span class="kw">effective_user</span>()<span class="op">$</span>first_name</span>
-<span id="cb36-34"><a href="-3.html#cb36-34" aria-hidden="true"></a></span>
-<span id="cb36-35"><a href="-3.html#cb36-35" aria-hidden="true"></a>  <span class="co"># обработка результата</span></span>
-<span id="cb36-36"><a href="-3.html#cb36-36" aria-hidden="true"></a>  <span class="cf">if</span> ( data <span class="op">==</span><span class="st"> &#39;no&#39;</span> ) {</span>
-<span id="cb36-37"><a href="-3.html#cb36-37" aria-hidden="true"></a></span>
-<span id="cb36-38"><a href="-3.html#cb36-38" aria-hidden="true"></a>    msg &lt;-<span class="st"> </span><span class="kw">paste0</span>(uname, <span class="st">&quot;, поздравляю, ваш тест на covid-19 отрицательный.&quot;</span>)</span>
-<span id="cb36-39"><a href="-3.html#cb36-39" aria-hidden="true"></a></span>
-<span id="cb36-40"><a href="-3.html#cb36-40" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
-<span id="cb36-41"><a href="-3.html#cb36-41" aria-hidden="true"></a></span>
-<span id="cb36-42"><a href="-3.html#cb36-42" aria-hidden="true"></a>    msg &lt;-<span class="st"> </span><span class="kw">paste0</span>(uname, <span class="st">&quot;, к сожалени ваш тест на covid-19 положительный.&quot;</span>)</span>
-<span id="cb36-43"><a href="-3.html#cb36-43" aria-hidden="true"></a></span>
-<span id="cb36-44"><a href="-3.html#cb36-44" aria-hidden="true"></a>  }</span>
-<span id="cb36-45"><a href="-3.html#cb36-45" aria-hidden="true"></a></span>
-<span id="cb36-46"><a href="-3.html#cb36-46" aria-hidden="true"></a></span>
-<span id="cb36-47"><a href="-3.html#cb36-47" aria-hidden="true"></a>  <span class="co"># Отправка сообщения</span></span>
-<span id="cb36-48"><a href="-3.html#cb36-48" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> update<span class="op">$</span><span class="kw">from_chat_id</span>(),</span>
-<span id="cb36-49"><a href="-3.html#cb36-49" aria-hidden="true"></a>                  <span class="dt">text =</span> msg)</span>
-<span id="cb36-50"><a href="-3.html#cb36-50" aria-hidden="true"></a></span>
-<span id="cb36-51"><a href="-3.html#cb36-51" aria-hidden="true"></a>  <span class="co"># сообщаем боту, что запрос с кнопки принят</span></span>
-<span id="cb36-52"><a href="-3.html#cb36-52" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">answerCallbackQuery</span>(<span class="dt">callback_query_id =</span> update<span class="op">$</span>callback_query<span class="op">$</span>id)</span>
-<span id="cb36-53"><a href="-3.html#cb36-53" aria-hidden="true"></a>}</span>
-<span id="cb36-54"><a href="-3.html#cb36-54" aria-hidden="true"></a></span>
-<span id="cb36-55"><a href="-3.html#cb36-55" aria-hidden="true"></a><span class="co"># создаём обработчики</span></span>
-<span id="cb36-56"><a href="-3.html#cb36-56" aria-hidden="true"></a>inline_h      &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;test&#39;</span>, test)</span>
-<span id="cb36-57"><a href="-3.html#cb36-57" aria-hidden="true"></a>query_handler &lt;-<span class="st"> </span><span class="kw">CallbackQueryHandler</span>(answer_cb)</span>
-<span id="cb36-58"><a href="-3.html#cb36-58" aria-hidden="true"></a></span>
-<span id="cb36-59"><a href="-3.html#cb36-59" aria-hidden="true"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
-<span id="cb36-60"><a href="-3.html#cb36-60" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span><span class="st"> </span>inline_h <span class="op">+</span><span class="st"> </span>query_handler</span>
-<span id="cb36-61"><a href="-3.html#cb36-61" aria-hidden="true"></a></span>
-<span id="cb36-62"><a href="-3.html#cb36-62" aria-hidden="true"></a><span class="co"># запускаем бота</span></span>
-<span id="cb36-63"><a href="-3.html#cb36-63" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="-3.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(telegram.bot)</span>
+<span id="cb36-2"><a href="-3.html#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="-3.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём экземпляр класса Updater</span></span>
+<span id="cb36-4"><a href="-3.html#cb36-4" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> <span class="fu">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb36-5"><a href="-3.html#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="-3.html#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co"># метод для отправки InLine клавиатуры</span></span>
+<span id="cb36-7"><a href="-3.html#cb36-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb36-8"><a href="-3.html#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="-3.html#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="-3.html#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># создаём InLine клавиатуру</span></span>
+<span id="cb36-11"><a href="-3.html#cb36-11" aria-hidden="true" tabindex="-1"></a>  IKM <span class="ot">&lt;-</span> <span class="fu">InlineKeyboardMarkup</span>(</span>
+<span id="cb36-12"><a href="-3.html#cb36-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">inline_keyboard =</span> <span class="fu">list</span>(</span>
+<span id="cb36-13"><a href="-3.html#cb36-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb36-14"><a href="-3.html#cb36-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="st">&quot;Да&quot;</span>, <span class="at">callback_data =</span> <span class="st">&#39;yes&#39;</span>),</span>
+<span id="cb36-15"><a href="-3.html#cb36-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="st">&quot;Нет&quot;</span>, <span class="at">callback_data =</span> <span class="st">&#39;no&#39;</span>)</span>
+<span id="cb36-16"><a href="-3.html#cb36-16" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb36-17"><a href="-3.html#cb36-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb36-18"><a href="-3.html#cb36-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb36-19"><a href="-3.html#cb36-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-20"><a href="-3.html#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Отправляем клавиатуру в чат</span></span>
+<span id="cb36-21"><a href="-3.html#cb36-21" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb36-22"><a href="-3.html#cb36-22" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="st">&quot;Вы болете коронавирусом?&quot;</span>,</span>
+<span id="cb36-23"><a href="-3.html#cb36-23" aria-hidden="true" tabindex="-1"></a>                  <span class="at">reply_markup =</span> IKM)</span>
+<span id="cb36-24"><a href="-3.html#cb36-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-25"><a href="-3.html#cb36-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-26"><a href="-3.html#cb36-26" aria-hidden="true" tabindex="-1"></a><span class="co"># метод для обработки нажатия кнопки</span></span>
+<span id="cb36-27"><a href="-3.html#cb36-27" aria-hidden="true" tabindex="-1"></a>answer_cb <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb36-28"><a href="-3.html#cb36-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-29"><a href="-3.html#cb36-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># полученные данные с кнопки</span></span>
+<span id="cb36-30"><a href="-3.html#cb36-30" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> update<span class="sc">$</span>callback_query<span class="sc">$</span>data</span>
+<span id="cb36-31"><a href="-3.html#cb36-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-32"><a href="-3.html#cb36-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># получаем имя пользователя, нажавшего кнопку</span></span>
+<span id="cb36-33"><a href="-3.html#cb36-33" aria-hidden="true" tabindex="-1"></a>  uname <span class="ot">&lt;-</span> update<span class="sc">$</span><span class="fu">effective_user</span>()<span class="sc">$</span>first_name</span>
+<span id="cb36-34"><a href="-3.html#cb36-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-35"><a href="-3.html#cb36-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># обработка результата</span></span>
+<span id="cb36-36"><a href="-3.html#cb36-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> ( data <span class="sc">==</span> <span class="st">&#39;no&#39;</span> ) {</span>
+<span id="cb36-37"><a href="-3.html#cb36-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-38"><a href="-3.html#cb36-38" aria-hidden="true" tabindex="-1"></a>    msg <span class="ot">&lt;-</span> <span class="fu">paste0</span>(uname, <span class="st">&quot;, поздравляю, ваш тест на covid-19 отрицательный.&quot;</span>)</span>
+<span id="cb36-39"><a href="-3.html#cb36-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-40"><a href="-3.html#cb36-40" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb36-41"><a href="-3.html#cb36-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-42"><a href="-3.html#cb36-42" aria-hidden="true" tabindex="-1"></a>    msg <span class="ot">&lt;-</span> <span class="fu">paste0</span>(uname, <span class="st">&quot;, к сожалени ваш тест на covid-19 положительный.&quot;</span>)</span>
+<span id="cb36-43"><a href="-3.html#cb36-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-44"><a href="-3.html#cb36-44" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb36-45"><a href="-3.html#cb36-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-46"><a href="-3.html#cb36-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-47"><a href="-3.html#cb36-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Отправка сообщения</span></span>
+<span id="cb36-48"><a href="-3.html#cb36-48" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(<span class="at">chat_id =</span> update<span class="sc">$</span><span class="fu">from_chat_id</span>(),</span>
+<span id="cb36-49"><a href="-3.html#cb36-49" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> msg)</span>
+<span id="cb36-50"><a href="-3.html#cb36-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-51"><a href="-3.html#cb36-51" aria-hidden="true" tabindex="-1"></a>  <span class="co"># сообщаем боту, что запрос с кнопки принят</span></span>
+<span id="cb36-52"><a href="-3.html#cb36-52" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">answerCallbackQuery</span>(<span class="at">callback_query_id =</span> update<span class="sc">$</span>callback_query<span class="sc">$</span>id)</span>
+<span id="cb36-53"><a href="-3.html#cb36-53" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-54"><a href="-3.html#cb36-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-55"><a href="-3.html#cb36-55" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём обработчики</span></span>
+<span id="cb36-56"><a href="-3.html#cb36-56" aria-hidden="true" tabindex="-1"></a>inline_h      <span class="ot">&lt;-</span> <span class="fu">CommandHandler</span>(<span class="st">&#39;test&#39;</span>, test)</span>
+<span id="cb36-57"><a href="-3.html#cb36-57" aria-hidden="true" tabindex="-1"></a>query_handler <span class="ot">&lt;-</span> <span class="fu">CallbackQueryHandler</span>(answer_cb)</span>
+<span id="cb36-58"><a href="-3.html#cb36-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-59"><a href="-3.html#cb36-59" aria-hidden="true" tabindex="-1"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span id="cb36-60"><a href="-3.html#cb36-60" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> updater <span class="sc">+</span> inline_h <span class="sc">+</span> query_handler</span>
+<span id="cb36-61"><a href="-3.html#cb36-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-62"><a href="-3.html#cb36-62" aria-hidden="true" tabindex="-1"></a><span class="co"># запускаем бота</span></span>
+<span id="cb36-63"><a href="-3.html#cb36-63" aria-hidden="true" tabindex="-1"></a>updater<span class="sc">$</span><span class="fu">start_polling</span>()</span></code></pre></div>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
 </blockquote>
@@ -590,210 +594,210 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>pattern</code> - Фильтр по данным, которые привязаны к кнопке с помощью аргумента <code>callback_data</code>.</li>
 </ul>
 <p>Соответвенно с помощью аргумента <code>pattern</code> мы можем под нажатие каждой кнопки написать отдельный метод:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="-3.html#cb37-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
-<span id="cb37-2"><a href="-3.html#cb37-2" aria-hidden="true"></a></span>
-<span id="cb37-3"><a href="-3.html#cb37-3" aria-hidden="true"></a><span class="co"># создаём экземпляр класса Updater</span></span>
-<span id="cb37-4"><a href="-3.html#cb37-4" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
-<span id="cb37-5"><a href="-3.html#cb37-5" aria-hidden="true"></a></span>
-<span id="cb37-6"><a href="-3.html#cb37-6" aria-hidden="true"></a><span class="co"># метод для отправки InLine клавиатуры</span></span>
-<span id="cb37-7"><a href="-3.html#cb37-7" aria-hidden="true"></a>test &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb37-8"><a href="-3.html#cb37-8" aria-hidden="true"></a></span>
-<span id="cb37-9"><a href="-3.html#cb37-9" aria-hidden="true"></a>  <span class="co"># создаём InLine клавиатуру</span></span>
-<span id="cb37-10"><a href="-3.html#cb37-10" aria-hidden="true"></a>  IKM &lt;-<span class="st"> </span><span class="kw">InlineKeyboardMarkup</span>(</span>
-<span id="cb37-11"><a href="-3.html#cb37-11" aria-hidden="true"></a>    <span class="dt">inline_keyboard =</span> <span class="kw">list</span>(</span>
-<span id="cb37-12"><a href="-3.html#cb37-12" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb37-13"><a href="-3.html#cb37-13" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="st">&quot;Да&quot;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;yes&#39;</span>),</span>
-<span id="cb37-14"><a href="-3.html#cb37-14" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="st">&quot;Нет&quot;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;no&#39;</span>)</span>
-<span id="cb37-15"><a href="-3.html#cb37-15" aria-hidden="true"></a>      )</span>
-<span id="cb37-16"><a href="-3.html#cb37-16" aria-hidden="true"></a>    )</span>
-<span id="cb37-17"><a href="-3.html#cb37-17" aria-hidden="true"></a>  )</span>
-<span id="cb37-18"><a href="-3.html#cb37-18" aria-hidden="true"></a></span>
-<span id="cb37-19"><a href="-3.html#cb37-19" aria-hidden="true"></a>  <span class="co"># Отправляем клавиатуру в чат</span></span>
-<span id="cb37-20"><a href="-3.html#cb37-20" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb37-21"><a href="-3.html#cb37-21" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="st">&quot;Вы болете коронавирусом?&quot;</span>,</span>
-<span id="cb37-22"><a href="-3.html#cb37-22" aria-hidden="true"></a>                  <span class="dt">reply_markup =</span> IKM)</span>
-<span id="cb37-23"><a href="-3.html#cb37-23" aria-hidden="true"></a>}</span>
-<span id="cb37-24"><a href="-3.html#cb37-24" aria-hidden="true"></a></span>
-<span id="cb37-25"><a href="-3.html#cb37-25" aria-hidden="true"></a><span class="co"># метод для обработки нажатия кнопки Да</span></span>
-<span id="cb37-26"><a href="-3.html#cb37-26" aria-hidden="true"></a>answer_cb_yes &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb37-27"><a href="-3.html#cb37-27" aria-hidden="true"></a></span>
-<span id="cb37-28"><a href="-3.html#cb37-28" aria-hidden="true"></a>  <span class="co"># получаем имя пользователя, нажавшего кнопку</span></span>
-<span id="cb37-29"><a href="-3.html#cb37-29" aria-hidden="true"></a>  uname &lt;-<span class="st"> </span>update<span class="op">$</span><span class="kw">effective_user</span>()<span class="op">$</span>first_name</span>
-<span id="cb37-30"><a href="-3.html#cb37-30" aria-hidden="true"></a></span>
-<span id="cb37-31"><a href="-3.html#cb37-31" aria-hidden="true"></a>  <span class="co"># обработка результата</span></span>
-<span id="cb37-32"><a href="-3.html#cb37-32" aria-hidden="true"></a>  msg &lt;-<span class="st"> </span><span class="kw">paste0</span>(uname, <span class="st">&quot;, к сожалени ваш текст на covid-19 положительный.&quot;</span>)</span>
-<span id="cb37-33"><a href="-3.html#cb37-33" aria-hidden="true"></a></span>
-<span id="cb37-34"><a href="-3.html#cb37-34" aria-hidden="true"></a>  <span class="co"># Отправка сообщения</span></span>
-<span id="cb37-35"><a href="-3.html#cb37-35" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> update<span class="op">$</span><span class="kw">from_chat_id</span>(),</span>
-<span id="cb37-36"><a href="-3.html#cb37-36" aria-hidden="true"></a>                  <span class="dt">text =</span> msg)</span>
-<span id="cb37-37"><a href="-3.html#cb37-37" aria-hidden="true"></a></span>
-<span id="cb37-38"><a href="-3.html#cb37-38" aria-hidden="true"></a>  <span class="co"># сообщаем боту, что запрос с кнопки принят</span></span>
-<span id="cb37-39"><a href="-3.html#cb37-39" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">answerCallbackQuery</span>(<span class="dt">callback_query_id =</span> update<span class="op">$</span>callback_query<span class="op">$</span>id)</span>
-<span id="cb37-40"><a href="-3.html#cb37-40" aria-hidden="true"></a>}</span>
-<span id="cb37-41"><a href="-3.html#cb37-41" aria-hidden="true"></a></span>
-<span id="cb37-42"><a href="-3.html#cb37-42" aria-hidden="true"></a><span class="co"># метод для обработки нажатия кнопки Нет</span></span>
-<span id="cb37-43"><a href="-3.html#cb37-43" aria-hidden="true"></a>answer_cb_no &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb37-44"><a href="-3.html#cb37-44" aria-hidden="true"></a></span>
-<span id="cb37-45"><a href="-3.html#cb37-45" aria-hidden="true"></a>  <span class="co"># получаем имя пользователя, нажавшего кнопку</span></span>
-<span id="cb37-46"><a href="-3.html#cb37-46" aria-hidden="true"></a>  uname &lt;-<span class="st"> </span>update<span class="op">$</span><span class="kw">effective_user</span>()<span class="op">$</span>first_name</span>
-<span id="cb37-47"><a href="-3.html#cb37-47" aria-hidden="true"></a></span>
-<span id="cb37-48"><a href="-3.html#cb37-48" aria-hidden="true"></a>  msg &lt;-<span class="st"> </span><span class="kw">paste0</span>(uname, <span class="st">&quot;, поздравляю, ваш текст на covid-19 отрицательный.&quot;</span>)</span>
-<span id="cb37-49"><a href="-3.html#cb37-49" aria-hidden="true"></a></span>
-<span id="cb37-50"><a href="-3.html#cb37-50" aria-hidden="true"></a>  <span class="co"># Отправка сообщения</span></span>
-<span id="cb37-51"><a href="-3.html#cb37-51" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> update<span class="op">$</span><span class="kw">from_chat_id</span>(),</span>
-<span id="cb37-52"><a href="-3.html#cb37-52" aria-hidden="true"></a>                  <span class="dt">text =</span> msg)</span>
-<span id="cb37-53"><a href="-3.html#cb37-53" aria-hidden="true"></a></span>
-<span id="cb37-54"><a href="-3.html#cb37-54" aria-hidden="true"></a>  <span class="co"># сообщаем боту, что запрос с кнопки принят</span></span>
-<span id="cb37-55"><a href="-3.html#cb37-55" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">answerCallbackQuery</span>(<span class="dt">callback_query_id =</span> update<span class="op">$</span>callback_query<span class="op">$</span>id)</span>
-<span id="cb37-56"><a href="-3.html#cb37-56" aria-hidden="true"></a>}</span>
-<span id="cb37-57"><a href="-3.html#cb37-57" aria-hidden="true"></a></span>
-<span id="cb37-58"><a href="-3.html#cb37-58" aria-hidden="true"></a><span class="co"># создаём обработчики</span></span>
-<span id="cb37-59"><a href="-3.html#cb37-59" aria-hidden="true"></a>inline_h          &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;test&#39;</span>, test)</span>
-<span id="cb37-60"><a href="-3.html#cb37-60" aria-hidden="true"></a>query_handler_yes &lt;-<span class="st"> </span><span class="kw">CallbackQueryHandler</span>(answer_cb_yes, <span class="dt">pattern =</span> <span class="st">&#39;yes&#39;</span>)</span>
-<span id="cb37-61"><a href="-3.html#cb37-61" aria-hidden="true"></a>query_handler_no  &lt;-<span class="st"> </span><span class="kw">CallbackQueryHandler</span>(answer_cb_no, <span class="dt">pattern =</span> <span class="st">&#39;no&#39;</span>)</span>
-<span id="cb37-62"><a href="-3.html#cb37-62" aria-hidden="true"></a></span>
-<span id="cb37-63"><a href="-3.html#cb37-63" aria-hidden="true"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
-<span id="cb37-64"><a href="-3.html#cb37-64" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span></span>
-<span id="cb37-65"><a href="-3.html#cb37-65" aria-hidden="true"></a><span class="st">            </span>inline_h <span class="op">+</span></span>
-<span id="cb37-66"><a href="-3.html#cb37-66" aria-hidden="true"></a><span class="st">            </span>query_handler_yes <span class="op">+</span></span>
-<span id="cb37-67"><a href="-3.html#cb37-67" aria-hidden="true"></a><span class="st">            </span>query_handler_no</span>
-<span id="cb37-68"><a href="-3.html#cb37-68" aria-hidden="true"></a></span>
-<span id="cb37-69"><a href="-3.html#cb37-69" aria-hidden="true"></a><span class="co"># запускаем бота</span></span>
-<span id="cb37-70"><a href="-3.html#cb37-70" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="-3.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(telegram.bot)</span>
+<span id="cb37-2"><a href="-3.html#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="-3.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём экземпляр класса Updater</span></span>
+<span id="cb37-4"><a href="-3.html#cb37-4" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> <span class="fu">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb37-5"><a href="-3.html#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="-3.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># метод для отправки InLine клавиатуры</span></span>
+<span id="cb37-7"><a href="-3.html#cb37-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb37-8"><a href="-3.html#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="-3.html#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># создаём InLine клавиатуру</span></span>
+<span id="cb37-10"><a href="-3.html#cb37-10" aria-hidden="true" tabindex="-1"></a>  IKM <span class="ot">&lt;-</span> <span class="fu">InlineKeyboardMarkup</span>(</span>
+<span id="cb37-11"><a href="-3.html#cb37-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">inline_keyboard =</span> <span class="fu">list</span>(</span>
+<span id="cb37-12"><a href="-3.html#cb37-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb37-13"><a href="-3.html#cb37-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="st">&quot;Да&quot;</span>, <span class="at">callback_data =</span> <span class="st">&#39;yes&#39;</span>),</span>
+<span id="cb37-14"><a href="-3.html#cb37-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="st">&quot;Нет&quot;</span>, <span class="at">callback_data =</span> <span class="st">&#39;no&#39;</span>)</span>
+<span id="cb37-15"><a href="-3.html#cb37-15" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb37-16"><a href="-3.html#cb37-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb37-17"><a href="-3.html#cb37-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb37-18"><a href="-3.html#cb37-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-19"><a href="-3.html#cb37-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Отправляем клавиатуру в чат</span></span>
+<span id="cb37-20"><a href="-3.html#cb37-20" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb37-21"><a href="-3.html#cb37-21" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="st">&quot;Вы болете коронавирусом?&quot;</span>,</span>
+<span id="cb37-22"><a href="-3.html#cb37-22" aria-hidden="true" tabindex="-1"></a>                  <span class="at">reply_markup =</span> IKM)</span>
+<span id="cb37-23"><a href="-3.html#cb37-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-24"><a href="-3.html#cb37-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-25"><a href="-3.html#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="co"># метод для обработки нажатия кнопки Да</span></span>
+<span id="cb37-26"><a href="-3.html#cb37-26" aria-hidden="true" tabindex="-1"></a>answer_cb_yes <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb37-27"><a href="-3.html#cb37-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-28"><a href="-3.html#cb37-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># получаем имя пользователя, нажавшего кнопку</span></span>
+<span id="cb37-29"><a href="-3.html#cb37-29" aria-hidden="true" tabindex="-1"></a>  uname <span class="ot">&lt;-</span> update<span class="sc">$</span><span class="fu">effective_user</span>()<span class="sc">$</span>first_name</span>
+<span id="cb37-30"><a href="-3.html#cb37-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-31"><a href="-3.html#cb37-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># обработка результата</span></span>
+<span id="cb37-32"><a href="-3.html#cb37-32" aria-hidden="true" tabindex="-1"></a>  msg <span class="ot">&lt;-</span> <span class="fu">paste0</span>(uname, <span class="st">&quot;, к сожалени ваш текст на covid-19 положительный.&quot;</span>)</span>
+<span id="cb37-33"><a href="-3.html#cb37-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-34"><a href="-3.html#cb37-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Отправка сообщения</span></span>
+<span id="cb37-35"><a href="-3.html#cb37-35" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(<span class="at">chat_id =</span> update<span class="sc">$</span><span class="fu">from_chat_id</span>(),</span>
+<span id="cb37-36"><a href="-3.html#cb37-36" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> msg)</span>
+<span id="cb37-37"><a href="-3.html#cb37-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-38"><a href="-3.html#cb37-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># сообщаем боту, что запрос с кнопки принят</span></span>
+<span id="cb37-39"><a href="-3.html#cb37-39" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">answerCallbackQuery</span>(<span class="at">callback_query_id =</span> update<span class="sc">$</span>callback_query<span class="sc">$</span>id)</span>
+<span id="cb37-40"><a href="-3.html#cb37-40" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-41"><a href="-3.html#cb37-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-42"><a href="-3.html#cb37-42" aria-hidden="true" tabindex="-1"></a><span class="co"># метод для обработки нажатия кнопки Нет</span></span>
+<span id="cb37-43"><a href="-3.html#cb37-43" aria-hidden="true" tabindex="-1"></a>answer_cb_no <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb37-44"><a href="-3.html#cb37-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-45"><a href="-3.html#cb37-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># получаем имя пользователя, нажавшего кнопку</span></span>
+<span id="cb37-46"><a href="-3.html#cb37-46" aria-hidden="true" tabindex="-1"></a>  uname <span class="ot">&lt;-</span> update<span class="sc">$</span><span class="fu">effective_user</span>()<span class="sc">$</span>first_name</span>
+<span id="cb37-47"><a href="-3.html#cb37-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-48"><a href="-3.html#cb37-48" aria-hidden="true" tabindex="-1"></a>  msg <span class="ot">&lt;-</span> <span class="fu">paste0</span>(uname, <span class="st">&quot;, поздравляю, ваш текст на covid-19 отрицательный.&quot;</span>)</span>
+<span id="cb37-49"><a href="-3.html#cb37-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-50"><a href="-3.html#cb37-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Отправка сообщения</span></span>
+<span id="cb37-51"><a href="-3.html#cb37-51" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(<span class="at">chat_id =</span> update<span class="sc">$</span><span class="fu">from_chat_id</span>(),</span>
+<span id="cb37-52"><a href="-3.html#cb37-52" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> msg)</span>
+<span id="cb37-53"><a href="-3.html#cb37-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-54"><a href="-3.html#cb37-54" aria-hidden="true" tabindex="-1"></a>  <span class="co"># сообщаем боту, что запрос с кнопки принят</span></span>
+<span id="cb37-55"><a href="-3.html#cb37-55" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">answerCallbackQuery</span>(<span class="at">callback_query_id =</span> update<span class="sc">$</span>callback_query<span class="sc">$</span>id)</span>
+<span id="cb37-56"><a href="-3.html#cb37-56" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-57"><a href="-3.html#cb37-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-58"><a href="-3.html#cb37-58" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём обработчики</span></span>
+<span id="cb37-59"><a href="-3.html#cb37-59" aria-hidden="true" tabindex="-1"></a>inline_h          <span class="ot">&lt;-</span> <span class="fu">CommandHandler</span>(<span class="st">&#39;test&#39;</span>, test)</span>
+<span id="cb37-60"><a href="-3.html#cb37-60" aria-hidden="true" tabindex="-1"></a>query_handler_yes <span class="ot">&lt;-</span> <span class="fu">CallbackQueryHandler</span>(answer_cb_yes, <span class="at">pattern =</span> <span class="st">&#39;yes&#39;</span>)</span>
+<span id="cb37-61"><a href="-3.html#cb37-61" aria-hidden="true" tabindex="-1"></a>query_handler_no  <span class="ot">&lt;-</span> <span class="fu">CallbackQueryHandler</span>(answer_cb_no, <span class="at">pattern =</span> <span class="st">&#39;no&#39;</span>)</span>
+<span id="cb37-62"><a href="-3.html#cb37-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-63"><a href="-3.html#cb37-63" aria-hidden="true" tabindex="-1"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span id="cb37-64"><a href="-3.html#cb37-64" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> updater <span class="sc">+</span></span>
+<span id="cb37-65"><a href="-3.html#cb37-65" aria-hidden="true" tabindex="-1"></a>            inline_h <span class="sc">+</span></span>
+<span id="cb37-66"><a href="-3.html#cb37-66" aria-hidden="true" tabindex="-1"></a>            query_handler_yes <span class="sc">+</span></span>
+<span id="cb37-67"><a href="-3.html#cb37-67" aria-hidden="true" tabindex="-1"></a>            query_handler_no</span>
+<span id="cb37-68"><a href="-3.html#cb37-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-69"><a href="-3.html#cb37-69" aria-hidden="true" tabindex="-1"></a><span class="co"># запускаем бота</span></span>
+<span id="cb37-70"><a href="-3.html#cb37-70" aria-hidden="true" tabindex="-1"></a>updater<span class="sc">$</span><span class="fu">start_polling</span>()</span></code></pre></div>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
 </blockquote>
 <p>Теперь мы написали 2 отдельных метода, т.е. по одному методу, под нажатие каждой кнопки, и использовали аргумент <code>pattern</code>, при создании их обработчиков:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="-3.html#cb38-1" aria-hidden="true"></a>query_handler_yes &lt;-<span class="st"> </span><span class="kw">CallbackQueryHandler</span>(answer_cb_yes, <span class="dt">pattern =</span> <span class="st">&#39;yes&#39;</span>)</span>
-<span id="cb38-2"><a href="-3.html#cb38-2" aria-hidden="true"></a>query_handler_no  &lt;-<span class="st"> </span><span class="kw">CallbackQueryHandler</span>(answer_cb_no, <span class="dt">pattern =</span> <span class="st">&#39;no&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="-3.html#cb38-1" aria-hidden="true" tabindex="-1"></a>query_handler_yes <span class="ot">&lt;-</span> <span class="fu">CallbackQueryHandler</span>(answer_cb_yes, <span class="at">pattern =</span> <span class="st">&#39;yes&#39;</span>)</span>
+<span id="cb38-2"><a href="-3.html#cb38-2" aria-hidden="true" tabindex="-1"></a>query_handler_no  <span class="ot">&lt;-</span> <span class="fu">CallbackQueryHandler</span>(answer_cb_no, <span class="at">pattern =</span> <span class="st">&#39;no&#39;</span>)</span></code></pre></div>
 <p>Заканчивается код метода <em>answer_cb</em> командой <code>bot$answerCallbackQuery(callback_query_id = update$callback_query$id)</code>, которая сообщает боту, что данные с inline клавиатуры получены.</p>
 </div>
 <div id="пример-бота-который-сообщает-текущую-погоду-по-выбранному-городу" class="section level3" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Пример бота, который сообщает текущую погоду по выбранному городу</h3>
 <p>Давайте попробуем написать бота, который запрашивает данные о погоде.</p>
-<p>Логика его работы будет следующая. Изначально командой <code>/start</code> вы вызываете основную клавиатуру, в которой присутствует всего одна кнопка “Погода”. Нажав на эту кнопку вы получаете сообщение с Inline клавиатурой, для выбора города, по которому требуется узнать текущую погоду. Выбираете один из городов, и получаете текущую погоду.</p>
+<p>Логика его работы будет следующая. Изначально командой <code>/start</code> вы вызываете основную клавиатуру, в которой присутствует всего одна кнопка “Погода.” Нажав на эту кнопку вы получаете сообщение с Inline клавиатурой, для выбора города, по которому требуется узнать текущую погоду. Выбираете один из городов, и получаете текущую погоду.</p>
 <p>В этом примере кода мы будем использовать несколько дополнительных пакетов:</p>
 <ul>
 <li><code>httr</code> - пакет для работы с HTTP запросами, на основе которых построена работа с любым API. В нашем случае мы будем использовать бесплатный API <a href="https://openweathermap.org/api">openweathermap.org</a>.</li>
 <li><code>stringr</code> - пакет для работы с текстом, в нашем случае мы будем его использовать для формирования сообщения о погоде в выбранном городе.</li>
 </ul>
 <p><em>Код бота, который сообщает текущую погоду по выбранному городу</em></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="-3.html#cb39-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
-<span id="cb39-2"><a href="-3.html#cb39-2" aria-hidden="true"></a><span class="kw">library</span>(httr)</span>
-<span id="cb39-3"><a href="-3.html#cb39-3" aria-hidden="true"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb39-4"><a href="-3.html#cb39-4" aria-hidden="true"></a></span>
-<span id="cb39-5"><a href="-3.html#cb39-5" aria-hidden="true"></a><span class="co"># создаём экземпляр класса Updater</span></span>
-<span id="cb39-6"><a href="-3.html#cb39-6" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
-<span id="cb39-7"><a href="-3.html#cb39-7" aria-hidden="true"></a></span>
-<span id="cb39-8"><a href="-3.html#cb39-8" aria-hidden="true"></a><span class="co"># создаём методы</span></span>
-<span id="cb39-9"><a href="-3.html#cb39-9" aria-hidden="true"></a><span class="co">## метод для запуска основной клавиатуры</span></span>
-<span id="cb39-10"><a href="-3.html#cb39-10" aria-hidden="true"></a>start &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb39-11"><a href="-3.html#cb39-11" aria-hidden="true"></a></span>
-<span id="cb39-12"><a href="-3.html#cb39-12" aria-hidden="true"></a>  <span class="co"># создаём клавиатуру</span></span>
-<span id="cb39-13"><a href="-3.html#cb39-13" aria-hidden="true"></a>  RKM &lt;-<span class="st"> </span><span class="kw">ReplyKeyboardMarkup</span>(</span>
-<span id="cb39-14"><a href="-3.html#cb39-14" aria-hidden="true"></a>    <span class="dt">keyboard =</span> <span class="kw">list</span>(</span>
-<span id="cb39-15"><a href="-3.html#cb39-15" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb39-16"><a href="-3.html#cb39-16" aria-hidden="true"></a>        <span class="kw">KeyboardButton</span>(<span class="st">&quot;Погода&quot;</span>)</span>
-<span id="cb39-17"><a href="-3.html#cb39-17" aria-hidden="true"></a>      )</span>
-<span id="cb39-18"><a href="-3.html#cb39-18" aria-hidden="true"></a>    ),</span>
-<span id="cb39-19"><a href="-3.html#cb39-19" aria-hidden="true"></a>    <span class="dt">resize_keyboard =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb39-20"><a href="-3.html#cb39-20" aria-hidden="true"></a>    <span class="dt">one_time_keyboard =</span> <span class="ot">TRUE</span></span>
-<span id="cb39-21"><a href="-3.html#cb39-21" aria-hidden="true"></a>  )</span>
-<span id="cb39-22"><a href="-3.html#cb39-22" aria-hidden="true"></a></span>
-<span id="cb39-23"><a href="-3.html#cb39-23" aria-hidden="true"></a>  <span class="co"># отправляем клавиатуру</span></span>
-<span id="cb39-24"><a href="-3.html#cb39-24" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb39-25"><a href="-3.html#cb39-25" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="st">&#39;Выберите команду&#39;</span>,</span>
-<span id="cb39-26"><a href="-3.html#cb39-26" aria-hidden="true"></a>                  <span class="dt">reply_markup =</span> RKM)</span>
-<span id="cb39-27"><a href="-3.html#cb39-27" aria-hidden="true"></a></span>
-<span id="cb39-28"><a href="-3.html#cb39-28" aria-hidden="true"></a>}</span>
-<span id="cb39-29"><a href="-3.html#cb39-29" aria-hidden="true"></a></span>
-<span id="cb39-30"><a href="-3.html#cb39-30" aria-hidden="true"></a><span class="co">## Метод вызова Inine клавиатуры</span></span>
-<span id="cb39-31"><a href="-3.html#cb39-31" aria-hidden="true"></a>weather &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb39-32"><a href="-3.html#cb39-32" aria-hidden="true"></a></span>
-<span id="cb39-33"><a href="-3.html#cb39-33" aria-hidden="true"></a>  IKM &lt;-<span class="st"> </span><span class="kw">InlineKeyboardMarkup</span>(</span>
-<span id="cb39-34"><a href="-3.html#cb39-34" aria-hidden="true"></a>    <span class="dt">inline_keyboard =</span> <span class="kw">list</span>(</span>
-<span id="cb39-35"><a href="-3.html#cb39-35" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb39-36"><a href="-3.html#cb39-36" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Москва&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;New York,us&#39;</span>),</span>
-<span id="cb39-37"><a href="-3.html#cb39-37" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Санкт-Петербург&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Saint Petersburg&#39;</span>),</span>
-<span id="cb39-38"><a href="-3.html#cb39-38" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Нью-Йорк&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;New York&#39;</span>)</span>
-<span id="cb39-39"><a href="-3.html#cb39-39" aria-hidden="true"></a>      ),</span>
-<span id="cb39-40"><a href="-3.html#cb39-40" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb39-41"><a href="-3.html#cb39-41" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Екатеринбург&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Yekaterinburg,ru&#39;</span>),</span>
-<span id="cb39-42"><a href="-3.html#cb39-42" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Берлин&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Berlin,de&#39;</span>),</span>
-<span id="cb39-43"><a href="-3.html#cb39-43" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Париж&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Paris,fr&#39;</span>)</span>
-<span id="cb39-44"><a href="-3.html#cb39-44" aria-hidden="true"></a>      ),</span>
-<span id="cb39-45"><a href="-3.html#cb39-45" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb39-46"><a href="-3.html#cb39-46" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Рим&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Rome,it&#39;</span>),</span>
-<span id="cb39-47"><a href="-3.html#cb39-47" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Одесса&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Odessa,ua&#39;</span>),</span>
-<span id="cb39-48"><a href="-3.html#cb39-48" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Киев&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Kyiv,fr&#39;</span>)</span>
-<span id="cb39-49"><a href="-3.html#cb39-49" aria-hidden="true"></a>      ),</span>
-<span id="cb39-50"><a href="-3.html#cb39-50" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb39-51"><a href="-3.html#cb39-51" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Токио&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Tokyo&#39;</span>),</span>
-<span id="cb39-52"><a href="-3.html#cb39-52" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Амстердам&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Amsterdam,nl&#39;</span>),</span>
-<span id="cb39-53"><a href="-3.html#cb39-53" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Вашингтон&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;Washington,us&#39;</span>)</span>
-<span id="cb39-54"><a href="-3.html#cb39-54" aria-hidden="true"></a>      )</span>
-<span id="cb39-55"><a href="-3.html#cb39-55" aria-hidden="true"></a>    )</span>
-<span id="cb39-56"><a href="-3.html#cb39-56" aria-hidden="true"></a>  )</span>
-<span id="cb39-57"><a href="-3.html#cb39-57" aria-hidden="true"></a></span>
-<span id="cb39-58"><a href="-3.html#cb39-58" aria-hidden="true"></a>  <span class="co"># Send Inline Keyboard</span></span>
-<span id="cb39-59"><a href="-3.html#cb39-59" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb39-60"><a href="-3.html#cb39-60" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="st">&quot;Выберите город&quot;</span>,</span>
-<span id="cb39-61"><a href="-3.html#cb39-61" aria-hidden="true"></a>                  <span class="dt">reply_markup =</span> IKM)</span>
-<span id="cb39-62"><a href="-3.html#cb39-62" aria-hidden="true"></a>}</span>
-<span id="cb39-63"><a href="-3.html#cb39-63" aria-hidden="true"></a></span>
-<span id="cb39-64"><a href="-3.html#cb39-64" aria-hidden="true"></a><span class="co"># метод для сообщения погоды</span></span>
-<span id="cb39-65"><a href="-3.html#cb39-65" aria-hidden="true"></a>answer_cb &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb39-66"><a href="-3.html#cb39-66" aria-hidden="true"></a></span>
-<span id="cb39-67"><a href="-3.html#cb39-67" aria-hidden="true"></a>  <span class="co"># получаем из сообщения город</span></span>
-<span id="cb39-68"><a href="-3.html#cb39-68" aria-hidden="true"></a>  city &lt;-<span class="st"> </span>update<span class="op">$</span>callback_query<span class="op">$</span>data</span>
-<span id="cb39-69"><a href="-3.html#cb39-69" aria-hidden="true"></a></span>
-<span id="cb39-70"><a href="-3.html#cb39-70" aria-hidden="true"></a>  <span class="co"># отправляем запрос</span></span>
-<span id="cb39-71"><a href="-3.html#cb39-71" aria-hidden="true"></a>  ans &lt;-<span class="st"> </span><span class="kw">GET</span>(<span class="st">&#39;https://api.openweathermap.org/data/2.5/weather&#39;</span>,</span>
-<span id="cb39-72"><a href="-3.html#cb39-72" aria-hidden="true"></a>             <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">q     =</span> city,</span>
-<span id="cb39-73"><a href="-3.html#cb39-73" aria-hidden="true"></a>                          <span class="dt">lang  =</span> <span class="st">&#39;ru&#39;</span>,</span>
-<span id="cb39-74"><a href="-3.html#cb39-74" aria-hidden="true"></a>                          <span class="dt">units =</span> <span class="st">&#39;metric&#39;</span>,</span>
-<span id="cb39-75"><a href="-3.html#cb39-75" aria-hidden="true"></a>                          <span class="dt">appid =</span> <span class="st">&#39;4776568ccea136ffe4cda9f1969af340&#39;</span>))</span>
-<span id="cb39-76"><a href="-3.html#cb39-76" aria-hidden="true"></a></span>
-<span id="cb39-77"><a href="-3.html#cb39-77" aria-hidden="true"></a>  <span class="co"># парсим ответ</span></span>
-<span id="cb39-78"><a href="-3.html#cb39-78" aria-hidden="true"></a>  result &lt;-<span class="st"> </span><span class="kw">content</span>(ans)</span>
-<span id="cb39-79"><a href="-3.html#cb39-79" aria-hidden="true"></a></span>
-<span id="cb39-80"><a href="-3.html#cb39-80" aria-hidden="true"></a>  <span class="co"># формируем сообщение</span></span>
-<span id="cb39-81"><a href="-3.html#cb39-81" aria-hidden="true"></a>  msg &lt;-<span class="st"> </span><span class="kw">str_glue</span>(<span class="st">&quot;{result$name} погода:</span><span class="ch">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb39-82"><a href="-3.html#cb39-82" aria-hidden="true"></a>                  <span class="st">&quot;Текущая температура: {result$main$temp}</span><span class="ch">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb39-83"><a href="-3.html#cb39-83" aria-hidden="true"></a>                  <span class="st">&quot;Скорость ветра: {result$wind$speed}</span><span class="ch">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb39-84"><a href="-3.html#cb39-84" aria-hidden="true"></a>                  <span class="st">&quot;Описание: {result$weather[[1]]$description}&quot;</span>)</span>
-<span id="cb39-85"><a href="-3.html#cb39-85" aria-hidden="true"></a></span>
-<span id="cb39-86"><a href="-3.html#cb39-86" aria-hidden="true"></a>  <span class="co"># отправляем информацию о погоде</span></span>
-<span id="cb39-87"><a href="-3.html#cb39-87" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> update<span class="op">$</span><span class="kw">from_chat_id</span>(),</span>
-<span id="cb39-88"><a href="-3.html#cb39-88" aria-hidden="true"></a>                  <span class="dt">text    =</span> msg)</span>
-<span id="cb39-89"><a href="-3.html#cb39-89" aria-hidden="true"></a></span>
-<span id="cb39-90"><a href="-3.html#cb39-90" aria-hidden="true"></a></span>
-<span id="cb39-91"><a href="-3.html#cb39-91" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">answerCallbackQuery</span>(<span class="dt">callback_query_id =</span> update<span class="op">$</span>callback_query<span class="op">$</span>id)</span>
-<span id="cb39-92"><a href="-3.html#cb39-92" aria-hidden="true"></a>}</span>
-<span id="cb39-93"><a href="-3.html#cb39-93" aria-hidden="true"></a></span>
-<span id="cb39-94"><a href="-3.html#cb39-94" aria-hidden="true"></a><span class="co"># создаём фильтры</span></span>
-<span id="cb39-95"><a href="-3.html#cb39-95" aria-hidden="true"></a><span class="co">## сообщения с текстом Погода</span></span>
-<span id="cb39-96"><a href="-3.html#cb39-96" aria-hidden="true"></a>MessageFilters<span class="op">$</span>weather &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
-<span id="cb39-97"><a href="-3.html#cb39-97" aria-hidden="true"></a></span>
-<span id="cb39-98"><a href="-3.html#cb39-98" aria-hidden="true"></a>  <span class="co"># проверяем текст сообщения</span></span>
-<span id="cb39-99"><a href="-3.html#cb39-99" aria-hidden="true"></a>  message<span class="op">$</span>text <span class="op">==</span><span class="st"> &quot;Погода&quot;</span></span>
-<span id="cb39-100"><a href="-3.html#cb39-100" aria-hidden="true"></a></span>
-<span id="cb39-101"><a href="-3.html#cb39-101" aria-hidden="true"></a>}</span>
-<span id="cb39-102"><a href="-3.html#cb39-102" aria-hidden="true"></a>)</span>
-<span id="cb39-103"><a href="-3.html#cb39-103" aria-hidden="true"></a></span>
-<span id="cb39-104"><a href="-3.html#cb39-104" aria-hidden="true"></a><span class="co"># создаём обработчики</span></span>
-<span id="cb39-105"><a href="-3.html#cb39-105" aria-hidden="true"></a>h_start         &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;start&#39;</span>, start)</span>
-<span id="cb39-106"><a href="-3.html#cb39-106" aria-hidden="true"></a>h_weather       &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(weather, <span class="dt">filters =</span> MessageFilters<span class="op">$</span>weather)</span>
-<span id="cb39-107"><a href="-3.html#cb39-107" aria-hidden="true"></a>h_query_handler &lt;-<span class="st"> </span><span class="kw">CallbackQueryHandler</span>(answer_cb)</span>
-<span id="cb39-108"><a href="-3.html#cb39-108" aria-hidden="true"></a></span>
-<span id="cb39-109"><a href="-3.html#cb39-109" aria-hidden="true"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
-<span id="cb39-110"><a href="-3.html#cb39-110" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span></span>
-<span id="cb39-111"><a href="-3.html#cb39-111" aria-hidden="true"></a><span class="st">              </span>h_start <span class="op">+</span></span>
-<span id="cb39-112"><a href="-3.html#cb39-112" aria-hidden="true"></a><span class="st">              </span>h_weather <span class="op">+</span></span>
-<span id="cb39-113"><a href="-3.html#cb39-113" aria-hidden="true"></a><span class="st">              </span>h_query_handler</span>
-<span id="cb39-114"><a href="-3.html#cb39-114" aria-hidden="true"></a></span>
-<span id="cb39-115"><a href="-3.html#cb39-115" aria-hidden="true"></a><span class="co"># запускаем бота</span></span>
-<span id="cb39-116"><a href="-3.html#cb39-116" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="-3.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(telegram.bot)</span>
+<span id="cb39-2"><a href="-3.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb39-3"><a href="-3.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb39-4"><a href="-3.html#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="-3.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём экземпляр класса Updater</span></span>
+<span id="cb39-6"><a href="-3.html#cb39-6" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> <span class="fu">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb39-7"><a href="-3.html#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="-3.html#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём методы</span></span>
+<span id="cb39-9"><a href="-3.html#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="do">## метод для запуска основной клавиатуры</span></span>
+<span id="cb39-10"><a href="-3.html#cb39-10" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb39-11"><a href="-3.html#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="-3.html#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># создаём клавиатуру</span></span>
+<span id="cb39-13"><a href="-3.html#cb39-13" aria-hidden="true" tabindex="-1"></a>  RKM <span class="ot">&lt;-</span> <span class="fu">ReplyKeyboardMarkup</span>(</span>
+<span id="cb39-14"><a href="-3.html#cb39-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">keyboard =</span> <span class="fu">list</span>(</span>
+<span id="cb39-15"><a href="-3.html#cb39-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb39-16"><a href="-3.html#cb39-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">KeyboardButton</span>(<span class="st">&quot;Погода&quot;</span>)</span>
+<span id="cb39-17"><a href="-3.html#cb39-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb39-18"><a href="-3.html#cb39-18" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb39-19"><a href="-3.html#cb39-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">resize_keyboard =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb39-20"><a href="-3.html#cb39-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">one_time_keyboard =</span> <span class="cn">TRUE</span></span>
+<span id="cb39-21"><a href="-3.html#cb39-21" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb39-22"><a href="-3.html#cb39-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-23"><a href="-3.html#cb39-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># отправляем клавиатуру</span></span>
+<span id="cb39-24"><a href="-3.html#cb39-24" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb39-25"><a href="-3.html#cb39-25" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="st">&#39;Выберите команду&#39;</span>,</span>
+<span id="cb39-26"><a href="-3.html#cb39-26" aria-hidden="true" tabindex="-1"></a>                  <span class="at">reply_markup =</span> RKM)</span>
+<span id="cb39-27"><a href="-3.html#cb39-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-28"><a href="-3.html#cb39-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-29"><a href="-3.html#cb39-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-30"><a href="-3.html#cb39-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Метод вызова Inine клавиатуры</span></span>
+<span id="cb39-31"><a href="-3.html#cb39-31" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb39-32"><a href="-3.html#cb39-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-33"><a href="-3.html#cb39-33" aria-hidden="true" tabindex="-1"></a>  IKM <span class="ot">&lt;-</span> <span class="fu">InlineKeyboardMarkup</span>(</span>
+<span id="cb39-34"><a href="-3.html#cb39-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">inline_keyboard =</span> <span class="fu">list</span>(</span>
+<span id="cb39-35"><a href="-3.html#cb39-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb39-36"><a href="-3.html#cb39-36" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Москва&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;New York,us&#39;</span>),</span>
+<span id="cb39-37"><a href="-3.html#cb39-37" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Санкт-Петербург&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;Saint Petersburg&#39;</span>),</span>
+<span id="cb39-38"><a href="-3.html#cb39-38" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Нью-Йорк&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;New York&#39;</span>)</span>
+<span id="cb39-39"><a href="-3.html#cb39-39" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb39-40"><a href="-3.html#cb39-40" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb39-41"><a href="-3.html#cb39-41" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Екатеринбург&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;Yekaterinburg,ru&#39;</span>),</span>
+<span id="cb39-42"><a href="-3.html#cb39-42" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Берлин&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;Berlin,de&#39;</span>),</span>
+<span id="cb39-43"><a href="-3.html#cb39-43" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Париж&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;Paris,fr&#39;</span>)</span>
+<span id="cb39-44"><a href="-3.html#cb39-44" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb39-45"><a href="-3.html#cb39-45" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb39-46"><a href="-3.html#cb39-46" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Рим&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;Rome,it&#39;</span>),</span>
+<span id="cb39-47"><a href="-3.html#cb39-47" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Одесса&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;Odessa,ua&#39;</span>),</span>
+<span id="cb39-48"><a href="-3.html#cb39-48" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Киев&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;Kyiv,ua&#39;</span>)</span>
+<span id="cb39-49"><a href="-3.html#cb39-49" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb39-50"><a href="-3.html#cb39-50" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb39-51"><a href="-3.html#cb39-51" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Токио&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;Tokyo&#39;</span>),</span>
+<span id="cb39-52"><a href="-3.html#cb39-52" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Амстердам&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;Amsterdam,nl&#39;</span>),</span>
+<span id="cb39-53"><a href="-3.html#cb39-53" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Вашингтон&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;Washington,us&#39;</span>)</span>
+<span id="cb39-54"><a href="-3.html#cb39-54" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb39-55"><a href="-3.html#cb39-55" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb39-56"><a href="-3.html#cb39-56" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb39-57"><a href="-3.html#cb39-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-58"><a href="-3.html#cb39-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Send Inline Keyboard</span></span>
+<span id="cb39-59"><a href="-3.html#cb39-59" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(<span class="at">chat_id =</span> update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb39-60"><a href="-3.html#cb39-60" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="st">&quot;Выберите город&quot;</span>,</span>
+<span id="cb39-61"><a href="-3.html#cb39-61" aria-hidden="true" tabindex="-1"></a>                  <span class="at">reply_markup =</span> IKM)</span>
+<span id="cb39-62"><a href="-3.html#cb39-62" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-63"><a href="-3.html#cb39-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-64"><a href="-3.html#cb39-64" aria-hidden="true" tabindex="-1"></a><span class="co"># метод для сообщения погоды</span></span>
+<span id="cb39-65"><a href="-3.html#cb39-65" aria-hidden="true" tabindex="-1"></a>answer_cb <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb39-66"><a href="-3.html#cb39-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-67"><a href="-3.html#cb39-67" aria-hidden="true" tabindex="-1"></a>  <span class="co"># получаем из сообщения город</span></span>
+<span id="cb39-68"><a href="-3.html#cb39-68" aria-hidden="true" tabindex="-1"></a>  city <span class="ot">&lt;-</span> update<span class="sc">$</span>callback_query<span class="sc">$</span>data</span>
+<span id="cb39-69"><a href="-3.html#cb39-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-70"><a href="-3.html#cb39-70" aria-hidden="true" tabindex="-1"></a>  <span class="co"># отправляем запрос</span></span>
+<span id="cb39-71"><a href="-3.html#cb39-71" aria-hidden="true" tabindex="-1"></a>  ans <span class="ot">&lt;-</span> <span class="fu">GET</span>(<span class="st">&#39;https://api.openweathermap.org/data/2.5/weather&#39;</span>,</span>
+<span id="cb39-72"><a href="-3.html#cb39-72" aria-hidden="true" tabindex="-1"></a>             <span class="at">query =</span> <span class="fu">list</span>(<span class="at">q     =</span> city,</span>
+<span id="cb39-73"><a href="-3.html#cb39-73" aria-hidden="true" tabindex="-1"></a>                          <span class="at">lang  =</span> <span class="st">&#39;ru&#39;</span>,</span>
+<span id="cb39-74"><a href="-3.html#cb39-74" aria-hidden="true" tabindex="-1"></a>                          <span class="at">units =</span> <span class="st">&#39;metric&#39;</span>,</span>
+<span id="cb39-75"><a href="-3.html#cb39-75" aria-hidden="true" tabindex="-1"></a>                          <span class="at">appid =</span> <span class="st">&#39;4776568ccea136ffe4cda9f1969af340&#39;</span>))</span>
+<span id="cb39-76"><a href="-3.html#cb39-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-77"><a href="-3.html#cb39-77" aria-hidden="true" tabindex="-1"></a>  <span class="co"># парсим ответ</span></span>
+<span id="cb39-78"><a href="-3.html#cb39-78" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">content</span>(ans)</span>
+<span id="cb39-79"><a href="-3.html#cb39-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-80"><a href="-3.html#cb39-80" aria-hidden="true" tabindex="-1"></a>  <span class="co"># формируем сообщение</span></span>
+<span id="cb39-81"><a href="-3.html#cb39-81" aria-hidden="true" tabindex="-1"></a>  msg <span class="ot">&lt;-</span> <span class="fu">str_glue</span>(<span class="st">&quot;{result$name} погода:</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb39-82"><a href="-3.html#cb39-82" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Текущая температура: {result$main$temp}</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb39-83"><a href="-3.html#cb39-83" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Скорость ветра: {result$wind$speed}</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb39-84"><a href="-3.html#cb39-84" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Описание: {result$weather[[1]]$description}&quot;</span>)</span>
+<span id="cb39-85"><a href="-3.html#cb39-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-86"><a href="-3.html#cb39-86" aria-hidden="true" tabindex="-1"></a>  <span class="co"># отправляем информацию о погоде</span></span>
+<span id="cb39-87"><a href="-3.html#cb39-87" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(<span class="at">chat_id =</span> update<span class="sc">$</span><span class="fu">from_chat_id</span>(),</span>
+<span id="cb39-88"><a href="-3.html#cb39-88" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text    =</span> msg)</span>
+<span id="cb39-89"><a href="-3.html#cb39-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-90"><a href="-3.html#cb39-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-91"><a href="-3.html#cb39-91" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">answerCallbackQuery</span>(<span class="at">callback_query_id =</span> update<span class="sc">$</span>callback_query<span class="sc">$</span>id)</span>
+<span id="cb39-92"><a href="-3.html#cb39-92" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-93"><a href="-3.html#cb39-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-94"><a href="-3.html#cb39-94" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём фильтры</span></span>
+<span id="cb39-95"><a href="-3.html#cb39-95" aria-hidden="true" tabindex="-1"></a><span class="do">## сообщения с текстом Погода</span></span>
+<span id="cb39-96"><a href="-3.html#cb39-96" aria-hidden="true" tabindex="-1"></a>MessageFilters<span class="sc">$</span>weather <span class="ot">&lt;-</span> <span class="fu">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
+<span id="cb39-97"><a href="-3.html#cb39-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-98"><a href="-3.html#cb39-98" aria-hidden="true" tabindex="-1"></a>  <span class="co"># проверяем текст сообщения</span></span>
+<span id="cb39-99"><a href="-3.html#cb39-99" aria-hidden="true" tabindex="-1"></a>  message<span class="sc">$</span>text <span class="sc">==</span> <span class="st">&quot;Погода&quot;</span></span>
+<span id="cb39-100"><a href="-3.html#cb39-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-101"><a href="-3.html#cb39-101" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-102"><a href="-3.html#cb39-102" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-103"><a href="-3.html#cb39-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-104"><a href="-3.html#cb39-104" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём обработчики</span></span>
+<span id="cb39-105"><a href="-3.html#cb39-105" aria-hidden="true" tabindex="-1"></a>h_start         <span class="ot">&lt;-</span> <span class="fu">CommandHandler</span>(<span class="st">&#39;start&#39;</span>, start)</span>
+<span id="cb39-106"><a href="-3.html#cb39-106" aria-hidden="true" tabindex="-1"></a>h_weather       <span class="ot">&lt;-</span> <span class="fu">MessageHandler</span>(weather, <span class="at">filters =</span> MessageFilters<span class="sc">$</span>weather)</span>
+<span id="cb39-107"><a href="-3.html#cb39-107" aria-hidden="true" tabindex="-1"></a>h_query_handler <span class="ot">&lt;-</span> <span class="fu">CallbackQueryHandler</span>(answer_cb)</span>
+<span id="cb39-108"><a href="-3.html#cb39-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-109"><a href="-3.html#cb39-109" aria-hidden="true" tabindex="-1"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span id="cb39-110"><a href="-3.html#cb39-110" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> updater <span class="sc">+</span></span>
+<span id="cb39-111"><a href="-3.html#cb39-111" aria-hidden="true" tabindex="-1"></a>              h_start <span class="sc">+</span></span>
+<span id="cb39-112"><a href="-3.html#cb39-112" aria-hidden="true" tabindex="-1"></a>              h_weather <span class="sc">+</span></span>
+<span id="cb39-113"><a href="-3.html#cb39-113" aria-hidden="true" tabindex="-1"></a>              h_query_handler</span>
+<span id="cb39-114"><a href="-3.html#cb39-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-115"><a href="-3.html#cb39-115" aria-hidden="true" tabindex="-1"></a><span class="co"># запускаем бота</span></span>
+<span id="cb39-116"><a href="-3.html#cb39-116" aria-hidden="true" tabindex="-1"></a>updater<span class="sc">$</span><span class="fu">start_polling</span>()</span></code></pre></div>
 <p></spoiler></p>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
@@ -810,15 +814,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Метод <em>start</em> у нас запускается командой <code>/start</code>, что реализовано обработчиком <code>CommandHandler('start', start)</code>.</p>
 <p>Для запуска метода <em>weather</em> мы создали одноимённый фильтр:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="-3.html#cb40-1" aria-hidden="true"></a><span class="co"># создаём фильтры</span></span>
-<span id="cb40-2"><a href="-3.html#cb40-2" aria-hidden="true"></a><span class="co">## сообщения с текстом Погода</span></span>
-<span id="cb40-3"><a href="-3.html#cb40-3" aria-hidden="true"></a>MessageFilters<span class="op">$</span>weather &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
-<span id="cb40-4"><a href="-3.html#cb40-4" aria-hidden="true"></a></span>
-<span id="cb40-5"><a href="-3.html#cb40-5" aria-hidden="true"></a>  <span class="co"># проверяем текст сообщения</span></span>
-<span id="cb40-6"><a href="-3.html#cb40-6" aria-hidden="true"></a>  message<span class="op">$</span>text <span class="op">==</span><span class="st"> &quot;Погода&quot;</span></span>
-<span id="cb40-7"><a href="-3.html#cb40-7" aria-hidden="true"></a></span>
-<span id="cb40-8"><a href="-3.html#cb40-8" aria-hidden="true"></a>}</span>
-<span id="cb40-9"><a href="-3.html#cb40-9" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="-3.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём фильтры</span></span>
+<span id="cb40-2"><a href="-3.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="do">## сообщения с текстом Погода</span></span>
+<span id="cb40-3"><a href="-3.html#cb40-3" aria-hidden="true" tabindex="-1"></a>MessageFilters<span class="sc">$</span>weather <span class="ot">&lt;-</span> <span class="fu">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
+<span id="cb40-4"><a href="-3.html#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="-3.html#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># проверяем текст сообщения</span></span>
+<span id="cb40-6"><a href="-3.html#cb40-6" aria-hidden="true" tabindex="-1"></a>  message<span class="sc">$</span>text <span class="sc">==</span> <span class="st">&quot;Погода&quot;</span></span>
+<span id="cb40-7"><a href="-3.html#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="-3.html#cb40-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-9"><a href="-3.html#cb40-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>И вызываем этот метод следующим обработчиком сообщений: <code>MessageHandler(weather, filters = MessageFilters$weather)</code>.</p>
 <p>И в конце концов, основной наш метод <em>answer_cb</em> реагирует на нажатие Inline кнопок, что реализовано специальным обработчиком: <code>CallbackQueryHandler(answer_cb)</code>.</p>
 <p>Внутри метода <em>answer_cb</em>, мы считываем отправленные с клавиатуры данные и записываем их в переменную <code>city</code>: <code>city &lt;- update$callback_query$data</code>. После чего запрашиваем из API данные о погоде, формируем и отправляем сообщение, и в конце концов используем метод <code>answerCallbackQuery</code> для того, что бы сообщить боту, о том, что мы обработали нажатие Inline кнопки.</p>
@@ -829,120 +833,120 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Логика данного бота схожа с предыдущим, изначально мы запускаем основную клавиатуру командой <code>/start</code>. Далее бот даёт нам на выбор список из 6 хабов, мы выбираем интересующий нас хаб, и получаем 5 самых свежих публикаций из выбранного Хаба.</p>
 <p>Как вы понимаете, в данном случае нам необходимо получить список статей, и для этого мы будем использовать специальный пакет <code>habR</code>, который позволяет запрашивать из хабры статьи и некоторую статистику по ним в R.</p>
 <p>Установить пакет <code>habR</code> можно только из github, для чего вам понадобится дополнительный пакет <code>devtools</code>. Для установки воспользуйтесь приведённым ниже кодом.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="-3.html#cb41-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&#39;devtools&#39;</span>)</span>
-<span id="cb41-2"><a href="-3.html#cb41-2" aria-hidden="true"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&#39;selesnow/habR&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="-3.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;devtools&#39;</span>)</span>
+<span id="cb41-2"><a href="-3.html#cb41-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&#39;selesnow/habR&#39;</span>)</span></code></pre></div>
 <p>Теперь рассмотрим код построения описанного выше бота:</p>
 <p><em>Код бот который выводит список наиболее свежих статей по выбранному Хабу</em></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="-3.html#cb42-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
-<span id="cb42-2"><a href="-3.html#cb42-2" aria-hidden="true"></a><span class="kw">library</span>(habR)</span>
-<span id="cb42-3"><a href="-3.html#cb42-3" aria-hidden="true"></a></span>
-<span id="cb42-4"><a href="-3.html#cb42-4" aria-hidden="true"></a><span class="co"># создаём экземпляр класса Updater</span></span>
-<span id="cb42-5"><a href="-3.html#cb42-5" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
-<span id="cb42-6"><a href="-3.html#cb42-6" aria-hidden="true"></a></span>
-<span id="cb42-7"><a href="-3.html#cb42-7" aria-hidden="true"></a><span class="co"># создаём методы</span></span>
-<span id="cb42-8"><a href="-3.html#cb42-8" aria-hidden="true"></a><span class="co">## метод для запуска основной клавиатуры</span></span>
-<span id="cb42-9"><a href="-3.html#cb42-9" aria-hidden="true"></a>start &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb42-10"><a href="-3.html#cb42-10" aria-hidden="true"></a></span>
-<span id="cb42-11"><a href="-3.html#cb42-11" aria-hidden="true"></a>  <span class="co"># создаём клавиатуру</span></span>
-<span id="cb42-12"><a href="-3.html#cb42-12" aria-hidden="true"></a>  RKM &lt;-<span class="st"> </span><span class="kw">ReplyKeyboardMarkup</span>(</span>
-<span id="cb42-13"><a href="-3.html#cb42-13" aria-hidden="true"></a>    <span class="dt">keyboard =</span> <span class="kw">list</span>(</span>
-<span id="cb42-14"><a href="-3.html#cb42-14" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb42-15"><a href="-3.html#cb42-15" aria-hidden="true"></a>        <span class="kw">KeyboardButton</span>(<span class="st">&quot;Список статей&quot;</span>)</span>
-<span id="cb42-16"><a href="-3.html#cb42-16" aria-hidden="true"></a>      )</span>
-<span id="cb42-17"><a href="-3.html#cb42-17" aria-hidden="true"></a>    ),</span>
-<span id="cb42-18"><a href="-3.html#cb42-18" aria-hidden="true"></a>    <span class="dt">resize_keyboard =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb42-19"><a href="-3.html#cb42-19" aria-hidden="true"></a>    <span class="dt">one_time_keyboard =</span> <span class="ot">TRUE</span></span>
-<span id="cb42-20"><a href="-3.html#cb42-20" aria-hidden="true"></a>  )</span>
-<span id="cb42-21"><a href="-3.html#cb42-21" aria-hidden="true"></a></span>
-<span id="cb42-22"><a href="-3.html#cb42-22" aria-hidden="true"></a>  <span class="co"># отправляем клавиатуру</span></span>
-<span id="cb42-23"><a href="-3.html#cb42-23" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb42-24"><a href="-3.html#cb42-24" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="st">&#39;Выберите команду&#39;</span>,</span>
-<span id="cb42-25"><a href="-3.html#cb42-25" aria-hidden="true"></a>                  <span class="dt">reply_markup =</span> RKM)</span>
-<span id="cb42-26"><a href="-3.html#cb42-26" aria-hidden="true"></a></span>
-<span id="cb42-27"><a href="-3.html#cb42-27" aria-hidden="true"></a>}</span>
-<span id="cb42-28"><a href="-3.html#cb42-28" aria-hidden="true"></a></span>
-<span id="cb42-29"><a href="-3.html#cb42-29" aria-hidden="true"></a><span class="co">## Метод вызова Inine клавиатуры</span></span>
-<span id="cb42-30"><a href="-3.html#cb42-30" aria-hidden="true"></a>habs &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb42-31"><a href="-3.html#cb42-31" aria-hidden="true"></a></span>
-<span id="cb42-32"><a href="-3.html#cb42-32" aria-hidden="true"></a>  IKM &lt;-<span class="st"> </span><span class="kw">InlineKeyboardMarkup</span>(</span>
-<span id="cb42-33"><a href="-3.html#cb42-33" aria-hidden="true"></a>    <span class="dt">inline_keyboard =</span> <span class="kw">list</span>(</span>
-<span id="cb42-34"><a href="-3.html#cb42-34" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb42-35"><a href="-3.html#cb42-35" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;R&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;R&#39;</span>),</span>
-<span id="cb42-36"><a href="-3.html#cb42-36" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Data Mining&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;data_mining&#39;</span>),</span>
-<span id="cb42-37"><a href="-3.html#cb42-37" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Data Engineering&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;data_engineering&#39;</span>)</span>
-<span id="cb42-38"><a href="-3.html#cb42-38" aria-hidden="true"></a>      ),</span>
-<span id="cb42-39"><a href="-3.html#cb42-39" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb42-40"><a href="-3.html#cb42-40" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Big Data&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;bigdata&#39;</span>),</span>
-<span id="cb42-41"><a href="-3.html#cb42-41" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Python&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;python&#39;</span>),</span>
-<span id="cb42-42"><a href="-3.html#cb42-42" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Визуализация данных&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;data_visualization&#39;</span>)</span>
-<span id="cb42-43"><a href="-3.html#cb42-43" aria-hidden="true"></a>      )</span>
-<span id="cb42-44"><a href="-3.html#cb42-44" aria-hidden="true"></a>    )</span>
-<span id="cb42-45"><a href="-3.html#cb42-45" aria-hidden="true"></a>  )</span>
-<span id="cb42-46"><a href="-3.html#cb42-46" aria-hidden="true"></a></span>
-<span id="cb42-47"><a href="-3.html#cb42-47" aria-hidden="true"></a>  <span class="co"># Send Inline Keyboard</span></span>
-<span id="cb42-48"><a href="-3.html#cb42-48" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb42-49"><a href="-3.html#cb42-49" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="st">&quot;Выберите Хаб&quot;</span>,</span>
-<span id="cb42-50"><a href="-3.html#cb42-50" aria-hidden="true"></a>                  <span class="dt">reply_markup =</span> IKM)</span>
-<span id="cb42-51"><a href="-3.html#cb42-51" aria-hidden="true"></a>}</span>
-<span id="cb42-52"><a href="-3.html#cb42-52" aria-hidden="true"></a></span>
-<span id="cb42-53"><a href="-3.html#cb42-53" aria-hidden="true"></a><span class="co"># метод для сообщения погоды</span></span>
-<span id="cb42-54"><a href="-3.html#cb42-54" aria-hidden="true"></a>answer_cb &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb42-55"><a href="-3.html#cb42-55" aria-hidden="true"></a></span>
-<span id="cb42-56"><a href="-3.html#cb42-56" aria-hidden="true"></a>  <span class="co"># получаем из сообщения город</span></span>
-<span id="cb42-57"><a href="-3.html#cb42-57" aria-hidden="true"></a>  hub &lt;-<span class="st"> </span>update<span class="op">$</span>callback_query<span class="op">$</span>data</span>
-<span id="cb42-58"><a href="-3.html#cb42-58" aria-hidden="true"></a></span>
-<span id="cb42-59"><a href="-3.html#cb42-59" aria-hidden="true"></a>  <span class="co"># сообщение о том, что данные по кнопке получены</span></span>
-<span id="cb42-60"><a href="-3.html#cb42-60" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">answerCallbackQuery</span>(<span class="dt">callback_query_id =</span> update<span class="op">$</span>callback_query<span class="op">$</span>id,</span>
-<span id="cb42-61"><a href="-3.html#cb42-61" aria-hidden="true"></a>                          <span class="dt">text =</span> <span class="st">&#39;Подождите несколько минут, запрос обрабатывается&#39;</span>)</span>
-<span id="cb42-62"><a href="-3.html#cb42-62" aria-hidden="true"></a></span>
-<span id="cb42-63"><a href="-3.html#cb42-63" aria-hidden="true"></a>  <span class="co"># сообщение о том, что надо подождать пока бот получит данные</span></span>
-<span id="cb42-64"><a href="-3.html#cb42-64" aria-hidden="true"></a>  mid &lt;-<span class="st"> </span>bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> update<span class="op">$</span><span class="kw">from_chat_id</span>(),</span>
-<span id="cb42-65"><a href="-3.html#cb42-65" aria-hidden="true"></a>                         <span class="dt">text    =</span> <span class="st">&quot;Подождите несколько минут пока, я соберу данные по выбранному Хабу&quot;</span>)</span>
-<span id="cb42-66"><a href="-3.html#cb42-66" aria-hidden="true"></a></span>
-<span id="cb42-67"><a href="-3.html#cb42-67" aria-hidden="true"></a>  <span class="co"># парсим Хабр</span></span>
-<span id="cb42-68"><a href="-3.html#cb42-68" aria-hidden="true"></a>  posts &lt;-<span class="st"> </span><span class="kw">head</span>(<span class="kw">habr_hub_posts</span>(hub, <span class="dv">1</span>), <span class="dv">5</span>)</span>
-<span id="cb42-69"><a href="-3.html#cb42-69" aria-hidden="true"></a></span>
-<span id="cb42-70"><a href="-3.html#cb42-70" aria-hidden="true"></a>  <span class="co"># удаляем сообщение о том, что надо подождать</span></span>
-<span id="cb42-71"><a href="-3.html#cb42-71" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">deleteMessage</span>(update<span class="op">$</span><span class="kw">from_chat_id</span>(), mid<span class="op">$</span>message_id)</span>
-<span id="cb42-72"><a href="-3.html#cb42-72" aria-hidden="true"></a></span>
-<span id="cb42-73"><a href="-3.html#cb42-73" aria-hidden="true"></a>  <span class="co"># формируем список кнопок</span></span>
-<span id="cb42-74"><a href="-3.html#cb42-74" aria-hidden="true"></a>  keys &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="cf">function</span>(x) <span class="kw">list</span>(<span class="kw">InlineKeyboardButton</span>(posts<span class="op">$</span>title[x], <span class="dt">url =</span> posts<span class="op">$</span>link[x])))</span>
-<span id="cb42-75"><a href="-3.html#cb42-75" aria-hidden="true"></a></span>
-<span id="cb42-76"><a href="-3.html#cb42-76" aria-hidden="true"></a>  <span class="co"># формируем клавиатуру</span></span>
-<span id="cb42-77"><a href="-3.html#cb42-77" aria-hidden="true"></a>  IKM &lt;-<span class="st"> </span><span class="kw">InlineKeyboardMarkup</span>(</span>
-<span id="cb42-78"><a href="-3.html#cb42-78" aria-hidden="true"></a>    <span class="dt">inline_keyboard =</span>  keys</span>
-<span id="cb42-79"><a href="-3.html#cb42-79" aria-hidden="true"></a>    )</span>
-<span id="cb42-80"><a href="-3.html#cb42-80" aria-hidden="true"></a></span>
-<span id="cb42-81"><a href="-3.html#cb42-81" aria-hidden="true"></a>  <span class="co"># отправляем информацию о погоде</span></span>
-<span id="cb42-82"><a href="-3.html#cb42-82" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> update<span class="op">$</span><span class="kw">from_chat_id</span>(),</span>
-<span id="cb42-83"><a href="-3.html#cb42-83" aria-hidden="true"></a>                  <span class="dt">text    =</span> <span class="kw">paste0</span>(<span class="st">&quot;5 наиболее свежих статей из Хаба &quot;</span>, hub),</span>
-<span id="cb42-84"><a href="-3.html#cb42-84" aria-hidden="true"></a>                  <span class="dt">reply_markup =</span> IKM)</span>
-<span id="cb42-85"><a href="-3.html#cb42-85" aria-hidden="true"></a></span>
-<span id="cb42-86"><a href="-3.html#cb42-86" aria-hidden="true"></a>}</span>
-<span id="cb42-87"><a href="-3.html#cb42-87" aria-hidden="true"></a></span>
-<span id="cb42-88"><a href="-3.html#cb42-88" aria-hidden="true"></a><span class="co"># создаём фильтры</span></span>
-<span id="cb42-89"><a href="-3.html#cb42-89" aria-hidden="true"></a><span class="co">## сообщения с текстом Погода</span></span>
-<span id="cb42-90"><a href="-3.html#cb42-90" aria-hidden="true"></a>MessageFilters<span class="op">$</span>hubs &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
-<span id="cb42-91"><a href="-3.html#cb42-91" aria-hidden="true"></a></span>
-<span id="cb42-92"><a href="-3.html#cb42-92" aria-hidden="true"></a>  <span class="co"># проверяем текст сообщения</span></span>
-<span id="cb42-93"><a href="-3.html#cb42-93" aria-hidden="true"></a>  message<span class="op">$</span>text <span class="op">==</span><span class="st"> &quot;Список статей&quot;</span></span>
-<span id="cb42-94"><a href="-3.html#cb42-94" aria-hidden="true"></a></span>
-<span id="cb42-95"><a href="-3.html#cb42-95" aria-hidden="true"></a>}</span>
-<span id="cb42-96"><a href="-3.html#cb42-96" aria-hidden="true"></a>)</span>
-<span id="cb42-97"><a href="-3.html#cb42-97" aria-hidden="true"></a></span>
-<span id="cb42-98"><a href="-3.html#cb42-98" aria-hidden="true"></a><span class="co"># создаём обработчики</span></span>
-<span id="cb42-99"><a href="-3.html#cb42-99" aria-hidden="true"></a>h_start         &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;start&#39;</span>, start)</span>
-<span id="cb42-100"><a href="-3.html#cb42-100" aria-hidden="true"></a>h_hubs          &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(habs, <span class="dt">filters =</span> MessageFilters<span class="op">$</span>hubs)</span>
-<span id="cb42-101"><a href="-3.html#cb42-101" aria-hidden="true"></a>h_query_handler &lt;-<span class="st"> </span><span class="kw">CallbackQueryHandler</span>(answer_cb)</span>
-<span id="cb42-102"><a href="-3.html#cb42-102" aria-hidden="true"></a></span>
-<span id="cb42-103"><a href="-3.html#cb42-103" aria-hidden="true"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
-<span id="cb42-104"><a href="-3.html#cb42-104" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span></span>
-<span id="cb42-105"><a href="-3.html#cb42-105" aria-hidden="true"></a><span class="st">  </span>h_start <span class="op">+</span></span>
-<span id="cb42-106"><a href="-3.html#cb42-106" aria-hidden="true"></a><span class="st">  </span>h_hubs  <span class="op">+</span></span>
-<span id="cb42-107"><a href="-3.html#cb42-107" aria-hidden="true"></a><span class="st">  </span>h_query_handler</span>
-<span id="cb42-108"><a href="-3.html#cb42-108" aria-hidden="true"></a></span>
-<span id="cb42-109"><a href="-3.html#cb42-109" aria-hidden="true"></a><span class="co"># запускаем бота</span></span>
-<span id="cb42-110"><a href="-3.html#cb42-110" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="-3.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(telegram.bot)</span>
+<span id="cb42-2"><a href="-3.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(habR)</span>
+<span id="cb42-3"><a href="-3.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="-3.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём экземпляр класса Updater</span></span>
+<span id="cb42-5"><a href="-3.html#cb42-5" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> <span class="fu">Updater</span>(<span class="st">&#39;ТОКЕН ВАШЕГО БОТА&#39;</span>)</span>
+<span id="cb42-6"><a href="-3.html#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="-3.html#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём методы</span></span>
+<span id="cb42-8"><a href="-3.html#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="do">## метод для запуска основной клавиатуры</span></span>
+<span id="cb42-9"><a href="-3.html#cb42-9" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb42-10"><a href="-3.html#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="-3.html#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># создаём клавиатуру</span></span>
+<span id="cb42-12"><a href="-3.html#cb42-12" aria-hidden="true" tabindex="-1"></a>  RKM <span class="ot">&lt;-</span> <span class="fu">ReplyKeyboardMarkup</span>(</span>
+<span id="cb42-13"><a href="-3.html#cb42-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">keyboard =</span> <span class="fu">list</span>(</span>
+<span id="cb42-14"><a href="-3.html#cb42-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb42-15"><a href="-3.html#cb42-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">KeyboardButton</span>(<span class="st">&quot;Список статей&quot;</span>)</span>
+<span id="cb42-16"><a href="-3.html#cb42-16" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb42-17"><a href="-3.html#cb42-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb42-18"><a href="-3.html#cb42-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">resize_keyboard =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb42-19"><a href="-3.html#cb42-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">one_time_keyboard =</span> <span class="cn">TRUE</span></span>
+<span id="cb42-20"><a href="-3.html#cb42-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb42-21"><a href="-3.html#cb42-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-22"><a href="-3.html#cb42-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># отправляем клавиатуру</span></span>
+<span id="cb42-23"><a href="-3.html#cb42-23" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb42-24"><a href="-3.html#cb42-24" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="st">&#39;Выберите команду&#39;</span>,</span>
+<span id="cb42-25"><a href="-3.html#cb42-25" aria-hidden="true" tabindex="-1"></a>                  <span class="at">reply_markup =</span> RKM)</span>
+<span id="cb42-26"><a href="-3.html#cb42-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-27"><a href="-3.html#cb42-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb42-28"><a href="-3.html#cb42-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-29"><a href="-3.html#cb42-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Метод вызова Inine клавиатуры</span></span>
+<span id="cb42-30"><a href="-3.html#cb42-30" aria-hidden="true" tabindex="-1"></a>habs <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb42-31"><a href="-3.html#cb42-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-32"><a href="-3.html#cb42-32" aria-hidden="true" tabindex="-1"></a>  IKM <span class="ot">&lt;-</span> <span class="fu">InlineKeyboardMarkup</span>(</span>
+<span id="cb42-33"><a href="-3.html#cb42-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">inline_keyboard =</span> <span class="fu">list</span>(</span>
+<span id="cb42-34"><a href="-3.html#cb42-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb42-35"><a href="-3.html#cb42-35" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;R&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;R&#39;</span>),</span>
+<span id="cb42-36"><a href="-3.html#cb42-36" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Data Mining&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;data_mining&#39;</span>),</span>
+<span id="cb42-37"><a href="-3.html#cb42-37" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Data Engineering&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;data_engineering&#39;</span>)</span>
+<span id="cb42-38"><a href="-3.html#cb42-38" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb42-39"><a href="-3.html#cb42-39" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb42-40"><a href="-3.html#cb42-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Big Data&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;bigdata&#39;</span>),</span>
+<span id="cb42-41"><a href="-3.html#cb42-41" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Python&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;python&#39;</span>),</span>
+<span id="cb42-42"><a href="-3.html#cb42-42" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Визуализация данных&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;data_visualization&#39;</span>)</span>
+<span id="cb42-43"><a href="-3.html#cb42-43" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb42-44"><a href="-3.html#cb42-44" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb42-45"><a href="-3.html#cb42-45" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb42-46"><a href="-3.html#cb42-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-47"><a href="-3.html#cb42-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Send Inline Keyboard</span></span>
+<span id="cb42-48"><a href="-3.html#cb42-48" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(<span class="at">chat_id =</span> update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb42-49"><a href="-3.html#cb42-49" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="st">&quot;Выберите Хаб&quot;</span>,</span>
+<span id="cb42-50"><a href="-3.html#cb42-50" aria-hidden="true" tabindex="-1"></a>                  <span class="at">reply_markup =</span> IKM)</span>
+<span id="cb42-51"><a href="-3.html#cb42-51" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb42-52"><a href="-3.html#cb42-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-53"><a href="-3.html#cb42-53" aria-hidden="true" tabindex="-1"></a><span class="co"># метод для сообщения погоды</span></span>
+<span id="cb42-54"><a href="-3.html#cb42-54" aria-hidden="true" tabindex="-1"></a>answer_cb <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb42-55"><a href="-3.html#cb42-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-56"><a href="-3.html#cb42-56" aria-hidden="true" tabindex="-1"></a>  <span class="co"># получаем из сообщения город</span></span>
+<span id="cb42-57"><a href="-3.html#cb42-57" aria-hidden="true" tabindex="-1"></a>  hub <span class="ot">&lt;-</span> update<span class="sc">$</span>callback_query<span class="sc">$</span>data</span>
+<span id="cb42-58"><a href="-3.html#cb42-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-59"><a href="-3.html#cb42-59" aria-hidden="true" tabindex="-1"></a>  <span class="co"># сообщение о том, что данные по кнопке получены</span></span>
+<span id="cb42-60"><a href="-3.html#cb42-60" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">answerCallbackQuery</span>(<span class="at">callback_query_id =</span> update<span class="sc">$</span>callback_query<span class="sc">$</span>id,</span>
+<span id="cb42-61"><a href="-3.html#cb42-61" aria-hidden="true" tabindex="-1"></a>                          <span class="at">text =</span> <span class="st">&#39;Подождите несколько минут, запрос обрабатывается&#39;</span>)</span>
+<span id="cb42-62"><a href="-3.html#cb42-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-63"><a href="-3.html#cb42-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># сообщение о том, что надо подождать пока бот получит данные</span></span>
+<span id="cb42-64"><a href="-3.html#cb42-64" aria-hidden="true" tabindex="-1"></a>  mid <span class="ot">&lt;-</span> bot<span class="sc">$</span><span class="fu">sendMessage</span>(<span class="at">chat_id =</span> update<span class="sc">$</span><span class="fu">from_chat_id</span>(),</span>
+<span id="cb42-65"><a href="-3.html#cb42-65" aria-hidden="true" tabindex="-1"></a>                         <span class="at">text    =</span> <span class="st">&quot;Подождите несколько минут пока, я соберу данные по выбранному Хабу&quot;</span>)</span>
+<span id="cb42-66"><a href="-3.html#cb42-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-67"><a href="-3.html#cb42-67" aria-hidden="true" tabindex="-1"></a>  <span class="co"># парсим Хабр</span></span>
+<span id="cb42-68"><a href="-3.html#cb42-68" aria-hidden="true" tabindex="-1"></a>  posts <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">habr_hub_posts</span>(hub, <span class="dv">1</span>), <span class="dv">5</span>)</span>
+<span id="cb42-69"><a href="-3.html#cb42-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-70"><a href="-3.html#cb42-70" aria-hidden="true" tabindex="-1"></a>  <span class="co"># удаляем сообщение о том, что надо подождать</span></span>
+<span id="cb42-71"><a href="-3.html#cb42-71" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">deleteMessage</span>(update<span class="sc">$</span><span class="fu">from_chat_id</span>(), mid<span class="sc">$</span>message_id)</span>
+<span id="cb42-72"><a href="-3.html#cb42-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-73"><a href="-3.html#cb42-73" aria-hidden="true" tabindex="-1"></a>  <span class="co"># формируем список кнопок</span></span>
+<span id="cb42-74"><a href="-3.html#cb42-74" aria-hidden="true" tabindex="-1"></a>  keys <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="cf">function</span>(x) <span class="fu">list</span>(<span class="fu">InlineKeyboardButton</span>(posts<span class="sc">$</span>title[x], <span class="at">url =</span> posts<span class="sc">$</span>link[x])))</span>
+<span id="cb42-75"><a href="-3.html#cb42-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-76"><a href="-3.html#cb42-76" aria-hidden="true" tabindex="-1"></a>  <span class="co"># формируем клавиатуру</span></span>
+<span id="cb42-77"><a href="-3.html#cb42-77" aria-hidden="true" tabindex="-1"></a>  IKM <span class="ot">&lt;-</span> <span class="fu">InlineKeyboardMarkup</span>(</span>
+<span id="cb42-78"><a href="-3.html#cb42-78" aria-hidden="true" tabindex="-1"></a>    <span class="at">inline_keyboard =</span>  keys</span>
+<span id="cb42-79"><a href="-3.html#cb42-79" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb42-80"><a href="-3.html#cb42-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-81"><a href="-3.html#cb42-81" aria-hidden="true" tabindex="-1"></a>  <span class="co"># отправляем информацию о погоде</span></span>
+<span id="cb42-82"><a href="-3.html#cb42-82" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(<span class="at">chat_id =</span> update<span class="sc">$</span><span class="fu">from_chat_id</span>(),</span>
+<span id="cb42-83"><a href="-3.html#cb42-83" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text    =</span> <span class="fu">paste0</span>(<span class="st">&quot;5 наиболее свежих статей из Хаба &quot;</span>, hub),</span>
+<span id="cb42-84"><a href="-3.html#cb42-84" aria-hidden="true" tabindex="-1"></a>                  <span class="at">reply_markup =</span> IKM)</span>
+<span id="cb42-85"><a href="-3.html#cb42-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-86"><a href="-3.html#cb42-86" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb42-87"><a href="-3.html#cb42-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-88"><a href="-3.html#cb42-88" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём фильтры</span></span>
+<span id="cb42-89"><a href="-3.html#cb42-89" aria-hidden="true" tabindex="-1"></a><span class="do">## сообщения с текстом Погода</span></span>
+<span id="cb42-90"><a href="-3.html#cb42-90" aria-hidden="true" tabindex="-1"></a>MessageFilters<span class="sc">$</span>hubs <span class="ot">&lt;-</span> <span class="fu">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
+<span id="cb42-91"><a href="-3.html#cb42-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-92"><a href="-3.html#cb42-92" aria-hidden="true" tabindex="-1"></a>  <span class="co"># проверяем текст сообщения</span></span>
+<span id="cb42-93"><a href="-3.html#cb42-93" aria-hidden="true" tabindex="-1"></a>  message<span class="sc">$</span>text <span class="sc">==</span> <span class="st">&quot;Список статей&quot;</span></span>
+<span id="cb42-94"><a href="-3.html#cb42-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-95"><a href="-3.html#cb42-95" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb42-96"><a href="-3.html#cb42-96" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb42-97"><a href="-3.html#cb42-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-98"><a href="-3.html#cb42-98" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём обработчики</span></span>
+<span id="cb42-99"><a href="-3.html#cb42-99" aria-hidden="true" tabindex="-1"></a>h_start         <span class="ot">&lt;-</span> <span class="fu">CommandHandler</span>(<span class="st">&#39;start&#39;</span>, start)</span>
+<span id="cb42-100"><a href="-3.html#cb42-100" aria-hidden="true" tabindex="-1"></a>h_hubs          <span class="ot">&lt;-</span> <span class="fu">MessageHandler</span>(habs, <span class="at">filters =</span> MessageFilters<span class="sc">$</span>hubs)</span>
+<span id="cb42-101"><a href="-3.html#cb42-101" aria-hidden="true" tabindex="-1"></a>h_query_handler <span class="ot">&lt;-</span> <span class="fu">CallbackQueryHandler</span>(answer_cb)</span>
+<span id="cb42-102"><a href="-3.html#cb42-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-103"><a href="-3.html#cb42-103" aria-hidden="true" tabindex="-1"></a><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span id="cb42-104"><a href="-3.html#cb42-104" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> updater <span class="sc">+</span></span>
+<span id="cb42-105"><a href="-3.html#cb42-105" aria-hidden="true" tabindex="-1"></a>  h_start <span class="sc">+</span></span>
+<span id="cb42-106"><a href="-3.html#cb42-106" aria-hidden="true" tabindex="-1"></a>  h_hubs  <span class="sc">+</span></span>
+<span id="cb42-107"><a href="-3.html#cb42-107" aria-hidden="true" tabindex="-1"></a>  h_query_handler</span>
+<span id="cb42-108"><a href="-3.html#cb42-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-109"><a href="-3.html#cb42-109" aria-hidden="true" tabindex="-1"></a><span class="co"># запускаем бота</span></span>
+<span id="cb42-110"><a href="-3.html#cb42-110" aria-hidden="true" tabindex="-1"></a>updater<span class="sc">$</span><span class="fu">start_polling</span>()</span></code></pre></div>
 <p></spoiler></p>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
@@ -950,40 +954,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>В итоге мы получим вот такой результат:
 <img src="https://img.netpeak.ua/alsey/159905964234_kiss_178kb.png" /></p>
 <p>Список доступных для выбора Хабов мы вбили хардкодом, в методе <code>habs</code>:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="-3.html#cb43-1" aria-hidden="true"></a><span class="co">## Метод вызова Inine клавиатуры</span></span>
-<span id="cb43-2"><a href="-3.html#cb43-2" aria-hidden="true"></a>habs &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb43-3"><a href="-3.html#cb43-3" aria-hidden="true"></a></span>
-<span id="cb43-4"><a href="-3.html#cb43-4" aria-hidden="true"></a>  IKM &lt;-<span class="st"> </span><span class="kw">InlineKeyboardMarkup</span>(</span>
-<span id="cb43-5"><a href="-3.html#cb43-5" aria-hidden="true"></a>    <span class="dt">inline_keyboard =</span> <span class="kw">list</span>(</span>
-<span id="cb43-6"><a href="-3.html#cb43-6" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb43-7"><a href="-3.html#cb43-7" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;R&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;r&#39;</span>),</span>
-<span id="cb43-8"><a href="-3.html#cb43-8" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Data Mining&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;data_mining&#39;</span>),</span>
-<span id="cb43-9"><a href="-3.html#cb43-9" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Data Engineering&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;data_engineering&#39;</span>)</span>
-<span id="cb43-10"><a href="-3.html#cb43-10" aria-hidden="true"></a>      ),</span>
-<span id="cb43-11"><a href="-3.html#cb43-11" aria-hidden="true"></a>      <span class="kw">list</span>(</span>
-<span id="cb43-12"><a href="-3.html#cb43-12" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Big Data&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;bigdata&#39;</span>),</span>
-<span id="cb43-13"><a href="-3.html#cb43-13" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Python&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;python&#39;</span>),</span>
-<span id="cb43-14"><a href="-3.html#cb43-14" aria-hidden="true"></a>        <span class="kw">InlineKeyboardButton</span>(<span class="dt">text =</span> <span class="st">&#39;Визуализация данных&#39;</span>, <span class="dt">callback_data =</span> <span class="st">&#39;data_visualization&#39;</span>)</span>
-<span id="cb43-15"><a href="-3.html#cb43-15" aria-hidden="true"></a>      )</span>
-<span id="cb43-16"><a href="-3.html#cb43-16" aria-hidden="true"></a>    )</span>
-<span id="cb43-17"><a href="-3.html#cb43-17" aria-hidden="true"></a>  )</span>
-<span id="cb43-18"><a href="-3.html#cb43-18" aria-hidden="true"></a></span>
-<span id="cb43-19"><a href="-3.html#cb43-19" aria-hidden="true"></a>  <span class="co"># Send Inline Keyboard</span></span>
-<span id="cb43-20"><a href="-3.html#cb43-20" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(<span class="dt">chat_id =</span> update<span class="op">$</span>message<span class="op">$</span>chat_id,</span>
-<span id="cb43-21"><a href="-3.html#cb43-21" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="st">&quot;Выберите Хаб&quot;</span>,</span>
-<span id="cb43-22"><a href="-3.html#cb43-22" aria-hidden="true"></a>                  <span class="dt">reply_markup =</span> IKM)</span>
-<span id="cb43-23"><a href="-3.html#cb43-23" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="-3.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Метод вызова Inine клавиатуры</span></span>
+<span id="cb43-2"><a href="-3.html#cb43-2" aria-hidden="true" tabindex="-1"></a>habs <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb43-3"><a href="-3.html#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="-3.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  IKM <span class="ot">&lt;-</span> <span class="fu">InlineKeyboardMarkup</span>(</span>
+<span id="cb43-5"><a href="-3.html#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">inline_keyboard =</span> <span class="fu">list</span>(</span>
+<span id="cb43-6"><a href="-3.html#cb43-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb43-7"><a href="-3.html#cb43-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;R&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;r&#39;</span>),</span>
+<span id="cb43-8"><a href="-3.html#cb43-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Data Mining&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;data_mining&#39;</span>),</span>
+<span id="cb43-9"><a href="-3.html#cb43-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Data Engineering&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;data_engineering&#39;</span>)</span>
+<span id="cb43-10"><a href="-3.html#cb43-10" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb43-11"><a href="-3.html#cb43-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb43-12"><a href="-3.html#cb43-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Big Data&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;bigdata&#39;</span>),</span>
+<span id="cb43-13"><a href="-3.html#cb43-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Python&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;python&#39;</span>),</span>
+<span id="cb43-14"><a href="-3.html#cb43-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">InlineKeyboardButton</span>(<span class="at">text =</span> <span class="st">&#39;Визуализация данных&#39;</span>, <span class="at">callback_data =</span> <span class="st">&#39;data_visualization&#39;</span>)</span>
+<span id="cb43-15"><a href="-3.html#cb43-15" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb43-16"><a href="-3.html#cb43-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb43-17"><a href="-3.html#cb43-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb43-18"><a href="-3.html#cb43-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-19"><a href="-3.html#cb43-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Send Inline Keyboard</span></span>
+<span id="cb43-20"><a href="-3.html#cb43-20" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(<span class="at">chat_id =</span> update<span class="sc">$</span>message<span class="sc">$</span>chat_id,</span>
+<span id="cb43-21"><a href="-3.html#cb43-21" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="st">&quot;Выберите Хаб&quot;</span>,</span>
+<span id="cb43-22"><a href="-3.html#cb43-22" aria-hidden="true" tabindex="-1"></a>                  <span class="at">reply_markup =</span> IKM)</span>
+<span id="cb43-23"><a href="-3.html#cb43-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Список статей из указанного Хаба мы получаем командой <code>habr_hub_posts()</code>, из пакета <code>habR</code>. При этом указываем, что нам не требуется список статей за всё время, а только первая страница на которой располагаются 20 статей. Из полученной таблицы с помощью команды <code>head()</code> оставляем только 5 самых верхних, которые и являются самыми свежими статьями.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="-3.html#cb44-1" aria-hidden="true"></a>  <span class="co"># парсим Хабр</span></span>
-<span id="cb44-2"><a href="-3.html#cb44-2" aria-hidden="true"></a>  posts &lt;-<span class="st"> </span><span class="kw">head</span>(<span class="kw">habr_hub_posts</span>(hub, <span class="dv">1</span>), <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="-3.html#cb44-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># парсим Хабр</span></span>
+<span id="cb44-2"><a href="-3.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  posts <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">habr_hub_posts</span>(hub, <span class="dv">1</span>), <span class="dv">5</span>)</span></code></pre></div>
 <p>Логика очень схожа с предыдущим ботом, но в данном случае Inline клавиатуру со списком статей мы генерируем динамически с помощью функции <code>lapply()</code>.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="-3.html#cb45-1" aria-hidden="true"></a>  <span class="co"># формируем список кнопок</span></span>
-<span id="cb45-2"><a href="-3.html#cb45-2" aria-hidden="true"></a>  keys &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="cf">function</span>(x) <span class="kw">list</span>(<span class="kw">InlineKeyboardButton</span>(posts<span class="op">$</span>title[x], <span class="dt">url =</span> posts<span class="op">$</span>link[x])))</span>
-<span id="cb45-3"><a href="-3.html#cb45-3" aria-hidden="true"></a></span>
-<span id="cb45-4"><a href="-3.html#cb45-4" aria-hidden="true"></a>  <span class="co"># формируем клавиатуру</span></span>
-<span id="cb45-5"><a href="-3.html#cb45-5" aria-hidden="true"></a>  IKM &lt;-<span class="st"> </span><span class="kw">InlineKeyboardMarkup</span>(</span>
-<span id="cb45-6"><a href="-3.html#cb45-6" aria-hidden="true"></a>    <span class="dt">inline_keyboard =</span>  keys</span>
-<span id="cb45-7"><a href="-3.html#cb45-7" aria-hidden="true"></a>    )</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="-3.html#cb45-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># формируем список кнопок</span></span>
+<span id="cb45-2"><a href="-3.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  keys <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="cf">function</span>(x) <span class="fu">list</span>(<span class="fu">InlineKeyboardButton</span>(posts<span class="sc">$</span>title[x], <span class="at">url =</span> posts<span class="sc">$</span>link[x])))</span>
+<span id="cb45-3"><a href="-3.html#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="-3.html#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># формируем клавиатуру</span></span>
+<span id="cb45-5"><a href="-3.html#cb45-5" aria-hidden="true" tabindex="-1"></a>  IKM <span class="ot">&lt;-</span> <span class="fu">InlineKeyboardMarkup</span>(</span>
+<span id="cb45-6"><a href="-3.html#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">inline_keyboard =</span>  keys</span>
+<span id="cb45-7"><a href="-3.html#cb45-7" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
 <p>В текст кнопки мы подставляем название статьи <code>posts$title[x]</code>, а в аргумент <code>url</code> ссылку на статью: <code>url = posts$link[x]</code>.</p>
 <p>Далее, создаём фильтр, обработчики и запускаем нашего бота.</p>
 </div>
@@ -1002,7 +1006,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="задания-2" class="section level3" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> Задания</h3>
 <ol style="list-style-type: decimal">
-<li>Создайте бота, который будет поддерживать Reply клавиатуру. На Reply клавиатуре будет всего одна кнопка “Время”. По нажатию на неё будет появляться Inline клавиатура с выбором из 6 часовых поясов.</li>
+<li>Создайте бота, который будет поддерживать Reply клавиатуру. На Reply клавиатуре будет всего одна кнопка “Время.” По нажатию на неё будет появляться Inline клавиатура с выбором из 6 часовых поясов.</li>
 </ol>
 <ul>
 <li>Africa/Cairo</li>
@@ -1051,6 +1055,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -1070,7 +1075,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["build_telegram_bot_using_r.pdf", "build_telegram_bot_using_r.epub"],
 "toc": {
 "collapse": "subsection"
 }

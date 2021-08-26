@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Глава 4 Построение последовательного, логического диалога с ботом  | Разработка telegram ботов на языке R</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Глава 4 Построение последовательного, логического диалога с ботом | Разработка telegram ботов на языке R</title>
+  <meta name="description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Глава 4 Построение последовательного, логического диалога с ботом  | Разработка telegram ботов на языке R" />
+  <meta property="og:title" content="Глава 4 Построение последовательного, логического диалога с ботом | Разработка telegram ботов на языке R" />
   <meta property="og:type" content="book" />
   
-  
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:image" content="/cover.png" />
+  <meta property="og:description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="github-repo" content="selesnow/build_telegram_bot_using_r" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Глава 4 Построение последовательного, логического диалога с ботом  | Разработка telegram ботов на языке R" />
+  <meta name="twitter:title" content="Глава 4 Построение последовательного, логического диалога с ботом | Разработка telegram ботов на языке R" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  
+  <meta name="twitter:description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R." />
+  <meta name="twitter:image" content="/cover.png" />
 
 <meta name="author" content="Алексей Селезнёв" />
 
 
-<meta name="date" content="2020-11-18" />
+<meta name="date" content="2021-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="-3.html"/>
 <link rel="next" href="-5.html"/>
-<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script>
 <script>
@@ -66,6 +68,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -126,6 +129,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -150,7 +154,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#правки-и-предложения"><i class="fa fa-check"></i>Правки и предложения</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#поддержать-проект"><i class="fa fa-check"></i>Поддержать проект</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="-telegram-1.html"><a href="-telegram-1.html"><i class="fa fa-check"></i><b>1</b> Создаём бота, и отправляем с его помощью сообщения в telegram </a>
+<li class="chapter" data-level="1" data-path="-telegram-1.html"><a href="-telegram-1.html"><i class="fa fa-check"></i><b>1</b> Создаём бота, и отправляем с его помощью сообщения в telegram (1)</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="-telegram-1.html"><a href="-telegram-1.html#создание-телеграм-бота"><i class="fa fa-check"></i><b>1.1</b> Создание телеграм бота</a></li>
 <li class="chapter" data-level="1.2" data-path="-telegram-1.html"><a href="-telegram-1.html#установка-пакета-для-работы-с-телеграм-ботом-на-r"><i class="fa fa-check"></i><b>1.2</b> Установка пакета для работы с телеграм ботом на R</a></li>
@@ -166,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.9.2" data-path="-telegram-1.html"><a href="-telegram-1.html#задания"><i class="fa fa-check"></i><b>1.9.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="-updater-2.html"><a href="-updater-2.html"><i class="fa fa-check"></i><b>2</b> Добавляем боту поддержку команд и фильтры сообщений, класс Updater </a>
+<li class="chapter" data-level="2" data-path="-updater-2.html"><a href="-updater-2.html"><i class="fa fa-check"></i><b>2</b> Добавляем боту поддержку команд и фильтры сообщений, класс Updater (2)</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="-updater-2.html"><a href="-updater-2.html#класс-updater"><i class="fa fa-check"></i><b>2.1</b> Класс Updater</a></li>
 <li class="chapter" data-level="2.2" data-path="-updater-2.html"><a href="-updater-2.html#handlers---обработчики"><i class="fa fa-check"></i><b>2.2</b> Handlers - обработчики</a></li>
@@ -183,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10.2" data-path="-updater-2.html"><a href="-updater-2.html#задания-1"><i class="fa fa-check"></i><b>2.10.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="-3.html"><a href="-3.html"><i class="fa fa-check"></i><b>3</b> Как добавить боту поддержку клавиатуры </a>
+<li class="chapter" data-level="3" data-path="-3.html"><a href="-3.html"><i class="fa fa-check"></i><b>3</b> Как добавить боту поддержку клавиатуры (3)</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="-3.html"><a href="-3.html#какие-типы-клавиатур-поддерживает-телеграм-бот"><i class="fa fa-check"></i><b>3.1</b> Какие типы клавиатур поддерживает телеграм бот</a></li>
 <li class="chapter" data-level="3.2" data-path="-3.html"><a href="-3.html#reply-клавиатура"><i class="fa fa-check"></i><b>3.2</b> Reply клавиатура</a></li>
@@ -220,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.13.2" data-path="-4.html"><a href="-4.html#задания-3"><i class="fa fa-check"></i><b>4.13.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="-5.html"><a href="-5.html"><i class="fa fa-check"></i><b>5</b> Управление правами пользователей бота </a>
+<li class="chapter" data-level="5" data-path="-5.html"><a href="-5.html"><i class="fa fa-check"></i><b>5</b> Управление правами пользователей бота (5)</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="-5.html"><a href="-5.html#введение-2"><i class="fa fa-check"></i><b>5.1</b> Введение</a></li>
 <li class="chapter" data-level="5.2" data-path="-5.html"><a href="-5.html#ограничиваем-права-пользователя-с-помощью-фильтров-сообщений"><i class="fa fa-check"></i><b>5.2</b> Ограничиваем права пользователя с помощью фильтров сообщений</a>
@@ -240,13 +244,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.2" data-path="-5.html"><a href="-5.html#задания-4"><i class="fa fa-check"></i><b>5.5.2</b> Задания</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="-6.html"><a href="-6.html"><i class="fa fa-check"></i><b>6</b> Повышаем стабильность работы бота </a>
+<li class="chapter" data-level="6" data-path="-6.html"><a href="-6.html"><i class="fa fa-check"></i><b>6</b> Повышаем стабильность работы бота (6)</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="-6.html"><a href="-6.html#конструкция-trycatch"><i class="fa fa-check"></i><b>6.1</b> Конструкция tryCatch()</a></li>
 <li class="chapter" data-level="6.2" data-path="-6.html"><a href="-6.html#логика-работы-конструкции-trycatch"><i class="fa fa-check"></i><b>6.2</b> Логика работы конструкции tryCatch()</a></li>
 <li class="chapter" data-level="6.3" data-path="-6.html"><a href="-6.html#используем-trycatch-внутри-бота"><i class="fa fa-check"></i><b>6.3</b> Используем tryCatch() внутри бота</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач </a>
+<li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html"><i class="fa fa-check"></i>Решение задач (tasks)</a>
 <ul>
 <li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-1.1"><i class="fa fa-check"></i>Задача 1.1</a></li>
 <li class="chapter" data-level="" data-path="-tasks.html"><a href="-tasks.html#задача-2.1"><i class="fa fa-check"></i>Задача 2.1</a></li>
@@ -346,116 +350,116 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <li>chat_state - текущее состояние всех чатов</li>
 </ul>
 <p>Создать эти таблицы можно с помощью следующего SQL запроса:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb48-1"><a href="-4.html#cb48-1" aria-hidden="true"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> chat_data (</span>
-<span id="cb48-2"><a href="-4.html#cb48-2" aria-hidden="true"></a>    chat_id BIGINT  <span class="kw">PRIMARY</span> <span class="kw">KEY</span></span>
-<span id="cb48-3"><a href="-4.html#cb48-3" aria-hidden="true"></a>                    <span class="kw">UNIQUE</span>,</span>
-<span id="cb48-4"><a href="-4.html#cb48-4" aria-hidden="true"></a>    name    TEXT,</span>
-<span id="cb48-5"><a href="-4.html#cb48-5" aria-hidden="true"></a>    age     <span class="dt">INTEGER</span></span>
-<span id="cb48-6"><a href="-4.html#cb48-6" aria-hidden="true"></a>);</span>
-<span id="cb48-7"><a href="-4.html#cb48-7" aria-hidden="true"></a></span>
-<span id="cb48-8"><a href="-4.html#cb48-8" aria-hidden="true"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> chat_state (</span>
-<span id="cb48-9"><a href="-4.html#cb48-9" aria-hidden="true"></a>    chat_id BIGINT <span class="kw">PRIMARY</span> <span class="kw">KEY</span></span>
-<span id="cb48-10"><a href="-4.html#cb48-10" aria-hidden="true"></a>                   <span class="kw">UNIQUE</span>,</span>
-<span id="cb48-11"><a href="-4.html#cb48-11" aria-hidden="true"></a>    state   TEXT</span>
-<span id="cb48-12"><a href="-4.html#cb48-12" aria-hidden="true"></a>);</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb48-1"><a href="-4.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> chat_data (</span>
+<span id="cb48-2"><a href="-4.html#cb48-2" aria-hidden="true" tabindex="-1"></a>    chat_id BIGINT  <span class="kw">PRIMARY</span> <span class="kw">KEY</span></span>
+<span id="cb48-3"><a href="-4.html#cb48-3" aria-hidden="true" tabindex="-1"></a>                    <span class="kw">UNIQUE</span>,</span>
+<span id="cb48-4"><a href="-4.html#cb48-4" aria-hidden="true" tabindex="-1"></a>    name    TEXT,</span>
+<span id="cb48-5"><a href="-4.html#cb48-5" aria-hidden="true" tabindex="-1"></a>    age     <span class="dt">INTEGER</span></span>
+<span id="cb48-6"><a href="-4.html#cb48-6" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb48-7"><a href="-4.html#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="-4.html#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> chat_state (</span>
+<span id="cb48-9"><a href="-4.html#cb48-9" aria-hidden="true" tabindex="-1"></a>    chat_id BIGINT <span class="kw">PRIMARY</span> <span class="kw">KEY</span></span>
+<span id="cb48-10"><a href="-4.html#cb48-10" aria-hidden="true" tabindex="-1"></a>                   <span class="kw">UNIQUE</span>,</span>
+<span id="cb48-11"><a href="-4.html#cb48-11" aria-hidden="true" tabindex="-1"></a>    state   TEXT</span>
+<span id="cb48-12"><a href="-4.html#cb48-12" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
 <p>Если вы скачали проект бота с <a href="https://github.com/selesnow/logical_tg_bot/archive/master.zip">GitHub</a>, то для создания базы можете воспользоваться следующим кодом на языке R.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="-4.html#cb49-1" aria-hidden="true"></a><span class="co"># Скрипт создания базы данных</span></span>
-<span id="cb49-2"><a href="-4.html#cb49-2" aria-hidden="true"></a><span class="kw">library</span>(DBI)     <span class="co"># интерфейс для работы с СУБД</span></span>
-<span id="cb49-3"><a href="-4.html#cb49-3" aria-hidden="true"></a><span class="kw">library</span>(configr) <span class="co"># чтение конфига</span></span>
-<span id="cb49-4"><a href="-4.html#cb49-4" aria-hidden="true"></a><span class="kw">library</span>(readr)   <span class="co"># чтение текстовых SQL файлов</span></span>
-<span id="cb49-5"><a href="-4.html#cb49-5" aria-hidden="true"></a><span class="kw">library</span>(RSQLite) <span class="co"># драйвер для подключения к SQLite</span></span>
-<span id="cb49-6"><a href="-4.html#cb49-6" aria-hidden="true"></a></span>
-<span id="cb49-7"><a href="-4.html#cb49-7" aria-hidden="true"></a><span class="co"># директория проекта</span></span>
-<span id="cb49-8"><a href="-4.html#cb49-8" aria-hidden="true"></a><span class="kw">setwd</span>(<span class="kw">Sys.getenv</span>(<span class="st">&#39;TG_BOT_PATH&#39;</span>))</span>
-<span id="cb49-9"><a href="-4.html#cb49-9" aria-hidden="true"></a></span>
-<span id="cb49-10"><a href="-4.html#cb49-10" aria-hidden="true"></a><span class="co"># чтение конфига</span></span>
-<span id="cb49-11"><a href="-4.html#cb49-11" aria-hidden="true"></a>cfg &lt;-<span class="st"> </span><span class="kw">read.config</span>(<span class="st">&#39;config.cfg&#39;</span>)</span>
-<span id="cb49-12"><a href="-4.html#cb49-12" aria-hidden="true"></a></span>
-<span id="cb49-13"><a href="-4.html#cb49-13" aria-hidden="true"></a><span class="co"># подключение к SQLite</span></span>
-<span id="cb49-14"><a href="-4.html#cb49-14" aria-hidden="true"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw">SQLite</span>(), cfg<span class="op">$</span>db_settings<span class="op">$</span>db_path)</span>
-<span id="cb49-15"><a href="-4.html#cb49-15" aria-hidden="true"></a></span>
-<span id="cb49-16"><a href="-4.html#cb49-16" aria-hidden="true"></a><span class="co"># Создание таблиц в базе</span></span>
-<span id="cb49-17"><a href="-4.html#cb49-17" aria-hidden="true"></a><span class="kw">dbExecute</span>(con, <span class="dt">statement =</span> <span class="kw">read_file</span>(<span class="st">&#39;create_db_data.sql&#39;</span>))</span>
-<span id="cb49-18"><a href="-4.html#cb49-18" aria-hidden="true"></a><span class="kw">dbExecute</span>(con, <span class="dt">statement =</span> <span class="kw">read_file</span>(<span class="st">&#39;create_db_state.sql&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="-4.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Скрипт создания базы данных</span></span>
+<span id="cb49-2"><a href="-4.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)     <span class="co"># интерфейс для работы с СУБД</span></span>
+<span id="cb49-3"><a href="-4.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(configr) <span class="co"># чтение конфига</span></span>
+<span id="cb49-4"><a href="-4.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)   <span class="co"># чтение текстовых SQL файлов</span></span>
+<span id="cb49-5"><a href="-4.html#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSQLite) <span class="co"># драйвер для подключения к SQLite</span></span>
+<span id="cb49-6"><a href="-4.html#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="-4.html#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co"># директория проекта</span></span>
+<span id="cb49-8"><a href="-4.html#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&#39;TG_BOT_PATH&#39;</span>))</span>
+<span id="cb49-9"><a href="-4.html#cb49-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-10"><a href="-4.html#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="co"># чтение конфига</span></span>
+<span id="cb49-11"><a href="-4.html#cb49-11" aria-hidden="true" tabindex="-1"></a>cfg <span class="ot">&lt;-</span> <span class="fu">read.config</span>(<span class="st">&#39;config.cfg&#39;</span>)</span>
+<span id="cb49-12"><a href="-4.html#cb49-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-13"><a href="-4.html#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="co"># подключение к SQLite</span></span>
+<span id="cb49-14"><a href="-4.html#cb49-14" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), cfg<span class="sc">$</span>db_settings<span class="sc">$</span>db_path)</span>
+<span id="cb49-15"><a href="-4.html#cb49-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-16"><a href="-4.html#cb49-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Создание таблиц в базе</span></span>
+<span id="cb49-17"><a href="-4.html#cb49-17" aria-hidden="true" tabindex="-1"></a><span class="fu">dbExecute</span>(con, <span class="at">statement =</span> <span class="fu">read_file</span>(<span class="st">&#39;create_db_data.sql&#39;</span>))</span>
+<span id="cb49-18"><a href="-4.html#cb49-18" aria-hidden="true" tabindex="-1"></a><span class="fu">dbExecute</span>(con, <span class="at">statement =</span> <span class="fu">read_file</span>(<span class="st">&#39;create_db_state.sql&#39;</span>))</span></code></pre></div>
 </div>
 <div id="пишем-функции-для-работы-с-базой-данных" class="section level2" number="4.7">
 <h2><span class="header-section-number">4.7</span> Пишем функции для работы с базой данных</h2>
 <p>У нас уже готов файл конфигурации и создана база данных. Теперь необходимо написать функции для чтения и записи данных в эту базу.</p>
 <p>Если вы скачали проект из <a href="https://github.com/selesnow/logical_tg_bot/archive/master.zip">GitHub</a>, то функции вы можете найти в файле <em>db_bot_function.R</em>.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="-4.html#cb50-1" aria-hidden="true"></a><span class="co"># ###########################################################</span></span>
-<span id="cb50-2"><a href="-4.html#cb50-2" aria-hidden="true"></a><span class="co"># Function for work bot with database</span></span>
-<span id="cb50-3"><a href="-4.html#cb50-3" aria-hidden="true"></a></span>
-<span id="cb50-4"><a href="-4.html#cb50-4" aria-hidden="true"></a><span class="co"># получить текущее состояние чата</span></span>
-<span id="cb50-5"><a href="-4.html#cb50-5" aria-hidden="true"></a>get_state &lt;-<span class="st"> </span><span class="cf">function</span>(chat_id) {</span>
-<span id="cb50-6"><a href="-4.html#cb50-6" aria-hidden="true"></a>  </span>
-<span id="cb50-7"><a href="-4.html#cb50-7" aria-hidden="true"></a>  con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw">SQLite</span>(), cfg<span class="op">$</span>db_settings<span class="op">$</span>db_path)</span>
-<span id="cb50-8"><a href="-4.html#cb50-8" aria-hidden="true"></a>  </span>
-<span id="cb50-9"><a href="-4.html#cb50-9" aria-hidden="true"></a>  chat_state &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(con, <span class="kw">str_interp</span>(<span class="st">&quot;SELECT state FROM chat_state WHERE chat_id == ${chat_id}&quot;</span>))<span class="op">$</span>state</span>
-<span id="cb50-10"><a href="-4.html#cb50-10" aria-hidden="true"></a>  </span>
-<span id="cb50-11"><a href="-4.html#cb50-11" aria-hidden="true"></a>  <span class="kw">return</span>(<span class="kw">unlist</span>(chat_state))</span>
-<span id="cb50-12"><a href="-4.html#cb50-12" aria-hidden="true"></a>  </span>
-<span id="cb50-13"><a href="-4.html#cb50-13" aria-hidden="true"></a>  <span class="kw">dbDisconnect</span>(con)</span>
-<span id="cb50-14"><a href="-4.html#cb50-14" aria-hidden="true"></a>}</span>
-<span id="cb50-15"><a href="-4.html#cb50-15" aria-hidden="true"></a></span>
-<span id="cb50-16"><a href="-4.html#cb50-16" aria-hidden="true"></a><span class="co"># установить текущее состояние чата</span></span>
-<span id="cb50-17"><a href="-4.html#cb50-17" aria-hidden="true"></a>set_state &lt;-<span class="st"> </span><span class="cf">function</span>(chat_id, state) {</span>
-<span id="cb50-18"><a href="-4.html#cb50-18" aria-hidden="true"></a>  </span>
-<span id="cb50-19"><a href="-4.html#cb50-19" aria-hidden="true"></a>  con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw">SQLite</span>(), cfg<span class="op">$</span>db_settings<span class="op">$</span>db_path)</span>
-<span id="cb50-20"><a href="-4.html#cb50-20" aria-hidden="true"></a>  </span>
-<span id="cb50-21"><a href="-4.html#cb50-21" aria-hidden="true"></a>  <span class="co"># upsert состояние чата</span></span>
-<span id="cb50-22"><a href="-4.html#cb50-22" aria-hidden="true"></a>  <span class="kw">dbExecute</span>(con, </span>
-<span id="cb50-23"><a href="-4.html#cb50-23" aria-hidden="true"></a>            <span class="kw">str_interp</span>(<span class="st">&quot;</span></span>
-<span id="cb50-24"><a href="-4.html#cb50-24" aria-hidden="true"></a><span class="st">            INSERT INTO chat_state (chat_id, state)</span></span>
-<span id="cb50-25"><a href="-4.html#cb50-25" aria-hidden="true"></a><span class="st">                VALUES(${chat_id}, &#39;${state}&#39;) </span></span>
-<span id="cb50-26"><a href="-4.html#cb50-26" aria-hidden="true"></a><span class="st">                ON CONFLICT(chat_id) </span></span>
-<span id="cb50-27"><a href="-4.html#cb50-27" aria-hidden="true"></a><span class="st">                DO UPDATE SET state=&#39;${state}&#39;;</span></span>
-<span id="cb50-28"><a href="-4.html#cb50-28" aria-hidden="true"></a><span class="st">            &quot;</span>)</span>
-<span id="cb50-29"><a href="-4.html#cb50-29" aria-hidden="true"></a>  )</span>
-<span id="cb50-30"><a href="-4.html#cb50-30" aria-hidden="true"></a>  </span>
-<span id="cb50-31"><a href="-4.html#cb50-31" aria-hidden="true"></a>  <span class="kw">dbDisconnect</span>(con)</span>
-<span id="cb50-32"><a href="-4.html#cb50-32" aria-hidden="true"></a>  </span>
-<span id="cb50-33"><a href="-4.html#cb50-33" aria-hidden="true"></a>}</span>
-<span id="cb50-34"><a href="-4.html#cb50-34" aria-hidden="true"></a></span>
-<span id="cb50-35"><a href="-4.html#cb50-35" aria-hidden="true"></a><span class="co"># запись полученных данных в базу</span></span>
-<span id="cb50-36"><a href="-4.html#cb50-36" aria-hidden="true"></a>set_chat_data &lt;-<span class="st"> </span><span class="cf">function</span>(chat_id, field, value) {</span>
-<span id="cb50-37"><a href="-4.html#cb50-37" aria-hidden="true"></a>  </span>
-<span id="cb50-38"><a href="-4.html#cb50-38" aria-hidden="true"></a>  </span>
-<span id="cb50-39"><a href="-4.html#cb50-39" aria-hidden="true"></a>  con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw">SQLite</span>(), cfg<span class="op">$</span>db_settings<span class="op">$</span>db_path)</span>
-<span id="cb50-40"><a href="-4.html#cb50-40" aria-hidden="true"></a>  </span>
-<span id="cb50-41"><a href="-4.html#cb50-41" aria-hidden="true"></a>  <span class="co"># upsert состояние чата</span></span>
-<span id="cb50-42"><a href="-4.html#cb50-42" aria-hidden="true"></a>  <span class="kw">dbExecute</span>(con, </span>
-<span id="cb50-43"><a href="-4.html#cb50-43" aria-hidden="true"></a>            <span class="kw">str_interp</span>(<span class="st">&quot;</span></span>
-<span id="cb50-44"><a href="-4.html#cb50-44" aria-hidden="true"></a><span class="st">            INSERT INTO chat_data (chat_id, ${field})</span></span>
-<span id="cb50-45"><a href="-4.html#cb50-45" aria-hidden="true"></a><span class="st">                VALUES(${chat_id}, &#39;${value}&#39;) </span></span>
-<span id="cb50-46"><a href="-4.html#cb50-46" aria-hidden="true"></a><span class="st">                ON CONFLICT(chat_id) </span></span>
-<span id="cb50-47"><a href="-4.html#cb50-47" aria-hidden="true"></a><span class="st">                DO UPDATE SET ${field}=&#39;${value}&#39;;</span></span>
-<span id="cb50-48"><a href="-4.html#cb50-48" aria-hidden="true"></a><span class="st">            &quot;</span>)</span>
-<span id="cb50-49"><a href="-4.html#cb50-49" aria-hidden="true"></a>  )</span>
-<span id="cb50-50"><a href="-4.html#cb50-50" aria-hidden="true"></a>  </span>
-<span id="cb50-51"><a href="-4.html#cb50-51" aria-hidden="true"></a>  <span class="kw">dbDisconnect</span>(con)</span>
-<span id="cb50-52"><a href="-4.html#cb50-52" aria-hidden="true"></a>  </span>
-<span id="cb50-53"><a href="-4.html#cb50-53" aria-hidden="true"></a>}</span>
-<span id="cb50-54"><a href="-4.html#cb50-54" aria-hidden="true"></a></span>
-<span id="cb50-55"><a href="-4.html#cb50-55" aria-hidden="true"></a><span class="co"># read chat data</span></span>
-<span id="cb50-56"><a href="-4.html#cb50-56" aria-hidden="true"></a>get_chat_data &lt;-<span class="st"> </span><span class="cf">function</span>(chat_id, field) {</span>
-<span id="cb50-57"><a href="-4.html#cb50-57" aria-hidden="true"></a>  </span>
-<span id="cb50-58"><a href="-4.html#cb50-58" aria-hidden="true"></a>  </span>
-<span id="cb50-59"><a href="-4.html#cb50-59" aria-hidden="true"></a>  con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw">SQLite</span>(), cfg<span class="op">$</span>db_settings<span class="op">$</span>db_path)</span>
-<span id="cb50-60"><a href="-4.html#cb50-60" aria-hidden="true"></a>  </span>
-<span id="cb50-61"><a href="-4.html#cb50-61" aria-hidden="true"></a>  <span class="co"># upsert состояние чата</span></span>
-<span id="cb50-62"><a href="-4.html#cb50-62" aria-hidden="true"></a>  data &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(con, </span>
-<span id="cb50-63"><a href="-4.html#cb50-63" aria-hidden="true"></a>                     <span class="kw">str_interp</span>(<span class="st">&quot;</span></span>
-<span id="cb50-64"><a href="-4.html#cb50-64" aria-hidden="true"></a><span class="st">            SELECT ${field}</span></span>
-<span id="cb50-65"><a href="-4.html#cb50-65" aria-hidden="true"></a><span class="st">            FROM chat_data</span></span>
-<span id="cb50-66"><a href="-4.html#cb50-66" aria-hidden="true"></a><span class="st">            WHERE chat_id = ${chat_id};</span></span>
-<span id="cb50-67"><a href="-4.html#cb50-67" aria-hidden="true"></a><span class="st">            &quot;</span>)</span>
-<span id="cb50-68"><a href="-4.html#cb50-68" aria-hidden="true"></a>  )</span>
-<span id="cb50-69"><a href="-4.html#cb50-69" aria-hidden="true"></a>  </span>
-<span id="cb50-70"><a href="-4.html#cb50-70" aria-hidden="true"></a>  <span class="kw">dbDisconnect</span>(con)</span>
-<span id="cb50-71"><a href="-4.html#cb50-71" aria-hidden="true"></a>  </span>
-<span id="cb50-72"><a href="-4.html#cb50-72" aria-hidden="true"></a>  <span class="kw">return</span>(data[[field]])</span>
-<span id="cb50-73"><a href="-4.html#cb50-73" aria-hidden="true"></a>  </span>
-<span id="cb50-74"><a href="-4.html#cb50-74" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="-4.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ###########################################################</span></span>
+<span id="cb50-2"><a href="-4.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Function for work bot with database</span></span>
+<span id="cb50-3"><a href="-4.html#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="-4.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># получить текущее состояние чата</span></span>
+<span id="cb50-5"><a href="-4.html#cb50-5" aria-hidden="true" tabindex="-1"></a>get_state <span class="ot">&lt;-</span> <span class="cf">function</span>(chat_id) {</span>
+<span id="cb50-6"><a href="-4.html#cb50-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-7"><a href="-4.html#cb50-7" aria-hidden="true" tabindex="-1"></a>  con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), cfg<span class="sc">$</span>db_settings<span class="sc">$</span>db_path)</span>
+<span id="cb50-8"><a href="-4.html#cb50-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-9"><a href="-4.html#cb50-9" aria-hidden="true" tabindex="-1"></a>  chat_state <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(con, <span class="fu">str_interp</span>(<span class="st">&quot;SELECT state FROM chat_state WHERE chat_id == ${chat_id}&quot;</span>))<span class="sc">$</span>state</span>
+<span id="cb50-10"><a href="-4.html#cb50-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-11"><a href="-4.html#cb50-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">unlist</span>(chat_state))</span>
+<span id="cb50-12"><a href="-4.html#cb50-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-13"><a href="-4.html#cb50-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dbDisconnect</span>(con)</span>
+<span id="cb50-14"><a href="-4.html#cb50-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb50-15"><a href="-4.html#cb50-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-16"><a href="-4.html#cb50-16" aria-hidden="true" tabindex="-1"></a><span class="co"># установить текущее состояние чата</span></span>
+<span id="cb50-17"><a href="-4.html#cb50-17" aria-hidden="true" tabindex="-1"></a>set_state <span class="ot">&lt;-</span> <span class="cf">function</span>(chat_id, state) {</span>
+<span id="cb50-18"><a href="-4.html#cb50-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-19"><a href="-4.html#cb50-19" aria-hidden="true" tabindex="-1"></a>  con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), cfg<span class="sc">$</span>db_settings<span class="sc">$</span>db_path)</span>
+<span id="cb50-20"><a href="-4.html#cb50-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-21"><a href="-4.html#cb50-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># upsert состояние чата</span></span>
+<span id="cb50-22"><a href="-4.html#cb50-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dbExecute</span>(con, </span>
+<span id="cb50-23"><a href="-4.html#cb50-23" aria-hidden="true" tabindex="-1"></a>            <span class="fu">str_interp</span>(<span class="st">&quot;</span></span>
+<span id="cb50-24"><a href="-4.html#cb50-24" aria-hidden="true" tabindex="-1"></a><span class="st">            INSERT INTO chat_state (chat_id, state)</span></span>
+<span id="cb50-25"><a href="-4.html#cb50-25" aria-hidden="true" tabindex="-1"></a><span class="st">                VALUES(${chat_id}, &#39;${state}&#39;) </span></span>
+<span id="cb50-26"><a href="-4.html#cb50-26" aria-hidden="true" tabindex="-1"></a><span class="st">                ON CONFLICT(chat_id) </span></span>
+<span id="cb50-27"><a href="-4.html#cb50-27" aria-hidden="true" tabindex="-1"></a><span class="st">                DO UPDATE SET state=&#39;${state}&#39;;</span></span>
+<span id="cb50-28"><a href="-4.html#cb50-28" aria-hidden="true" tabindex="-1"></a><span class="st">            &quot;</span>)</span>
+<span id="cb50-29"><a href="-4.html#cb50-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb50-30"><a href="-4.html#cb50-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-31"><a href="-4.html#cb50-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dbDisconnect</span>(con)</span>
+<span id="cb50-32"><a href="-4.html#cb50-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-33"><a href="-4.html#cb50-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb50-34"><a href="-4.html#cb50-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-35"><a href="-4.html#cb50-35" aria-hidden="true" tabindex="-1"></a><span class="co"># запись полученных данных в базу</span></span>
+<span id="cb50-36"><a href="-4.html#cb50-36" aria-hidden="true" tabindex="-1"></a>set_chat_data <span class="ot">&lt;-</span> <span class="cf">function</span>(chat_id, field, value) {</span>
+<span id="cb50-37"><a href="-4.html#cb50-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-38"><a href="-4.html#cb50-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-39"><a href="-4.html#cb50-39" aria-hidden="true" tabindex="-1"></a>  con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), cfg<span class="sc">$</span>db_settings<span class="sc">$</span>db_path)</span>
+<span id="cb50-40"><a href="-4.html#cb50-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-41"><a href="-4.html#cb50-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># upsert состояние чата</span></span>
+<span id="cb50-42"><a href="-4.html#cb50-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dbExecute</span>(con, </span>
+<span id="cb50-43"><a href="-4.html#cb50-43" aria-hidden="true" tabindex="-1"></a>            <span class="fu">str_interp</span>(<span class="st">&quot;</span></span>
+<span id="cb50-44"><a href="-4.html#cb50-44" aria-hidden="true" tabindex="-1"></a><span class="st">            INSERT INTO chat_data (chat_id, ${field})</span></span>
+<span id="cb50-45"><a href="-4.html#cb50-45" aria-hidden="true" tabindex="-1"></a><span class="st">                VALUES(${chat_id}, &#39;${value}&#39;) </span></span>
+<span id="cb50-46"><a href="-4.html#cb50-46" aria-hidden="true" tabindex="-1"></a><span class="st">                ON CONFLICT(chat_id) </span></span>
+<span id="cb50-47"><a href="-4.html#cb50-47" aria-hidden="true" tabindex="-1"></a><span class="st">                DO UPDATE SET ${field}=&#39;${value}&#39;;</span></span>
+<span id="cb50-48"><a href="-4.html#cb50-48" aria-hidden="true" tabindex="-1"></a><span class="st">            &quot;</span>)</span>
+<span id="cb50-49"><a href="-4.html#cb50-49" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb50-50"><a href="-4.html#cb50-50" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-51"><a href="-4.html#cb50-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dbDisconnect</span>(con)</span>
+<span id="cb50-52"><a href="-4.html#cb50-52" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-53"><a href="-4.html#cb50-53" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb50-54"><a href="-4.html#cb50-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-55"><a href="-4.html#cb50-55" aria-hidden="true" tabindex="-1"></a><span class="co"># read chat data</span></span>
+<span id="cb50-56"><a href="-4.html#cb50-56" aria-hidden="true" tabindex="-1"></a>get_chat_data <span class="ot">&lt;-</span> <span class="cf">function</span>(chat_id, field) {</span>
+<span id="cb50-57"><a href="-4.html#cb50-57" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-58"><a href="-4.html#cb50-58" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-59"><a href="-4.html#cb50-59" aria-hidden="true" tabindex="-1"></a>  con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), cfg<span class="sc">$</span>db_settings<span class="sc">$</span>db_path)</span>
+<span id="cb50-60"><a href="-4.html#cb50-60" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-61"><a href="-4.html#cb50-61" aria-hidden="true" tabindex="-1"></a>  <span class="co"># upsert состояние чата</span></span>
+<span id="cb50-62"><a href="-4.html#cb50-62" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(con, </span>
+<span id="cb50-63"><a href="-4.html#cb50-63" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">str_interp</span>(<span class="st">&quot;</span></span>
+<span id="cb50-64"><a href="-4.html#cb50-64" aria-hidden="true" tabindex="-1"></a><span class="st">            SELECT ${field}</span></span>
+<span id="cb50-65"><a href="-4.html#cb50-65" aria-hidden="true" tabindex="-1"></a><span class="st">            FROM chat_data</span></span>
+<span id="cb50-66"><a href="-4.html#cb50-66" aria-hidden="true" tabindex="-1"></a><span class="st">            WHERE chat_id = ${chat_id};</span></span>
+<span id="cb50-67"><a href="-4.html#cb50-67" aria-hidden="true" tabindex="-1"></a><span class="st">            &quot;</span>)</span>
+<span id="cb50-68"><a href="-4.html#cb50-68" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb50-69"><a href="-4.html#cb50-69" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-70"><a href="-4.html#cb50-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dbDisconnect</span>(con)</span>
+<span id="cb50-71"><a href="-4.html#cb50-71" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-72"><a href="-4.html#cb50-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data[[field]])</span>
+<span id="cb50-73"><a href="-4.html#cb50-73" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-74"><a href="-4.html#cb50-74" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Мы создали 4 простые функции:
 * <code>get_state()</code> - получить текущее состояние чата из БД
 * <code>set_state()</code> - записать текущее состояние чата в БД
@@ -463,107 +467,107 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 * <code>set_chat_data()</code> - записать данные полученные от пользователя</p>
 <p>Все функции достаточно простые, они либо читают данные из базы с помощью команды <code>dbGetQuery()</code>, либо совершают <code>UPSERT</code> операцию (изменение существующих данных или запись новых данных в БД), с помощью функции <code>dbExecute()</code>.</p>
 <p>Синтаксис UPSERT операции выглядит следующим образом:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb51-1"><a href="-4.html#cb51-1" aria-hidden="true"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> chat_data (chat_id, ${field})</span>
-<span id="cb51-2"><a href="-4.html#cb51-2" aria-hidden="true"></a><span class="kw">VALUES</span>(${chat_id}, <span class="st">&#39;${value}&#39;</span>) </span>
-<span id="cb51-3"><a href="-4.html#cb51-3" aria-hidden="true"></a><span class="kw">ON</span> CONFLICT(chat_id) </span>
-<span id="cb51-4"><a href="-4.html#cb51-4" aria-hidden="true"></a>DO <span class="kw">UPDATE</span> <span class="kw">SET</span> ${field}<span class="op">=</span><span class="st">&#39;${value}&#39;</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb51-1"><a href="-4.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> chat_data (chat_id, ${field})</span>
+<span id="cb51-2"><a href="-4.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span>(${chat_id}, <span class="st">&#39;${value}&#39;</span>) </span>
+<span id="cb51-3"><a href="-4.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> CONFLICT(chat_id) </span>
+<span id="cb51-4"><a href="-4.html#cb51-4" aria-hidden="true" tabindex="-1"></a>DO <span class="kw">UPDATE</span> <span class="kw">SET</span> ${field}<span class="op">=</span><span class="st">&#39;${value}&#39;</span>;</span></code></pre></div>
 <p>Т.е. в наших таблицах поле <em>chat_id</em> имеет ограничение по уникальности и является первичным ключом таблиц. Изначально мы пробуем добавить информацию в таблицу, и получаем ошибку если данные по текущему чату уже присутствуют, в таком случае мы просто обновляем информацию по данному чату.</p>
 <p>Далее эти функции мы будем использовать в методах и фильтрах бота.</p>
 </div>
 <div id="методы-бота" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Методы бота</h2>
 <p>Следующим шагом в построении нашего бота будет создание методов. Если вы скачали проект с <a href="https://github.com/selesnow/logical_tg_bot/archive/master.zip">GitHub</a>, то все методы находятся в файле <em>bot_methods.R</em>.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="-4.html#cb52-1" aria-hidden="true"></a><span class="co"># ###########################################################</span></span>
-<span id="cb52-2"><a href="-4.html#cb52-2" aria-hidden="true"></a><span class="co"># bot methods</span></span>
-<span id="cb52-3"><a href="-4.html#cb52-3" aria-hidden="true"></a></span>
-<span id="cb52-4"><a href="-4.html#cb52-4" aria-hidden="true"></a><span class="co"># start dialog</span></span>
-<span id="cb52-5"><a href="-4.html#cb52-5" aria-hidden="true"></a>start &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb52-6"><a href="-4.html#cb52-6" aria-hidden="true"></a>  </span>
-<span id="cb52-7"><a href="-4.html#cb52-7" aria-hidden="true"></a>  <span class="co"># </span></span>
-<span id="cb52-8"><a href="-4.html#cb52-8" aria-hidden="true"></a>  </span>
-<span id="cb52-9"><a href="-4.html#cb52-9" aria-hidden="true"></a>  <span class="co"># Send query</span></span>
-<span id="cb52-10"><a href="-4.html#cb52-10" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
-<span id="cb52-11"><a href="-4.html#cb52-11" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="st">&quot;Введи своё имя&quot;</span>)</span>
-<span id="cb52-12"><a href="-4.html#cb52-12" aria-hidden="true"></a>  </span>
-<span id="cb52-13"><a href="-4.html#cb52-13" aria-hidden="true"></a>  <span class="co"># переключаем состояние диалога в режим ожидания ввода имени</span></span>
-<span id="cb52-14"><a href="-4.html#cb52-14" aria-hidden="true"></a>  <span class="kw">set_state</span>(<span class="dt">chat_id =</span> update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="dt">state =</span> <span class="st">&#39;wait_name&#39;</span>)</span>
-<span id="cb52-15"><a href="-4.html#cb52-15" aria-hidden="true"></a>  </span>
-<span id="cb52-16"><a href="-4.html#cb52-16" aria-hidden="true"></a>}</span>
-<span id="cb52-17"><a href="-4.html#cb52-17" aria-hidden="true"></a></span>
-<span id="cb52-18"><a href="-4.html#cb52-18" aria-hidden="true"></a><span class="co"># get current chat state</span></span>
-<span id="cb52-19"><a href="-4.html#cb52-19" aria-hidden="true"></a>state &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb52-20"><a href="-4.html#cb52-20" aria-hidden="true"></a>  </span>
-<span id="cb52-21"><a href="-4.html#cb52-21" aria-hidden="true"></a>  chat_state &lt;-<span class="st"> </span><span class="kw">get_state</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id)</span>
-<span id="cb52-22"><a href="-4.html#cb52-22" aria-hidden="true"></a>  </span>
-<span id="cb52-23"><a href="-4.html#cb52-23" aria-hidden="true"></a>  <span class="co"># Send state</span></span>
-<span id="cb52-24"><a href="-4.html#cb52-24" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
-<span id="cb52-25"><a href="-4.html#cb52-25" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="kw">unlist</span>(chat_state))</span>
-<span id="cb52-26"><a href="-4.html#cb52-26" aria-hidden="true"></a>  </span>
-<span id="cb52-27"><a href="-4.html#cb52-27" aria-hidden="true"></a>}</span>
-<span id="cb52-28"><a href="-4.html#cb52-28" aria-hidden="true"></a></span>
-<span id="cb52-29"><a href="-4.html#cb52-29" aria-hidden="true"></a><span class="co"># reset dialog state</span></span>
-<span id="cb52-30"><a href="-4.html#cb52-30" aria-hidden="true"></a>reset &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb52-31"><a href="-4.html#cb52-31" aria-hidden="true"></a>  </span>
-<span id="cb52-32"><a href="-4.html#cb52-32" aria-hidden="true"></a>  <span class="kw">set_state</span>(<span class="dt">chat_id =</span> update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="dt">state =</span> <span class="st">&#39;start&#39;</span>)</span>
-<span id="cb52-33"><a href="-4.html#cb52-33" aria-hidden="true"></a>  </span>
-<span id="cb52-34"><a href="-4.html#cb52-34" aria-hidden="true"></a>}</span>
-<span id="cb52-35"><a href="-4.html#cb52-35" aria-hidden="true"></a></span>
-<span id="cb52-36"><a href="-4.html#cb52-36" aria-hidden="true"></a><span class="co"># enter username</span></span>
-<span id="cb52-37"><a href="-4.html#cb52-37" aria-hidden="true"></a>enter_name &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb52-38"><a href="-4.html#cb52-38" aria-hidden="true"></a>  </span>
-<span id="cb52-39"><a href="-4.html#cb52-39" aria-hidden="true"></a>  uname &lt;-<span class="st"> </span>update<span class="op">$</span>message<span class="op">$</span>text</span>
-<span id="cb52-40"><a href="-4.html#cb52-40" aria-hidden="true"></a>  </span>
-<span id="cb52-41"><a href="-4.html#cb52-41" aria-hidden="true"></a>  <span class="co"># Send message with name</span></span>
-<span id="cb52-42"><a href="-4.html#cb52-42" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
-<span id="cb52-43"><a href="-4.html#cb52-43" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="kw">paste0</span>(uname, <span class="st">&quot;, приятно познакомится, я бот!&quot;</span>))</span>
-<span id="cb52-44"><a href="-4.html#cb52-44" aria-hidden="true"></a>  </span>
-<span id="cb52-45"><a href="-4.html#cb52-45" aria-hidden="true"></a>  <span class="co"># Записываем имя в глобальную переменную</span></span>
-<span id="cb52-46"><a href="-4.html#cb52-46" aria-hidden="true"></a>  <span class="co">#username &lt;&lt;- uname</span></span>
-<span id="cb52-47"><a href="-4.html#cb52-47" aria-hidden="true"></a>  <span class="kw">set_chat_data</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="st">&#39;name&#39;</span>, uname) </span>
-<span id="cb52-48"><a href="-4.html#cb52-48" aria-hidden="true"></a>  </span>
-<span id="cb52-49"><a href="-4.html#cb52-49" aria-hidden="true"></a>  <span class="co"># Справшиваем возраст</span></span>
-<span id="cb52-50"><a href="-4.html#cb52-50" aria-hidden="true"></a>  bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
-<span id="cb52-51"><a href="-4.html#cb52-51" aria-hidden="true"></a>                  <span class="dt">text =</span> <span class="st">&quot;Сколько тебе лет?&quot;</span>)</span>
-<span id="cb52-52"><a href="-4.html#cb52-52" aria-hidden="true"></a>  </span>
-<span id="cb52-53"><a href="-4.html#cb52-53" aria-hidden="true"></a>  <span class="co"># Меняем состояние на ожидание ввода имени</span></span>
-<span id="cb52-54"><a href="-4.html#cb52-54" aria-hidden="true"></a>  <span class="kw">set_state</span>(<span class="dt">chat_id =</span> update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="dt">state =</span> <span class="st">&#39;wait_age&#39;</span>)</span>
-<span id="cb52-55"><a href="-4.html#cb52-55" aria-hidden="true"></a>  </span>
-<span id="cb52-56"><a href="-4.html#cb52-56" aria-hidden="true"></a>}</span>
-<span id="cb52-57"><a href="-4.html#cb52-57" aria-hidden="true"></a></span>
-<span id="cb52-58"><a href="-4.html#cb52-58" aria-hidden="true"></a><span class="co"># enter user age</span></span>
-<span id="cb52-59"><a href="-4.html#cb52-59" aria-hidden="true"></a>enter_age &lt;-<span class="st"> </span><span class="cf">function</span>(bot, update) {</span>
-<span id="cb52-60"><a href="-4.html#cb52-60" aria-hidden="true"></a>  </span>
-<span id="cb52-61"><a href="-4.html#cb52-61" aria-hidden="true"></a>  uage &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(update<span class="op">$</span>message<span class="op">$</span>text)</span>
-<span id="cb52-62"><a href="-4.html#cb52-62" aria-hidden="true"></a>  </span>
-<span id="cb52-63"><a href="-4.html#cb52-63" aria-hidden="true"></a>  <span class="co"># проверяем было введено число или нет</span></span>
-<span id="cb52-64"><a href="-4.html#cb52-64" aria-hidden="true"></a>  <span class="cf">if</span> ( <span class="kw">is.na</span>(uage) ) {</span>
-<span id="cb52-65"><a href="-4.html#cb52-65" aria-hidden="true"></a>    </span>
-<span id="cb52-66"><a href="-4.html#cb52-66" aria-hidden="true"></a>    <span class="co"># если введено не число то переспрашиваем возраст</span></span>
-<span id="cb52-67"><a href="-4.html#cb52-67" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
-<span id="cb52-68"><a href="-4.html#cb52-68" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="st">&quot;Ты ввёл некорректные данные, введи число&quot;</span>)</span>
-<span id="cb52-69"><a href="-4.html#cb52-69" aria-hidden="true"></a>    </span>
-<span id="cb52-70"><a href="-4.html#cb52-70" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
-<span id="cb52-71"><a href="-4.html#cb52-71" aria-hidden="true"></a>    </span>
-<span id="cb52-72"><a href="-4.html#cb52-72" aria-hidden="true"></a>    <span class="co"># если введено число сообщаем что возраст принят</span></span>
-<span id="cb52-73"><a href="-4.html#cb52-73" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
-<span id="cb52-74"><a href="-4.html#cb52-74" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="st">&quot;ОК, возраст принят&quot;</span>)</span>
-<span id="cb52-75"><a href="-4.html#cb52-75" aria-hidden="true"></a>    </span>
-<span id="cb52-76"><a href="-4.html#cb52-76" aria-hidden="true"></a>    <span class="co"># записываем глобальную переменную с возрастом</span></span>
-<span id="cb52-77"><a href="-4.html#cb52-77" aria-hidden="true"></a>    <span class="co">#userage &lt;&lt;- uage</span></span>
-<span id="cb52-78"><a href="-4.html#cb52-78" aria-hidden="true"></a>    <span class="kw">set_chat_data</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="st">&#39;age&#39;</span>, uage) </span>
-<span id="cb52-79"><a href="-4.html#cb52-79" aria-hidden="true"></a>    </span>
-<span id="cb52-80"><a href="-4.html#cb52-80" aria-hidden="true"></a>    <span class="co"># сообщаем какие данные были собраны</span></span>
-<span id="cb52-81"><a href="-4.html#cb52-81" aria-hidden="true"></a>    username &lt;-<span class="st"> </span><span class="kw">get_chat_data</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="st">&#39;name&#39;</span>)</span>
-<span id="cb52-82"><a href="-4.html#cb52-82" aria-hidden="true"></a>    userage  &lt;-<span class="st"> </span><span class="kw">get_chat_data</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="st">&#39;age&#39;</span>)</span>
-<span id="cb52-83"><a href="-4.html#cb52-83" aria-hidden="true"></a>    </span>
-<span id="cb52-84"><a href="-4.html#cb52-84" aria-hidden="true"></a>    bot<span class="op">$</span><span class="kw">sendMessage</span>(update<span class="op">$</span>message<span class="op">$</span>chat_id, </span>
-<span id="cb52-85"><a href="-4.html#cb52-85" aria-hidden="true"></a>                    <span class="dt">text =</span> <span class="kw">paste0</span>(<span class="st">&quot;Тебя зовут &quot;</span>, username, <span class="st">&quot; и тебе &quot;</span>, userage, <span class="st">&quot; лет. Будем знакомы&quot;</span>))</span>
-<span id="cb52-86"><a href="-4.html#cb52-86" aria-hidden="true"></a>    </span>
-<span id="cb52-87"><a href="-4.html#cb52-87" aria-hidden="true"></a>    <span class="co"># возвращаем диалог в исходное состояние</span></span>
-<span id="cb52-88"><a href="-4.html#cb52-88" aria-hidden="true"></a>    <span class="kw">set_state</span>(<span class="dt">chat_id =</span> update<span class="op">$</span>message<span class="op">$</span>chat_id, <span class="dt">state =</span> <span class="st">&#39;start&#39;</span>)</span>
-<span id="cb52-89"><a href="-4.html#cb52-89" aria-hidden="true"></a>  }</span>
-<span id="cb52-90"><a href="-4.html#cb52-90" aria-hidden="true"></a>  </span>
-<span id="cb52-91"><a href="-4.html#cb52-91" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="-4.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ###########################################################</span></span>
+<span id="cb52-2"><a href="-4.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co"># bot methods</span></span>
+<span id="cb52-3"><a href="-4.html#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="-4.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># start dialog</span></span>
+<span id="cb52-5"><a href="-4.html#cb52-5" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb52-6"><a href="-4.html#cb52-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-7"><a href="-4.html#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span></span>
+<span id="cb52-8"><a href="-4.html#cb52-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-9"><a href="-4.html#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Send query</span></span>
+<span id="cb52-10"><a href="-4.html#cb52-10" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id, </span>
+<span id="cb52-11"><a href="-4.html#cb52-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="st">&quot;Введи своё имя&quot;</span>)</span>
+<span id="cb52-12"><a href="-4.html#cb52-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-13"><a href="-4.html#cb52-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># переключаем состояние диалога в режим ожидания ввода имени</span></span>
+<span id="cb52-14"><a href="-4.html#cb52-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_state</span>(<span class="at">chat_id =</span> update<span class="sc">$</span>message<span class="sc">$</span>chat_id, <span class="at">state =</span> <span class="st">&#39;wait_name&#39;</span>)</span>
+<span id="cb52-15"><a href="-4.html#cb52-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-16"><a href="-4.html#cb52-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb52-17"><a href="-4.html#cb52-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-18"><a href="-4.html#cb52-18" aria-hidden="true" tabindex="-1"></a><span class="co"># get current chat state</span></span>
+<span id="cb52-19"><a href="-4.html#cb52-19" aria-hidden="true" tabindex="-1"></a>state <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb52-20"><a href="-4.html#cb52-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-21"><a href="-4.html#cb52-21" aria-hidden="true" tabindex="-1"></a>  chat_state <span class="ot">&lt;-</span> <span class="fu">get_state</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id)</span>
+<span id="cb52-22"><a href="-4.html#cb52-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-23"><a href="-4.html#cb52-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Send state</span></span>
+<span id="cb52-24"><a href="-4.html#cb52-24" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id, </span>
+<span id="cb52-25"><a href="-4.html#cb52-25" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="fu">unlist</span>(chat_state))</span>
+<span id="cb52-26"><a href="-4.html#cb52-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-27"><a href="-4.html#cb52-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb52-28"><a href="-4.html#cb52-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-29"><a href="-4.html#cb52-29" aria-hidden="true" tabindex="-1"></a><span class="co"># reset dialog state</span></span>
+<span id="cb52-30"><a href="-4.html#cb52-30" aria-hidden="true" tabindex="-1"></a>reset <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb52-31"><a href="-4.html#cb52-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-32"><a href="-4.html#cb52-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_state</span>(<span class="at">chat_id =</span> update<span class="sc">$</span>message<span class="sc">$</span>chat_id, <span class="at">state =</span> <span class="st">&#39;start&#39;</span>)</span>
+<span id="cb52-33"><a href="-4.html#cb52-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-34"><a href="-4.html#cb52-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb52-35"><a href="-4.html#cb52-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-36"><a href="-4.html#cb52-36" aria-hidden="true" tabindex="-1"></a><span class="co"># enter username</span></span>
+<span id="cb52-37"><a href="-4.html#cb52-37" aria-hidden="true" tabindex="-1"></a>enter_name <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb52-38"><a href="-4.html#cb52-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-39"><a href="-4.html#cb52-39" aria-hidden="true" tabindex="-1"></a>  uname <span class="ot">&lt;-</span> update<span class="sc">$</span>message<span class="sc">$</span>text</span>
+<span id="cb52-40"><a href="-4.html#cb52-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-41"><a href="-4.html#cb52-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Send message with name</span></span>
+<span id="cb52-42"><a href="-4.html#cb52-42" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id, </span>
+<span id="cb52-43"><a href="-4.html#cb52-43" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="fu">paste0</span>(uname, <span class="st">&quot;, приятно познакомится, я бот!&quot;</span>))</span>
+<span id="cb52-44"><a href="-4.html#cb52-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-45"><a href="-4.html#cb52-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Записываем имя в глобальную переменную</span></span>
+<span id="cb52-46"><a href="-4.html#cb52-46" aria-hidden="true" tabindex="-1"></a>  <span class="co">#username &lt;&lt;- uname</span></span>
+<span id="cb52-47"><a href="-4.html#cb52-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_chat_data</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id, <span class="st">&#39;name&#39;</span>, uname) </span>
+<span id="cb52-48"><a href="-4.html#cb52-48" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-49"><a href="-4.html#cb52-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Справшиваем возраст</span></span>
+<span id="cb52-50"><a href="-4.html#cb52-50" aria-hidden="true" tabindex="-1"></a>  bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id, </span>
+<span id="cb52-51"><a href="-4.html#cb52-51" aria-hidden="true" tabindex="-1"></a>                  <span class="at">text =</span> <span class="st">&quot;Сколько тебе лет?&quot;</span>)</span>
+<span id="cb52-52"><a href="-4.html#cb52-52" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-53"><a href="-4.html#cb52-53" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Меняем состояние на ожидание ввода имени</span></span>
+<span id="cb52-54"><a href="-4.html#cb52-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_state</span>(<span class="at">chat_id =</span> update<span class="sc">$</span>message<span class="sc">$</span>chat_id, <span class="at">state =</span> <span class="st">&#39;wait_age&#39;</span>)</span>
+<span id="cb52-55"><a href="-4.html#cb52-55" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-56"><a href="-4.html#cb52-56" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb52-57"><a href="-4.html#cb52-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-58"><a href="-4.html#cb52-58" aria-hidden="true" tabindex="-1"></a><span class="co"># enter user age</span></span>
+<span id="cb52-59"><a href="-4.html#cb52-59" aria-hidden="true" tabindex="-1"></a>enter_age <span class="ot">&lt;-</span> <span class="cf">function</span>(bot, update) {</span>
+<span id="cb52-60"><a href="-4.html#cb52-60" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-61"><a href="-4.html#cb52-61" aria-hidden="true" tabindex="-1"></a>  uage <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(update<span class="sc">$</span>message<span class="sc">$</span>text)</span>
+<span id="cb52-62"><a href="-4.html#cb52-62" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-63"><a href="-4.html#cb52-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># проверяем было введено число или нет</span></span>
+<span id="cb52-64"><a href="-4.html#cb52-64" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> ( <span class="fu">is.na</span>(uage) ) {</span>
+<span id="cb52-65"><a href="-4.html#cb52-65" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb52-66"><a href="-4.html#cb52-66" aria-hidden="true" tabindex="-1"></a>    <span class="co"># если введено не число то переспрашиваем возраст</span></span>
+<span id="cb52-67"><a href="-4.html#cb52-67" aria-hidden="true" tabindex="-1"></a>    bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id, </span>
+<span id="cb52-68"><a href="-4.html#cb52-68" aria-hidden="true" tabindex="-1"></a>                    <span class="at">text =</span> <span class="st">&quot;Ты ввёл некорректные данные, введи число&quot;</span>)</span>
+<span id="cb52-69"><a href="-4.html#cb52-69" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb52-70"><a href="-4.html#cb52-70" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb52-71"><a href="-4.html#cb52-71" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb52-72"><a href="-4.html#cb52-72" aria-hidden="true" tabindex="-1"></a>    <span class="co"># если введено число сообщаем что возраст принят</span></span>
+<span id="cb52-73"><a href="-4.html#cb52-73" aria-hidden="true" tabindex="-1"></a>    bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id, </span>
+<span id="cb52-74"><a href="-4.html#cb52-74" aria-hidden="true" tabindex="-1"></a>                    <span class="at">text =</span> <span class="st">&quot;ОК, возраст принят&quot;</span>)</span>
+<span id="cb52-75"><a href="-4.html#cb52-75" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb52-76"><a href="-4.html#cb52-76" aria-hidden="true" tabindex="-1"></a>    <span class="co"># записываем глобальную переменную с возрастом</span></span>
+<span id="cb52-77"><a href="-4.html#cb52-77" aria-hidden="true" tabindex="-1"></a>    <span class="co">#userage &lt;&lt;- uage</span></span>
+<span id="cb52-78"><a href="-4.html#cb52-78" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_chat_data</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id, <span class="st">&#39;age&#39;</span>, uage) </span>
+<span id="cb52-79"><a href="-4.html#cb52-79" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb52-80"><a href="-4.html#cb52-80" aria-hidden="true" tabindex="-1"></a>    <span class="co"># сообщаем какие данные были собраны</span></span>
+<span id="cb52-81"><a href="-4.html#cb52-81" aria-hidden="true" tabindex="-1"></a>    username <span class="ot">&lt;-</span> <span class="fu">get_chat_data</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id, <span class="st">&#39;name&#39;</span>)</span>
+<span id="cb52-82"><a href="-4.html#cb52-82" aria-hidden="true" tabindex="-1"></a>    userage  <span class="ot">&lt;-</span> <span class="fu">get_chat_data</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id, <span class="st">&#39;age&#39;</span>)</span>
+<span id="cb52-83"><a href="-4.html#cb52-83" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb52-84"><a href="-4.html#cb52-84" aria-hidden="true" tabindex="-1"></a>    bot<span class="sc">$</span><span class="fu">sendMessage</span>(update<span class="sc">$</span>message<span class="sc">$</span>chat_id, </span>
+<span id="cb52-85"><a href="-4.html#cb52-85" aria-hidden="true" tabindex="-1"></a>                    <span class="at">text =</span> <span class="fu">paste0</span>(<span class="st">&quot;Тебя зовут &quot;</span>, username, <span class="st">&quot; и тебе &quot;</span>, userage, <span class="st">&quot; лет. Будем знакомы&quot;</span>))</span>
+<span id="cb52-86"><a href="-4.html#cb52-86" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb52-87"><a href="-4.html#cb52-87" aria-hidden="true" tabindex="-1"></a>    <span class="co"># возвращаем диалог в исходное состояние</span></span>
+<span id="cb52-88"><a href="-4.html#cb52-88" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_state</span>(<span class="at">chat_id =</span> update<span class="sc">$</span>message<span class="sc">$</span>chat_id, <span class="at">state =</span> <span class="st">&#39;start&#39;</span>)</span>
+<span id="cb52-89"><a href="-4.html#cb52-89" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb52-90"><a href="-4.html#cb52-90" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-91"><a href="-4.html#cb52-91" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Мы создали 5 методов:</p>
 <ul>
 <li>start - Запуск диалога</li>
@@ -582,76 +586,76 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <p>В нашем случае это одна из наиболее важных частей в построении бота. Именно с помощью фильтров сообщений бот будет понимать какую информацию он от вас ждёт, и как её надо обрабатывать.</p>
 <p>В проекте на <a href="https://github.com/selesnow/logical_tg_bot">GitHub</a> фильтры прописаны в файле <em>message_filters.R</em>.</p>
 <p>Код фильтров сообщений:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="-4.html#cb53-1" aria-hidden="true"></a><span class="co"># ###########################################################</span></span>
-<span id="cb53-2"><a href="-4.html#cb53-2" aria-hidden="true"></a><span class="co"># message state filters</span></span>
-<span id="cb53-3"><a href="-4.html#cb53-3" aria-hidden="true"></a></span>
-<span id="cb53-4"><a href="-4.html#cb53-4" aria-hidden="true"></a><span class="co"># фильтр сообщений в состоянии ожидания имени</span></span>
-<span id="cb53-5"><a href="-4.html#cb53-5" aria-hidden="true"></a>MessageFilters<span class="op">$</span>wait_name &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
-<span id="cb53-6"><a href="-4.html#cb53-6" aria-hidden="true"></a>  <span class="kw">get_state</span>( message<span class="op">$</span>chat_id )  <span class="op">==</span><span class="st"> &quot;wait_name&quot;</span></span>
-<span id="cb53-7"><a href="-4.html#cb53-7" aria-hidden="true"></a>}</span>
-<span id="cb53-8"><a href="-4.html#cb53-8" aria-hidden="true"></a>)</span>
-<span id="cb53-9"><a href="-4.html#cb53-9" aria-hidden="true"></a></span>
-<span id="cb53-10"><a href="-4.html#cb53-10" aria-hidden="true"></a><span class="co"># фильтр сообщений в состоянии ожидания возраста</span></span>
-<span id="cb53-11"><a href="-4.html#cb53-11" aria-hidden="true"></a>MessageFilters<span class="op">$</span>wait_age &lt;-<span class="st"> </span><span class="kw">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
-<span id="cb53-12"><a href="-4.html#cb53-12" aria-hidden="true"></a>  <span class="kw">get_state</span>( message<span class="op">$</span>chat_id )   <span class="op">==</span><span class="st"> &quot;wait_age&quot;</span></span>
-<span id="cb53-13"><a href="-4.html#cb53-13" aria-hidden="true"></a>}</span>
-<span id="cb53-14"><a href="-4.html#cb53-14" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="-4.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ###########################################################</span></span>
+<span id="cb53-2"><a href="-4.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># message state filters</span></span>
+<span id="cb53-3"><a href="-4.html#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="-4.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># фильтр сообщений в состоянии ожидания имени</span></span>
+<span id="cb53-5"><a href="-4.html#cb53-5" aria-hidden="true" tabindex="-1"></a>MessageFilters<span class="sc">$</span>wait_name <span class="ot">&lt;-</span> <span class="fu">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
+<span id="cb53-6"><a href="-4.html#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_state</span>( message<span class="sc">$</span>chat_id )  <span class="sc">==</span> <span class="st">&quot;wait_name&quot;</span></span>
+<span id="cb53-7"><a href="-4.html#cb53-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-8"><a href="-4.html#cb53-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb53-9"><a href="-4.html#cb53-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-10"><a href="-4.html#cb53-10" aria-hidden="true" tabindex="-1"></a><span class="co"># фильтр сообщений в состоянии ожидания возраста</span></span>
+<span id="cb53-11"><a href="-4.html#cb53-11" aria-hidden="true" tabindex="-1"></a>MessageFilters<span class="sc">$</span>wait_age <span class="ot">&lt;-</span> <span class="fu">BaseFilter</span>(<span class="cf">function</span>(message) {</span>
+<span id="cb53-12"><a href="-4.html#cb53-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_state</span>( message<span class="sc">$</span>chat_id )   <span class="sc">==</span> <span class="st">&quot;wait_age&quot;</span></span>
+<span id="cb53-13"><a href="-4.html#cb53-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-14"><a href="-4.html#cb53-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>В фильтрах мы используем написанную ранее функцию <code>get_state()</code>, для того, что бы запрашивать текущее состояние чата. Данна функция требует всего 1 аргумент, id чата.</p>
 <p>Далее фильтр <em>wait_name</em> обрабатывает сообщения когда чат находится в состоянии <code>wait_name</code>, и соответственно фильтр <em>wait_age</em> обрабатывает сообщения когда чат находится в состоянии <code>wait_age</code>.</p>
 </div>
 <div id="обработчики" class="section level2" number="4.10">
 <h2><span class="header-section-number">4.10</span> Обработчики</h2>
 <p>Файл с обработчиками называется <em>handlers.R</em>, и имеет следующий код:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="-4.html#cb54-1" aria-hidden="true"></a><span class="co"># ###########################################################</span></span>
-<span id="cb54-2"><a href="-4.html#cb54-2" aria-hidden="true"></a><span class="co"># handlers</span></span>
-<span id="cb54-3"><a href="-4.html#cb54-3" aria-hidden="true"></a></span>
-<span id="cb54-4"><a href="-4.html#cb54-4" aria-hidden="true"></a><span class="co"># command handlers</span></span>
-<span id="cb54-5"><a href="-4.html#cb54-5" aria-hidden="true"></a>start_h &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;start&#39;</span>, start)</span>
-<span id="cb54-6"><a href="-4.html#cb54-6" aria-hidden="true"></a>state_h &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;state&#39;</span>, state)</span>
-<span id="cb54-7"><a href="-4.html#cb54-7" aria-hidden="true"></a>reset_h &lt;-<span class="st"> </span><span class="kw">CommandHandler</span>(<span class="st">&#39;reset&#39;</span>, reset)</span>
-<span id="cb54-8"><a href="-4.html#cb54-8" aria-hidden="true"></a></span>
-<span id="cb54-9"><a href="-4.html#cb54-9" aria-hidden="true"></a><span class="co"># message handlers</span></span>
-<span id="cb54-10"><a href="-4.html#cb54-10" aria-hidden="true"></a><span class="co">## !MessageFilters$command - означает что команды данные обработчики не обрабатывают, </span></span>
-<span id="cb54-11"><a href="-4.html#cb54-11" aria-hidden="true"></a><span class="co">## только текстовые сообщения</span></span>
-<span id="cb54-12"><a href="-4.html#cb54-12" aria-hidden="true"></a>wait_age_h  &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(enter_age,  MessageFilters<span class="op">$</span>wait_age  <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>MessageFilters<span class="op">$</span>command)</span>
-<span id="cb54-13"><a href="-4.html#cb54-13" aria-hidden="true"></a>wait_name_h &lt;-<span class="st"> </span><span class="kw">MessageHandler</span>(enter_name, MessageFilters<span class="op">$</span>wait_name <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>MessageFilters<span class="op">$</span>command)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="-4.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ###########################################################</span></span>
+<span id="cb54-2"><a href="-4.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># handlers</span></span>
+<span id="cb54-3"><a href="-4.html#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="-4.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># command handlers</span></span>
+<span id="cb54-5"><a href="-4.html#cb54-5" aria-hidden="true" tabindex="-1"></a>start_h <span class="ot">&lt;-</span> <span class="fu">CommandHandler</span>(<span class="st">&#39;start&#39;</span>, start)</span>
+<span id="cb54-6"><a href="-4.html#cb54-6" aria-hidden="true" tabindex="-1"></a>state_h <span class="ot">&lt;-</span> <span class="fu">CommandHandler</span>(<span class="st">&#39;state&#39;</span>, state)</span>
+<span id="cb54-7"><a href="-4.html#cb54-7" aria-hidden="true" tabindex="-1"></a>reset_h <span class="ot">&lt;-</span> <span class="fu">CommandHandler</span>(<span class="st">&#39;reset&#39;</span>, reset)</span>
+<span id="cb54-8"><a href="-4.html#cb54-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-9"><a href="-4.html#cb54-9" aria-hidden="true" tabindex="-1"></a><span class="co"># message handlers</span></span>
+<span id="cb54-10"><a href="-4.html#cb54-10" aria-hidden="true" tabindex="-1"></a><span class="do">## !MessageFilters$command - означает что команды данные обработчики не обрабатывают, </span></span>
+<span id="cb54-11"><a href="-4.html#cb54-11" aria-hidden="true" tabindex="-1"></a><span class="do">## только текстовые сообщения</span></span>
+<span id="cb54-12"><a href="-4.html#cb54-12" aria-hidden="true" tabindex="-1"></a>wait_age_h  <span class="ot">&lt;-</span> <span class="fu">MessageHandler</span>(enter_age,  MessageFilters<span class="sc">$</span>wait_age  <span class="sc">&amp;</span> <span class="sc">!</span>MessageFilters<span class="sc">$</span>command)</span>
+<span id="cb54-13"><a href="-4.html#cb54-13" aria-hidden="true" tabindex="-1"></a>wait_name_h <span class="ot">&lt;-</span> <span class="fu">MessageHandler</span>(enter_name, MessageFilters<span class="sc">$</span>wait_name <span class="sc">&amp;</span> <span class="sc">!</span>MessageFilters<span class="sc">$</span>command)</span></code></pre></div>
 <p>Сначала мы создаём обработчики команд, которые позволят вам запускать методы для начала диалога, его сброса, и запроса текущего состояния.</p>
 <p>Далее мы создаём 2 обработчика сообщений с использованием созданных на прошлом шаге фильтров, и добавляем к ним фильтр <code>!MessageFilters$command</code>, для того, что бы мы в любом состоянии чата могли использовать команды.</p>
 </div>
 <div id="код-запуска-бота" class="section level2" number="4.11">
 <h2><span class="header-section-number">4.11</span> Код запуска бота</h2>
 <p>Теперь у нас всё готово к запуску, основной код запуска бота находится в файле <em>bot.R</em>.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="-4.html#cb55-1" aria-hidden="true"></a><span class="kw">library</span>(telegram.bot)</span>
-<span id="cb55-2"><a href="-4.html#cb55-2" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb55-3"><a href="-4.html#cb55-3" aria-hidden="true"></a><span class="kw">library</span>(RSQLite)</span>
-<span id="cb55-4"><a href="-4.html#cb55-4" aria-hidden="true"></a><span class="kw">library</span>(DBI)</span>
-<span id="cb55-5"><a href="-4.html#cb55-5" aria-hidden="true"></a><span class="kw">library</span>(configr)</span>
-<span id="cb55-6"><a href="-4.html#cb55-6" aria-hidden="true"></a></span>
-<span id="cb55-7"><a href="-4.html#cb55-7" aria-hidden="true"></a><span class="co"># переходим в папку проекта</span></span>
-<span id="cb55-8"><a href="-4.html#cb55-8" aria-hidden="true"></a><span class="kw">setwd</span>(<span class="kw">Sys.getenv</span>(<span class="st">&#39;TG_BOT_PATH&#39;</span>))</span>
-<span id="cb55-9"><a href="-4.html#cb55-9" aria-hidden="true"></a></span>
-<span id="cb55-10"><a href="-4.html#cb55-10" aria-hidden="true"></a><span class="co"># читаем конфиг</span></span>
-<span id="cb55-11"><a href="-4.html#cb55-11" aria-hidden="true"></a>cfg &lt;-<span class="st"> </span><span class="kw">read.config</span>(<span class="st">&#39;config.cfg&#39;</span>)</span>
-<span id="cb55-12"><a href="-4.html#cb55-12" aria-hidden="true"></a></span>
-<span id="cb55-13"><a href="-4.html#cb55-13" aria-hidden="true"></a><span class="co"># создаём экземпляр бота</span></span>
-<span id="cb55-14"><a href="-4.html#cb55-14" aria-hidden="true"></a>updater &lt;-<span class="st"> </span><span class="kw">Updater</span>(cfg<span class="op">$</span>bot_settings<span class="op">$</span>bot_token)</span>
-<span id="cb55-15"><a href="-4.html#cb55-15" aria-hidden="true"></a></span>
-<span id="cb55-16"><a href="-4.html#cb55-16" aria-hidden="true"></a><span class="co"># Загрузка компонентов бота</span></span>
-<span id="cb55-17"><a href="-4.html#cb55-17" aria-hidden="true"></a><span class="kw">source</span>(<span class="st">&#39;db_bot_function.R&#39;</span>) <span class="co"># функции для работы с БД</span></span>
-<span id="cb55-18"><a href="-4.html#cb55-18" aria-hidden="true"></a><span class="kw">source</span>(<span class="st">&#39;bot_methods.R&#39;</span>)     <span class="co"># методы бота</span></span>
-<span id="cb55-19"><a href="-4.html#cb55-19" aria-hidden="true"></a><span class="kw">source</span>(<span class="st">&#39;message_filters.R&#39;</span>) <span class="co"># фильтры сообщений</span></span>
-<span id="cb55-20"><a href="-4.html#cb55-20" aria-hidden="true"></a><span class="kw">source</span>(<span class="st">&#39;handlers.R&#39;</span>) <span class="co"># обработчики сообщений</span></span>
-<span id="cb55-21"><a href="-4.html#cb55-21" aria-hidden="true"></a></span>
-<span id="cb55-22"><a href="-4.html#cb55-22" aria-hidden="true"></a><span class="co"># Добавляем обработчики в диспетчер</span></span>
-<span id="cb55-23"><a href="-4.html#cb55-23" aria-hidden="true"></a>updater &lt;-<span class="st"> </span>updater <span class="op">+</span></span>
-<span id="cb55-24"><a href="-4.html#cb55-24" aria-hidden="true"></a><span class="st">  </span>start_h <span class="op">+</span></span>
-<span id="cb55-25"><a href="-4.html#cb55-25" aria-hidden="true"></a><span class="st">  </span>wait_age_h <span class="op">+</span></span>
-<span id="cb55-26"><a href="-4.html#cb55-26" aria-hidden="true"></a><span class="st">  </span>wait_name_h <span class="op">+</span></span>
-<span id="cb55-27"><a href="-4.html#cb55-27" aria-hidden="true"></a><span class="st">  </span>state_h <span class="op">+</span></span>
-<span id="cb55-28"><a href="-4.html#cb55-28" aria-hidden="true"></a><span class="st">  </span>reset_h</span>
-<span id="cb55-29"><a href="-4.html#cb55-29" aria-hidden="true"></a></span>
-<span id="cb55-30"><a href="-4.html#cb55-30" aria-hidden="true"></a><span class="co"># Запускаем бота</span></span>
-<span id="cb55-31"><a href="-4.html#cb55-31" aria-hidden="true"></a>updater<span class="op">$</span><span class="kw">start_polling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="-4.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(telegram.bot)</span>
+<span id="cb55-2"><a href="-4.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb55-3"><a href="-4.html#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSQLite)</span>
+<span id="cb55-4"><a href="-4.html#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb55-5"><a href="-4.html#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(configr)</span>
+<span id="cb55-6"><a href="-4.html#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-7"><a href="-4.html#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="co"># переходим в папку проекта</span></span>
+<span id="cb55-8"><a href="-4.html#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&#39;TG_BOT_PATH&#39;</span>))</span>
+<span id="cb55-9"><a href="-4.html#cb55-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-10"><a href="-4.html#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="co"># читаем конфиг</span></span>
+<span id="cb55-11"><a href="-4.html#cb55-11" aria-hidden="true" tabindex="-1"></a>cfg <span class="ot">&lt;-</span> <span class="fu">read.config</span>(<span class="st">&#39;config.cfg&#39;</span>)</span>
+<span id="cb55-12"><a href="-4.html#cb55-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-13"><a href="-4.html#cb55-13" aria-hidden="true" tabindex="-1"></a><span class="co"># создаём экземпляр бота</span></span>
+<span id="cb55-14"><a href="-4.html#cb55-14" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> <span class="fu">Updater</span>(cfg<span class="sc">$</span>bot_settings<span class="sc">$</span>bot_token)</span>
+<span id="cb55-15"><a href="-4.html#cb55-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-16"><a href="-4.html#cb55-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Загрузка компонентов бота</span></span>
+<span id="cb55-17"><a href="-4.html#cb55-17" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;db_bot_function.R&#39;</span>) <span class="co"># функции для работы с БД</span></span>
+<span id="cb55-18"><a href="-4.html#cb55-18" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;bot_methods.R&#39;</span>)     <span class="co"># методы бота</span></span>
+<span id="cb55-19"><a href="-4.html#cb55-19" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;message_filters.R&#39;</span>) <span class="co"># фильтры сообщений</span></span>
+<span id="cb55-20"><a href="-4.html#cb55-20" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;handlers.R&#39;</span>) <span class="co"># обработчики сообщений</span></span>
+<span id="cb55-21"><a href="-4.html#cb55-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-22"><a href="-4.html#cb55-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Добавляем обработчики в диспетчер</span></span>
+<span id="cb55-23"><a href="-4.html#cb55-23" aria-hidden="true" tabindex="-1"></a>updater <span class="ot">&lt;-</span> updater <span class="sc">+</span></span>
+<span id="cb55-24"><a href="-4.html#cb55-24" aria-hidden="true" tabindex="-1"></a>  start_h <span class="sc">+</span></span>
+<span id="cb55-25"><a href="-4.html#cb55-25" aria-hidden="true" tabindex="-1"></a>  wait_age_h <span class="sc">+</span></span>
+<span id="cb55-26"><a href="-4.html#cb55-26" aria-hidden="true" tabindex="-1"></a>  wait_name_h <span class="sc">+</span></span>
+<span id="cb55-27"><a href="-4.html#cb55-27" aria-hidden="true" tabindex="-1"></a>  state_h <span class="sc">+</span></span>
+<span id="cb55-28"><a href="-4.html#cb55-28" aria-hidden="true" tabindex="-1"></a>  reset_h</span>
+<span id="cb55-29"><a href="-4.html#cb55-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-30"><a href="-4.html#cb55-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Запускаем бота</span></span>
+<span id="cb55-31"><a href="-4.html#cb55-31" aria-hidden="true" tabindex="-1"></a>updater<span class="sc">$</span><span class="fu">start_polling</span>()</span></code></pre></div>
 <p>В результате, у нас получился вот такой бот:
 <img src="https://img.netpeak.ua/alsey/160069507819_kiss_188kb.png" alt="image" /></p>
 <p>В любой момент с помощью команды <code>/state</code> мы можем запрашивать текущее состояние чата, а с помощью команды <code>/reset</code> переводить чат в исходное состояние и начинать диалог заново.</p>
@@ -673,7 +677,7 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <ol style="list-style-type: decimal">
 <li>Постройте бота который будет поддерживать игру угадай число. Т.е. по команде <code>/start</code> бот будет загадывать число от 1 до 50. Далее у вас будет 5 попыток угадать это число.</li>
 </ol>
-<p>Вы по очереди в каждой из попыток вводите числа, если введённое число меньше чем то, которое загадал бот то бот пишет “моё число больше”, иначе бот пишет “моё число меньше”. Если вы ввели правильное число то бот пишет что вы выйграли, и переводит диалог в исходное состояние.</p>
+<p>Вы по очереди в каждой из попыток вводите числа, если введённое число меньше чем то, которое загадал бот то бот пишет “моё число больше,” иначе бот пишет “моё число меньше.” Если вы ввели правильное число то бот пишет что вы выйграли, и переводит диалог в исходное состояние.</p>
 <p>Если вы всё сделали правильно, бот будет выглядеть так:</p>
 <p><em>Победа с 5 попытки:</em></p>
 <p><img src="http://img.netpeak.ua/alsey/160495888357_kiss_258kb.png" /></p>
@@ -712,6 +716,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -731,7 +736,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["build_telegram_bot_using_r.pdf", "build_telegram_bot_using_r.epub"],
 "toc": {
 "collapse": "subsection"
 }
