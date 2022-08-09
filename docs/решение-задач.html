@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Решение задач | Разработка telegram ботов на языке R</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content="В этом разделе книги приведены решения всех, представленных в учебнике задач. Задача 1.1 Создайте с помощью BotFather бота. Перейдите к диалогу с ботом, и узнайте идентификатор вашего с ботом...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Решение задач | Разработка telegram ботов на языке R">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/cover.png">
+<meta property="og:description" content="В этом разделе книги приведены решения всех, представленных в учебнике задач. Задача 1.1 Создайте с помощью BotFather бота. Перейдите к диалогу с ботом, и узнайте идентификатор вашего с ботом...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Решение задач | Разработка telegram ботов на языке R">
+<meta name="twitter:description" content="В этом разделе книги приведены решения всех, представленных в учебнике задач. Задача 1.1 Создайте с помощью BotFather бота. Перейдите к диалогу с ботом, и узнайте идентификатор вашего с ботом...">
+<meta name="twitter:image" content="/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114798296-1');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Разработка telegram ботов на языке R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="" href="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram.html"><span class="header-section-number">1</span> Создаём бота, и отправляем с его помощью сообщения в telegram</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html"><span class="header-section-number">2</span> Добавляем боту поддержку команд и фильтры сообщений, класс Updater</a></li>
+<li><a class="" href="%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B.html"><span class="header-section-number">3</span> Как добавить боту поддержку клавиатуры</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html"><span class="header-section-number">4</span> Построение последовательного, логического диалога с ботом</a></li>
+<li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
+<li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
+<li><a class="active" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="решение-задач" class="section level1 unnumbered">
+<h1>Решение задач<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87"><i class="fas fa-link"></i></a>
+</h1>
+<p>В этом разделе книги приведены решения всех, представленных в учебнике задач.</p>
+<div id="задача-1.1" class="section level2 unnumbered">
+<h2>Задача 1.1<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-1.1"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Создайте с помощью <a href="http://t.me/BotFather">BotFather</a> бота.</li>
+<li>Перейдите к диалогу с ботом, и узнайте идентификатор вашего с ботом чата.</li>
+<li>Отправьте с помощью созданного бота в telegram первые 20 строк из встроенного в R набора данных <code>ToothGrowth</code>.</li>
+</ol>
+<p><em>Решение:</em></p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
+
+<span class="co"># функция для перевода data.frame в telegram таблицу </span>
+<span class="va">to_tg_table</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span> <span class="va">table</span>, <span class="va">align</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">indents</span> <span class="op">=</span> <span class="fl">3</span>, <span class="va">parse_mode</span> <span class="op">=</span> <span class="st">'Markdown'</span> <span class="op">)</span> <span class="op">{</span>
+  
+  <span class="co"># если выравнивание не задано то выравниваем по левому краю</span>
+  <span class="kw">if</span> <span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">align</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span>
+    
+    <span class="va">col_num</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">table</span><span class="op">)</span>
+    <span class="va">align</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'l'</span>, <span class="va">col_num</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">''</span> <span class="op">)</span>
+    
+  <span class="op">}</span>
+  
+  <span class="co"># проверяем правильно ли заданно выравнивание</span>
+  <span class="kw">if</span> <span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">table</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">align</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span>
+    
+    <span class="va">align</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
+    
+  <span class="op">}</span>
+  
+  <span class="co"># новое выравнивание столбцов </span>
+  <span class="va">side</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">align</span><span class="op">)</span>, 
+                 <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> 
+                   <span class="va">letter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">align</span>, <span class="va">x</span>, <span class="va">x</span><span class="op">)</span>
+                   <span class="kw"><a href="https://rdrr.io/r/base/switch.html">switch</a></span> <span class="op">(</span><span class="va">letter</span>,
+                           <span class="st">'l'</span> <span class="op">=</span> <span class="st">'right'</span>,
+                           <span class="st">'r'</span> <span class="op">=</span> <span class="st">'left'</span>,
+                           <span class="st">'c'</span> <span class="op">=</span> <span class="st">'both'</span>,
+                           <span class="st">'left'</span>
+                   <span class="op">)</span>
+                 <span class="op">}</span><span class="op">)</span>
+  
+  <span class="co"># сохраняем имена</span>
+  <span class="va">t_names</span>      <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">table</span><span class="op">)</span>
+  
+  <span class="co"># вычисляем ширину столбцов</span>
+  <span class="va">names_length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">t_names</span>, <span class="va">nchar</span><span class="op">)</span> 
+  <span class="va">value_length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">table</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">max_length</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">value_length</span> <span class="op">&gt;</span> <span class="va">names_length</span>, <span class="va">value_length</span>, <span class="va">names_length</span><span class="op">)</span>
+  
+  <span class="co"># подгоняем размер имён столбцов под их ширину + указанное в indents к-во пробелов </span>
+  <span class="va">t_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="va">str_pad</span>, 
+                    string <span class="op">=</span> <span class="va">t_names</span>, 
+                    width  <span class="op">=</span> <span class="va">max_length</span> <span class="op">+</span> <span class="va">indents</span>, 
+                    side   <span class="op">=</span> <span class="va">side</span><span class="op">)</span>
+  
+  <span class="co"># объединяем названия столбцов</span>
+  <span class="va">str_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="va">t_names</span>, collapse <span class="op">=</span> <span class="st">''</span><span class="op">)</span>
+  
+  <span class="co"># аргументы для фукнции str_pad</span>
+  <span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>string <span class="op">=</span> <span class="va">table</span>, width <span class="op">=</span> <span class="va">max_length</span> <span class="op">+</span> <span class="va">indents</span>, side <span class="op">=</span> <span class="va">side</span><span class="op">)</span>
+  
+  <span class="co"># поочереди переводим каждый столбец к нужному виду</span>
+  <span class="va">t_str</span> <span class="op">&lt;-</span>   <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">pmap_df</a></span><span class="op">(</span> <span class="va">rules</span>, <span class="va">str_pad</span> <span class="op">)</span><span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, remove <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">''</span><span class="op">)</span> <span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">'\n'</span><span class="op">)</span> 
+  
+  <span class="co"># если таблица занимает более 4096 символов обрезаем её</span>
+  <span class="kw">if</span> <span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">t_str</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">4021</span> <span class="op">)</span> <span class="op">{</span>
+    
+    <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">'Таблица составляет более 4096 символов!'</span><span class="op">)</span>
+    <span class="va">t_str</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">t_str</span>, <span class="fl">1</span>, <span class="fl">4021</span><span class="op">)</span>
+    
+  <span class="op">}</span>
+  
+  <span class="co"># символы выделения блока кода согласно выбранной разметке</span>
+  <span class="va">code_block</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/switch.html">switch</a></span><span class="op">(</span><span class="va">parse_mode</span>, 
+                       <span class="st">'Markdown'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'```'</span>, <span class="st">'```'</span><span class="op">)</span>,
+                       <span class="st">'HTML'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'&lt;code&gt;'</span>, <span class="st">'&lt;/code&gt;'</span><span class="op">)</span><span class="op">)</span>
+  
+  <span class="co"># переводим в code</span>
+  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="va">code_block</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">str_names</span>, <span class="va">t_str</span>, <span class="va">code_block</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, sep <span class="op">=</span> <span class="st">'\n'</span><span class="op">)</span>
+  
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="co"># создаём экземпляр бота</span>
+<span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span><span class="st">'1165649194:AAFkDqIzQ6Wq5GV0YU7PmEZcv1gmWIFIB_8'</span><span class="op">)</span>
+
+<span class="co"># получаем ID чата </span>
+<span class="co"># (предварительно отправьте боту любое сообщение)</span>
+<span class="va">chat_id</span> <span class="op">&lt;-</span> <span class="va">bot</span><span class="op">$</span><span class="fu">getUpdates</span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># преоразуем таблицу ToothGrowth</span>
+<span class="va">TG</span> <span class="op">&lt;-</span> <span class="fu">to_tg_table</span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ToothGrowth</span>, <span class="fl">20</span><span class="op">)</span> <span class="op">)</span>
+
+<span class="co"># отправляем таблицу в Telegram</span>
+<span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">chat_id</span>, 
+                <span class="va">TG</span>,
+                <span class="st">'Markdown'</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="задача-2.1" class="section level2 unnumbered">
+<h2>Задача 2.1<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2.1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Создайте бота, который будет по команде <code>/sum</code> и переданное в качестве дополнительных параметров произвольное количество перечисленных через пробел чисел, возвращать их сумму.</p>
+<p><em>Решение:</em></p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
+
+<span class="co"># Создаём жкземпляр класса Updater</span>
+<span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span>
+
+<span class="co"># Создаём функцию, которая будет суммировать переданные числа</span>
+<span class="va">summing</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span>, <span class="va">args</span><span class="op">)</span> <span class="op">{</span>
+
+  <span class="co"># Переводим полученный вектор параметров в числа и суммируем</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">args</span><span class="op">)</span><span class="op">)</span>
+
+  <span class="co"># создаём сообщение</span>
+  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Сумма переданных чисел: '</span>, <span class="va">x</span><span class="op">)</span>
+
+  <span class="co"># отправляем результат</span>
+  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="va">msg</span>, <span class="st">'Markdown'</span><span class="op">)</span>
+
+<span class="op">}</span>
+
+<span class="co"># создаём обработчик</span>
+<span class="va">h_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'sum'</span>, <span class="va">summing</span>, pass_args <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="co"># добавляем обработчик в диспетчер</span>
+<span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">h_sum</span>
+
+<span class="co"># запускаем бота</span>
+<span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="задача-3.1" class="section level2 unnumbered">
+<h2>Задача 3.1<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-3.1"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Создайте бота, который будет поддерживать Reply клавиатуру. На Reply клавиатуре будет всего одна кнопка “Время”. По нажатию на неё будет появляться Inline клавиатура с выбором из 6 часовых поясов.</li>
+</ol>
+<ul>
+<li>Africa/Cairo</li>
+<li>America/Chicago</li>
+<li>Europe/Moscow</li>
+<li>Asia/Bangkok</li>
+<li>Europe/Kiev</li>
+<li>Australia/Sydney</li>
+</ul>
+<p>Кнопки Inline клавиатуры необходимо расположить по 2 в ряд, соответвенно в три ряда.</p>
+<p>По нажатию на одну из кнопки Inline клавиатуры бот будет запрашивать информацию по текущему времени из API <a href="http://worldtimeapi.org/">worldtimeapi.org</a>.</p>
+<p>Формат запроса к API: <code>http://worldtimeapi.org/api/timezone/{area}/:{location}</code>.</p>
+<p>Где <code>{area}</code> это континент, например Europe, а <code>{location}</code> это город, например Kiev. Дату и время надо брать в ответе из компонента <code>datetime</code>.</p>
+<p><em>Решение:</em></p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span>
+
+<span class="co"># Создаём жкземпляр класса Updater</span>
+<span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span>
+
+<span class="co"># Запуск клавиатуры</span>
+<span class="va">start</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="co"># строим Reply клавиатуру</span>
+  <span class="va">RKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup</a></span><span class="op">(</span>
+    keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">'Время'</span><span class="op">)</span>
+      <span class="op">)</span>
+    <span class="op">)</span><span class="op">)</span>
+  
+  <span class="co"># отпралвяем Reply клавиатуру</span>
+  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                  <span class="st">'Выберите команду'</span>, 
+                  <span class="st">'Markdown'</span>,
+                  reply_markup <span class="op">=</span> <span class="va">RKM</span><span class="op">)</span>
+  
+<span class="op">}</span>
+
+<span class="co"># Отправляем inline клавиатуру</span>
+<span class="va">inline</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span>
+              inline_keyboard <span class="op">=</span> 
+                <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+                  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+                    <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Africa/Cairo'</span>, callback_data <span class="op">=</span> <span class="st">'Africa/Cairo'</span><span class="op">)</span>,
+                    <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'America/Chicago'</span>, callback_data <span class="op">=</span> <span class="st">'America/Chicago'</span><span class="op">)</span>
+                  <span class="op">)</span>,
+                  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+                    <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Europe/Moscow'</span>, callback_data <span class="op">=</span> <span class="st">'Europe/Moscow'</span><span class="op">)</span>,
+                    <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Asia/Bangkok'</span>, callback_data <span class="op">=</span> <span class="st">'Asia/Bangkok'</span><span class="op">)</span>
+                  <span class="op">)</span>,
+                  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+                    <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Europe/Kiev'</span>, callback_data <span class="op">=</span> <span class="st">'Europe/Kiev'</span><span class="op">)</span>,
+                    <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Australia/Sydney'</span>, callback_data <span class="op">=</span> <span class="st">'Australia/Sydney'</span><span class="op">)</span>
+                  <span class="op">)</span>
+                <span class="op">)</span><span class="op">)</span>
+  
+  <span class="co"># отпралвяем Reply клавиатуру</span>
+  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                  <span class="st">'Выберите регион'</span>, 
+                  <span class="st">'Markdown'</span>,
+                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span>
+  
+<span class="op">}</span>
+
+<span class="co"># обрабатываем нажатие на кнопку</span>
+<span class="va">curtime</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="co"># сообщаем боту, что запрос с кнопки принят</span>
+  <span class="va">bot</span><span class="op">$</span><span class="fu">answerCallbackQuery</span><span class="op">(</span>callback_query_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">id</span><span class="op">)</span> 
+  
+  <span class="co"># данные с кнопки</span>
+  <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">data</span>
+  
+  <span class="co"># разбиваем на регион и город</span>
+  <span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">data</span>, split <span class="op">=</span> <span class="st">'/'</span><span class="op">)</span><span class="op">)</span>
+  
+  <span class="co"># компонуем URL</span>
+  <span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">'http://worldtimeapi.org/api/timezone/{geo[1]}/{geo[2]}'</span><span class="op">)</span>
+  
+  <span class="co"># запрос к API</span>
+  <span class="va">answer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
+  
+  <span class="co"># парсим ответ</span>
+  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">answer</span><span class="op">)</span>
+  
+  <span class="co"># создаём сообщение</span>
+  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">'Текущее время в {data}: {res$datetime}'</span><span class="op">)</span>
+  
+  <span class="co"># отправляем сообщение</span>
+  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, 
+                  <span class="va">msg</span>, 
+                  <span class="st">'Markdown'</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="co"># Фильтр для Reply клавиатуры</span>
+<span class="va">MessageFilters</span><span class="op">$</span><span class="va">start</span> <span class="op">&lt;-</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span>
+    <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">message</span><span class="op">$</span><span class="va">text</span> <span class="op">==</span> <span class="st">'Время'</span>
+    <span class="op">}</span>
+  <span class="op">)</span>
+
+<span class="co"># Обработчики</span>
+<span class="va">h_start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'start'</span>, <span class="va">start</span><span class="op">)</span>
+<span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">inline</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">start</span><span class="op">)</span>
+<span class="va">h_cb</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">curtime</span><span class="op">)</span>
+
+<span class="co"># Добавляем обработчики в диспетчер</span>
+<span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">h_start</span> <span class="op">+</span> <span class="va">h_time</span> <span class="op">+</span> <span class="va">h_cb</span>
+
+<span class="co"># Запускаем бота</span>
+<span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="задача-4.1" class="section level2 unnumbered">
+<h2>Задача 4.1<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-4.1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Постройте бота который будет поддерживать игру угадай число. Т.е. по команде <code>/start</code> бот будет загадывать число от 1 до 50. Далее у вас будет 5 попыток угадать это число.</p>
+<p>Вы по очереди в каждой из попыток вводите числа, если введённое число меньше чем то, которое загадал бот то бот пишет “моё число больше”, иначе бот пишет “моё число меньше”. Если вы ввели правильное число то бот пишет что вы выйграли, и переводит диалог в исходное состояние.</p>
+<p><em>Решение:</em></p>
+<p>Создаём таблицу в базе данных для хранеия числа и текущей попытки.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb71-1"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> chat_data (</span>
+<span id="cb71-2"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb71-2" aria-hidden="true" tabindex="-1"></a>    chat_id BIGINT  <span class="kw">PRIMARY</span> <span class="kw">KEY</span></span>
+<span id="cb71-3"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb71-3" aria-hidden="true" tabindex="-1"></a>                    <span class="kw">UNIQUE</span>,</span>
+<span id="cb71-4"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb71-4" aria-hidden="true" tabindex="-1"></a>    attempt    <span class="dt">INTEGER</span>,</span>
+<span id="cb71-5"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb71-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">number</span>     <span class="dt">INTEGER</span></span>
+<span id="cb71-6"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb71-6" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<p>Далее создаём функции для работы с бахой данных.</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># write chat data</span>
+<span class="co"># write chat data</span>
+<span class="va">set_chat_data</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">field</span>, <span class="va">value</span><span class="op">)</span> <span class="op">{</span>
+  
+  
+  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">db</span><span class="op">)</span>
+  
+  <span class="co"># upsert состояние чата</span>
+  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExecute.html">dbExecute</a></span><span class="op">(</span><span class="va">con</span>, 
+            <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_interp.html">str_interp</a></span><span class="op">(</span><span class="st">"
+            INSERT INTO chat_data (chat_id, ${field})
+                VALUES(${chat_id}, '${value}') 
+                ON CONFLICT(chat_id) 
+                DO UPDATE SET ${field}='${value}';
+            "</span><span class="op">)</span>
+  <span class="op">)</span>
+  
+  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span>
+  
+<span class="op">}</span>
+
+<span class="co"># read chat data</span>
+<span class="va">get_chat_data</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">field</span><span class="op">)</span> <span class="op">{</span>
+  
+  
+  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">db</span><span class="op">)</span>
+  
+  <span class="co"># upsert состояние чата</span>
+  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery</a></span><span class="op">(</span><span class="va">con</span>, 
+                     <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_interp.html">str_interp</a></span><span class="op">(</span><span class="st">"
+            SELECT ${field}
+            FROM chat_data
+            WHERE chat_id = ${chat_id};
+            "</span><span class="op">)</span>
+  <span class="op">)</span>
+  
+  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span>
+  
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">data</span><span class="op">[[</span><span class="va">field</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+  
+<span class="op">}</span></code></pre></div>
+<p>Основной код бота выглядит так:</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rsqlite.r-dbi.org">RSQLite</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org">DBI</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span>
+
+<span class="co"># Создаём жкземпляр класса Updater</span>
+<span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span>
+
+<span class="co"># путь к базе</span>
+<span class="va">db</span> <span class="op">&lt;-</span> <span class="st">"ПУСТЬ К БАЗЕ ДАННЫХ/bot.db"</span>
+
+<span class="va">start</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="co"># бот загадывает число</span>
+  <span class="va">num</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">50</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span>
+  
+  <span class="co"># записываем данные в базу о начале игры</span>
+  <span class="fu">set_chat_data</span><span class="op">(</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'number'</span>, <span class="va">num</span><span class="op">)</span>
+  <span class="fu">set_chat_data</span><span class="op">(</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'attempt'</span>, <span class="fl">1</span><span class="op">)</span>
+  
+  <span class="co"># отпралвяем Reply клавиатуру</span>
+  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                  <span class="st">'Число загаданно, начинаем игру, ваша первая попытка.'</span>, 
+                  <span class="st">'Markdown'</span><span class="op">)</span>
+  
+<span class="op">}</span>
+
+<span class="va">attempt</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">num</span> <span class="op">&lt;-</span> <span class="fu">get_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'number'</span><span class="op">)</span>
+  <span class="va">att</span> <span class="op">&lt;-</span> <span class="fu">get_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'attempt'</span><span class="op">)</span>
+  
+  <span class="va">user_num</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">text</span>
+  
+  <span class="kw">if</span> <span class="op">(</span> <span class="va">user_num</span> <span class="op">&lt;</span> <span class="va">num</span> <span class="op">)</span> <span class="op">{</span>
+    
+    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Номер попытки: '</span>, <span class="va">att</span>, <span class="st">". Моё число больше"</span><span class="op">)</span>,
+                    <span class="st">'Markdown'</span><span class="op">)</span>
+    
+  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span> <span class="va">user_num</span> <span class="op">&gt;</span> <span class="va">num</span> <span class="op">)</span> <span class="op">{</span>
+    
+    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Номер попытки: '</span>, <span class="va">att</span>, <span class="st">". Моё число меньше"</span><span class="op">)</span>,
+                    <span class="st">'Markdown'</span><span class="op">)</span>
+    
+  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
+    
+    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Номер попытки: '</span>, <span class="va">att</span>, <span class="st">". Поздравляю, вы угадали число!"</span><span class="op">)</span>,
+                    <span class="st">'Markdown'</span><span class="op">)</span>
+    
+    <span class="fu">set_chat_data</span><span class="op">(</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'attempt'</span>, <span class="fl">0</span><span class="op">)</span>
+    
+  <span class="op">}</span>
+  
+  <span class="kw">if</span> <span class="op">(</span> <span class="va">att</span> <span class="op">==</span> <span class="fl">5</span> <span class="op">&amp;</span>  <span class="va">user_num</span> <span class="op">!=</span> <span class="va">num</span> <span class="op">)</span>  <span class="op">{</span>
+    
+    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Вы проиграли, я загадал число "</span>, <span class="va">num</span><span class="op">)</span>,
+                    <span class="st">'Markdown'</span><span class="op">)</span>
+    <span class="fu">set_chat_data</span><span class="op">(</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'attempt'</span>, <span class="fl">0</span><span class="op">)</span>
+    
+  <span class="op">}</span>
+  
+  <span class="fu">set_chat_data</span><span class="op">(</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'attempt'</span>, <span class="va">att</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
+  
+<span class="op">}</span>
+
+
+<span class="co"># фильтр сообщение в состоянии ожидания имени</span>
+<span class="va">MessageFilters</span><span class="op">$</span><span class="va">attempt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span>
+
+  <span class="va">att</span> <span class="op">&lt;-</span> <span class="fu">get_chat_data</span><span class="op">(</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'attempt'</span><span class="op">)</span> 
+  <span class="fl">0</span> <span class="op">&lt;</span> <span class="va">att</span> <span class="op">&amp;</span> <span class="va">att</span> <span class="op">&lt;</span> <span class="fl">6</span>
+<span class="op">}</span>
+<span class="op">)</span>
+
+<span class="co"># обработчики</span>
+<span class="va">h_start</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'start'</span>, <span class="va">start</span><span class="op">)</span>
+<span class="va">h_attempt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">attempt</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">attempt</span> <span class="op">&amp;</span> <span class="op">!</span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">command</span><span class="op">)</span>
+
+<span class="co"># диспетчер</span>
+<span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">h_start</span> <span class="op">+</span> <span class="va">h_attempt</span>
+
+<span class="co"># запуск</span>
+<span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="задача-5.1" class="section level2 unnumbered">
+<h2>Задача 5.1<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-5.1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Возьмите <a href="-updater.html#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-1">задачу 2.1</a> из второй главы, и ограничьте использование единственного метода, доступного в созданном боте, так, что бы он работал только когда его запрашиваете вы.</p>
+<p><em>Решение:</em></p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
+
+<span class="co"># Создаём жкземпляр класса Updater</span>
+<span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span>
+
+<span class="co"># Создаём функцию, которая будет суммировать переданные числа</span>
+<span class="va">summing</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span>, <span class="va">args</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="kw">if</span> <span class="op">(</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">from</span><span class="op">$</span><span class="va">username</span> <span class="op">==</span> <span class="st">'YourUsername'</span> <span class="op">)</span> <span class="op">{</span>
+
+    <span class="co"># Переводим полученный вектор параметров в числа и суммируем</span>
+    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">args</span><span class="op">)</span><span class="op">)</span>
+  
+    <span class="co"># создаём сообщение</span>
+    <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Сумма переданных чисел: '</span>, <span class="va">x</span><span class="op">)</span>
+  
+    <span class="co"># отправляем результат</span>
+    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="va">msg</span>, <span class="st">'Markdown'</span><span class="op">)</span>
+    
+  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
+    
+    <span class="co"># отправляем результат</span>
+    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                    <span class="st">'У вас не достаточно прав на использование этой функции бота!'</span>, 
+                    <span class="st">'Markdown'</span><span class="op">)</span>
+    
+  <span class="op">}</span>
+
+<span class="op">}</span>
+
+<span class="co"># создаём обработчик</span>
+<span class="va">h_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'sum'</span>, <span class="va">summing</span>, pass_args <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="co"># добавляем обработчик в диспетчер</span>
+<span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">h_sum</span>
+
+<span class="co"># запускаем бота</span>
+<span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87">Решение задач</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-1.1">Задача 1.1</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2.1">Задача 2.1</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-3.1">Задача 3.1</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-4.1">Задача 4.1</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-5.1">Задача 5.1</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

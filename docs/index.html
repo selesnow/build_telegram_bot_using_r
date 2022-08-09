@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Введение | Разработка telegram ботов на языке R</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R.">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Введение | Разработка telegram ботов на языке R">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/cover.png">
+<meta property="og:description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Введение | Разработка telegram ботов на языке R">
+<meta name="twitter:description" content="Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R.">
+<meta name="twitter:image" content="/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114798296-1');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Разработка telegram ботов на языке R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="active" href="index.html">Введение</a></li>
+<li><a class="" href="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram.html"><span class="header-section-number">1</span> Создаём бота, и отправляем с его помощью сообщения в telegram</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html"><span class="header-section-number">2</span> Добавляем боту поддержку команд и фильтры сообщений, класс Updater</a></li>
+<li><a class="" href="%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B.html"><span class="header-section-number">3</span> Как добавить боту поддержку клавиатуры</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html"><span class="header-section-number">4</span> Построение последовательного, логического диалога с ботом</a></li>
+<li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
+<li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="введение" class="section level1 unnumbered">
+<h1>Введение<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5"><i class="fas fa-link"></i></a>
+</h1>
+<hr>
+<div id="предисловие" class="section level2 unnumbered">
+<h2>Предисловие<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B4%D0%B8%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D0%B5"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://selesnow.github.io"><img src="cover.png" width="250" height="366" align="right" alt="Cover image"></a></p>
+<p>Аудитория telegram ежедневно растёт с геометрической прогрессией, этому способствует удобство мессенджера, наличие каналов, чатов, и конечно возможность создавать ботов.</p>
+<p>Боты могут использоваться в совершенно разных целях, от автоматизации коммуникации с вашими клиентами до управления вашими собственными задачами.</p>
+<p>По сути через бота можно используя telegram выполнять любые операции: отправлять, либо запрашивать данные, запускать задачи на сервере, собирать информацию в базу данных, отправлять электронные письма и так далее.</p>
+<p>Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R.</p>
+<p>Материал изложен последовательно, от простого к сложному.</p>
+<p>Первая глава посвящена отправке сообщений из R в Telegram, а в последней главе мы разработаем полноценного бота, который поддерживает последовательный логический диалог с пользователем.</p>
+<p>В ходе всего учебника основным R пакетом который мы будем использовать будет <code>telegram.bot</code>.</p>
+<p>Каждая глава заканчивается небольшим заданием и тестом, для того, что бы вы могли проверить насколько хорошо был воспринят материал.</p>
+</div>
+<div id="навыки-необходимые-для-прохождения-учебника" class="section level2 unnumbered">
+<h2>Навыки необходимые для прохождения учебника<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D0%B2%D1%8B%D0%BA%D0%B8-%D0%BD%D0%B5%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%D0%B8%D0%BC%D1%8B%D0%B5-%D0%B4%D0%BB%D1%8F-%D0%BF%D1%80%D0%BE%D1%85%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F-%D1%83%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA%D0%B0"><i class="fas fa-link"></i></a>
+</h2>
+<p>Тему построения ботов я отношу к продвинутым навыкам, не зависимо от выбранного язка программирования. Поэтому в этой книге не рассматриваются базовые вводные темы по основам языка R.</p>
+<p>Для чтения и понимания книги вам необходимо обладать следующими навыками на языке программирования R:</p>
+<ul>
+<li>Понимать базовые програмные конструкции, т.е. циклы и условные ветвления.</li>
+<li>Понимать что такое функция.</li>
+<li>Разбираться в основных структурах данных языка.</li>
+<li>Уметь работать со строками.</li>
+<li>Владеть основами манипуляции данных с помощью пакета <code>dplyr</code>.</li>
+<li>Иметь поверхностное понимание о том, что такое API.</li>
+</ul>
+<p>Перечисленные выше темы выходят за рамки этой книги, но подробно рассматриваются в онлайн академии <a href="https://r-for-marketing.netpeak.net/">“Язык R для интернет-маркетинга”</a>.</p>
+</div>
+<div id="об-авторе" class="section level2 unnumbered">
+<h2>Об авторе<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B5"><i class="fas fa-link"></i></a>
+</h2>
+<p>Меня зовут Алексей Селезнёв, уже более 10 лет я являюсь практикующим аналитиком. С 2016 года возглавляю отдел аналитики в агентстве интернет - маркетинга Netpeak.</p>
+<p><a href="https://selesnow.github.io"><img src="author.png" width="200" height="200" align="left" alt="Алексей Селезнёв" hspace="20" vspace="7"></a></p>
+<p>Являюсь автором курсов по языку R: <a href="https://needfordata.ru/r">“Язык R для интернет - маркетинга”</a> и <a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4pgGg16wYMobvIYy_0MI0kF">“Язык R для пользователей Excel”</a>.</p>
+<p>С 2015 года активно пишу статьи по аналитике, на момент написания этих строк мной опубликовано уже более 120 статей в различных интернет изданиях. Веду собственный <a href="https://alexeyseleznev.wordpress.com/">блог</a>, хотя он по большей части он является агрегатором моих статей из различных источников.</p>
+<p>В 2018 году завёл telegram канал <a href="https://t.me/R4marketing">R4marketing</a>, в котором делюсь полезными, русскоязычными материалами по языку R: ссылки на статьи, доклады, вебинары, заметки по применению языка R.</p>
+<p>В 2020 году запустил <a href="https://bit.ly/36kliAp">YouTube канал</a>, в котором делюсь видео уроками по языку R И аналитике в целом.</p>
+</div>
+<div id="видео-введение-в-курс" class="section level2 unnumbered">
+<h2>Видео введение в курс<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-%D0%BA%D1%83%D1%80%D1%81"><i class="fas fa-link"></i></a>
+</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iMZlUowNh5M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="правки-и-предложения" class="section level2 unnumbered">
+<h2>Правки и предложения<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B8-%D0%B8-%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F"><i class="fas fa-link"></i></a>
+</h2>
+<p>Перед публикацией учебника я несколько раз перечитал его, но всё же некоторые помарки в разметке, грамматические или синтаксические ошибки могли ускользнуть от моего внимания.</p>
+<p>К тому же, возможно у вас есть идеи о том, какой информации в учебнике нехватает, или о том, что какая часть учебника потеряла свою актуальность.</p>
+<p>По таким вопросам прошу писать мне либо на почту, либо напрямую в Telegram.</p>
+<p>Email: <a href="mailto:selesnow@gmail.com" class="email">selesnow@gmail.com</a> <br>
+Telegram: <a href="http://t.me/AlexeySeleznev">AlexeySeleznev</a></p>
+</div>
+<div id="поддержать-проект" class="section level2 unnumbered">
+<h2>Поддержать проект<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B0%D1%82%D1%8C-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82"><i class="fas fa-link"></i></a>
+</h2>
+<p>Учебник, и все необходимые материалы находятся в открытом доступе, но при желании вы можете поддержать этот проект любой произвольной сумме перейдя по <a href="https://secure.wayforpay.com/payment/build_telegram_bot_using_r">этой ссылке</a>.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="empty"></div>
+<div class="next"><a href="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram.html"><span class="header-section-number">1</span> Создаём бота, и отправляем с его помощью сообщения в telegram</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5">Введение</a></li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B4%D0%B8%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D0%B5">Предисловие</a></li>
+<li><a class="nav-link" href="#%D0%BD%D0%B0%D0%B2%D1%8B%D0%BA%D0%B8-%D0%BD%D0%B5%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%D0%B8%D0%BC%D1%8B%D0%B5-%D0%B4%D0%BB%D1%8F-%D0%BF%D1%80%D0%BE%D1%85%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F-%D1%83%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA%D0%B0">Навыки необходимые для прохождения учебника</a></li>
+<li><a class="nav-link" href="#%D0%BE%D0%B1-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B5">Об авторе</a></li>
+<li><a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-%D0%BA%D1%83%D1%80%D1%81">Видео введение в курс</a></li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B8-%D0%B8-%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F">Правки и предложения</a></li>
+<li><a class="nav-link" href="#%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B0%D1%82%D1%8C-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82">Поддержать проект</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

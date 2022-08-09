@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Глава 1 Создаём бота, и отправляем с его помощью сообщения в telegram | Разработка telegram ботов на языке R</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content="В этой главе мы разберёмся как создать телеграм бота, и отправлять с его помощью уведомления в telegram.  1.1 Создание телеграм бота  1.1.1 Видео урок о создании telegram бота через BotFather   ...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Глава 1 Создаём бота, и отправляем с его помощью сообщения в telegram | Разработка telegram ботов на языке R">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/cover.png">
+<meta property="og:description" content="В этой главе мы разберёмся как создать телеграм бота, и отправлять с его помощью уведомления в telegram.  1.1 Создание телеграм бота  1.1.1 Видео урок о создании telegram бота через BotFather   ...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Глава 1 Создаём бота, и отправляем с его помощью сообщения в telegram | Разработка telegram ботов на языке R">
+<meta name="twitter:description" content="В этой главе мы разберёмся как создать телеграм бота, и отправлять с его помощью уведомления в telegram.  1.1 Создание телеграм бота  1.1.1 Видео урок о создании telegram бота через BotFather   ...">
+<meta name="twitter:image" content="/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114798296-1');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Разработка telegram ботов на языке R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="active" href="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram.html"><span class="header-section-number">1</span> Создаём бота, и отправляем с его помощью сообщения в telegram</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html"><span class="header-section-number">2</span> Добавляем боту поддержку команд и фильтры сообщений, класс Updater</a></li>
+<li><a class="" href="%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B.html"><span class="header-section-number">3</span> Как добавить боту поддержку клавиатуры</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html"><span class="header-section-number">4</span> Построение последовательного, логического диалога с ботом</a></li>
+<li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
+<li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="создаём-бота-и-отправляем-с-его-помощью-сообщения-в-telegram" class="section level1" number="1">
+<h1>
+<span class="header-section-number">Глава 1</span> Создаём бота, и отправляем с его помощью сообщения в telegram<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram"><i class="fas fa-link"></i></a>
+</h1>
+<div class="inline-figure"><img src="https://habrastorage.org/webt/mz/ef/op/mzefopqcvltbomddoh8pmx45hzc.png" align="center" width="80%"></div>
+<p>В этой главе мы разберёмся как создать телеграм бота, и отправлять с его помощью уведомления в telegram.</p>
+<div id="создание-телеграм-бота" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Создание телеграм бота<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D1%82%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h2>
+<div id="видео-урок-о-создании-telegram-бота-через-botfather" class="section level3" number="1.1.1">
+<h3>
+<span class="header-section-number">1.1.1</span> Видео урок о создании telegram бота через BotFather<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-%D1%83%D1%80%D0%BE%D0%BA-%D0%BE-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B8-telegram-%D0%B1%D0%BE%D1%82%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-botfather"><i class="fas fa-link"></i></a>
+</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Tu9tHHhQU0g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="конспект-о-создании-telegram-бота-через-botfather" class="section level3" number="1.1.2">
+<h3>
+<span class="header-section-number">1.1.2</span> Конспект о создании telegram бота через BotFather<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-%D0%BE-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B8-telegram-%D0%B1%D0%BE%D1%82%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-botfather"><i class="fas fa-link"></i></a>
+</h3>
+<p>Для начала нам необходимо создать бота. Делается это с помощью специального бота <strong>BotFather</strong>, переходим по <a href="https://t.me/BotFather">ссылке</a> и пишем боту <code>/start</code>.</p>
+<p>После чего вы получите сообщение со списком команд:</p>
+<pre><code>I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual (https://core.telegram.org/bots).
+
+You can control me by sending these commands:
+
+/newbot - create a new bot
+/mybots - edit your bots [beta]
+
+Edit Bots
+/setname - change a bot's name
+/setdescription - change bot description
+/setabouttext - change bot about info
+/setuserpic - change bot profile photo
+/setcommands - change the list of commands
+/deletebot - delete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode (https://core.telegram.org/bots/inline)
+/setinlinegeo - toggle inline location requests (https://core.telegram.org/bots/inline#location-based-results)
+/setinlinefeedback - change inline feedback (https://core.telegram.org/bots/inline#collecting-feedback) settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode (https://core.telegram.org/bots#privacy-mode) in groups
+
+Games
+/mygames - edit your games (https://core.telegram.org/bots/games) [beta]
+/newgame - create a new game (https://core.telegram.org/bots/games)
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game</code></pre>
+<p>Для создания нового бота отправляем команду <code>/newbot</code>.</p>
+<p>BotFather попросит вас ввести имя и логин бота.</p>
+<pre><code>BotFather, [25.07.20 09:39]
+Alright, a new bot. How are we going to call it? Please choose a name for your bot.
+
+Alexey Seleznev, [25.07.20 09:40]
+My Test Bot
+
+BotFather, [25.07.20 09:40]
+Good. Now let's choose a username for your bot. It must end in `bot`. Like this, for example: TetrisBot or tetris_bot.
+
+Alexey Seleznev, [25.07.20 09:40]
+@my_test_bot</code></pre>
+<p>Имя вы можете ввести произвольное, а логин должен заканчиваться на <code>bot</code>.</p>
+<p>Если вы всё сделали правильно, то получите следующее сообщение:</p>
+<pre><code>Done! Congratulations on your new bot. You will find it at t.me/my_test_bot. You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you've finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this.
+
+Use this token to access the HTTP API:
+123456789:abcdefghijklmnopqrstuvwxyz
+
+For a description of the Bot API, see this page: https://core.telegram.org/bots/api</code></pre>
+<p>Далее вам понадобится полученный API токен, в моём примере это <code>123456789:abcdefghijklmnopqrstuvwxyz</code>.</p>
+<p>Более подробно о возможностях <strong>BotFather</strong> можно узнать из <a href="https://botcreators.ru/blog/botfather-instrukciya/">этой публикации</a>. На этом шаге подготовительные работы по созданию бота завершены.</p>
+</div>
+</div>
+<div id="установка-пакета-для-работы-с-телеграм-ботом-на-r" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Установка пакета для работы с телеграм ботом на R<a class="anchor" aria-label="anchor" href="#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-%D1%82%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC-%D0%BD%D0%B0-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>Я предполагаю, что у вас уже установлен язык R, и среда разработки RStudio. Если это не так, то вы можете посмотреть данный <a href="https://youtu.be/wFUoaeGEMmY">видео урок</a> о том, как их установить.</p>
+<p>Для работы с Telegram Bot API мы будем использовать R пакет <a href="https://CRAN.R-project.org/package=telegram.bot">telegram.bot</a>.</p>
+<p>Установка пакетов в R осуществляется функцией <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>, поэтому для установки нужного нам пакета используйте команду <code>install.packages("telegram.bot")</code>.</p>
+<p>Более подробно узнать об установке различных пакетов можно из <a href="https://youtu.be/1UvrWoZugic">этого видео</a>.</p>
+<p>После установки пакета его необходимо подключить:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></code></pre></div>
+</div>
+<div id="отправка-сообщений-из-r-в-telegram" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Отправка сообщений из R в Telegram<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B8%D0%B7-r-%D0%B2-telegram"><i class="fas fa-link"></i></a>
+</h2>
+<p>Созданного вами бота можно найти в Telegram по заданному при создании логину, в моём случае это <code>@my_test_bot</code>.</p>
+<p>Отправьте боту любое сообщение, например “Привет бот”. На данный момент это нам надо для того, что бы получить id вашего с ботом чата.</p>
+<p>Теперь в R пишем следующий код.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
+
+<span class="co"># создаём экземпляр бота</span>
+<span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="st">"123456789:abcdefghijklmnopqrstuvwxyz"</span><span class="op">)</span>
+
+<span class="co"># Запрашиваем информацию о боте</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">bot</span><span class="op">$</span><span class="fu">getMe</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># Получаем обновления бота, т.е. список отправленных ему сообщений</span>
+<span class="va">updates</span> <span class="op">&lt;-</span> <span class="va">bot</span><span class="op">$</span><span class="fu">getUpdates</span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># Запрашиваем идентификатор чата</span>
+<span class="co"># Примечание: перед запросом обновлений вы должны отправить боту сообщение</span>
+<span class="va">chat_id</span> <span class="op">&lt;-</span> <span class="va">updates</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>Изначально мы создаём экземпляр нашего бота функцией <code><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot()</a></code>, в качестве аргумента в неё необходимо передать полученный ранее токен.</p>
+<p>Хранить токен в коде считается не лучшей практикой, поэтому вы можете хранить его в переменной среды, и считывать его из неё. По умолчанию в пакете <code>telegram.bot</code> реализована поддержка переменных среды следующего наименования: <code>R_TELEGRAM_BOT_ИМЯ_ВАШЕГО_БОТА</code>. Вместо <code>ИМЯ_ВАШЕГО_БОТА</code> подставьте имя которое вы задали при создании, в моём случае будет переменная <code>R_TELEGRAM_BOT_My Test Bot</code>.</p>
+<p>Создать переменную среды можно несколькими способами, я расскажу о наиболее универсальном и кроссплатформенном. Создайте в вашей домашней директории (узнать её можно с помощью команды <code>path.expand("~")</code>) текстовый файл с названием <em>.Renviron</em>. Сделать это также можно с помощью команды <code>file.edit(path.expand(file.path("~", ".Renviron")))</code>.</p>
+<p>И добавьте в него следующую строку.</p>
+<pre><code>R_TELEGRAM_BOT_ИМЯ_ВАШЕГО_БОТА=123456789:abcdefghijklmnopqrstuvwxyz</code></pre>
+<p>Далее вы можете использовать сохранённый в переменной среды токен с помощью функции <code><a href="https://rdrr.io/pkg/telegram.bot/man/bot_token.html">bot_token()</a></code>, т.е. вот так:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/bot_token.html">bot_token</a></span><span class="op">(</span><span class="st">"My Test Bot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Метод <code><a href="https://rdrr.io/pkg/telegram.bot/man/getUpdates.html">getUpdates()</a></code>позволяет нам получить обновления бота, т.е. сообщения которые были ему отправлены. Метод <code><a href="https://rdrr.io/pkg/telegram.bot/man/from_chat_id.html">from_chat_id()</a></code>, позволяет получить идентификатор чата, из которого было отправлено сообщение. Этот идентификатор нам нужен для отправки сообщений от бота.</p>
+<p>Помимо id чата из объекта полученного методом <code><a href="https://rdrr.io/pkg/telegram.bot/man/getUpdates.html">getUpdates()</a></code> вы получаете и некоторую другую полезную информацию. Например, информацию о пользователе, отправившем сообщение.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">updates</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">from</span></code></pre></div>
+<pre><code>$id
+[1] 000000000
+
+$is_bot
+[1] FALSE
+
+$first_name
+[1] "Alexey"
+
+$last_name
+[1] "Seleznev"
+
+$username
+[1] "AlexeySeleznev"
+
+$language_code
+[1] "ru"</code></pre>
+<p>Итак, на данном этапе у нас уже есть всё, что необходимо для отправки сообщения от бота в телеграм. Воспользуемся методом <code><a href="https://rdrr.io/pkg/telegram.bot/man/sendMessage.html">sendMessage()</a></code>, в который необходимо передать идентификатор чата, текст сообщения, и тип разметки текста сообщения. Тип разметки может быть Markdown или HTML и устанавливается аргументом <code>parse_mode</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Отправка сообщения</span>
+<span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">chat_id</span>,
+                text <span class="op">=</span> <span class="st">"Привет, *жирный текст* _курсив_"</span>,
+                parse_mode <span class="op">=</span> <span class="st">"Markdown"</span>
+<span class="op">)</span></code></pre></div>
+<p>Если вам необходимо отправить сообщение от бота не в чат, а в публичный канал, то в <code>chat_id</code> указывайте адрс вашего канала, например <code>'@MyTGChannel'</code>.</p>
+<p>При необходимости отправить сообщение в приватный канал, вам необходимо скопировать ссылку на любое сообщение данного канала, из ссылки получить его идентификатор, и к этому идентификатору добавить -100.</p>
+<div class="inline-figure"><img src="http://img.netpeak.ua/alsey/1JA922T.png"></div>
+<p>Пример ссылки приватного канала: <a href="https://t.me/c/012345678/11" class="uri">https://t.me/c/012345678/11</a></p>
+<p>Соответвенно, к id 012345678 вам необходимо добавить -100, в таком случае в <code>chat_id</code> надо указать -100012345678.</p>
+<p><strong>Основы форматирования Markdown разметки:</strong></p>
+<ul>
+<li>Жирный шрифт выделяется с помощью знака *:
+<ul>
+<li>пример: <code>*жирный шритф*</code>
+</li>
+<li>результат: <strong>жирный шритф</strong>
+</li>
+</ul>
+</li>
+<li>Курсив задаётся нижним подчёркиванием:
+<ul>
+<li>пример: <code>_курсив_</code>
+</li>
+<li>результат: <em>курсив</em>
+</li>
+</ul>
+</li>
+<li>Моноширинный шрифт, которым обычно выделяется программный код, задаётся с помощью апострофов:
+<ul>
+<li>пример: `моноширинный шрифт`</li>
+<li>результат: <code>моноширинный шрифт</code>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Основы форматирования HTML разметки:</strong></p>
+<p>В HTML вы заворачиваете часть текста, которую надо выделать, в теги, пример <code>&lt;тег&gt;текст&lt;/тег&gt;</code>.</p>
+<ul>
+<li>
+<code>&lt;тег&gt;</code> - открывающий тег</li>
+<li>
+<code>&lt;/тег&gt;</code> - закрывающий тег</li>
+</ul>
+<p><strong>Теги HTML разметки</strong></p>
+<ul>
+<li>
+<code>&lt;b&gt;</code> - жирный шрифт
+<ul>
+<li>пример: <code>&lt;b&gt;жирный шрифт&lt;/b&gt;</code>
+</li>
+<li>результат <strong>жирный шрифт</strong>
+</li>
+</ul>
+</li>
+<li>
+<code>&lt;i&gt;</code> - курсив
+<ul>
+<li>пример: <code>&lt;i&gt;курсив&lt;/i&gt;</code>
+</li>
+<li>результат: <em>курсив</em>
+</li>
+</ul>
+</li>
+<li>
+<code>&lt;code&gt;</code> - моноширинный шрифт
+<ul>
+<li>пример: <code>&lt;code\&gt;моноширинный шрифт&lt;/code\&gt;</code>
+</li>
+<li>результат: <code>моноширинный шрифт</code>
+</li>
+</ul>
+</li>
+</ul>
+<p>Помимо текста вы можете отправлять и другой контент используя специальные методы:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Отправить изображение</span>
+<span class="va">bot</span><span class="op">$</span><span class="fu">sendPhoto</span><span class="op">(</span><span class="va">chat_id</span>,
+  photo <span class="op">=</span> <span class="st">"https://telegram.org/img/t_logo.png"</span>
+<span class="op">)</span>
+
+<span class="co"># Отправка голосового сообщения</span>
+<span class="va">bot</span><span class="op">$</span><span class="fu">sendAudio</span><span class="op">(</span><span class="va">chat_id</span>,
+  audio <span class="op">=</span> <span class="st">"http://www.largesound.com/ashborytour/sound/brobob.mp3"</span>
+<span class="op">)</span>
+
+<span class="co"># Отправить документ</span>
+<span class="va">bot</span><span class="op">$</span><span class="fu">sendDocument</span><span class="op">(</span><span class="va">chat_id</span>,
+  document <span class="op">=</span> <span class="st">"https://github.com/ebeneditos/telegram.bot/raw/gh-pages/docs/telegram.bot.pdf"</span>
+<span class="op">)</span>
+
+<span class="co"># Отправить стикер</span>
+<span class="va">bot</span><span class="op">$</span><span class="fu">sendSticker</span><span class="op">(</span><span class="va">chat_id</span>,
+  sticker <span class="op">=</span> <span class="st">"https://www.gstatic.com/webp/gallery/1.webp"</span>
+<span class="op">)</span>
+
+<span class="co"># Отправить видео</span>
+<span class="va">bot</span><span class="op">$</span><span class="fu">sendVideo</span><span class="op">(</span><span class="va">chat_id</span>,
+  video <span class="op">=</span> <span class="st">"http://techslides.com/demos/sample-videos/small.mp4"</span>
+<span class="op">)</span>
+
+<span class="co"># Отправить gif анимацию</span>
+<span class="va">bot</span><span class="op">$</span><span class="fu">sendAnimation</span><span class="op">(</span><span class="va">chat_id</span>,
+  animation <span class="op">=</span> <span class="st">"https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif"</span>
+<span class="op">)</span>
+
+<span class="co"># Отправить локацию</span>
+<span class="va">bot</span><span class="op">$</span><span class="fu">sendLocation</span><span class="op">(</span><span class="va">chat_id</span>,
+  latitude <span class="op">=</span> <span class="fl">51.521727</span>,
+  longitude <span class="op">=</span> <span class="op">-</span><span class="fl">0.117255</span>
+<span class="op">)</span>
+
+<span class="co"># Имитация действия в чате</span>
+<span class="va">bot</span><span class="op">$</span><span class="fu">sendChatAction</span><span class="op">(</span><span class="va">chat_id</span>,
+  action <span class="op">=</span> <span class="st">"typing"</span>
+<span class="op">)</span></code></pre></div>
+<p>Т.е. например с помощью метода <code><a href="https://rdrr.io/pkg/telegram.bot/man/sendPhoto.html">sendPhoto()</a></code> вы можете отправить сохранённый в виде изображения график, который вы построили с помощью пакета <code>ggplot2</code>.</p>
+</div>
+<div id="как-отправить-в-telegram-таблицу" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Как отправить в telegram таблицу<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B2-telegram-%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D1%83"><i class="fas fa-link"></i></a>
+</h2>
+<p>К сожалению на момент написания книги telegram не поддерживает полноценные таблицы в HTML или Markdown, но вы можете иметировать подобие таблицы. Для этого воспользуйтесь кодом представленной ниже функции <code>to_tg_table()</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span>
+
+<span class="co"># функция для перевода data.frame в telegram таблицу </span>
+<span class="va">to_tg_table</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span> <span class="va">table</span>, <span class="va">align</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">indents</span> <span class="op">=</span> <span class="fl">3</span>, <span class="va">parse_mode</span> <span class="op">=</span> <span class="st">'Markdown'</span> <span class="op">)</span> <span class="op">{</span>
+  
+  <span class="co"># если выравнивание не задано то выравниваем по левому краю</span>
+  <span class="kw">if</span> <span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">align</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span>
+    
+    <span class="va">col_num</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">table</span><span class="op">)</span>
+    <span class="va">align</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'l'</span>, <span class="va">col_num</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">''</span> <span class="op">)</span>
+  
+  <span class="op">}</span>
+  
+  <span class="co"># проверяем правильно ли заданно выравнивание</span>
+  <span class="kw">if</span> <span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">table</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">align</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span>
+    
+    <span class="va">align</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
+    
+  <span class="op">}</span>
+  
+  <span class="co"># новое выравнивание столбцов </span>
+  <span class="va">side</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">align</span><span class="op">)</span>, 
+         <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> 
+           <span class="va">letter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">align</span>, <span class="va">x</span>, <span class="va">x</span><span class="op">)</span>
+           <span class="kw"><a href="https://rdrr.io/r/base/switch.html">switch</a></span> <span class="op">(</span><span class="va">letter</span>,
+                   <span class="st">'l'</span> <span class="op">=</span> <span class="st">'right'</span>,
+                   <span class="st">'r'</span> <span class="op">=</span> <span class="st">'left'</span>,
+                   <span class="st">'c'</span> <span class="op">=</span> <span class="st">'both'</span>,
+                   <span class="st">'left'</span>
+           <span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span>
+  
+  <span class="co"># сохраняем имена</span>
+  <span class="va">t_names</span>      <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">table</span><span class="op">)</span>
+
+  <span class="co"># вычисляем ширину столбцов</span>
+  <span class="va">names_length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">t_names</span>, <span class="va">nchar</span><span class="op">)</span> 
+  <span class="va">value_length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">table</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">max_length</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">value_length</span> <span class="op">&gt;</span> <span class="va">names_length</span>, <span class="va">value_length</span>, <span class="va">names_length</span><span class="op">)</span>
+  
+  <span class="co"># подгоняем размер имён столбцов под их ширину + указанное в indents к-во пробелов </span>
+  <span class="va">t_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="va">str_pad</span>, 
+                    string <span class="op">=</span> <span class="va">t_names</span>, 
+                    width  <span class="op">=</span> <span class="va">max_length</span> <span class="op">+</span> <span class="va">indents</span>, 
+                    side   <span class="op">=</span> <span class="va">side</span><span class="op">)</span>
+  
+  <span class="co"># объединяем названия столбцов</span>
+  <span class="va">str_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="va">t_names</span>, collapse <span class="op">=</span> <span class="st">''</span><span class="op">)</span>
+  
+  <span class="co"># аргументы для фукнции str_pad</span>
+  <span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>string <span class="op">=</span> <span class="va">table</span>, width <span class="op">=</span> <span class="va">max_length</span> <span class="op">+</span> <span class="va">indents</span>, side <span class="op">=</span> <span class="va">side</span><span class="op">)</span>
+
+  <span class="co"># поочереди переводим каждый столбец к нужному виду</span>
+  <span class="va">t_str</span> <span class="op">&lt;-</span>   <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">pmap_df</a></span><span class="op">(</span> <span class="va">rules</span>, <span class="va">str_pad</span> <span class="op">)</span><span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+              <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, remove <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">''</span><span class="op">)</span> <span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+              <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+              <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">'\n'</span><span class="op">)</span> 
+  
+  <span class="co"># если таблица занимает более 4096 символов обрезаем её</span>
+  <span class="kw">if</span> <span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">t_str</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">4021</span> <span class="op">)</span> <span class="op">{</span>
+    
+    <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">'Таблица составляет более 4096 символов!'</span><span class="op">)</span>
+    <span class="va">t_str</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">t_str</span>, <span class="fl">1</span>, <span class="fl">4021</span><span class="op">)</span>
+    
+  <span class="op">}</span>
+  
+  <span class="co"># символы выделения блока кода согласно выбранной разметке</span>
+  <span class="va">code_block</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/switch.html">switch</a></span><span class="op">(</span><span class="va">parse_mode</span>, 
+                       <span class="st">'Markdown'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'```'</span>, <span class="st">'```'</span><span class="op">)</span>,
+                       <span class="st">'HTML'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'&lt;code&gt;'</span>, <span class="st">'&lt;/code&gt;'</span><span class="op">)</span><span class="op">)</span>
+           
+  <span class="co"># переводим в code</span>
+  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="va">code_block</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">str_names</span>, <span class="va">t_str</span>, <span class="va">code_block</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, sep <span class="op">=</span> <span class="st">'\n'</span><span class="op">)</span>
+  
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<p>С помощью этой функци вы можете преобразовать любой data.frame и отправить в telegram:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># преобразуем таблицу iris </span>
+<span class="va">tg_table</span> <span class="op">&lt;-</span> <span class="fu">to_tg_table</span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">15</span><span class="op">)</span> <span class="op">)</span>
+
+<span class="co"># отправляем таблицу в telegram</span>
+<span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="fl">194336771</span>, 
+                <span class="va">tg_table</span>,
+                <span class="st">"Markdown"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure">В telegram это буедет выглядеть так:
+<img src="http://img.netpeak.ua/alsey/160295135597_kiss_150kb.png">
+</div>
+<p>У функции <code>to_tg_table()</code> есть несколько дополнительных аргументов:</p>
+<ul>
+<li>align - выравнивнивание столбцов, тектовая строка, каждая буква соответвует одному столбцу, пример <code>'llrrc'</code>:
+<ul>
+<li>l - выравнивание по левой стороне</li>
+<li>r - выравнивание по правой стороне</li>
+<li>c - выравнивание по центру</li>
+</ul>
+</li>
+<li>indents - количество пробелов для разделения столбцов.</li>
+<li>parse_mode - разметка сообщения, Markdown или HTML.</li>
+</ul>
+<p>Пример с выравниванием столбцов:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># преобразуем таблицу iris </span>
+<span class="va">tg_table</span> <span class="op">&lt;-</span> <span class="fu">to_tg_table</span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">15</span><span class="op">)</span>, 
+                         align <span class="op">=</span> <span class="st">'llccr'</span><span class="op">)</span>
+
+<span class="co"># отправляем таблицу в telegram</span>
+<span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="fl">194336771</span>, 
+                <span class="va">tg_table</span>,
+                <span class="st">"Markdown"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="http://img.netpeak.ua/alsey/160295200291_kiss_174kb.png"></div>
+</div>
+<div id="как-добавить-в-сообщение-emoji" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> Как добавить в сообщение Emoji<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B2-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B5-emoji"><i class="fas fa-link"></i></a>
+</h2>
+<p>Требования к телеграм ботам могут быть разные, в том числе заказчик может попросить вас добавить в сообщения бота какие то Emoji.</p>
+<p>Получить полный список доступных смайлов можно по этой <a href="https://apps.timwhitlock.info/emoji/tables/unicode">ссылке</a>.</p>
+<div class="figure">
+<img src="http://img.netpeak.ua/alsey/160070556432_kiss_104kb.png" alt=""><p class="caption">Таблица смайлов</p>
+</div>
+<p>Из таблицы нас интересует поле <strong>Unicode</strong>. Скопиройте код нужного вам смайла, и замените <code>U+</code> на <code>\U000</code>. Т.е. если вам необходимо отправить смайл, код котого в <a href="https://apps.timwhitlock.info/emoji/tables/unicode">таблице</a> <code>U+1F601</code>, то в коде на R вам необходимо добавить его в текст сообщения вот так - <code>\U0001F601</code>.</p>
+<p>Пример:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">chat_id</span>, 
+                <span class="st">'Сообщение со смайлом \U0001F601 код которого в таблице U+1F601'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure">Результат:
+<img src="http://img.netpeak.ua/alsey/160070602417_kiss_156kb.png">
+</div>
+</div>
+<div id="проверка-планировщика-задач-windows-и-отправка-уведомления-о-задачах-работа-которых-была-завершена-аварийно" class="section level2" number="1.6">
+<h2>
+<span class="header-section-number">1.6</span> Проверка планировщика задач Windows, и отправка уведомления о задачах, работа которых была завершена аварийно<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BF%D0%BB%D0%B0%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D1%89%D0%B8%D0%BA%D0%B0-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87-windows-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-%D1%83%D0%B2%D0%B5%D0%B4%D0%BE%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BE-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0%D1%85-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D1%85-%D0%B1%D1%8B%D0%BB%D0%B0-%D0%B7%D0%B0%D0%B2%D0%B5%D1%80%D1%88%D0%B5%D0%BD%D0%B0-%D0%B0%D0%B2%D0%B0%D1%80%D0%B8%D0%B9%D0%BD%D0%BE"><i class="fas fa-link"></i></a>
+</h2>
+<div id="видео-урок-о-разработке-бота-для-контроля-планировщика-заданий" class="section level3" number="1.6.1">
+<h3>
+<span class="header-section-number">1.6.1</span> Видео урок о разработке бота для контроля планировщика заданий<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-%D1%83%D1%80%D0%BE%D0%BA-%D0%BE-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B5-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B4%D0%BB%D1%8F-%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8F-%D0%BF%D0%BB%D0%B0%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D1%89%D0%B8%D0%BA%D0%B0-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9"><i class="fas fa-link"></i></a>
+</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/u8vpsyIUVCs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="конспект-о-разработке-бота-для-контроля-планировщика-заданий" class="section level3" number="1.6.2">
+<h3>
+<span class="header-section-number">1.6.2</span> Конспект о разработке бота для контроля планировщика заданий<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-%D0%BE-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B5-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B4%D0%BB%D1%8F-%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8F-%D0%BF%D0%BB%D0%B0%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D1%89%D0%B8%D0%BA%D0%B0-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9"><i class="fas fa-link"></i></a>
+</h3>
+<p>Для работы с планировщиком заданий Windows вам необходимо установить пакет <code>taskscheduleR</code>, и для удобства работы с данными установим пакет <code>dplyr</code>.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Установка пакетов</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'taskscheduleR'</span>, <span class="st">'dplyr'</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># Подключение пакетов</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bnosac/taskscheduleR">taskscheduleR</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
+<p>Далее с помощью функции <code><a href="https://rdrr.io/pkg/taskscheduleR/man/taskscheduler_ls.html">taskscheduler_ls()</a></code> мы запрашиваем информацию о задачах из нашего планировщика. С помощью функции <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> из пакета <code>dplyr</code> мы убираем из списка задач те, которые были успешно выполненны и имеют статус последнего результата 0, и те, которые ещё ни разу не запускались и имеют статус 267011, выключенные задачи, и задачи которые выполняются в данный момент.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># запрашиваем список задач</span>
+<span class="va">task</span> <span class="op">&lt;-</span> <span class="va">task</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/taskscheduleR/man/taskscheduler_ls.html">taskscheduler_ls</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span> <span class="va">`Last Result`</span>  <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0"</span>, <span class="st">"267011"</span><span class="op">)</span> <span class="op">&amp;</span> 
+               <span class="va">`Scheduled Task State`</span> <span class="op">==</span> <span class="st">"Enabled"</span> <span class="op">&amp;</span> 
+               <span class="va">Status</span> <span class="op">!=</span> <span class="st">"Running"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">TaskName</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+        <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+        <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+        <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">.</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span></code></pre></div>
+<p>В объекте <code>task</code> у нас теперь список задач, работа которых завершилась ошибкой, этот список нам надо отправить в Telegram.</p>
+<p>Если рассмотреть каждую команду подробнее, то:</p>
+<ul>
+<li>
+<code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> - фильтрует список задач, по описанным выше условиям</li>
+<li>
+<code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> - оставляет в таблице только одно поле с названием задач</li>
+<li>
+<code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> - убирает дубли названий</li>
+<li>
+<code><a href="https://rdrr.io/r/base/unlist.html">unlist()</a></code> - переводит выбранный столбец таблицы в вектор</li>
+<li>
+<code><a href="https://rdrr.io/r/base/paste.html">paste0()</a></code> - соединяет названия задач в одну строку, и ставит в качестве разделителя знак перевода строки, т.е. <code>\n</code>.</li>
+</ul>
+<p>Всё что нам остаётся - отправить этот результат в телеграм.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">chat_id</span>,
+                text <span class="op">=</span> <span class="va">task</span>,
+                parse_mode <span class="op">=</span> <span class="st">"Markdown"</span>
+<span class="op">)</span></code></pre></div>
+<p>Итак, на данный момент код бота выглядит вот так:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Подключение пакета</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bnosac/taskscheduleR">taskscheduleR</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+
+<span class="co"># инициализируем бота</span>
+<span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="st">"123456789:abcdefghijklmnopqrstuvwxyz"</span><span class="op">)</span>
+
+<span class="co"># идентификатор чата</span>
+<span class="va">chat_id</span> <span class="op">&lt;-</span> <span class="fl">123456789</span>
+
+<span class="co"># запрашиваем список задач</span>
+<span class="va">task</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/taskscheduleR/man/taskscheduler_ls.html">taskscheduler_ls</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span> <span class="va">`Last Result`</span>  <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0"</span>, <span class="st">"267011"</span><span class="op">)</span>  <span class="op">&amp;</span>
+               <span class="va">`Scheduled Task State`</span> <span class="op">==</span> <span class="st">"Enabled"</span> <span class="op">&amp;</span> 
+               <span class="va">Status</span> <span class="op">!=</span> <span class="st">"Running"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">TaskName</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+        <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+        <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+        <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">.</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span>
+
+<span class="co"># если есть проблемные задачи отправляем сообщение</span>
+<span class="kw">if</span> <span class="op">(</span> <span class="va">task</span> <span class="op">!=</span> <span class="st">""</span> <span class="op">)</span> <span class="op">{</span>
+
+  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">chat_id</span>,
+                  text <span class="op">=</span> <span class="va">task</span>,
+                  parse_mode <span class="op">=</span> <span class="st">"Markdown"</span>
+  <span class="op">)</span>
+
+<span class="op">}</span></code></pre></div>
+<p><em>При использовании приведённого выше примера подставьте в код токен вашего бота и ваш идентификатор чата.</em></p>
+<p>Вы можете добавлять условия фильтрации задач, например проверяя только те задачи, которые были созданны вами, исключая системные.</p>
+<p>Так же вы можете вынести различные настройки в отдельный файл конфигурации, и хранить в нём id чата и токен. Читать конфиг можно например с помощью пакета <code>configr</code>.</p>
+<pre><code>[telegram_bot]
+;настройки телеграм бота и чата, в который будут приходить уведомления
+chat_id=12345678
+bot_token=123456789:abcdefghijklmnopqrstuvwxyz"</code></pre>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Miachol/configr">configr</a></span><span class="op">)</span>
+
+<span class="co"># чтение конфина</span>
+<span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/configr/man/read.config.html">read.config</a></span><span class="op">(</span><span class="st">'C:/путь_к_конфигу/config.cfg'</span>, rcmd.parse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="va">bot_token</span> <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">telegram_bot</span><span class="op">$</span><span class="va">bot_token</span>
+<span class="va">chat_id</span>     <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">telegram_bot</span><span class="op">$</span><span class="va">chat_id</span></code></pre></div>
+</div>
+</div>
+<div id="настраиваем-расписание-запуска-проверки-задач" class="section level2" number="1.7">
+<h2>
+<span class="header-section-number">1.7</span> Настраиваем расписание запуска проверки задач<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%B0%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D1%80%D0%B0%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87"><i class="fas fa-link"></i></a>
+</h2>
+<p>Наиболее подробно процесс настройки запуска скриптов по расписанию описан в этой <a href="https://netpeak.net/ru/blog/kak-nastroit-zapusk-r-skripta-po-raspisaniyu/">статье</a> . Тут я лишь опишу шаги, которые для этого необходимо выполнить. Если какой-то из шагов вам не понятен, то обратитесь к статье на которую я указал ссылку.</p>
+<p>Предположим, что мы сохранили код нашего бота в файл <code>check_bot.R</code>. Для того, что бы запланировать регулярный запуск этого файла выполните следующие шаги:</p>
+<ol style="list-style-type: decimal">
+<li>Пропишите в системную переменную Path путь к папке в которой установлен R, в Windows путь будет примерно таким: <code>C:\Program Files\R\R-4.0.2\bin</code>.</li>
+<li>Создайте исполняемый bat файл, в котором будет всего одна строка <code>R CMD BATCH C:\rscripts\check_bot\check_bot.R</code>. Замените <code>C:\rscripts\check_bot\check_bot.R</code> на полный путь к вашему R файлу.</li>
+<li>Далее настройте с помощью планировщика задач Windows расписание запуска, например на каждые пол часа.</li>
+</ol>
+</div>
+<div id="заключение" class="section level2" number="1.8">
+<h2>
+<span class="header-section-number">1.8</span> Заключение<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5"><i class="fas fa-link"></i></a>
+</h2>
+<p>В этой главе мы разобрались с тем, как создать бота, и отправлять с его помощью различные уведомления в telegram.</p>
+<p>Я описал задачу контроля планировщика заданий Windows, но вы можете использовать материал этой главы для отправки любых уведомлений, от прогноза погоды до котировок акций на фондовой бирже, т.к. R позволяет вам подключиться к огромному количеству источников данных.</p>
+<p>В следующей главе мы с вами разберёмся с тем, как добавить боту команды и фильтры сообщений, для того, что он мог не только отправлять уведомления, но и выполнять более сложные действия.</p>
+</div>
+<div id="тесты-и-задания" class="section level2" number="1.9">
+<h2>
+<span class="header-section-number">1.9</span> Тесты и задания<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-%D0%B8-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F"><i class="fas fa-link"></i></a>
+</h2>
+<div id="тесты" class="section level3" number="1.9.1">
+<h3>
+<span class="header-section-number">1.9.1</span> Тесты<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B"><i class="fas fa-link"></i></a>
+</h3>
+<p>Для закрепления материла рекомендую вам пройти тест доступный по <a href="https://onlinetestpad.com/t/build-tg-bot-in-r-1">ссылке</a>.</p>
+</div>
+<div id="задания" class="section level3" number="1.9.2">
+<h3>
+<span class="header-section-number">1.9.2</span> Задания<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Создайте с помощью <a href="http://t.me/BotFather">BotFather</a> бота.</li>
+<li>Перейдите к диалогу с ботом, и узнайте идентификатор вашего с ботом чата.</li>
+<li>Отправьте с помощью созданного бота в telegram первые 20 строк из встроенного в R набора данных <code>ToothGrowth</code>.</li>
+</ol>
+<div class="inline-figure">Если вы всё сделали правильно то результат будет следующим:
+<img src="http://img.netpeak.ua/alsey/160390694961_kiss_150kb.png">
+</div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Введение</a></div>
+<div class="next"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html"><span class="header-section-number">2</span> Добавляем боту поддержку команд и фильтры сообщений, класс Updater</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram"><span class="header-section-number">1</span> Создаём бота, и отправляем с его помощью сообщения в telegram</a></li>
+<li>
+<a class="nav-link" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D1%82%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0"><span class="header-section-number">1.1</span> Создание телеграм бота</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-%D1%83%D1%80%D0%BE%D0%BA-%D0%BE-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B8-telegram-%D0%B1%D0%BE%D1%82%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-botfather"><span class="header-section-number">1.1.1</span> Видео урок о создании telegram бота через BotFather</a></li>
+<li><a class="nav-link" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-%D0%BE-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B8-telegram-%D0%B1%D0%BE%D1%82%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-botfather"><span class="header-section-number">1.1.2</span> Конспект о создании telegram бота через BotFather</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-%D1%82%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC-%D0%BD%D0%B0-r"><span class="header-section-number">1.2</span> Установка пакета для работы с телеграм ботом на R</a></li>
+<li><a class="nav-link" href="#%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B8%D0%B7-r-%D0%B2-telegram"><span class="header-section-number">1.3</span> Отправка сообщений из R в Telegram</a></li>
+<li><a class="nav-link" href="#%D0%BA%D0%B0%D0%BA-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B2-telegram-%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D1%83"><span class="header-section-number">1.4</span> Как отправить в telegram таблицу</a></li>
+<li><a class="nav-link" href="#%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B2-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B5-emoji"><span class="header-section-number">1.5</span> Как добавить в сообщение Emoji</a></li>
+<li>
+<a class="nav-link" href="#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BF%D0%BB%D0%B0%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D1%89%D0%B8%D0%BA%D0%B0-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87-windows-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-%D1%83%D0%B2%D0%B5%D0%B4%D0%BE%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BE-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0%D1%85-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D1%85-%D0%B1%D1%8B%D0%BB%D0%B0-%D0%B7%D0%B0%D0%B2%D0%B5%D1%80%D1%88%D0%B5%D0%BD%D0%B0-%D0%B0%D0%B2%D0%B0%D1%80%D0%B8%D0%B9%D0%BD%D0%BE"><span class="header-section-number">1.6</span> Проверка планировщика задач Windows, и отправка уведомления о задачах, работа которых была завершена аварийно</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-%D1%83%D1%80%D0%BE%D0%BA-%D0%BE-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B5-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B4%D0%BB%D1%8F-%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8F-%D0%BF%D0%BB%D0%B0%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D1%89%D0%B8%D0%BA%D0%B0-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9"><span class="header-section-number">1.6.1</span> Видео урок о разработке бота для контроля планировщика заданий</a></li>
+<li><a class="nav-link" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-%D0%BE-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B5-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B4%D0%BB%D1%8F-%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8F-%D0%BF%D0%BB%D0%B0%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D1%89%D0%B8%D0%BA%D0%B0-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9"><span class="header-section-number">1.6.2</span> Конспект о разработке бота для контроля планировщика заданий</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%B0%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D1%80%D0%B0%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87"><span class="header-section-number">1.7</span> Настраиваем расписание запуска проверки задач</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5"><span class="header-section-number">1.8</span> Заключение</a></li>
+<li>
+<a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-%D0%B8-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F"><span class="header-section-number">1.9</span> Тесты и задания</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B"><span class="header-section-number">1.9.1</span> Тесты</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F"><span class="header-section-number">1.9.2</span> Задания</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

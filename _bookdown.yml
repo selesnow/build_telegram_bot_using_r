@@ -1,0 +1,6 @@
+book_filename: "build_telegram_bot_using_r"
+language:
+  ui:
+    chapter_name: "Глава "
+delete_merged_file: true
+output_dir: "docs"

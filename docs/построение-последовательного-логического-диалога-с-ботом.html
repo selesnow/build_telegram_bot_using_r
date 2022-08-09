@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Глава 4 Построение последовательного, логического диалога с ботом | Разработка telegram ботов на языке R</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content="В этой главе мы с вами научимся писать бота, который будет поддерживать последовательный диалог. Т.е. бот будет задавать вам вопросы, и ждать от вас ввода какой-либо информации. В зависимости от...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Глава 4 Построение последовательного, логического диалога с ботом | Разработка telegram ботов на языке R">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/cover.png">
+<meta property="og:description" content="В этой главе мы с вами научимся писать бота, который будет поддерживать последовательный диалог. Т.е. бот будет задавать вам вопросы, и ждать от вас ввода какой-либо информации. В зависимости от...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Глава 4 Построение последовательного, логического диалога с ботом | Разработка telegram ботов на языке R">
+<meta name="twitter:description" content="В этой главе мы с вами научимся писать бота, который будет поддерживать последовательный диалог. Т.е. бот будет задавать вам вопросы, и ждать от вас ввода какой-либо информации. В зависимости от...">
+<meta name="twitter:image" content="/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114798296-1');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Разработка telegram ботов на языке R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="" href="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram.html"><span class="header-section-number">1</span> Создаём бота, и отправляем с его помощью сообщения в telegram</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html"><span class="header-section-number">2</span> Добавляем боту поддержку команд и фильтры сообщений, класс Updater</a></li>
+<li><a class="" href="%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B.html"><span class="header-section-number">3</span> Как добавить боту поддержку клавиатуры</a></li>
+<li><a class="active" href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html"><span class="header-section-number">4</span> Построение последовательного, логического диалога с ботом</a></li>
+<li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
+<li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="построение-последовательного-логического-диалога-с-ботом" class="section level1" number="4">
+<h1>
+<span class="header-section-number">Глава 4</span> Построение последовательного, логического диалога с ботом<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC"><i class="fas fa-link"></i></a>
+</h1>
+<p>В этой главе мы с вами научимся писать бота, который будет поддерживать последовательный диалог. Т.е. бот будет задавать вам вопросы, и ждать от вас ввода какой-либо информации. В зависимости от введённых вами данных бот будет выполнять некоторые действия.</p>
+<p>Также в данной главе мы научимся использовать под капотом бота базы данных, в нашем примере это будет SQLite, но вы можете использовать любую другую СУБД. Более подробно о взаимодействии с базами данных на языке R я писал в <a href="https://habr.com/ru/post/469215/">статье на Хабре</a>.</p>
+<div class="inline-figure"><img src="https://habrastorage.org/webt/m5/vv/89/m5vv894lc6u0bafbsun9-amuvoe.png" align="center" width="80%"></div>
+<div id="видео-урок-по-разработке-последовательного-диалога-с-ботом" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Видео урок по разработке последовательного диалога с ботом<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-%D1%83%D1%80%D0%BE%D0%BA-%D0%BF%D0%BE-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC"><i class="fas fa-link"></i></a>
+</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NgH5G4GO3mA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="конспект-по-разработке-логического-диалога-с-ботом" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Конспект по разработке логического диалога с ботом<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-%D0%BF%D0%BE-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B5-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC"><i class="fas fa-link"></i></a>
+</h2>
+<div id="введение-1" class="section level3" number="4.2.1">
+<h3>
+<span class="header-section-number">4.2.1</span> Введение<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Для того, что бы бот мог запрашивать от вас данные, и ждать ввод какой-либо информации вам потребуется фиксировать текущее состояние диалога. Лучший способ это делать, использовать какую нибудь встраиваемую базу данных, например SQLite.</p>
+<p>Т.е. логика будет следующей. Мы вызываем метод бота, и бот последовательно запрашивает у нас какую-то информацию, при этом на каждом шаге он ждёт ввод этой информации, и может осуществлять её проверку.</p>
+<p>Мы напишем максимально простого бота, сначала он будет спрашивать ваше имя, потом возраст, полученные данные будет сохранять в базу данных. При запросе возраста будет проверять, что бы введённые данные были числом, а не текстом.</p>
+<p>Такой простой диалог будет иметь всего три состояния:
+1. start - обычное состояние бота, в котором он не ждёт от вас никакой информации
+2. wait_name - состояние, при котором бот ожидает ввод имени
+3. wait_age - состояние, при котором бот ожидает ввод вашего возраста, количество полных лет.</p>
+</div>
+<div id="процесс-построения-бота" class="section level3" number="4.2.2">
+<h3>
+<span class="header-section-number">4.2.2</span> Процесс построения бота<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h3>
+<div class="inline-figure">В ходе статьи мы с вами шаг за шагом построим бота, весь процесс схематически можно изобразить следующим образом:
+<img src="http://img.netpeak.ua/alsey/160071071193_kiss_48kb.png">
+</div>
+<ol style="list-style-type: decimal">
+<li>Создаём конфиг бота, в котором будем хранить некоторые настройки. В нашем случае токен бота, и путь к файлу базы данных.</li>
+<li>Создаём переменную среды, в которой будет хранится путь к проекту с ботом.</li>
+<li>Создаём саму базу данных, и ряд функций для того, что бы бот мог взаимодействовать с ней.</li>
+<li>Пишем методы бота, т.е. функции которые он будет выполнять.</li>
+<li>Добавляем фильтры сообщений. С помощью которых бот будет обращаться к нужным методам, в зависимости от текущего состояния чата.</li>
+<li>Добавляем обработчики, которые свяжут команды и сообщения с нужными методами бота.</li>
+<li>Запускаем бота.</li>
+</ol>
+</div>
+<div id="структура-проекта-бота" class="section level3" number="4.2.3">
+<h3>
+<span class="header-section-number">4.2.3</span> Структура проекта бота<a class="anchor" aria-label="anchor" href="#%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h3>
+<p>Для удобства мы разобъём код нашего бота, и прочие связанные с ним файлы на следующую структуру.</p>
+<ul>
+<li>
+<em>bot.R</em> - основной код нашего бота</li>
+<li>
+<em>db_bot_function.R</em> - блок кода с функциями для работы с базой данных</li>
+<li>
+<em>bot_methods.R</em> - код методов бота</li>
+<li>
+<em>message_filters.R</em> - фильтры сообщений</li>
+<li>
+<em>handlers.R</em> - обработчики</li>
+<li>
+<em>config.cfg</em> - конфиг бота</li>
+<li>
+<em>create_db_data.sql</em> - SQL скрипт создания таблицы с данными чата в базе данных</li>
+<li>
+<em>create_db_state.sql</em> - SQL скрипт создания таблицы текущего состояния чата в базе данных</li>
+<li>
+<em>bot.db</em> - база данных бота</li>
+</ul>
+<p>Весь проект бота можно посмотреть, или <a href="https://github.com/selesnow/logical_tg_bot/archive/master.zip">скачать</a> из моего <a href="https://github.com/selesnow/logical_tg_bot">репозитория на GitHub</a>.</p>
+</div>
+<div id="конфиг-бота" class="section level3" number="4.2.4">
+<h3>
+<span class="header-section-number">4.2.4</span> Конфиг бота<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B3-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h3>
+<p>В качестве конфига мы будем использовать обычный <a href="https://ru.wikipedia.org/wiki/.ini">ini файл</a>, следующего вида:</p>
+<pre><code>[bot_settings]
+bot_token=ТОКЕН_ВАШЕГО_БОТА
+
+[db_settings]
+db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
+<p>В конфиг мы записываем токен бота, и путь к базе данных, т.е. к файлу bot.db, сам файл мы будем создавать на следующем шаге.</p>
+<p>Для более сложных ботов можно создавать и более сложные конфиги, к тому же необязательно писать именно ini конфиг, можете использовать любой другой формат включая JSON.</p>
+</div>
+<div id="создаём-переменную-среды" class="section level3" number="4.2.5">
+<h3>
+<span class="header-section-number">4.2.5</span> Создаём переменную среды<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%83%D1%8E-%D1%81%D1%80%D0%B5%D0%B4%D1%8B"><i class="fas fa-link"></i></a>
+</h3>
+<p>На каждом ПК папка с проектом бота может располагаться в разных директориях, и на разных дисках, поэтому в коде путь к папке проекта будет задан через переменную среды <code>TG_BOT_PATH</code>.</p>
+<p>Создать переменную среды можно несколькими способами, наиболее простой - прописать её в файле <em>.Renviron</em>.</p>
+<p>Создать, или редактировать данный файл можно с помощью команды <code>file.edit(path.expand(file.path("~", ".Renviron")))</code>. Выполните её и добавьте в файл одну строку:</p>
+<pre><code>TG_BOT_PATH=C:/ПУТЬ/К/ВАШЕМУ/ПРОЕКТУ</code></pre>
+<p>Далее сохраните файл <em>.Renviron</em> и перезапустите RStudio.</p>
+</div>
+<div id="создаём-базу-данных" class="section level3" number="4.2.6">
+<h3>
+<span class="header-section-number">4.2.6</span> Создаём базу данных<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%B0%D0%B7%D1%83-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85"><i class="fas fa-link"></i></a>
+</h3>
+<p>Следующий шаг - создание базы данных. Нам понадобится 2 таблицы:</p>
+<ul>
+<li>chat_data - данные которые бот запросил у пользователя</li>
+<li>chat_state - текущее состояние всех чатов</li>
+</ul>
+<p>Создать эти таблицы можно с помощью следующего SQL запроса:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb48-1"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> chat_data (</span>
+<span id="cb48-2"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb48-2" aria-hidden="true" tabindex="-1"></a>    chat_id BIGINT  <span class="kw">PRIMARY</span> <span class="kw">KEY</span></span>
+<span id="cb48-3"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb48-3" aria-hidden="true" tabindex="-1"></a>                    <span class="kw">UNIQUE</span>,</span>
+<span id="cb48-4"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb48-4" aria-hidden="true" tabindex="-1"></a>    name    TEXT,</span>
+<span id="cb48-5"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb48-5" aria-hidden="true" tabindex="-1"></a>    age     <span class="dt">INTEGER</span></span>
+<span id="cb48-6"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb48-6" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb48-7"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> chat_state (</span>
+<span id="cb48-9"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb48-9" aria-hidden="true" tabindex="-1"></a>    chat_id BIGINT <span class="kw">PRIMARY</span> <span class="kw">KEY</span></span>
+<span id="cb48-10"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb48-10" aria-hidden="true" tabindex="-1"></a>                   <span class="kw">UNIQUE</span>,</span>
+<span id="cb48-11"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb48-11" aria-hidden="true" tabindex="-1"></a>    state   TEXT</span>
+<span id="cb48-12"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb48-12" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<p>Если вы скачали проект бота с <a href="https://github.com/selesnow/logical_tg_bot/archive/master.zip">GitHub</a>, то для создания базы можете воспользоваться следующим кодом на языке R.</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Скрипт создания базы данных</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org">DBI</a></span><span class="op">)</span>     <span class="co"># интерфейс для работы с СУБД</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Miachol/configr">configr</a></span><span class="op">)</span> <span class="co"># чтение конфига</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>   <span class="co"># чтение текстовых SQL файлов</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rsqlite.r-dbi.org">RSQLite</a></span><span class="op">)</span> <span class="co"># драйвер для подключения к SQLite</span>
+
+<span class="co"># директория проекта</span>
+<span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">'TG_BOT_PATH'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># чтение конфига</span>
+<span class="va">cfg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/configr/man/read.config.html">read.config</a></span><span class="op">(</span><span class="st">'config.cfg'</span><span class="op">)</span>
+
+<span class="co"># подключение к SQLite</span>
+<span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span>
+
+<span class="co"># Создание таблиц в базе</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExecute.html">dbExecute</a></span><span class="op">(</span><span class="va">con</span>, statement <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_file.html">read_file</a></span><span class="op">(</span><span class="st">'create_db_data.sql'</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExecute.html">dbExecute</a></span><span class="op">(</span><span class="va">con</span>, statement <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_file.html">read_file</a></span><span class="op">(</span><span class="st">'create_db_state.sql'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="пишем-функции-для-работы-с-базой-данных" class="section level3" number="4.2.7">
+<h3>
+<span class="header-section-number">4.2.7</span> Пишем функции для работы с базой данных<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-%D0%B1%D0%B0%D0%B7%D0%BE%D0%B9-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85"><i class="fas fa-link"></i></a>
+</h3>
+<p>У нас уже готов файл конфигурации и создана база данных. Теперь необходимо написать функции для чтения и записи данных в эту базу.</p>
+<p>Если вы скачали проект из <a href="https://github.com/selesnow/logical_tg_bot/archive/master.zip">GitHub</a>, то функции вы можете найти в файле <em>db_bot_function.R</em>.</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ###########################################################</span>
+<span class="co"># Function for work bot with database</span>
+
+<span class="co"># получить текущее состояние чата</span>
+<span class="va">get_state</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">chat_id</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span>
+  
+  <span class="va">chat_state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_interp.html">str_interp</a></span><span class="op">(</span><span class="st">"SELECT state FROM chat_state WHERE chat_id == ${chat_id}"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">state</span>
+  
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">chat_state</span><span class="op">)</span><span class="op">)</span>
+  
+  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="co"># установить текущее состояние чата</span>
+<span class="va">set_state</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">state</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span>
+  
+  <span class="co"># upsert состояние чата</span>
+  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExecute.html">dbExecute</a></span><span class="op">(</span><span class="va">con</span>, 
+            <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_interp.html">str_interp</a></span><span class="op">(</span><span class="st">"
+            INSERT INTO chat_state (chat_id, state)
+                VALUES(${chat_id}, '${state}') 
+                ON CONFLICT(chat_id) 
+                DO UPDATE SET state='${state}';
+            "</span><span class="op">)</span>
+  <span class="op">)</span>
+  
+  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span>
+  
+<span class="op">}</span>
+
+<span class="co"># запись полученных данных в базу</span>
+<span class="va">set_chat_data</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">field</span>, <span class="va">value</span><span class="op">)</span> <span class="op">{</span>
+  
+  
+  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span>
+  
+  <span class="co"># upsert состояние чата</span>
+  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExecute.html">dbExecute</a></span><span class="op">(</span><span class="va">con</span>, 
+            <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_interp.html">str_interp</a></span><span class="op">(</span><span class="st">"
+            INSERT INTO chat_data (chat_id, ${field})
+                VALUES(${chat_id}, '${value}') 
+                ON CONFLICT(chat_id) 
+                DO UPDATE SET ${field}='${value}';
+            "</span><span class="op">)</span>
+  <span class="op">)</span>
+  
+  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span>
+  
+<span class="op">}</span>
+
+<span class="co"># read chat data</span>
+<span class="va">get_chat_data</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">field</span><span class="op">)</span> <span class="op">{</span>
+  
+  
+  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span>
+  
+  <span class="co"># upsert состояние чата</span>
+  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery</a></span><span class="op">(</span><span class="va">con</span>, 
+                     <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_interp.html">str_interp</a></span><span class="op">(</span><span class="st">"
+            SELECT ${field}
+            FROM chat_data
+            WHERE chat_id = ${chat_id};
+            "</span><span class="op">)</span>
+  <span class="op">)</span>
+  
+  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span>
+  
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">data</span><span class="op">[[</span><span class="va">field</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+  
+<span class="op">}</span></code></pre></div>
+<p>Мы создали 4 простые функции:
+* <code>get_state()</code> - получить текущее состояние чата из БД
+* <code>set_state()</code> - записать текущее состояние чата в БД
+* <code>get_chat_data()</code> - получить данные отправленные пользователем
+* <code>set_chat_data()</code> - записать данные полученные от пользователя</p>
+<p>Все функции достаточно простые, они либо читают данные из базы с помощью команды <code><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery()</a></code>, либо совершают <code>UPSERT</code> операцию (изменение существующих данных или запись новых данных в БД), с помощью функции <code><a href="https://dbi.r-dbi.org/reference/dbExecute.html">dbExecute()</a></code>.</p>
+<p>Синтаксис UPSERT операции выглядит следующим образом:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb51-1"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> chat_data (chat_id, ${field})</span>
+<span id="cb51-2"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span>(${chat_id}, <span class="st">'${value}'</span>) </span>
+<span id="cb51-3"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> CONFLICT(chat_id) </span>
+<span id="cb51-4"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb51-4" aria-hidden="true" tabindex="-1"></a>DO <span class="kw">UPDATE</span> <span class="kw">SET</span> ${field}<span class="op">=</span><span class="st">'${value}'</span>;</span></code></pre></div>
+<p>Т.е. в наших таблицах поле <em>chat_id</em> имеет ограничение по уникальности и является первичным ключом таблиц. Изначально мы пробуем добавить информацию в таблицу, и получаем ошибку если данные по текущему чату уже присутствуют, в таком случае мы просто обновляем информацию по данному чату.</p>
+<p>Далее эти функции мы будем использовать в методах и фильтрах бота.</p>
+</div>
+<div id="методы-бота" class="section level3" number="4.2.8">
+<h3>
+<span class="header-section-number">4.2.8</span> Методы бота<a class="anchor" aria-label="anchor" href="#%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h3>
+<p>Следующим шагом в построении нашего бота будет создание методов. Если вы скачали проект с <a href="https://github.com/selesnow/logical_tg_bot/archive/master.zip">GitHub</a>, то все методы находятся в файле <em>bot_methods.R</em>.</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ###########################################################</span>
+<span class="co"># bot methods</span>
+
+<span class="co"># start dialog</span>
+<span class="va">start</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="co"># </span>
+  
+  <span class="co"># Send query</span>
+  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                  text <span class="op">=</span> <span class="st">"Введи своё имя"</span><span class="op">)</span>
+  
+  <span class="co"># переключаем состояние диалога в режим ожидания ввода имени</span>
+  <span class="fu">set_state</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, state <span class="op">=</span> <span class="st">'wait_name'</span><span class="op">)</span>
+  
+<span class="op">}</span>
+
+<span class="co"># get current chat state</span>
+<span class="va">state</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">chat_state</span> <span class="op">&lt;-</span> <span class="fu">get_state</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span><span class="op">)</span>
+  
+  <span class="co"># Send state</span>
+  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                  text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">chat_state</span><span class="op">)</span><span class="op">)</span>
+  
+<span class="op">}</span>
+
+<span class="co"># reset dialog state</span>
+<span class="va">reset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="fu">set_state</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, state <span class="op">=</span> <span class="st">'start'</span><span class="op">)</span>
+  
+<span class="op">}</span>
+
+<span class="co"># enter username</span>
+<span class="va">enter_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">uname</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">text</span>
+  
+  <span class="co"># Send message with name</span>
+  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                  text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">uname</span>, <span class="st">", приятно познакомится, я бот!"</span><span class="op">)</span><span class="op">)</span>
+  
+  <span class="co"># Записываем имя в глобальную переменную</span>
+  <span class="co">#username &lt;&lt;- uname</span>
+  <span class="fu">set_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'name'</span>, <span class="va">uname</span><span class="op">)</span> 
+  
+  <span class="co"># Справшиваем возраст</span>
+  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                  text <span class="op">=</span> <span class="st">"Сколько тебе лет?"</span><span class="op">)</span>
+  
+  <span class="co"># Меняем состояние на ожидание ввода имени</span>
+  <span class="fu">set_state</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, state <span class="op">=</span> <span class="st">'wait_age'</span><span class="op">)</span>
+  
+<span class="op">}</span>
+
+<span class="co"># enter user age</span>
+<span class="va">enter_age</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">uage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">text</span><span class="op">)</span>
+  
+  <span class="co"># проверяем было введено число или нет</span>
+  <span class="kw">if</span> <span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">uage</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span>
+    
+    <span class="co"># если введено не число то переспрашиваем возраст</span>
+    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                    text <span class="op">=</span> <span class="st">"Ты ввёл некорректные данные, введи число"</span><span class="op">)</span>
+    
+  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
+    
+    <span class="co"># если введено число сообщаем что возраст принят</span>
+    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                    text <span class="op">=</span> <span class="st">"ОК, возраст принят"</span><span class="op">)</span>
+    
+    <span class="co"># записываем глобальную переменную с возрастом</span>
+    <span class="co">#userage &lt;&lt;- uage</span>
+    <span class="fu">set_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'age'</span>, <span class="va">uage</span><span class="op">)</span> 
+    
+    <span class="co"># сообщаем какие данные были собраны</span>
+    <span class="va">username</span> <span class="op">&lt;-</span> <span class="fu">get_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'name'</span><span class="op">)</span>
+    <span class="va">userage</span>  <span class="op">&lt;-</span> <span class="fu">get_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'age'</span><span class="op">)</span>
+    
+    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, 
+                    text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Тебя зовут "</span>, <span class="va">username</span>, <span class="st">" и тебе "</span>, <span class="va">userage</span>, <span class="st">" лет. Будем знакомы"</span><span class="op">)</span><span class="op">)</span>
+    
+    <span class="co"># возвращаем диалог в исходное состояние</span>
+    <span class="fu">set_state</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, state <span class="op">=</span> <span class="st">'start'</span><span class="op">)</span>
+  <span class="op">}</span>
+  
+<span class="op">}</span></code></pre></div>
+<p>Мы создали 5 методов:</p>
+<ul>
+<li>start - Запуск диалога</li>
+<li>state - Получить текущее состояние чата</li>
+<li>reset - Сбросить текущее состояние чата</li>
+<li>enter_name - Бот запрашивает ваше имя</li>
+<li>enter_age - Бот запрашивает ваш возраст</li>
+</ul>
+<p>Метод <code>start</code> запрашивает ваше имя, и переводит состояние чата в <em>wait_name</em>, т.е. в режим ожидания ввода вашего имени.</p>
+<p>Далее, вы отправляете имя и оно обрабатывается методом <code>enter_name</code>, бот с вами здоровается, записывает полученное имя в базу, и переводит чат в состояние <em>wait_age</em>.</p>
+<p>На этом этапе бот ждёт от вас ввода вашего возраста. Вы отправляете ваш возраст, бот проверяет сообщение, если вы вместо числа отправили какой-то текст он скажет: <code>Ты ввёл некорректные данные, введи число</code>, и будет ждать от вас повторного ввода данных. В случае если вы отправили число, бот сообщит о том, что он принял ваш возраст, запишет полученные данные в базу, сообщит все полученные от вас данные и переведёт состояние чата в исходное положение, т.е. в <code>start</code>.</p>
+<p>Вызвав метод <code>state</code> вы в любой момент можете запросить текущее состояние чата, а методом <code>reset</code> перевести чат в исходное состояние.</p>
+</div>
+<div id="фильтры-сообщений" class="section level3" number="4.2.9">
+<h3>
+<span class="header-section-number">4.2.9</span> Фильтры сообщений<a class="anchor" aria-label="anchor" href="#%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9"><i class="fas fa-link"></i></a>
+</h3>
+<p>В нашем случае это одна из наиболее важных частей в построении бота. Именно с помощью фильтров сообщений бот будет понимать какую информацию он от вас ждёт, и как её надо обрабатывать.</p>
+<p>В проекте на <a href="https://github.com/selesnow/logical_tg_bot">GitHub</a> фильтры прописаны в файле <em>message_filters.R</em>.</p>
+<p>Код фильтров сообщений:</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ###########################################################</span>
+<span class="co"># message state filters</span>
+
+<span class="co"># фильтр сообщений в состоянии ожидания имени</span>
+<span class="va">MessageFilters</span><span class="op">$</span><span class="va">wait_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">get_state</span><span class="op">(</span> <span class="va">message</span><span class="op">$</span><span class="va">chat_id</span> <span class="op">)</span>  <span class="op">==</span> <span class="st">"wait_name"</span>
+<span class="op">}</span>
+<span class="op">)</span>
+
+<span class="co"># фильтр сообщений в состоянии ожидания возраста</span>
+<span class="va">MessageFilters</span><span class="op">$</span><span class="va">wait_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">get_state</span><span class="op">(</span> <span class="va">message</span><span class="op">$</span><span class="va">chat_id</span> <span class="op">)</span>   <span class="op">==</span> <span class="st">"wait_age"</span>
+<span class="op">}</span>
+<span class="op">)</span></code></pre></div>
+<p>В фильтрах мы используем написанную ранее функцию <code>get_state()</code>, для того, что бы запрашивать текущее состояние чата. Данна функция требует всего 1 аргумент, id чата.</p>
+<p>Далее фильтр <em>wait_name</em> обрабатывает сообщения когда чат находится в состоянии <code>wait_name</code>, и соответственно фильтр <em>wait_age</em> обрабатывает сообщения когда чат находится в состоянии <code>wait_age</code>.</p>
+</div>
+<div id="обработчики" class="section level3" number="4.2.10">
+<h3>
+<span class="header-section-number">4.2.10</span> Обработчики<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B8"><i class="fas fa-link"></i></a>
+</h3>
+<p>Файл с обработчиками называется <em>handlers.R</em>, и имеет следующий код:</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ###########################################################</span>
+<span class="co"># handlers</span>
+
+<span class="co"># command handlers</span>
+<span class="va">start_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'start'</span>, <span class="va">start</span><span class="op">)</span>
+<span class="va">state_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'state'</span>, <span class="va">state</span><span class="op">)</span>
+<span class="va">reset_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'reset'</span>, <span class="va">reset</span><span class="op">)</span>
+
+<span class="co"># message handlers</span>
+<span class="co">## !MessageFilters$command - означает что команды данные обработчики не обрабатывают, </span>
+<span class="co">## только текстовые сообщения</span>
+<span class="va">wait_age_h</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">enter_age</span>,  <span class="va">MessageFilters</span><span class="op">$</span><span class="va">wait_age</span>  <span class="op">&amp;</span> <span class="op">!</span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">command</span><span class="op">)</span>
+<span class="va">wait_name_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">enter_name</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">wait_name</span> <span class="op">&amp;</span> <span class="op">!</span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">command</span><span class="op">)</span></code></pre></div>
+<p>Сначала мы создаём обработчики команд, которые позволят вам запускать методы для начала диалога, его сброса, и запроса текущего состояния.</p>
+<p>Далее мы создаём 2 обработчика сообщений с использованием созданных на прошлом шаге фильтров, и добавляем к ним фильтр <code>!MessageFilters$command</code>, для того, что бы мы в любом состоянии чата могли использовать команды.</p>
+</div>
+<div id="код-запуска-бота" class="section level3" number="4.2.11">
+<h3>
+<span class="header-section-number">4.2.11</span> Код запуска бота<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%B4-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h3>
+<p>Теперь у нас всё готово к запуску, основной код запуска бота находится в файле <em>bot.R</em>.</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rsqlite.r-dbi.org">RSQLite</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org">DBI</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Miachol/configr">configr</a></span><span class="op">)</span>
+
+<span class="co"># переходим в папку проекта</span>
+<span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">'TG_BOT_PATH'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># читаем конфиг</span>
+<span class="va">cfg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/configr/man/read.config.html">read.config</a></span><span class="op">(</span><span class="st">'config.cfg'</span><span class="op">)</span>
+
+<span class="co"># создаём экземпляр бота</span>
+<span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="va">cfg</span><span class="op">$</span><span class="va">bot_settings</span><span class="op">$</span><span class="va">bot_token</span><span class="op">)</span>
+
+<span class="co"># Загрузка компонентов бота</span>
+<span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">'db_bot_function.R'</span><span class="op">)</span> <span class="co"># функции для работы с БД</span>
+<span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">'bot_methods.R'</span><span class="op">)</span>     <span class="co"># методы бота</span>
+<span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">'message_filters.R'</span><span class="op">)</span> <span class="co"># фильтры сообщений</span>
+<span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">'handlers.R'</span><span class="op">)</span> <span class="co"># обработчики сообщений</span>
+
+<span class="co"># Добавляем обработчики в диспетчер</span>
+<span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span>
+  <span class="va">start_h</span> <span class="op">+</span>
+  <span class="va">wait_age_h</span> <span class="op">+</span>
+  <span class="va">wait_name_h</span> <span class="op">+</span>
+  <span class="va">state_h</span> <span class="op">+</span>
+  <span class="va">reset_h</span>
+
+<span class="co"># Запускаем бота</span>
+<span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure">В результате, у нас получился вот такой бот:
+<img src="https://img.netpeak.ua/alsey/160069507819_kiss_188kb.png" alt="image">
+</div>
+<p>В любой момент с помощью команды <code>/state</code> мы можем запрашивать текущее состояние чата, а с помощью команды <code>/reset</code> переводить чат в исходное состояние и начинать диалог заново.</p>
+</div>
+<div id="заключение-3" class="section level3" number="4.2.12">
+<h3>
+<span class="header-section-number">4.2.12</span> Заключение<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>В этой главе мы разобрались как использовать внутри бота базы данных, и как строить последовательные логические диалоги за счёт фиксации состояния чата.</p>
+<p>В данном случае мы рассмотрели самый примитивный пример, для того, что бы вам проще было понять идею построения таких ботов, на практике вы можете строить гораздо более сложные диалоги.</p>
+<p>В следующей <a href="https://habr.com/ru/post/520208/">статье</a> из этой серии мы научимся ограничивать пользователям бота права на использования различных его методов.</p>
+</div>
+</div>
+<div id="тесты-и-задания-3" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Тесты и задания<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-%D0%B8-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-3"><i class="fas fa-link"></i></a>
+</h2>
+<div id="тесты-3" class="section level3" number="4.3.1">
+<h3>
+<span class="header-section-number">4.3.1</span> Тесты<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>Для закрепления материла рекомендую вам пройти тест доступный по <a href="https://onlinetestpad.com/t/build-tg-bot-in-r-4">ссылке</a>.</p>
+</div>
+<div id="задания-3" class="section level3" number="4.3.2">
+<h3>
+<span class="header-section-number">4.3.2</span> Задания<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-3"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Постройте бота который будет поддерживать игру угадай число. Т.е. по команде <code>/start</code> бот будет загадывать число от 1 до 50. Далее у вас будет 5 попыток угадать это число.</li>
+</ol>
+<p>Вы по очереди в каждой из попыток вводите числа, если введённое число меньше чем то, которое загадал бот то бот пишет “моё число больше”, иначе бот пишет “моё число меньше”. Если вы ввели правильное число то бот пишет что вы выйграли, и переводит диалог в исходное состояние.</p>
+<p>Если вы всё сделали правильно, бот будет выглядеть так:</p>
+<p><em>Победа с 5 попытки:</em></p>
+<div class="inline-figure"><img src="http://img.netpeak.ua/alsey/160495888357_kiss_258kb.png"></div>
+<p><em>Пройгрыш</em>
+<img src="http://img.netpeak.ua/alsey/160495881567_kiss_266kb.png"></p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B.html"><span class="header-section-number">3</span> Как добавить боту поддержку клавиатуры</a></div>
+<div class="next"><a href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC"><span class="header-section-number">4</span> Построение последовательного, логического диалога с ботом</a></li>
+<li><a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-%D1%83%D1%80%D0%BE%D0%BA-%D0%BF%D0%BE-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC"><span class="header-section-number">4.1</span> Видео урок по разработке последовательного диалога с ботом</a></li>
+<li>
+<a class="nav-link" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-%D0%BF%D0%BE-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B5-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC"><span class="header-section-number">4.2</span> Конспект по разработке логического диалога с ботом</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-1"><span class="header-section-number">4.2.1</span> Введение</a></li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B1%D0%BE%D1%82%D0%B0"><span class="header-section-number">4.2.2</span> Процесс построения бота</a></li>
+<li><a class="nav-link" href="#%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0-%D0%B1%D0%BE%D1%82%D0%B0"><span class="header-section-number">4.2.3</span> Структура проекта бота</a></li>
+<li><a class="nav-link" href="#%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B3-%D0%B1%D0%BE%D1%82%D0%B0"><span class="header-section-number">4.2.4</span> Конфиг бота</a></li>
+<li><a class="nav-link" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%83%D1%8E-%D1%81%D1%80%D0%B5%D0%B4%D1%8B"><span class="header-section-number">4.2.5</span> Создаём переменную среды</a></li>
+<li><a class="nav-link" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%B0%D0%B7%D1%83-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85"><span class="header-section-number">4.2.6</span> Создаём базу данных</a></li>
+<li><a class="nav-link" href="#%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-%D0%B1%D0%B0%D0%B7%D0%BE%D0%B9-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85"><span class="header-section-number">4.2.7</span> Пишем функции для работы с базой данных</a></li>
+<li><a class="nav-link" href="#%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0"><span class="header-section-number">4.2.8</span> Методы бота</a></li>
+<li><a class="nav-link" href="#%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9"><span class="header-section-number">4.2.9</span> Фильтры сообщений</a></li>
+<li><a class="nav-link" href="#%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B8"><span class="header-section-number">4.2.10</span> Обработчики</a></li>
+<li><a class="nav-link" href="#%D0%BA%D0%BE%D0%B4-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0-%D0%B1%D0%BE%D1%82%D0%B0"><span class="header-section-number">4.2.11</span> Код запуска бота</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-3"><span class="header-section-number">4.2.12</span> Заключение</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-%D0%B8-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-3"><span class="header-section-number">4.3</span> Тесты и задания</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-3"><span class="header-section-number">4.3.1</span> Тесты</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-3"><span class="header-section-number">4.3.2</span> Задания</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

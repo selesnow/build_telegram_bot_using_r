@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Глава 6 Повышаем стабильность работы бота | Разработка telegram ботов на языке R</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content="К этому моменту вы знаете уже достаточно для того, что бы решить значительную часть своих задач по ботостроению. Простой бот будет работать достаточно стабильно, но всё равно иногда сервера API...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Глава 6 Повышаем стабильность работы бота | Разработка telegram ботов на языке R">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/cover.png">
+<meta property="og:description" content="К этому моменту вы знаете уже достаточно для того, что бы решить значительную часть своих задач по ботостроению. Простой бот будет работать достаточно стабильно, но всё равно иногда сервера API...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Глава 6 Повышаем стабильность работы бота | Разработка telegram ботов на языке R">
+<meta name="twitter:description" content="К этому моменту вы знаете уже достаточно для того, что бы решить значительную часть своих задач по ботостроению. Простой бот будет работать достаточно стабильно, но всё равно иногда сервера API...">
+<meta name="twitter:image" content="/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114798296-1');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Разработка telegram ботов на языке R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="" href="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram.html"><span class="header-section-number">1</span> Создаём бота, и отправляем с его помощью сообщения в telegram</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html"><span class="header-section-number">2</span> Добавляем боту поддержку команд и фильтры сообщений, класс Updater</a></li>
+<li><a class="" href="%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B.html"><span class="header-section-number">3</span> Как добавить боту поддержку клавиатуры</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html"><span class="header-section-number">4</span> Построение последовательного, логического диалога с ботом</a></li>
+<li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
+<li><a class="active" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
+<li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="повышаем-стабильность-работы-бота" class="section level1" number="6">
+<h1>
+<span class="header-section-number">Глава 6</span> Повышаем стабильность работы бота<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h1>
+<p>К этому моменту вы знаете уже достаточно для того, что бы решить значительную часть своих задач по ботостроению. Простой бот будет работать достаточно стабильно, но всё равно иногда сервера API Telegram могут давать сбой. Даже если в вашем коде нет ошибок, и пользователи используют его правильно, иногда он может падать.</p>
+<p>В этой главе мы поговорим о том, как повысить работоспособность бота за счёт отлавливания и обработки ошибок пуллинга.</p>
+<div id="конструкция-trycatch" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Конструкция tryCatch()<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F-trycatch"><i class="fas fa-link"></i></a>
+</h2>
+<p>Повысить работоспособность вашего бота поможет конструкция <code><a href="https://rdrr.io/r/base/conditions.html">tryCatch()</a></code>. Данная конструкция имеет следующий синтаксис:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>(<span class="at">expr =</span> {</span>
+<span id="cb66-2"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb66-3"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> Тут код который будет выполняться <span class="sc">~</span></span>
+<span id="cb66-4"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb66-5"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-5" aria-hidden="true" tabindex="-1"></a>}, </span>
+<span id="cb66-6"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">error =</span> <span class="cf">function</span>(err) {</span>
+<span id="cb66-7"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb66-8"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> код который будет выполняться в случае возникновения ошибки в блоке expr <span class="sc">~</span></span>
+<span id="cb66-9"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb66-10"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-10" aria-hidden="true" tabindex="-1"></a>  }, </span>
+<span id="cb66-11"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">finally =</span> {</span>
+<span id="cb66-12"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb66-13"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-13" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> Код который будет выполняться в любом случае, не зависимо от того закончилось выражение expr ошибкой или нет <span class="sc">~</span></span>
+<span id="cb66-14"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb66-15"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html#cb66-15" aria-hidden="true" tabindex="-1"></a>  })</span></code></pre></div>
+</div>
+<div id="логика-работы-конструкции-trycatch" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Логика работы конструкции tryCatch()<a class="anchor" aria-label="anchor" href="#%D0%BB%D0%BE%D0%B3%D0%B8%D0%BA%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8-trycatch"><i class="fas fa-link"></i></a>
+</h2>
+<p>Из описанного синтаксиса понятно, что вам необходимо завернуть выражение в фигурные скобки в аргументе <code>expr</code>. Это выражение будет выполняться либо до тех пор, пока не встретится ошибка, либо если ошибки нет, оно будет выполнено полностью.</p>
+<p>Если в выражении переданном в <code>expr</code> встречается ошибка, то конструкция <code>tryCath()</code> запустит анонимную функцию, которую вы передали в блоке <code>error</code>.</p>
+<p>В любом случае, не зависимо от того, встретилась в выражении <code>expr</code> ошибка или нет, в завершении выполнения будет выполнен код, переданный в аргумент <code>finally</code>.</p>
+<p>Если вы хотите более подробно узнать про конструкцию <code><a href="https://rdrr.io/r/base/conditions.html">tryCatch()</a></code> посмотрите этот <a href="https://youtu.be/GvmjW34IHu8">видео урок</a>.</p>
+</div>
+<div id="используем-trycatch-внутри-бота" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Используем tryCatch() внутри бота<a class="anchor" aria-label="anchor" href="#%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D0%B5%D0%BC-trycatch-%D0%B2%D0%BD%D1%83%D1%82%D1%80%D0%B8-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h2>
+<p>По большому счёту вы можете использовать <code><a href="https://rdrr.io/r/base/conditions.html">tryCatch()</a></code> внутри каждой функции вашего бота. Но можно убить всех зайцев одним выстрелом.</p>
+<p>В разработке ботов слабым местом является пуллинг, т.е. метод <code>updater$start_polling()</code>. Пуллинг - это бесконечный цикл, именно он выполняется всё время работы бота, и даёт сбой если пользователь неправильно использовал бота, или API Telegram не отправил вам ответ. Соответственно если завернуть пуллинг в <code><a href="https://rdrr.io/r/base/conditions.html">tryCatch()</a></code>, и перезапускать вашего бота в бота в блоке <code>finally</code> то при любой ошибке он будет самостоятельно перезапускаться.</p>
+<p>Перед перезапуском бота не забывайте очистить его апдейты, что бы избавиться от ошибки, которая вызвала падение бота.</p>
+<p>Выглядеть такой пуллинг будет следующим образом:</p>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span>
+  
+  <span class="co"># запускаем пуллинг</span>
+  expr <span class="op">=</span> <span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span>, 
+  
+  <span class="co"># действия при ошибке пуллинга</span>
+  error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">err</span><span class="op">)</span> <span class="op">{</span>
+    
+    <span class="co"># бот для оповещения</span>
+    <span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/bot_token.html">bot_token</a></span><span class="op">(</span><span class="st">"Токен вашего бота"</span><span class="op">)</span><span class="op">)</span>
+    
+    <span class="co"># чат для оповещения</span>
+    <span class="va">chat_id</span> <span class="op">&lt;-</span> <span class="st">"Идентификатор чата в который необходимо отправить сообщение"</span>
+    
+    <span class="co"># сообщение</span>
+    <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"*Бот упал*: Ошибка (_{err$message}_)."</span><span class="op">)</span>
+    
+    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">chat_id</span>, 
+                    text <span class="op">=</span> <span class="va">msg</span>,
+                    parse_mode <span class="op">=</span> <span class="st">'Markdown'</span><span class="op">)</span>
+    
+    <span class="co"># очищаем полученный апдейт бота, который вызвал ошибку</span>
+    <span class="va">updater</span><span class="op">$</span><span class="va">bot</span><span class="op">$</span><span class="fu">clean_updates</span><span class="op">(</span><span class="op">)</span>
+    
+    <span class="co"># информация о том, что бот будет перезапущен</span>
+    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">chat_id</span>, 
+                    text <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">'*Перезапускаю бота* в {Sys.time()}'</span><span class="op">)</span>,
+                    parse_mode <span class="op">=</span> <span class="st">'Markdown'</span><span class="op">)</span>
+
+    
+  <span class="op">}</span>, 
+  <span class="co"># действия которые будут выполненны в любом случае</span>
+  finally <span class="op">=</span> <span class="op">{</span>
+    
+    <span class="co"># останавливаем пулинг</span>
+    <span class="va">updater</span><span class="op">$</span><span class="fu">stop_polling</span><span class="op">(</span><span class="op">)</span>
+        
+    <span class="co"># перезапускаем скрипт бота</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">'C:\\telegram_bot\\my_bot.R'</span><span class="op">)</span> 
+
+  <span class="op">}</span>
+<span class="op">)</span></code></pre></div>
+<p>В приведённом выше коде вам необходимо подставить токен созданного вами бота, и указать ID чата, в который бот будет отправлять уведомление о падении пуллинга.</p>
+<p>В блок <code>expr</code> мы завернули процесс пуллинга, таким образом он постоянно контролируется конструкцией <code>tryCatch</code>.</p>
+<p>Далее в блок <code>error</code> мы передали безымянную функцию, которая принимает всего один аргумент <code>err</code>, т.е. саму ошибку. Сообщение об ошибке мы получаем через <code>err$message</code>, и отправляем в указанный чат. С помощью <code>updater$bot$clean_updates()</code> мы очищаем очередь апдейтов бота, т.к. последний апдейт вызвал ошибку и падение нашего бота.</p>
+<p>В блоке <code>finally</code> мы останавливаем пуллинг, и командой <code>source('C:\\telegram_bot\\my_bot.R')</code> занова запускаем скрипт с ботом.</p>
+<p>Такая схема позволяет боту очищаться и подниматься при любой ошибке пуллинга.</p>
+<p>Очищать апдейты бота с помощью комманды <code>updater$bot$clean_updates()</code> можно так же и при запуске бота, указав эту команду сразу, после инициализации объекта бота.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></div>
+<div class="next"><a href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
+<li><a class="nav-link" href="#%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F-trycatch"><span class="header-section-number">6.1</span> Конструкция tryCatch()</a></li>
+<li><a class="nav-link" href="#%D0%BB%D0%BE%D0%B3%D0%B8%D0%BA%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8-trycatch"><span class="header-section-number">6.2</span> Логика работы конструкции tryCatch()</a></li>
+<li><a class="nav-link" href="#%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D0%B5%D0%BC-trycatch-%D0%B2%D0%BD%D1%83%D1%82%D1%80%D0%B8-%D0%B1%D0%BE%D1%82%D0%B0"><span class="header-section-number">6.3</span> Используем tryCatch() внутри бота</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
