@@ -74,7 +74,7 @@ description: "Этот веб учебник поможет вам освоит�
 В 2020 году запустил [YouTube канал](https://bit.ly/36kliAp), в котором делюсь видео уроками по языку R И аналитике в целом.
 
 ## Видео введение в курс {-}
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iMZlUowNh5M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iMZlUowNh5M?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Правки и предложения {-}
 
