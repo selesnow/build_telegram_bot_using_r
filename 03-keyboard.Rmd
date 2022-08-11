@@ -1,7 +1,7 @@
 # Как добавить боту поддержку клавиатуры
 
 ## Видео урок по добавлению боту клавиатуры
-<iframe width="560" height="315" src="https://www.youtube.com/embed/QKHkL_GLy-M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QKHkL_GLy-M?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Конспект по добавлению клавиатуры
 

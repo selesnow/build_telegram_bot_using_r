@@ -7,7 +7,7 @@
 <img src="https://habrastorage.org/webt/m5/vv/89/m5vv894lc6u0bafbsun9-amuvoe.png" align="center" width="80%" />
 
 ## Видео урок по разработке последовательного диалога с ботом
-<iframe width="560" height="315" src="https://www.youtube.com/embed/NgH5G4GO3mA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NgH5G4GO3mA?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Конспект по разработке логического диалога с ботом
 

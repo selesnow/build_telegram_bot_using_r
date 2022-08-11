@@ -8,7 +8,7 @@
 
 ### Видео урок о создании telegram бота через BotFather
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Tu9tHHhQU0g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Tu9tHHhQU0g?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Конспект о создании telegram бота через BotFather
 
@@ -407,7 +407,7 @@ bot$sendMessage(chat_id,
 ## Проверка планировщика задач Windows, и отправка уведомления о задачах, работа которых была завершена аварийно
 
 ### Видео урок о разработке бота для контроля планировщика заданий
-<iframe width="560" height="315" src="https://www.youtube.com/embed/u8vpsyIUVCs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/u8vpsyIUVCs?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Конспект о разработке бота для контроля планировщика заданий
 Для работы с планировщиком заданий Windows вам необходимо установить пакет `taskscheduleR`, и для удобства работы с данными установим пакет `dplyr`.
