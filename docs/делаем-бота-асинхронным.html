@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Глава 7 Делаем бота асинхронным | Разработка telegram ботов на языке R</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content="7.1 Что такое асинхронное программирование По умолчанию созданные вами боты работают в параллеьном, однопоточном режиме. Т.е. они выполняют заданные команды последовательно. Это не доставит...">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta property="og:title" content="Глава 7 Делаем бота асинхронным | Разработка telegram ботов на языке R">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/cover.png">
+<meta property="og:description" content="7.1 Что такое асинхронное программирование По умолчанию созданные вами боты работают в параллеьном, однопоточном режиме. Т.е. они выполняют заданные команды последовательно. Это не доставит...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Глава 7 Делаем бота асинхронным | Разработка telegram ботов на языке R">
+<meta name="twitter:description" content="7.1 Что такое асинхронное программирование По умолчанию созданные вами боты работают в параллеьном, однопоточном режиме. Т.е. они выполняют заданные команды последовательно. Это не доставит...">
+<meta name="twitter:image" content="/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114798296-1');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Разработка telegram ботов на языке R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="" href="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram.html"><span class="header-section-number">1</span> Создаём бота, и отправляем с его помощью сообщения в telegram</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html"><span class="header-section-number">2</span> Добавляем боту поддержку команд и фильтры сообщений, класс Updater</a></li>
+<li><a class="" href="%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B.html"><span class="header-section-number">3</span> Как добавить боту поддержку клавиатуры</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html"><span class="header-section-number">4</span> Построение последовательного, логического диалога с ботом</a></li>
+<li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
+<li><a class="active" href="%D0%B4%D0%B5%D0%BB%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%BC.html"><span class="header-section-number">7</span> Делаем бота асинхронным</a></li>
+<li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="делаем-бота-асинхронным" class="section level1" number="7">
+<h1>
+<span class="header-section-number">Глава 7</span> Делаем бота асинхронным<a class="anchor" aria-label="anchor" href="#%D0%B4%D0%B5%D0%BB%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%BC"><i class="fas fa-link"></i></a>
+</h1>
+<div id="что-такое-асинхронное-программирование" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Что такое асинхронное программирование<a class="anchor" aria-label="anchor" href="#%D1%87%D1%82%D0%BE-%D1%82%D0%B0%D0%BA%D0%BE%D0%B5-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D0%B5-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><i class="fas fa-link"></i></a>
+</h2>
+<p>По умолчанию созданные вами боты работают в параллеьном, однопоточном режиме. Т.е. они выполняют заданные команды последовательно. Это не доставит никаких дополнительных трудностей если:</p>
+<ul>
+<li>ваш бот выпоняет простейшие команды длительность работы которых не превышает 1 секунды;</li>
+<li>вашего бота использует всего несколько пользователей, и редко используют его одновременно.</li>
+</ul>
+<blockquote>
+<p>Асинхронность в программировании — выполнение процесса в неблокирующем режиме системного вызова, что позволяет потоку программы продолжить обработку.</p>
+<p>– <a href="https://tproger.ru/articles/asynchronous-programming/">tproger.ru</a></p>
+</blockquote>
+</div>
+<div id="пример-последовательного-бота-с-поддержкой-длиетльных-команд" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Пример последовательного бота с поддержкой длиетльных команд<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%BE%D0%B9-%D0%B4%D0%BB%D0%B8%D0%B5%D1%82%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4"><i class="fas fa-link"></i></a>
+</h2>
+<p>В этом разделе мы разберёмся с тем, как сделать нашего бота асинхронным, т.е. способным обрабатывать одновременно несколько команд, таким образом, что бы одна длительная команда, не блокировала работу боту на время её выполнения. Для демострации примера мы создадим бота с двумя простейшими командами:</p>
+<ul>
+<li>
+<code>fast</code> - быстрая команда, время выполнение которой менее 1 секунды.</li>
+<li>
+<code>slow</code> - команда, на выполнение которой боту требуется некоторое время, в нашем случае более 10 секунд.</li>
+</ul>
+<p>Для создания бота выполните приведённый ниже код:</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">"Токен вашего бота"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Функция с длительным временем вычислений</span></span>
+<span><span class="va">slow_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># Сообщение о том, что начата работа длительного вычисления</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span></span>
+<span>      <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>      text <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"Медленная функция, начало работы!\nID процесса: {Sys.getpid()}"</span><span class="op">)</span>,</span>
+<span>      parse_mode <span class="op">=</span> <span class="st">"Markdown"</span></span>
+<span>  <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Добавляем паузу, для того, что бы исскусственно сделать функцию длительной</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Сообщаем о том, что все вычисления выполнены</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>      text <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"Медленная функция выполнена!\nID процесса: {Sys.getpid()}"</span><span class="op">)</span>,</span>
+<span>      parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Функция с коротким временем вычислений</span></span>
+<span><span class="va">fast_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># Просто отправляем сообщение</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>    text <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"Быстрая функция, выполняется последовательный режим!\nID процесса: {Sys.getpid()}"</span><span class="op">)</span>,</span>
+<span>    parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># создаём обработчики</span></span>
+<span><span class="va">slow_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'slow'</span>, <span class="va">slow_fun</span><span class="op">)</span></span>
+<span><span class="va">fast_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'fast'</span>, <span class="va">fast_fun</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># добаляем обработчик в диспетчер</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">slow_hendler</span> <span class="op">+</span> <span class="va">fast_hendler</span></span>
+<span></span>
+<span><span class="co"># запускаем бота</span></span>
+<span><span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>В многофункциональных ботах также можно разделить все команды на быстрые и медленные. Команды, которые бот выполняет мгновенно не требуют асинзронности, а вот команды реализующие длительные, дорогие вычисления, например запросы к API, лучше выполнять в параллельном, фоновом процессе не блокируя на период вычислений работу бота.</p>
+<p>Для демострации проблемы давайте попробуем запустить бота, по приведённому выше примеру кода.</p>
+<div class="inline-figure"><img src="http://img.netpeak.ua/alsey/1B8UCF6.png"></div>
+<p>Изначально мы запустили медленную команду <code>/slow</code>, и не дожидаясь её выполнения отправили быструю команду <code>/fast</code>. Но, к выполнеию команды <code>/fast</code> бот приступил только после того, как выполнил длительную команду <code>/slow</code>. Это видно из диалога, т.к. после того, как боту была отправлена команда <code>/fast</code>, он завершил работу команды <code>/slow</code>, сообщил нам “Медленная функция выполнена! ID процесса: 868”. Только после этого приступил к выполнению быстрой функции, сообщив “Быстрая функция, выполняется последовательный режим!ID процесса: 868”.</p>
+<p>Представьте ситуацию, если у вас одновременно 5 пользователей отправят вперемешку быстрые и длительные команды. В качестве эксперимента давайте отпарвим боту очередь команд:</p>
+<ol style="list-style-type: decimal">
+<li><code>/slow</code></li>
+<li><code>/slow</code></li>
+<li><code>/fast</code></li>
+<li><code>/slow</code></li>
+<li><code>/fast</code></li>
+</ol>
+<div class="inline-figure"><img src="http://img.netpeak.ua/alsey/1B8VPW8.png"></div>
+<p>В данном случае не важно, эти команды запустил один пользователь или 5, выполняться они будут последовательно. Не смотря на то, что 5ая команда является быстрой, пользователю, который её отправил придётся ждать выполнения всех 4ёх, предыдущих команд. Если изобразить этот процесс схематически, и допустить, что быстрая команда выполняется за 1 секунду, а медленная за 10, то получтся следующее:</p>
+<div class="inline-figure"><img src="http://img.netpeak.ua/alsey/1B99JER.png" align="middle" width="640"></div>
+<p>Как видите в последовательном режиме выполнения, не смотря на то, что 5ая по счёта команда требует всего 1 секунду на вычисления, она 31 секунду находится в ожидании, пока будут выполнены 4 предыдущие операции.</p>
+</div>
+<div id="многопоточность-в-r" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Многопоточность в R<a class="anchor" aria-label="anchor" href="#%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%B2-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>В языке R есть множество реализаций многопоточности:</p>
+<ul>
+<li><code>foreach</code></li>
+<li><code>parallel</code></li>
+<li><code>future</code></li>
+</ul>
+<p>Это далеко не полный перечень пакетов, которые позволяют вам производить вычисления в многопоточном режиме используя язык R. Для реализации многопоточности при разработке telegram ботов наиболее удобным является пакет <code>future</code>, о котором я подробно рассказывал в уроке <a href="https://selesnow.github.io/iterations_in_r/%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-future.html">“Пакет future”</a> курса <a href="https://selesnow.github.io/iterations_in_r/">“Циклы и функционалы в языке R”</a>. Крайне рекомендую пройти весь курс <a href="https://selesnow.github.io/iterations_in_r/">“Циклы и функционалы в языке R”</a> для большего погружения в тему многопоточности. Т.к. в данном курсе мы не будет подробно рассматривать параллельное программирование.</p>
+<p>Пакет <code>future</code> позволяет вам, выполнять вычисления как в последовательном (обычном) режиме, так и в многопоточном. При этом данный пакет поддерживает несколько различных многопоточных режима:</p>
+<div class="inline-figure"><img src="http://img.netpeak.ua/alsey/1B9B14H.png" align="middle" width="640"></div>
+<p>Изменять план выполнения вычислений можно с помощью <code><a href="https://future.futureverse.org/reference/plan.html">future::plan()</a></code>. Наиболее простым, и удобным для использования при построения telegram ботов многопоточный план вычислений - multisession. Данный план позволяет запускать на вашем локальном ПК паралелльные R сеансы в фоновом режиме, после выполнения вычислений их результат импортируется в основной R сеанс.</p>
+<div class="inline-figure"><img src="https://img.netpeak.ua/alsey/1B9CTQ6.png"></div>
+<p>Далее, после переопределения плана вычислений, запустить вычисление в многопоточном режиме можно с помощью одноимённой функции <code>future()</code>.</p>
+</div>
+<div id="используем-future-для-построения-асинхронного-бота" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Используем future для построения асинхронного бота<a class="anchor" aria-label="anchor" href="#%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D0%B5%D0%BC-future-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h2>
+<p>Хочу обратить ваше внимание, когда мы в начале этого урока запустили бота в последовательном режиме, он с помощью функции <code><a href="https://rdrr.io/r/base/Sys.getpid.html">Sys.getpid()</a></code> получал, и выводил в сообщении идентификатор R сеанса, в ходе которого выполнялись все вычисления бота. Во всех представленных выше сообщение идентификатор процесса был одинаковым - 868. Это связано с тем, что все вычисления производились последовательно в рамках одного R сеанса.</p>
+<p>Ниже я приведу пример, доработаного бота, таким образом, что бы функция <code>/slow</code> запускалась в фоновом, паралелльном R сеансе, и не блокировала работу бота. При этом функцию <code>/fast</code> мы оставим без изменений, т.к. она выполняется ботом достаточно быстро, и скорее всего накладные расходы на создание фонового сеанса будут больше, чем вычисление самой функции.</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Включаем параллеьный план вычислений</span></span>
+<span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="st">'multisession'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">"Токен вашего бота"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Функция с длительным временем вычислений</span></span>
+<span><span class="va">slow_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># Запускаем выполнение кода в параллельной сессии</span></span>
+<span>  <span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/future.html">future</a></span><span class="op">(</span></span>
+<span>    <span class="op">{</span></span>
+<span>      <span class="co"># Сообщение о том, что начата работа длительного вычисления</span></span>
+<span>      <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>        text <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"Медленная функция, начало работы!\nID процесса: {Sys.getpid()}"</span><span class="op">)</span>,</span>
+<span>        parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span></span>
+<span>      </span>
+<span>      <span class="co"># Добавляем паузу, для того, что бы исскусственно сделать функцию длительной</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
+<span>      </span>
+<span>      <span class="co"># Сообщаем о том, что все вычисления выполнены</span></span>
+<span>      <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>        text <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"Медленная функция выполнена!\nID процесса: {Sys.getpid()}"</span><span class="op">)</span>,</span>
+<span>        parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Функция с коротким временем вычислений</span></span>
+<span><span class="va">fast_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  </span>
+<span>  <span class="co"># Просто отправляем сообщение</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>    text <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"Быстрая функция, выполняется последовательный режим!\nID процесса: {Sys.getpid()}"</span><span class="op">)</span>,</span>
+<span>    parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># создаём обработчик</span></span>
+<span><span class="va">slow_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'slow'</span>, <span class="va">slow_fun</span><span class="op">)</span></span>
+<span><span class="va">fast_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'fast'</span>, <span class="va">fast_fun</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># добаляем обработчик в диспетчер</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">slow_hendler</span> <span class="op">+</span> <span class="va">fast_hendler</span></span>
+<span></span>
+<span><span class="co"># запускаем бота</span></span>
+<span><span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><em>Что мы изменили в коде бота:</em>
+1. В начале скрипта, командой <code>future::plan('multisession')</code> мы переопределили план вычислений с последовательного на многопоточный. На самом деле весь код будет выполняться последовательно, кроме кода используемого внутри функции <code>future()</code>.
+2. Весь код внутри функции бота <code>slow_fun()</code> мы завернули в <code><a href="https://future.futureverse.org/reference/future.html">future::future()</a></code>, таким образом, при запуске медленной функции будет запускаться параллеьный фоновый R процесс, и все вычисления данной функции будут выполняться там, не блокируя основной сеанс.</p>
+<p>Теперь давайте попробуем в параллеьном режиме запустить такую же очередь команд, как и в предыдущем последовательном примере:</p>
+<div class="inline-figure"><img src="http://img.netpeak.ua/alsey/1B9FMSK.png"></div>
+<p>Обратите внимение на то, что вычисление всех долгих команд <code>/slow</code> выполняются в разных процессах, бот выводит в каждом сообщение информацию “ID процесса: XX”. При этом вычисление быстрой команды <code>/fast</code> оба раза выполнялось в корневом процессе с id 868.</p>
+<p>Схематически весь процесс обработки команд, даже при одновременном их запуске, теперь выглядит так:</p>
+<div class="inline-figure"><img src="http://img.netpeak.ua/alsey/1B9HGKZ.png"></div>
+<p>В последовательном режиме выполнение всех команд заняло 32 секунды (10 + 10 + 1 + 10 + 1), в многопоточном всего 10 секунд. При этом даже в течении этих 10 секунд основной сеанс практически не был заблокирован, только на первые две секунды, когда в нём происходили вычисления быстрых команд <code>/fast</code> в последовательном режиме.</p>
+</div>
+<div id="управление-количеством-потоков" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> Управление количеством потоков<a class="anchor" aria-label="anchor" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE%D0%BC-%D0%BF%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%B2"><i class="fas fa-link"></i></a>
+</h2>
+<p>По умолчанию функция <code><a href="https://future.futureverse.org/reference/plan.html">future::plan()</a></code> при изменение плана с последовательного на многопоточный автоматически определяет оптимальное количество потоков, т.е. фоновых процессов, которые будут доступны в фоновом режиме. По умолчанию будет создано столько процессов, сколько ядер доступно в процессоре вашего ПК. Программно можно посмотреть количество достуных ядер следующим образом:</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://parallelly.futureverse.org/reference/availableCores.html">availableCores</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## system 
+##      8</code></pre>
+<p>В моём случае одновременно будет доступно 8 фоновых R сеансов. Для большинства задач этого будет достаточно, но в функции <code><a href="https://future.futureverse.org/reference/plan.html">future::plan()</a></code> доступен агрумент <code>workers</code>, который позволяет самостоятельно задать необходимое количество фоновых процессов.</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="st">'multisession'</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<p>Приведённый выше код демонстрирует сокращение количества доступных процессов до 4ёх.</p>
+</div>
+<div id="функция-promisesfuture_promise" class="section level2" number="7.6">
+<h2>
+<span class="header-section-number">7.6</span> Функция promises::future_promise()<a class="anchor" aria-label="anchor" href="#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-promisesfuture_promise"><i class="fas fa-link"></i></a>
+</h2>
+<p>Пакет <code>promises</code> часто используется в связке с <code>future</code> органично дополняя его.</p>
+<p>В приведённых выше практических примерах нам было достаточно количества созданных фоновых поток. Но всегда есть вероятность того, что все потоки будут заняты. Например, мы включили мультисессионый режим вычислений с двумя потоками (workers = 4) и бот получил практически одновременно 3 команды <code>/slow</code>. В таком случае первые две команды уйдут выполняться в фоновые процессы, а третяя, и последующие встанут в очередь ожидания свободного процесса, заняв при этом основной процесс. В такой ситуации до тех пор, пока не появится свободный процесс, основной процесс будет заблокирован, и даже при попытки отправить быструю функцию <code>/fast</code>, она будет также поставлена в очередь.</p>
+<p>Решить эту проблему можно с помощью функции <code><a href="https://rstudio.github.io/promises//reference/future_promise.html">promises::future_promise()</a></code>. Преимущество <code><a href="https://rstudio.github.io/promises//reference/future_promise.html">promises::future_promise()</a></code> перед <code><a href="https://future.futureverse.org/reference/future.html">future::future()</a></code>, заключается в том, что даже если нет свободных потоков, созданая очередь не будет блокировать основной поток, она будет созданна так же в фоновом потоке. Для доработки приведенного ранее примера достаточно просто заменить в коде функции <code>slow()</code> функцию <code><a href="https://future.futureverse.org/reference/future.html">future::future()</a></code> на <code><a href="https://rstudio.github.io/promises//reference/future_promise.html">promises::future_promise()</a></code>.</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Включаем параллеьный план вычислений</span></span>
+<span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="st">'multisession'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">"Токен вашего бота"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Функция с длительным временем вычислений</span></span>
+<span><span class="va">slow_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># Запускаем выполнение кода в параллельной сессии</span></span>
+<span>  <span class="fu">promises</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/promises//reference/future_promise.html">future_promise</a></span><span class="op">(</span></span>
+<span>    <span class="op">{</span></span>
+<span>      <span class="co"># Сообщение о том, что начата работа длительного вычисления</span></span>
+<span>      <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>        text <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"Медленная функция, начало работы!\nID процесса: {Sys.getpid()}"</span><span class="op">)</span>,</span>
+<span>        parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span></span>
+<span>      </span>
+<span>      <span class="co"># Добавляем паузу, для того, что бы исскусственно сделать функцию длительной</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
+<span>      </span>
+<span>      <span class="co"># Сообщаем о том, что все вычисления выполнены</span></span>
+<span>      <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>        text <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"Медленная функция выполнена!\nID процесса: {Sys.getpid()}"</span><span class="op">)</span>,</span>
+<span>        parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Функция с коротким временем вычислений</span></span>
+<span><span class="va">fast_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  </span>
+<span>  <span class="co"># Просто отправляем сообщение</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>    text <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"Быстрая функция, выполняется последовательный режим!\nID процесса: {Sys.getpid()}"</span><span class="op">)</span>,</span>
+<span>    parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># создаём обработчик</span></span>
+<span><span class="va">slow_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'slow'</span>, <span class="va">slow_fun</span><span class="op">)</span></span>
+<span><span class="va">fast_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'fast'</span>, <span class="va">fast_fun</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># добаляем обработчик в диспетчер</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">slow_hendler</span> <span class="op">+</span> <span class="va">fast_hendler</span></span>
+<span></span>
+<span><span class="co"># запускаем бота</span></span>
+<span><span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="заключение-5" class="section level2" number="7.7">
+<h2>
+<span class="header-section-number">7.7</span> Заключение<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>Итак, для того, что бы ваш бот умел одноврмененно обрабатывать входящие команды необходимо:</p>
+<ol style="list-style-type: decimal">
+<li>Выявить список команд, требующих длителые вычисления.</li>
+<li>В начале скрипта добавить команду <code>future::plan('multisession')</code>, для того, что бы у вас была возможность запускать вычисление длительных операций в фоновых, паралельных R сеансах.</li>
+<li>Код методов бота, которые требуют длительных вычислений заворачиваем в <code>future::future({Тут будет многострочный код метода бота})</code>.</li>
+<li>Улучшить многопоточность бота можно заменив функцию `<code><a href="https://future.futureverse.org/reference/future.html">future::future()</a></code> на <code><a href="https://rstudio.github.io/promises//reference/future_promise.html">promises::future_promise()</a></code>, которая оставляет свободным основной поток R, даже если все фоновые потоки заняты.</li>
+</ol>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></div>
+<div class="next"><a href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%B4%D0%B5%D0%BB%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%BC"><span class="header-section-number">7</span> Делаем бота асинхронным</a></li>
+<li><a class="nav-link" href="#%D1%87%D1%82%D0%BE-%D1%82%D0%B0%D0%BA%D0%BE%D0%B5-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D0%B5-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">7.1</span> Что такое асинхронное программирование</a></li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%BE%D0%B9-%D0%B4%D0%BB%D0%B8%D0%B5%D1%82%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4"><span class="header-section-number">7.2</span> Пример последовательного бота с поддержкой длиетльных команд</a></li>
+<li><a class="nav-link" href="#%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%B2-r"><span class="header-section-number">7.3</span> Многопоточность в R</a></li>
+<li><a class="nav-link" href="#%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D0%B5%D0%BC-future-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE-%D0%B1%D0%BE%D1%82%D0%B0"><span class="header-section-number">7.4</span> Используем future для построения асинхронного бота</a></li>
+<li><a class="nav-link" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE%D0%BC-%D0%BF%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%B2"><span class="header-section-number">7.5</span> Управление количеством потоков</a></li>
+<li><a class="nav-link" href="#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-promisesfuture_promise"><span class="header-section-number">7.6</span> Функция promises::future_promise()</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-5"><span class="header-section-number">7.7</span> Заключение</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-17.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

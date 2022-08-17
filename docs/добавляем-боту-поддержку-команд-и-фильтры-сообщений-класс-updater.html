@@ -7,7 +7,7 @@
 <title>Глава 2 Добавляем боту поддержку команд и фильтры сообщений, класс Updater | Разработка telegram ботов на языке R</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="2.1 Видео по добавлению боту поддержки команд    2.2 Конспект по добавлению боту поддержки команд В этой главе мы разберёмся как оживить нашего бота и добавим ему поддержку команд, а также...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
 <meta property="og:title" content="Глава 2 Добавляем боту поддержку команд и фильтры сообщений, класс Updater | Разработка telegram ботов на языке R">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/cover.png">
@@ -18,7 +18,7 @@
 <meta name="twitter:image" content="/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -58,6 +58,7 @@
 <li><a class="" href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html"><span class="header-section-number">4</span> Построение последовательного, логического диалога с ботом</a></li>
 <li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
 <li><a class="" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C.html"><span class="header-section-number">7</span> Добавляем боту асинхронность</a></li>
 <li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
 <li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
 </ul>
@@ -89,7 +90,7 @@
 <h3>
 <span class="header-section-number">2.2.1</span> Класс Updater<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater"><i class="fas fa-link"></i></a>
 </h3>
-<p><code>Updater</code> - это класс, который упрощает вам разработку телеграм бота, и использует под капотом класс <code>Dispetcher</code>. Назначение класса <code>Updater</code> заключается в том, что бы получить обновления от бота (в предыдущей главе мы использовали для этой цели метод <code><a href="https://rdrr.io/pkg/telegram.bot/man/getUpdates.html">getUpdates()</a></code>), и передать их далее в <code>Dispetcher</code>.</p>
+<p><code>Updater</code> - это класс, который упрощает вам разработку телеграм бота, и использует под капотом класс <code>Dispetcher</code>. Назначение класса <code>Updater</code> заключается в том, что бы получить обновления от бота (в предыдущей главе мы использовали для этой цели метод <code>getUpdates()</code>), и передать их далее в <code>Dispetcher</code>.</p>
 <p>В свою очередь <code>Dispetcher</code> содержит в себе созданные вами обработчики, т.е. объекты класса <code>Handler</code>.</p>
 </div>
 <div id="handlers---обработчики" class="section level3" number="2.2.2">
@@ -111,36 +112,36 @@
 <p>Если вы никогда ранее не использовали ботов, и не в курсе, что такое команда, то команды боту необходимо отправлять с помощью прямого слеша <code>/</code> в качестве префикса.</p>
 <p>Начнём мы с простых команд, т.е. научим нашего бота здороваться по команде <code>/hi</code>.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
-
-<span class="co"># создаём экземпляр класса Updater</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span>
-
-<span class="co"># Пишем метод для приветсвия</span>
-<span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># Имя пользователя с которым надо поздароваться</span>
-  <span class="va">user_name</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">from</span><span class="op">$</span><span class="va">first_name</span>
-
-  <span class="co"># Отправка приветственного сообщения</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                  text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Моё почтение, "</span>, <span class="va">user_name</span>, <span class="st">"!"</span><span class="op">)</span>,
-                  parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span>
-
-<span class="op">}</span>
-
-<span class="co"># создаём обработчик</span>
-<span class="va">hi_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'hi'</span>, <span class="va">say_hello</span><span class="op">)</span>
-
-<span class="co"># добаляем обработчик в диспетчер</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">hi_hendler</span>
-
-<span class="co"># запускаем бота</span>
-<span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># создаём экземпляр класса Updater</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Пишем метод для приветсвия</span></span>
+<span><span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># Имя пользователя с которым надо поздароваться</span></span>
+<span>  <span class="va">user_name</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">from</span><span class="op">$</span><span class="va">first_name</span></span>
+<span></span>
+<span>  <span class="co"># Отправка приветственного сообщения</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                  text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Моё почтение, "</span>, <span class="va">user_name</span>, <span class="st">"!"</span><span class="op">)</span>,</span>
+<span>                  parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># создаём обработчик</span></span>
+<span><span class="va">hi_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'hi'</span>, <span class="va">say_hello</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># добаляем обработчик в диспетчер</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">hi_hendler</span></span>
+<span></span>
+<span><span class="co"># запускаем бота</span></span>
+<span><span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
 </blockquote>
-<p>Метод <code><a href="https://rdrr.io/pkg/telegram.bot/man/start_polling.html">start_polling()</a></code> класса <code>Updater</code>, который используется в конце кода, запускает бесконечный цикл запроса и обработки обновлений от бота.</p>
+<p>Метод <code>start_polling()</code> класса <code>Updater</code>, который используется в конце кода, запускает бесконечный цикл запроса и обработки обновлений от бота.</p>
 <p>Теперь откроем телеграм, и напишем нашему боту первую команду <code>/hi</code>.</p>
 <div class="inline-figure"><img src="http://img.netpeak.ua/alsey/159742442588_kiss_208kb.png"></div>
 <p>Теперь наш бот понимает команду <code>/hi</code>, и умеет с нами здороваться.</p>
@@ -148,10 +149,10 @@
 <div class="inline-figure"><img src="http://img.netpeak.ua/alsey/159742510212_kiss_21kb.png"></div>
 <ol style="list-style-type: decimal">
 <li>Создаём экземпляр класса <code>Updater</code>;</li>
-<li>Создаём методы, т.е. функции которые будет выполнять наш бот. В примере кода это функция <code>say_hello()</code>. Функции, которые вами будут использоваться как методы бота должны иметь два обязательных аргумента - <em>bot</em> и <em>update</em>, и один необязательный - <em>args</em>. Аргумент <em>bot</em>, это и есть ваш бот, с его помощью вы можете отвечать на сообщения, отправлять сообщения, или использовать любые другие доступные боту методы. Аргумент <em>update</em> это то, что бот получил от пользователя, по сути, то что в первой главе мы получали методом <code><a href="https://rdrr.io/pkg/telegram.bot/man/getUpdates.html">getUpdates()</a></code>. Аргумент <em>args</em> позволяет вам обрабатывать дополнительные данные отправленные пользователем вместе с командой, к этой теме мы ещё вернёмся немного позже;</li>
+<li>Создаём методы, т.е. функции которые будет выполнять наш бот. В примере кода это функция <code>say_hello()</code>. Функции, которые вами будут использоваться как методы бота должны иметь два обязательных аргумента - <em>bot</em> и <em>update</em>, и один необязательный - <em>args</em>. Аргумент <em>bot</em>, это и есть ваш бот, с его помощью вы можете отвечать на сообщения, отправлять сообщения, или использовать любые другие доступные боту методы. Аргумент <em>update</em> это то, что бот получил от пользователя, по сути, то что в первой главе мы получали методом <code>getUpdates()</code>. Аргумент <em>args</em> позволяет вам обрабатывать дополнительные данные отправленные пользователем вместе с командой, к этой теме мы ещё вернёмся немного позже;</li>
 <li>Создаём обработчики, т.е. связываем какие-то действия пользователя с созданными на прошлом шаге методами. По сути обработчик это триггер, событие которое вызывает какую-то функцию бота. В нашем примере таким триггером является отправка команды <code>/hi</code>, и реализуется командой <code>hi_hendler &lt;- CommandHandler('hi', say_hello)</code>. Первый аргумент функции <code><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler()</a></code> позволяет вам задать команду, в нашем случае <code>hi</code>, на которую будет реагировать бот. Второй аргумент позволяет указать метод бота, мы будем вызывать метод <code>say_hello</code>, который будет выполняться если пользователь вызвал указанную в первом аргументе команду;</li>
-<li>Далее добавляем созданный обработчик в диспетчер нашего экземпляра класса <code>Updater</code>. Добавлять обработчики можно несколькими способами, в примере выше я использовал простейший, с помощью знака <code>+</code>, т.е. <code>updater &lt;- updater + hi_hendler</code>. То же самое можно сделать с помощью метода <code><a href="https://rdrr.io/pkg/telegram.bot/man/add_handler.html">add_handler()</a></code>, который относится к классу <code>Dispatcher</code>, найти этот метод можно так: <code>updater$dispatcher$add_handler()</code>;</li>
-<li>Запускаем бота с помощью команды <code><a href="https://rdrr.io/pkg/telegram.bot/man/start_polling.html">start_polling()</a></code>.</li>
+<li>Далее добавляем созданный обработчик в диспетчер нашего экземпляра класса <code>Updater</code>. Добавлять обработчики можно несколькими способами, в примере выше я использовал простейший, с помощью знака <code>+</code>, т.е. <code>updater &lt;- updater + hi_hendler</code>. То же самое можно сделать с помощью метода <code>add_handler()</code>, который относится к классу <code>Dispatcher</code>, найти этот метод можно так: <code>updater$dispatcher$add_handler()</code>;</li>
+<li>Запускаем бота с помощью команды <code>start_polling()</code>.</li>
 </ol>
 </div>
 <div id="обработчик-текстовых-сообщений-и-фильтры" class="section level3" number="2.2.4">
@@ -162,77 +163,77 @@
 <p>Обычный <strong>MessageHandler</strong> будет реагировать на абсолютно все входящие сообщения. Поэтому зачастую обработчики сообщений используются вместе с фильтрами. Давайте научим бота здороваться не только по команде <code>/hi</code>, но и всегда, когда в сообщении отправленном боту встречается одно из следующих слов: привет, здравствуй, салют, хай, бонжур.</p>
 <p>Пока мы не будем писать какие-то новые методы, т.к. у нас уже есть метод с помощью которого бот с нами здоровается. От нас требуется только создать нужный фильтр и обработчик сообщений.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
-
-<span class="co"># создаём экземпляр класса Updater</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span>
-
-<span class="co"># Пишем метод для приветсвия</span>
-<span class="co">## команда приветвия</span>
-<span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># Имя пользователя с которым надо поздароваться</span>
-  <span class="va">user_name</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">from</span><span class="op">$</span><span class="va">first_name</span>
-
-  <span class="co"># Отправляем приветсвенное сообщение</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                  text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Моё почтение, "</span>, <span class="va">user_name</span>, <span class="st">"!"</span><span class="op">)</span>,
-                  parse_mode <span class="op">=</span> <span class="st">"Markdown"</span>,
-                  reply_to_message_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">message_id</span><span class="op">)</span>
-
-<span class="op">}</span>
-
-<span class="co"># создаём фильтры</span>
-<span class="va">MessageFilters</span><span class="op">$</span><span class="va">hi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># проверяем, встречается ли в тексте сообщения слова: привет, здравствуй, салют, хай, бонжур</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span>x           <span class="op">=</span> <span class="va">message</span><span class="op">$</span><span class="va">text</span>,
-        pattern     <span class="op">=</span> <span class="st">'привет|здравствуй|салют|хай|бонжур'</span>,
-        ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-  <span class="op">}</span>
-<span class="op">)</span>
-
-<span class="co"># создаём обработчик</span>
-<span class="va">hi_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'hi'</span>, <span class="va">say_hello</span><span class="op">)</span> <span class="co"># обработчик команды hi</span>
-<span class="va">hi_txt_hnd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">say_hello</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">hi</span><span class="op">)</span>
-
-<span class="co"># добаляем обработчики в диспетчер</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span>
-             <span class="va">hi_hendler</span> <span class="op">+</span>
-             <span class="va">hi_txt_hnd</span>
-
-<span class="co"># запускаем бота</span>
-<span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># создаём экземпляр класса Updater</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Пишем метод для приветсвия</span></span>
+<span><span class="co">## команда приветвия</span></span>
+<span><span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># Имя пользователя с которым надо поздароваться</span></span>
+<span>  <span class="va">user_name</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">from</span><span class="op">$</span><span class="va">first_name</span></span>
+<span></span>
+<span>  <span class="co"># Отправляем приветсвенное сообщение</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                  text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Моё почтение, "</span>, <span class="va">user_name</span>, <span class="st">"!"</span><span class="op">)</span>,</span>
+<span>                  parse_mode <span class="op">=</span> <span class="st">"Markdown"</span>,</span>
+<span>                  reply_to_message_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">message_id</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># создаём фильтры</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">hi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># проверяем, встречается ли в тексте сообщения слова: привет, здравствуй, салют, хай, бонжур</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span>x           <span class="op">=</span> <span class="va">message</span><span class="op">$</span><span class="va">text</span>,</span>
+<span>        pattern     <span class="op">=</span> <span class="st">'привет|здравствуй|салют|хай|бонжур'</span>,</span>
+<span>        ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># создаём обработчик</span></span>
+<span><span class="va">hi_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'hi'</span>, <span class="va">say_hello</span><span class="op">)</span> <span class="co"># обработчик команды hi</span></span>
+<span><span class="va">hi_txt_hnd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">say_hello</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">hi</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># добаляем обработчики в диспетчер</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span></span>
+<span>             <span class="va">hi_hendler</span> <span class="op">+</span></span>
+<span>             <span class="va">hi_txt_hnd</span></span>
+<span></span>
+<span><span class="co"># запускаем бота</span></span>
+<span><span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
 </blockquote>
 <div class="inline-figure">Теперь попробуем отправить боту несколько сообщений, в которых будут встречаться перечисленные ранее слова приветствия:
 <img src="https://img.netpeak.ua/alsey/159787794513_kiss_226kb.png">
 </div>
-<p>Итак, в первую очередь мы научили бота не просто здороваться, а отвечать на приветствие. Сделали мы это с помощью аргумента <em>reply_to_message_id</em>, который доступен в методе <code><a href="https://rdrr.io/pkg/telegram.bot/man/sendMessage.html">sendMessage()</a></code>, в который необходимо передать id сообщения на которое требуется ответить. Получить id сообщения можно вот так: <code>update$message$message_id</code>.</p>
+<p>Итак, в первую очередь мы научили бота не просто здороваться, а отвечать на приветствие. Сделали мы это с помощью аргумента <em>reply_to_message_id</em>, который доступен в методе <code>sendMessage()</code>, в который необходимо передать id сообщения на которое требуется ответить. Получить id сообщения можно вот так: <code>update$message$message_id</code>.</p>
 <p>Но главное, что мы сделали - добавили боту фильтр с помощью функции <code><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter()</a></code>:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># создаём фильтры</span>
-<span class="va">MessageFilters</span><span class="op">$</span><span class="va">hi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span>
-
-  <span class="co"># анонимная фильтрующая функция</span>
-  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span>
-
-    <span class="co"># проверяем, встречается ли в тексте сообщения слова приветствия</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span>x           <span class="op">=</span> <span class="va">message</span><span class="op">$</span><span class="va">text</span>,
-          pattern     <span class="op">=</span> <span class="st">'привет|здравствуй|салют|хай|бонжур'</span>,
-          ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-  <span class="op">}</span>
-
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># создаём фильтры</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">hi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
+<span></span>
+<span>  <span class="co"># анонимная фильтрующая функция</span></span>
+<span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>    <span class="co"># проверяем, встречается ли в тексте сообщения слова приветствия</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span>x           <span class="op">=</span> <span class="va">message</span><span class="op">$</span><span class="va">text</span>,</span>
+<span>          pattern     <span class="op">=</span> <span class="st">'привет|здравствуй|салют|хай|бонжур'</span>,</span>
+<span>          ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Как вы могли заметить, фильтры необходимо добавлять в объект <strong>MessageFilters</strong>, в котором изначально уже есть небольшой набор готовых фильтров. В нашем примере в объект <strong>MessageFilters</strong> мы добавили элемент <em>hi</em>, это новый фильтр.</p>
 <p>В функцию <code><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter()</a></code> вам необходимо передать фильтрующую функцию. По сути, фильтр - это просто функция, которая получает экземпляр сообщения и возвращает <em>TRUE</em> или <em>FALSE</em>. В нашем примере, мы написали простейшую функцию, которая с помощью базовой функции <code><a href="https://rdrr.io/r/base/grep.html">grepl()</a></code> проверяет текст сообщения, и если он соответствует регулярному выражению <code>привет|здравствуй|салют|хай|бонжур</code> возвращает <em>TRUE</em>.</p>
 <p>Далее мы создаём обработчик сообщений <code>hi_txt_hnd &lt;- MessageHandler(say_hello, filters = MessageFilters$hi)</code>. Первый аргумент функции <code><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler()</a></code> - метод, который будет вызывать обработчик, а второй аргумент - это фильтр по которому он будет вызываться. В нашем случае это созданный нами фильтр <code>MessageFilters$hi</code>.</p>
 <p>Ну и в итоге, мы добавляем в диспетчер созданный только, что обработчик <em>hi_txt_hnd</em>.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span>
-             <span class="va">hi_hendler</span> <span class="op">+</span>
-             <span class="va">hi_txt_hnd</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span></span>
+<span>             <span class="va">hi_hendler</span> <span class="op">+</span></span>
+<span>             <span class="va">hi_txt_hnd</span></span></code></pre></div>
 <p>Как я уже писал выше, в пакете <code>telegram.bot</code> и объекте <strong>MessageFilters</strong> уже есть набор встроенных фильтров, которые вы можете использовать:</p>
 <ul>
 <li>all - Все сообщения</li>
@@ -253,9 +254,9 @@
 </ul>
 <p>Если вы хотите совместить некоторые фильтры в одном обработчике просто используйте знак <code>|</code> - в качестве логического <strong>ИЛИ</strong>, и знак <code>&amp;</code> в качестве логического <strong>И</strong>. Например, если вы хотите что бы бот вызывал один и тот же метод когда он получает видео, изображение или документ используйте следующий пример создания обработчика сообщений:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">handler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">callback</span>,
-  <span class="va">MessageFilters</span><span class="op">$</span><span class="va">video</span> <span class="op">|</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">photo</span> <span class="op">|</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">document</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">handler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">callback</span>,</span>
+<span>  <span class="va">MessageFilters</span><span class="op">$</span><span class="va">video</span> <span class="op">|</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">photo</span> <span class="op">|</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">document</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="добавление-команд-с-параметрами" class="section level3" number="2.2.5">
 <h3>
@@ -266,88 +267,88 @@
 <p>Приведённый ниже бот использует API производственного календаря <a href="https://isdayoff.ru/">isdayoff.ru</a>.</p>
 <p><spoiler title="Код 3: Бот, который сообщает по дате и стране "></spoiler></p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
-
-<span class="co"># создаём экземпляр класса Updater</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span>
-
-<span class="co"># Пишем метод для приветсвия</span>
-<span class="co">## команда приветвия</span>
-<span class="va">check_date</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span>, <span class="va">args</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># входящие данные</span>
-  <span class="va">day</span>     <span class="op">&lt;-</span> <span class="va">args</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>  <span class="co"># дата</span>
-  <span class="va">country</span> <span class="op">&lt;-</span> <span class="va">args</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>  <span class="co"># страна</span>
-
-  <span class="co"># проверка введённых параметров</span>
-  <span class="kw">if</span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">'\\d{4}-\\d{2}-\\d{2}'</span>, <span class="va">day</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span>
-
-    <span class="co"># Send Custom Keyboard</span>
-    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                    text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">day</span>, <span class="st">" - некорреткная дата, введите дату в формате ГГГГ-ММ-ДД"</span><span class="op">)</span>,
-                    parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span>
-
-  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-    <span class="va">day</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">day</span><span class="op">)</span>
-    <span class="co"># переводим в формат POSIXtl</span>
-    <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">day</span>, <span class="st">"%Y"</span><span class="op">)</span>
-    <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">day</span>, <span class="st">"%m"</span><span class="op">)</span>
-    <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">day</span>, <span class="st">"%d"</span><span class="op">)</span>
-
-  <span class="op">}</span>
-
-  <span class="co"># страна для проверки</span>
-  <span class="co">## проверяем задана ли страна</span>
-  <span class="co">## если не задана устанавливаем ru</span>
-  <span class="kw">if</span> <span class="op">(</span> <span class="op">!</span> <span class="va">country</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'ru'</span>, <span class="st">'ua'</span>, <span class="st">'by'</span>, <span class="st">'kz'</span>, <span class="st">'us'</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span>
-
-    <span class="co"># Send Custom Keyboard</span>
-    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                    text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">country</span>, <span class="st">" - некорретктный код страны, возможнные значения: ru, by, kz, ua, us. Запрошены данные по России."</span><span class="op">)</span>,
-                    parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span>
-
-    <span class="va">country</span> <span class="op">&lt;-</span> <span class="st">'ru'</span>
-
-  <span class="op">}</span>
-
-  <span class="co"># запрос данных из API</span>
-  <span class="co"># компоновка HTTP запроса</span>
-  <span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"https://isdayoff.ru/api/getdata?"</span>,
-                <span class="st">"year="</span>,  <span class="va">y</span>, <span class="st">"&amp;"</span>,
-                <span class="st">"month="</span>, <span class="va">m</span>, <span class="st">"&amp;"</span>,
-                <span class="st">"day="</span>,   <span class="va">d</span>, <span class="st">"&amp;"</span>,
-                <span class="st">"cc="</span>,    <span class="va">country</span>, <span class="st">"&amp;"</span>,
-                <span class="st">"pre=1&amp;"</span>,
-                <span class="st">"covid=1"</span><span class="op">)</span>
-
-  <span class="co"># получаем ответ</span>
-  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
-
-  <span class="co"># интрепретация ответа</span>
-  <span class="va">out</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/switch.html">switch</a></span><span class="op">(</span><span class="va">res</span>,
-                <span class="st">"0"</span>   <span class="op">=</span> <span class="st">"Рабочий день"</span>,
-                <span class="st">"1"</span>   <span class="op">=</span> <span class="st">"Нерабочий день"</span>,
-                <span class="st">"2"</span>   <span class="op">=</span> <span class="st">"Сокращённый рабочий день"</span>,
-                <span class="st">"4"</span>   <span class="op">=</span> <span class="st">"covid-19"</span>,
-                <span class="st">"100"</span> <span class="op">=</span> <span class="st">"Ошибка в дате"</span>,
-                <span class="st">"101"</span> <span class="op">=</span> <span class="st">"Данные не найдены"</span>,
-                <span class="st">"199"</span> <span class="op">=</span> <span class="st">"Ошибка сервиса"</span><span class="op">)</span>
-
-  <span class="co"># отправляем сообщение</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                  text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">day</span>, <span class="st">" - "</span>, <span class="va">out</span><span class="op">)</span>,
-                  parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span>
-
-<span class="op">}</span>
-
-<span class="co"># создаём обработчик</span>
-<span class="va">date_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'check_date'</span>, <span class="va">check_date</span>, pass_args <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="co"># добаляем обработчик в диспетчер</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">date_hendler</span>
-
-<span class="co"># запускаем бота</span>
-<span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># создаём экземпляр класса Updater</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Пишем метод для приветсвия</span></span>
+<span><span class="co">## команда приветвия</span></span>
+<span><span class="va">check_date</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span>, <span class="va">args</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># входящие данные</span></span>
+<span>  <span class="va">day</span>     <span class="op">&lt;-</span> <span class="va">args</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>  <span class="co"># дата</span></span>
+<span>  <span class="va">country</span> <span class="op">&lt;-</span> <span class="va">args</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>  <span class="co"># страна</span></span>
+<span></span>
+<span>  <span class="co"># проверка введённых параметров</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">'\\d{4}-\\d{2}-\\d{2}'</span>, <span class="va">day</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>    <span class="co"># Send Custom Keyboard</span></span>
+<span>    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                    text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">day</span>, <span class="st">" - некорреткная дата, введите дату в формате ГГГГ-ММ-ДД"</span><span class="op">)</span>,</span>
+<span>                    parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">day</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">day</span><span class="op">)</span></span>
+<span>    <span class="co"># переводим в формат POSIXtl</span></span>
+<span>    <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">day</span>, <span class="st">"%Y"</span><span class="op">)</span></span>
+<span>    <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">day</span>, <span class="st">"%m"</span><span class="op">)</span></span>
+<span>    <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">day</span>, <span class="st">"%d"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="co"># страна для проверки</span></span>
+<span>  <span class="co">## проверяем задана ли страна</span></span>
+<span>  <span class="co">## если не задана устанавливаем ru</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span> <span class="op">!</span> <span class="va">country</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'ru'</span>, <span class="st">'ua'</span>, <span class="st">'by'</span>, <span class="st">'kz'</span>, <span class="st">'us'</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>    <span class="co"># Send Custom Keyboard</span></span>
+<span>    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                    text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">country</span>, <span class="st">" - некорретктный код страны, возможнные значения: ru, by, kz, ua, us. Запрошены данные по России."</span><span class="op">)</span>,</span>
+<span>                    parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">country</span> <span class="op">&lt;-</span> <span class="st">'ru'</span></span>
+<span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="co"># запрос данных из API</span></span>
+<span>  <span class="co"># компоновка HTTP запроса</span></span>
+<span>  <span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"https://isdayoff.ru/api/getdata?"</span>,</span>
+<span>                <span class="st">"year="</span>,  <span class="va">y</span>, <span class="st">"&amp;"</span>,</span>
+<span>                <span class="st">"month="</span>, <span class="va">m</span>, <span class="st">"&amp;"</span>,</span>
+<span>                <span class="st">"day="</span>,   <span class="va">d</span>, <span class="st">"&amp;"</span>,</span>
+<span>                <span class="st">"cc="</span>,    <span class="va">country</span>, <span class="st">"&amp;"</span>,</span>
+<span>                <span class="st">"pre=1&amp;"</span>,</span>
+<span>                <span class="st">"covid=1"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># получаем ответ</span></span>
+<span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># интрепретация ответа</span></span>
+<span>  <span class="va">out</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/switch.html">switch</a></span><span class="op">(</span><span class="va">res</span>,</span>
+<span>                <span class="st">"0"</span>   <span class="op">=</span> <span class="st">"Рабочий день"</span>,</span>
+<span>                <span class="st">"1"</span>   <span class="op">=</span> <span class="st">"Нерабочий день"</span>,</span>
+<span>                <span class="st">"2"</span>   <span class="op">=</span> <span class="st">"Сокращённый рабочий день"</span>,</span>
+<span>                <span class="st">"4"</span>   <span class="op">=</span> <span class="st">"covid-19"</span>,</span>
+<span>                <span class="st">"100"</span> <span class="op">=</span> <span class="st">"Ошибка в дате"</span>,</span>
+<span>                <span class="st">"101"</span> <span class="op">=</span> <span class="st">"Данные не найдены"</span>,</span>
+<span>                <span class="st">"199"</span> <span class="op">=</span> <span class="st">"Ошибка сервиса"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># отправляем сообщение</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                  text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">day</span>, <span class="st">" - "</span>, <span class="va">out</span><span class="op">)</span>,</span>
+<span>                  parse_mode <span class="op">=</span> <span class="st">"Markdown"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># создаём обработчик</span></span>
+<span><span class="va">date_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'check_date'</span>, <span class="va">check_date</span>, pass_args <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># добаляем обработчик в диспетчер</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">date_hendler</span></span>
+<span></span>
+<span><span class="co"># запускаем бота</span></span>
+<span><span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p></p>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
@@ -474,7 +475,7 @@ command2 - Another description</code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-11.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

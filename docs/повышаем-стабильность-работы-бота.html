@@ -7,7 +7,7 @@
 <title>Глава 6 Повышаем стабильность работы бота | Разработка telegram ботов на языке R</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="К этому моменту вы знаете уже достаточно для того, что бы решить значительную часть своих задач по ботостроению. Простой бот будет работать достаточно стабильно, но всё равно иногда сервера API...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
 <meta property="og:title" content="Глава 6 Повышаем стабильность работы бота | Разработка telegram ботов на языке R">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/cover.png">
@@ -18,7 +18,7 @@
 <meta name="twitter:image" content="/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -58,6 +58,7 @@
 <li><a class="" href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html"><span class="header-section-number">4</span> Построение последовательного, логического диалога с ботом</a></li>
 <li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
 <li><a class="active" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C.html"><span class="header-section-number">7</span> Добавляем боту асинхронность</a></li>
 <li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
 <li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
 </ul>
@@ -112,48 +113,48 @@
 <p>Перед перезапуском бота не забывайте очистить его апдейты, что бы избавиться от ошибки, которая вызвала падение бота.</p>
 <p>Выглядеть такой пуллинг будет следующим образом:</p>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span>
-  
-  <span class="co"># запускаем пуллинг</span>
-  expr <span class="op">=</span> <span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span>, 
-  
-  <span class="co"># действия при ошибке пуллинга</span>
-  error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">err</span><span class="op">)</span> <span class="op">{</span>
-    
-    <span class="co"># бот для оповещения</span>
-    <span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/bot_token.html">bot_token</a></span><span class="op">(</span><span class="st">"Токен вашего бота"</span><span class="op">)</span><span class="op">)</span>
-    
-    <span class="co"># чат для оповещения</span>
-    <span class="va">chat_id</span> <span class="op">&lt;-</span> <span class="st">"Идентификатор чата в который необходимо отправить сообщение"</span>
-    
-    <span class="co"># сообщение</span>
-    <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"*Бот упал*: Ошибка (_{err$message}_)."</span><span class="op">)</span>
-    
-    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">chat_id</span>, 
-                    text <span class="op">=</span> <span class="va">msg</span>,
-                    parse_mode <span class="op">=</span> <span class="st">'Markdown'</span><span class="op">)</span>
-    
-    <span class="co"># очищаем полученный апдейт бота, который вызвал ошибку</span>
-    <span class="va">updater</span><span class="op">$</span><span class="va">bot</span><span class="op">$</span><span class="fu">clean_updates</span><span class="op">(</span><span class="op">)</span>
-    
-    <span class="co"># информация о том, что бот будет перезапущен</span>
-    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">chat_id</span>, 
-                    text <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">'*Перезапускаю бота* в {Sys.time()}'</span><span class="op">)</span>,
-                    parse_mode <span class="op">=</span> <span class="st">'Markdown'</span><span class="op">)</span>
-
-    
-  <span class="op">}</span>, 
-  <span class="co"># действия которые будут выполненны в любом случае</span>
-  finally <span class="op">=</span> <span class="op">{</span>
-    
-    <span class="co"># останавливаем пулинг</span>
-    <span class="va">updater</span><span class="op">$</span><span class="fu">stop_polling</span><span class="op">(</span><span class="op">)</span>
-        
-    <span class="co"># перезапускаем скрипт бота</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">'C:\\telegram_bot\\my_bot.R'</span><span class="op">)</span> 
-
-  <span class="op">}</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span></span>
+<span>  </span>
+<span>  <span class="co"># запускаем пуллинг</span></span>
+<span>  expr <span class="op">=</span> <span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span>, </span>
+<span>  </span>
+<span>  <span class="co"># действия при ошибке пуллинга</span></span>
+<span>  error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">err</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="co"># бот для оповещения</span></span>
+<span>    <span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/bot_token.html">bot_token</a></span><span class="op">(</span><span class="st">"Токен вашего бота"</span><span class="op">)</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># чат для оповещения</span></span>
+<span>    <span class="va">chat_id</span> <span class="op">&lt;-</span> <span class="st">"Идентификатор чата в который необходимо отправить сообщение"</span></span>
+<span>    </span>
+<span>    <span class="co"># сообщение</span></span>
+<span>    <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"*Бот упал*: Ошибка (_{err$message}_)."</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">chat_id</span>, </span>
+<span>                    text <span class="op">=</span> <span class="va">msg</span>,</span>
+<span>                    parse_mode <span class="op">=</span> <span class="st">'Markdown'</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># очищаем полученный апдейт бота, который вызвал ошибку</span></span>
+<span>    <span class="va">updater</span><span class="op">$</span><span class="va">bot</span><span class="op">$</span><span class="fu">clean_updates</span><span class="op">(</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># информация о том, что бот будет перезапущен</span></span>
+<span>    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">chat_id</span>, </span>
+<span>                    text <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">'*Перезапускаю бота* в {Sys.time()}'</span><span class="op">)</span>,</span>
+<span>                    parse_mode <span class="op">=</span> <span class="st">'Markdown'</span><span class="op">)</span></span>
+<span></span>
+<span>    </span>
+<span>  <span class="op">}</span>, </span>
+<span>  <span class="co"># действия которые будут выполненны в любом случае</span></span>
+<span>  finally <span class="op">=</span> <span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="co"># останавливаем пулинг</span></span>
+<span>    <span class="va">updater</span><span class="op">$</span><span class="fu">stop_polling</span><span class="op">(</span><span class="op">)</span></span>
+<span>        </span>
+<span>    <span class="co"># перезапускаем скрипт бота</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">'C:\\telegram_bot\\my_bot.R'</span><span class="op">)</span> </span>
+<span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>В приведённом выше коде вам необходимо подставить токен созданного вами бота, и указать ID чата, в который бот будет отправлять уведомление о падении пуллинга.</p>
 <p>В блок <code>expr</code> мы завернули процесс пуллинга, таким образом он постоянно контролируется конструкцией <code>tryCatch</code>.</p>
 <p>Далее в блок <code>error</code> мы передали безымянную функцию, которая принимает всего один аргумент <code>err</code>, т.е. саму ошибку. Сообщение об ошибке мы получаем через <code>err$message</code>, и отправляем в указанный чат. С помощью <code>updater$bot$clean_updates()</code> мы очищаем очередь апдейтов бота, т.к. последний апдейт вызвал ошибку и падение нашего бота.</p>
@@ -165,7 +166,7 @@
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></div>
-<div class="next"><a href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></div>
+<div class="next"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C.html"><span class="header-section-number">7</span> Добавляем боту асинхронность</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -189,7 +190,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-11.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

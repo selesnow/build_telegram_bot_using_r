@@ -7,7 +7,7 @@
 <title>Глава 3 Как добавить боту поддержку клавиатуры | Разработка telegram ботов на языке R</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="3.1 Видео урок по добавлению боту клавиатуры    3.2 Конспект по добавлению клавиатуры В этой главе мы повысим юзабилити нашего бота за счёт добавления клавиатуры, которая сделает интерфейс бота...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
 <meta property="og:title" content="Глава 3 Как добавить боту поддержку клавиатуры | Разработка telegram ботов на языке R">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/cover.png">
@@ -18,7 +18,7 @@
 <meta name="twitter:image" content="/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -58,6 +58,7 @@
 <li><a class="" href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html"><span class="header-section-number">4</span> Построение последовательного, логического диалога с ботом</a></li>
 <li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
 <li><a class="" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C.html"><span class="header-section-number">7</span> Добавляем боту асинхронность</a></li>
 <li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
 <li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
 </ul>
@@ -93,7 +94,7 @@
 <li>Reply - Основная, обычная клавиатура, которая находится под панелью ввода текста сообщения. Такая клавиатура просто отправляет боту текстовое сообщение, и в качестве текста отправит тот текст, который написан на самой кнопке.</li>
 <li>Inline - Клавиатура привязанная к конкретному сообщению бота. Данная клавиатура отправляет боту данные, привязанные к нажатой кнопке, эти данные могут отличаться от текста, написанного на самой кнопке. И обрабатываются такие кнопки через <strong>CallbackQueryHandler</strong>.</li>
 </ul>
-<p>Для того, что бы бот открыл клавиатуру необходимо при отправке сообщения через метод <code><a href="https://rdrr.io/pkg/telegram.bot/man/sendMessage.html">sendMessage()</a></code>, передать созданную ранее клавиатуру в аргумент <code>reply_markup</code>.</p>
+<p>Для того, что бы бот открыл клавиатуру необходимо при отправке сообщения через метод <code>sendMessage()</code>, передать созданную ранее клавиатуру в аргумент <code>reply_markup</code>.</p>
 <p>Ниже мы разберём несколько примеров.</p>
 </div>
 <div id="reply-клавиатура" class="section level3" number="3.2.2">
@@ -102,23 +103,23 @@
 </h3>
 <p>Как я уже писал выше, это основная клавиатура управления ботом.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="st">"TOKEN"</span><span class="op">)</span>
-<span class="va">chat_id</span> <span class="op">&lt;-</span> <span class="st">"CHAT_ID"</span>
-
-<span class="co"># Create Custom Keyboard</span>
-<span class="va">text</span> <span class="op">&lt;-</span> <span class="st">"Aren't those custom keyboards cool?"</span>
-<span class="va">RKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup</a></span><span class="op">(</span>
-  keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Yes, they certainly are!"</span><span class="op">)</span><span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"I'm not quite sure"</span><span class="op">)</span><span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"No..."</span><span class="op">)</span><span class="op">)</span>
-  <span class="op">)</span>,
-  resize_keyboard <span class="op">=</span> <span class="cn">FALSE</span>,
-  one_time_keyboard <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-
-<span class="co"># Send Custom Keyboard</span>
-<span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">text</span>, reply_markup <span class="op">=</span> <span class="va">RKM</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="st">"TOKEN"</span><span class="op">)</span></span>
+<span><span class="va">chat_id</span> <span class="op">&lt;-</span> <span class="st">"CHAT_ID"</span></span>
+<span></span>
+<span><span class="co"># Create Custom Keyboard</span></span>
+<span><span class="va">text</span> <span class="op">&lt;-</span> <span class="st">"Aren't those custom keyboards cool?"</span></span>
+<span><span class="va">RKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>  keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Yes, they certainly are!"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"I'm not quite sure"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"No..."</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  resize_keyboard <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  one_time_keyboard <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Send Custom Keyboard</span></span>
+<span><span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">text</span>, reply_markup <span class="op">=</span> <span class="va">RKM</span><span class="op">)</span></span></code></pre></div>
 <p>Выше приведён пример из официальной справки пакета <code>telegram.bot</code>. Для создания клавиатуры используется функция <code><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup()</a></code>, которая в свою очередь принимает список списков кнопок, которые создаются функцией <code><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton()</a></code>.</p>
 <p>Почему в <code><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup()</a></code> необходимо передавать не просто список, а список списков? Дело в том, что вы передаёте основной список, и в нём отдельными списками вы задаёте каждый ряд кнопок, т.к. в один ряд можно расположить несколько кнопок.</p>
 <p>Аргумент <code>resize_keyboard</code> позволяет автоматически подбирать оптимальный размер кнопок клавиатуры, а аргумент <code>one_time_keyboard</code> позволяет скрывать клавиатуру после каждого нажатия на кнопку.</p>
@@ -245,41 +246,41 @@
 </ul>
 <p>И создали 4 обработчика, которые по заданным командам и фильтрам будут выполнять указанные методы.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># создаём обработчики</span>
-<span class="va">h_start</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'start'</span>, <span class="va">start</span><span class="op">)</span>
-<span class="va">h_chat_id</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">chat_id</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">chat_id</span><span class="op">)</span>
-<span class="va">h_name</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">my_name</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>
-<span class="va">h_username</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">my_username</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">username</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># создаём обработчики</span></span>
+<span><span class="va">h_start</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'start'</span>, <span class="va">start</span><span class="op">)</span></span>
+<span><span class="va">h_chat_id</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">chat_id</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">chat_id</span><span class="op">)</span></span>
+<span><span class="va">h_name</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">my_name</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">name</span><span class="op">)</span></span>
+<span><span class="va">h_username</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">my_username</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">username</span><span class="op">)</span></span></code></pre></div>
 <p>Сама клавиатура создаётся внутри метода <code><a href="https://rdrr.io/r/stats/start.html">start()</a></code> командой <code><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup()</a></code>.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">RKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup</a></span><span class="op">(</span>
-    keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Чат ID"</span><span class="op">)</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Моё имя"</span><span class="op">)</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Мой логин"</span><span class="op">)</span><span class="op">)</span>
-    <span class="op">)</span>,
-    resize_keyboard <span class="op">=</span> <span class="cn">FALSE</span>,
-    one_time_keyboard <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">RKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>    keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Чат ID"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Моё имя"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Мой логин"</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    resize_keyboard <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    one_time_keyboard <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>В нашем случае все кнопки мы расположили друг под другом, но мы можем расположить их в один ряд, внеся изменения в список списков кнопок. Т.к. один ряд внутри клавиатуры создаётся через вложенный список кнопок, то для того, что бы вывести наши кнопки в один ряд надо переписать часть кода по построению клавиатуры вот так:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">RKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup</a></span><span class="op">(</span>
-    keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-          <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Чат ID"</span><span class="op">)</span>,
-          <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Моё имя"</span><span class="op">)</span>,
-          <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Мой логин"</span><span class="op">)</span>
-     <span class="op">)</span>
-    <span class="op">)</span>,
-    resize_keyboard <span class="op">=</span> <span class="cn">FALSE</span>,
-    one_time_keyboard <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">RKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>    keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>          <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Чат ID"</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Моё имя"</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Мой логин"</span><span class="op">)</span></span>
+<span>     <span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    resize_keyboard <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    one_time_keyboard <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="http://img.netpeak.ua/alsey/159861075655_kiss_153kb.png"></div>
-<p>Отправляется клавиатура в чат методом <code><a href="https://rdrr.io/pkg/telegram.bot/man/sendMessage.html">sendMessage()</a></code>, в аргументе <code>reply_markup</code>.</p>
+<p>Отправляется клавиатура в чат методом <code>sendMessage()</code>, в аргументе <code>reply_markup</code>.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R">  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                  text <span class="op">=</span> <span class="st">'Выберите команду'</span>,
-                  reply_markup <span class="op">=</span> <span class="va">RKM</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                  text <span class="op">=</span> <span class="st">'Выберите команду'</span>,</span>
+<span>                  reply_markup <span class="op">=</span> <span class="va">RKM</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="inline-клавиатура" class="section level3" number="3.2.3">
 <h3>
@@ -287,43 +288,43 @@
 </h3>
 <p>Как я уже писал выше, Inline клавиатура привязана к конкретному сообщению. С ней работать несколько сложнее чем с основной клавиатурой.</p>
 <p>Изначально вам необходимо добавить боту метод, для вызова Inline клавиатуры.</p>
-<p>Для ответа на нажатие Inline кнопки также можно использовать метод бота <code><a href="https://rdrr.io/pkg/telegram.bot/man/answerCallbackQuery.html">answerCallbackQuery()</a></code>, который может вывести уведомление в интерфейсе telegram, пользователю нажавшему Inline кнопку.</p>
+<p>Для ответа на нажатие Inline кнопки также можно использовать метод бота <code>answerCallbackQuery()</code>, который может вывести уведомление в интерфейсе telegram, пользователю нажавшему Inline кнопку.</p>
 <p>Данные отправленные с Inline кнопки не являются текстом, поэтому для их обработки необходимо создать специальный обработчик с помощью команды <code><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler()</a></code>.</p>
 <p>Код построения Inline клавиатуры который приводится в официальной справке пакета <code>telegram.bot</code>.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Initialize bot</span>
-<span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="st">"TOKEN"</span><span class="op">)</span>
-<span class="va">chat_id</span> <span class="op">&lt;-</span> <span class="st">"CHAT_ID"</span>
-
-<span class="co"># Create Inline Keyboard</span>
-<span class="va">text</span> <span class="op">&lt;-</span> <span class="st">"Could you type their phone number, please?"</span>
-<span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span>
-  inline_keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
-    <span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>
-    <span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span>
-    <span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="st">"#"</span><span class="op">)</span>
-    <span class="op">)</span>
-  <span class="op">)</span>
-<span class="op">)</span>
-
-<span class="co"># Send Inline Keyboard</span>
-<span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">text</span>, reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Initialize bot</span></span>
+<span><span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="st">"TOKEN"</span><span class="op">)</span></span>
+<span><span class="va">chat_id</span> <span class="op">&lt;-</span> <span class="st">"CHAT_ID"</span></span>
+<span></span>
+<span><span class="co"># Create Inline Keyboard</span></span>
+<span><span class="va">text</span> <span class="op">&lt;-</span> <span class="st">"Could you type their phone number, please?"</span></span>
+<span><span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>  inline_keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="st">"#"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Send Inline Keyboard</span></span>
+<span><span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">text</span>, reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span></span></code></pre></div>
 <p>Строить Inline клавиатуру необходимо с помощью команды <code><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup()</a></code>, по такому же принципу, как и Reply клавиатуру. В <code><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup()</a></code> необходимо передать список, списков Inline кнопок, каждая отдельная кнопка создаётся функцией <code><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton()</a></code>.</p>
 <p>Inline кнопка может либо передавать боту какие-то данные с помощью аргумента <code>callback_data</code>, либо открывать какую-либо HTML страницу, заданную с помощью аргумента <code>url</code>.</p>
 <p>В результате будет список, в котором каждый элемент так же является списком Inline кнопок, которые необходимо объединить в один ряд.</p>
@@ -334,69 +335,69 @@
 </h4>
 <p>Для начала мы напишем бота для экспресс тестирования на covid-19. По команде <code>/test</code>, он будет отправлять вам клавиатуру с двумя кнопками, в зависимости от нажатой кнопки он будет присылать вам сообщение с результатами вашего тестирования.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
-
-<span class="co"># создаём экземпляр класса Updater</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span>
-
-<span class="co"># метод для отправки InLine клавиатуры</span>
-<span class="va">test</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-
-  <span class="co"># создаём InLine клавиатуру</span>
-  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span>
-    inline_keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="st">"Да"</span>, callback_data <span class="op">=</span> <span class="st">'yes'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="st">"Нет"</span>, callback_data <span class="op">=</span> <span class="st">'no'</span><span class="op">)</span>
-      <span class="op">)</span>
-    <span class="op">)</span>
-  <span class="op">)</span>
-
-  <span class="co"># Отправляем клавиатуру в чат</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                  text <span class="op">=</span> <span class="st">"Вы болете коронавирусом?"</span>,
-                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="co"># метод для обработки нажатия кнопки</span>
-<span class="va">answer_cb</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># полученные данные с кнопки</span>
-  <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">data</span>
-
-  <span class="co"># получаем имя пользователя, нажавшего кнопку</span>
-  <span class="va">uname</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="fu">effective_user</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">first_name</span>
-
-  <span class="co"># обработка результата</span>
-  <span class="kw">if</span> <span class="op">(</span> <span class="va">data</span> <span class="op">==</span> <span class="st">'no'</span> <span class="op">)</span> <span class="op">{</span>
-
-    <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">uname</span>, <span class="st">", поздравляю, ваш тест на covid-19 отрицательный."</span><span class="op">)</span>
-
-  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-
-    <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">uname</span>, <span class="st">", к сожалени ваш тест на covid-19 положительный."</span><span class="op">)</span>
-
-  <span class="op">}</span>
-
-
-  <span class="co"># Отправка сообщения</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>,
-                  text <span class="op">=</span> <span class="va">msg</span><span class="op">)</span>
-
-  <span class="co"># сообщаем боту, что запрос с кнопки принят</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">answerCallbackQuery</span><span class="op">(</span>callback_query_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">id</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="co"># создаём обработчики</span>
-<span class="va">inline_h</span>      <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'test'</span>, <span class="va">test</span><span class="op">)</span>
-<span class="va">query_handler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb</span><span class="op">)</span>
-
-<span class="co"># добавляем обработчики в диспетчер</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">inline_h</span> <span class="op">+</span> <span class="va">query_handler</span>
-
-<span class="co"># запускаем бота</span>
-<span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># создаём экземпляр класса Updater</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># метод для отправки InLine клавиатуры</span></span>
+<span><span class="va">test</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span></span>
+<span>  <span class="co"># создаём InLine клавиатуру</span></span>
+<span>  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>    inline_keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="st">"Да"</span>, callback_data <span class="op">=</span> <span class="st">'yes'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="st">"Нет"</span>, callback_data <span class="op">=</span> <span class="st">'no'</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Отправляем клавиатуру в чат</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                  text <span class="op">=</span> <span class="st">"Вы болете коронавирусом?"</span>,</span>
+<span>                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># метод для обработки нажатия кнопки</span></span>
+<span><span class="va">answer_cb</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># полученные данные с кнопки</span></span>
+<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">data</span></span>
+<span></span>
+<span>  <span class="co"># получаем имя пользователя, нажавшего кнопку</span></span>
+<span>  <span class="va">uname</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="fu">effective_user</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">first_name</span></span>
+<span></span>
+<span>  <span class="co"># обработка результата</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span> <span class="va">data</span> <span class="op">==</span> <span class="st">'no'</span> <span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>    <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">uname</span>, <span class="st">", поздравляю, ваш тест на covid-19 отрицательный."</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span></span>
+<span>    <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">uname</span>, <span class="st">", к сожалени ваш тест на covid-19 положительный."</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span></span>
+<span>  <span class="co"># Отправка сообщения</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                  text <span class="op">=</span> <span class="va">msg</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># сообщаем боту, что запрос с кнопки принят</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">answerCallbackQuery</span><span class="op">(</span>callback_query_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># создаём обработчики</span></span>
+<span><span class="va">inline_h</span>      <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'test'</span>, <span class="va">test</span><span class="op">)</span></span>
+<span><span class="va">query_handler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">inline_h</span> <span class="op">+</span> <span class="va">query_handler</span></span>
+<span></span>
+<span><span class="co"># запускаем бота</span></span>
+<span><span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
 </blockquote>
@@ -420,83 +421,83 @@
 </ul>
 <p>Соответвенно с помощью аргумента <code>pattern</code> мы можем под нажатие каждой кнопки написать отдельный метод:</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
-
-<span class="co"># создаём экземпляр класса Updater</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span>
-
-<span class="co"># метод для отправки InLine клавиатуры</span>
-<span class="va">test</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># создаём InLine клавиатуру</span>
-  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span>
-    inline_keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="st">"Да"</span>, callback_data <span class="op">=</span> <span class="st">'yes'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="st">"Нет"</span>, callback_data <span class="op">=</span> <span class="st">'no'</span><span class="op">)</span>
-      <span class="op">)</span>
-    <span class="op">)</span>
-  <span class="op">)</span>
-
-  <span class="co"># Отправляем клавиатуру в чат</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                  text <span class="op">=</span> <span class="st">"Вы болете коронавирусом?"</span>,
-                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="co"># метод для обработки нажатия кнопки Да</span>
-<span class="va">answer_cb_yes</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># получаем имя пользователя, нажавшего кнопку</span>
-  <span class="va">uname</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="fu">effective_user</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">first_name</span>
-
-  <span class="co"># обработка результата</span>
-  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">uname</span>, <span class="st">", к сожалени ваш текст на covid-19 положительный."</span><span class="op">)</span>
-
-  <span class="co"># Отправка сообщения</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>,
-                  text <span class="op">=</span> <span class="va">msg</span><span class="op">)</span>
-
-  <span class="co"># сообщаем боту, что запрос с кнопки принят</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">answerCallbackQuery</span><span class="op">(</span>callback_query_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">id</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="co"># метод для обработки нажатия кнопки Нет</span>
-<span class="va">answer_cb_no</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># получаем имя пользователя, нажавшего кнопку</span>
-  <span class="va">uname</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="fu">effective_user</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">first_name</span>
-
-  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">uname</span>, <span class="st">", поздравляю, ваш текст на covid-19 отрицательный."</span><span class="op">)</span>
-
-  <span class="co"># Отправка сообщения</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>,
-                  text <span class="op">=</span> <span class="va">msg</span><span class="op">)</span>
-
-  <span class="co"># сообщаем боту, что запрос с кнопки принят</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">answerCallbackQuery</span><span class="op">(</span>callback_query_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">id</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="co"># создаём обработчики</span>
-<span class="va">inline_h</span>          <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'test'</span>, <span class="va">test</span><span class="op">)</span>
-<span class="va">query_handler_yes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb_yes</span>, pattern <span class="op">=</span> <span class="st">'yes'</span><span class="op">)</span>
-<span class="va">query_handler_no</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb_no</span>, pattern <span class="op">=</span> <span class="st">'no'</span><span class="op">)</span>
-
-<span class="co"># добавляем обработчики в диспетчер</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span>
-            <span class="va">inline_h</span> <span class="op">+</span>
-            <span class="va">query_handler_yes</span> <span class="op">+</span>
-            <span class="va">query_handler_no</span>
-
-<span class="co"># запускаем бота</span>
-<span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># создаём экземпляр класса Updater</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># метод для отправки InLine клавиатуры</span></span>
+<span><span class="va">test</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># создаём InLine клавиатуру</span></span>
+<span>  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>    inline_keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="st">"Да"</span>, callback_data <span class="op">=</span> <span class="st">'yes'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="st">"Нет"</span>, callback_data <span class="op">=</span> <span class="st">'no'</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Отправляем клавиатуру в чат</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                  text <span class="op">=</span> <span class="st">"Вы болете коронавирусом?"</span>,</span>
+<span>                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># метод для обработки нажатия кнопки Да</span></span>
+<span><span class="va">answer_cb_yes</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># получаем имя пользователя, нажавшего кнопку</span></span>
+<span>  <span class="va">uname</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="fu">effective_user</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">first_name</span></span>
+<span></span>
+<span>  <span class="co"># обработка результата</span></span>
+<span>  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">uname</span>, <span class="st">", к сожалени ваш текст на covid-19 положительный."</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Отправка сообщения</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                  text <span class="op">=</span> <span class="va">msg</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># сообщаем боту, что запрос с кнопки принят</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">answerCallbackQuery</span><span class="op">(</span>callback_query_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># метод для обработки нажатия кнопки Нет</span></span>
+<span><span class="va">answer_cb_no</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># получаем имя пользователя, нажавшего кнопку</span></span>
+<span>  <span class="va">uname</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="fu">effective_user</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">first_name</span></span>
+<span></span>
+<span>  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">uname</span>, <span class="st">", поздравляю, ваш текст на covid-19 отрицательный."</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Отправка сообщения</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                  text <span class="op">=</span> <span class="va">msg</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># сообщаем боту, что запрос с кнопки принят</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">answerCallbackQuery</span><span class="op">(</span>callback_query_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># создаём обработчики</span></span>
+<span><span class="va">inline_h</span>          <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'test'</span>, <span class="va">test</span><span class="op">)</span></span>
+<span><span class="va">query_handler_yes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb_yes</span>, pattern <span class="op">=</span> <span class="st">'yes'</span><span class="op">)</span></span>
+<span><span class="va">query_handler_no</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb_no</span>, pattern <span class="op">=</span> <span class="st">'no'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span></span>
+<span>            <span class="va">inline_h</span> <span class="op">+</span></span>
+<span>            <span class="va">query_handler_yes</span> <span class="op">+</span></span>
+<span>            <span class="va">query_handler_no</span></span>
+<span></span>
+<span><span class="co"># запускаем бота</span></span>
+<span><span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
 </blockquote>
 <p>Теперь мы написали 2 отдельных метода, т.е. по одному методу, под нажатие каждой кнопки, и использовали аргумент <code>pattern</code>, при создании их обработчиков:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">query_handler_yes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb_yes</span>, pattern <span class="op">=</span> <span class="st">'yes'</span><span class="op">)</span>
-<span class="va">query_handler_no</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb_no</span>, pattern <span class="op">=</span> <span class="st">'no'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">query_handler_yes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb_yes</span>, pattern <span class="op">=</span> <span class="st">'yes'</span><span class="op">)</span></span>
+<span><span class="va">query_handler_no</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb_no</span>, pattern <span class="op">=</span> <span class="st">'no'</span><span class="op">)</span></span></code></pre></div>
 <p>Заканчивается код метода <em>answer_cb</em> командой <code>bot$answerCallbackQuery(callback_query_id = update$callback_query$id)</code>, которая сообщает боту, что данные с inline клавиатуры получены.</p>
 </div>
 <div id="пример-бота-который-сообщает-текущую-погоду-по-выбранному-городу" class="section level4" number="3.2.3.2">
@@ -514,122 +515,122 @@
 </ul>
 <p><em>Код бота, который сообщает текущую погоду по выбранному городу</em></p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span>
-
-<span class="co"># создаём экземпляр класса Updater</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span>
-
-<span class="co"># создаём методы</span>
-<span class="co">## метод для запуска основной клавиатуры</span>
-<span class="va">start</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># создаём клавиатуру</span>
-  <span class="va">RKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup</a></span><span class="op">(</span>
-    keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Погода"</span><span class="op">)</span>
-      <span class="op">)</span>
-    <span class="op">)</span>,
-    resize_keyboard <span class="op">=</span> <span class="cn">TRUE</span>,
-    one_time_keyboard <span class="op">=</span> <span class="cn">TRUE</span>
-  <span class="op">)</span>
-
-  <span class="co"># отправляем клавиатуру</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                  text <span class="op">=</span> <span class="st">'Выберите команду'</span>,
-                  reply_markup <span class="op">=</span> <span class="va">RKM</span><span class="op">)</span>
-
-<span class="op">}</span>
-
-<span class="co">## Метод вызова Inine клавиатуры</span>
-<span class="va">weather</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span>
-    inline_keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Москва'</span>, callback_data <span class="op">=</span> <span class="st">'New York,us'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Санкт-Петербург'</span>, callback_data <span class="op">=</span> <span class="st">'Saint Petersburg'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Нью-Йорк'</span>, callback_data <span class="op">=</span> <span class="st">'New York'</span><span class="op">)</span>
-      <span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Екатеринбург'</span>, callback_data <span class="op">=</span> <span class="st">'Yekaterinburg,ru'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Берлин'</span>, callback_data <span class="op">=</span> <span class="st">'Berlin,de'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Париж'</span>, callback_data <span class="op">=</span> <span class="st">'Paris,fr'</span><span class="op">)</span>
-      <span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Рим'</span>, callback_data <span class="op">=</span> <span class="st">'Rome,it'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Одесса'</span>, callback_data <span class="op">=</span> <span class="st">'Odessa,ua'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Киев'</span>, callback_data <span class="op">=</span> <span class="st">'Kyiv,ua'</span><span class="op">)</span>
-      <span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Токио'</span>, callback_data <span class="op">=</span> <span class="st">'Tokyo'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Амстердам'</span>, callback_data <span class="op">=</span> <span class="st">'Amsterdam,nl'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Вашингтон'</span>, callback_data <span class="op">=</span> <span class="st">'Washington,us'</span><span class="op">)</span>
-      <span class="op">)</span>
-    <span class="op">)</span>
-  <span class="op">)</span>
-
-  <span class="co"># Send Inline Keyboard</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                  text <span class="op">=</span> <span class="st">"Выберите город"</span>,
-                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="co"># метод для сообщения погоды</span>
-<span class="va">answer_cb</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># получаем из сообщения город</span>
-  <span class="va">city</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">data</span>
-
-  <span class="co"># отправляем запрос</span>
-  <span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="st">'https://api.openweathermap.org/data/2.5/weather'</span>,
-             query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>q     <span class="op">=</span> <span class="va">city</span>,
-                          lang  <span class="op">=</span> <span class="st">'ru'</span>,
-                          units <span class="op">=</span> <span class="st">'metric'</span>,
-                          appid <span class="op">=</span> <span class="st">'4776568ccea136ffe4cda9f1969af340'</span><span class="op">)</span><span class="op">)</span>
-
-  <span class="co"># парсим ответ</span>
-  <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">ans</span><span class="op">)</span>
-
-  <span class="co"># формируем сообщение</span>
-  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"{result$name} погода:\n"</span>,
-                  <span class="st">"Текущая температура: {result$main$temp}\n"</span>,
-                  <span class="st">"Скорость ветра: {result$wind$speed}\n"</span>,
-                  <span class="st">"Описание: {result$weather[[1]]$description}"</span><span class="op">)</span>
-
-  <span class="co"># отправляем информацию о погоде</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>,
-                  text    <span class="op">=</span> <span class="va">msg</span><span class="op">)</span>
-
-
-  <span class="va">bot</span><span class="op">$</span><span class="fu">answerCallbackQuery</span><span class="op">(</span>callback_query_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">id</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="co"># создаём фильтры</span>
-<span class="co">## сообщения с текстом Погода</span>
-<span class="va">MessageFilters</span><span class="op">$</span><span class="va">weather</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># проверяем текст сообщения</span>
-  <span class="va">message</span><span class="op">$</span><span class="va">text</span> <span class="op">==</span> <span class="st">"Погода"</span>
-
-<span class="op">}</span>
-<span class="op">)</span>
-
-<span class="co"># создаём обработчики</span>
-<span class="va">h_start</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'start'</span>, <span class="va">start</span><span class="op">)</span>
-<span class="va">h_weather</span>       <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">weather</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">weather</span><span class="op">)</span>
-<span class="va">h_query_handler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb</span><span class="op">)</span>
-
-<span class="co"># добавляем обработчики в диспетчер</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span>
-              <span class="va">h_start</span> <span class="op">+</span>
-              <span class="va">h_weather</span> <span class="op">+</span>
-              <span class="va">h_query_handler</span>
-
-<span class="co"># запускаем бота</span>
-<span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># создаём экземпляр класса Updater</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># создаём методы</span></span>
+<span><span class="co">## метод для запуска основной клавиатуры</span></span>
+<span><span class="va">start</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># создаём клавиатуру</span></span>
+<span>  <span class="va">RKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>    keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Погода"</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    resize_keyboard <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    one_time_keyboard <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># отправляем клавиатуру</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                  text <span class="op">=</span> <span class="st">'Выберите команду'</span>,</span>
+<span>                  reply_markup <span class="op">=</span> <span class="va">RKM</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## Метод вызова Inine клавиатуры</span></span>
+<span><span class="va">weather</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>    inline_keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Москва'</span>, callback_data <span class="op">=</span> <span class="st">'New York,us'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Санкт-Петербург'</span>, callback_data <span class="op">=</span> <span class="st">'Saint Petersburg'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Нью-Йорк'</span>, callback_data <span class="op">=</span> <span class="st">'New York'</span><span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Екатеринбург'</span>, callback_data <span class="op">=</span> <span class="st">'Yekaterinburg,ru'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Берлин'</span>, callback_data <span class="op">=</span> <span class="st">'Berlin,de'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Париж'</span>, callback_data <span class="op">=</span> <span class="st">'Paris,fr'</span><span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Рим'</span>, callback_data <span class="op">=</span> <span class="st">'Rome,it'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Одесса'</span>, callback_data <span class="op">=</span> <span class="st">'Odessa,ua'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Киев'</span>, callback_data <span class="op">=</span> <span class="st">'Kyiv,ua'</span><span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Токио'</span>, callback_data <span class="op">=</span> <span class="st">'Tokyo'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Амстердам'</span>, callback_data <span class="op">=</span> <span class="st">'Amsterdam,nl'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Вашингтон'</span>, callback_data <span class="op">=</span> <span class="st">'Washington,us'</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Send Inline Keyboard</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                  text <span class="op">=</span> <span class="st">"Выберите город"</span>,</span>
+<span>                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># метод для сообщения погоды</span></span>
+<span><span class="va">answer_cb</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># получаем из сообщения город</span></span>
+<span>  <span class="va">city</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">data</span></span>
+<span></span>
+<span>  <span class="co"># отправляем запрос</span></span>
+<span>  <span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="st">'https://api.openweathermap.org/data/2.5/weather'</span>,</span>
+<span>             query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>q     <span class="op">=</span> <span class="va">city</span>,</span>
+<span>                          lang  <span class="op">=</span> <span class="st">'ru'</span>,</span>
+<span>                          units <span class="op">=</span> <span class="st">'metric'</span>,</span>
+<span>                          appid <span class="op">=</span> <span class="st">'4776568ccea136ffe4cda9f1969af340'</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># парсим ответ</span></span>
+<span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">ans</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># формируем сообщение</span></span>
+<span>  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"{result$name} погода:\n"</span>,</span>
+<span>                  <span class="st">"Текущая температура: {result$main$temp}\n"</span>,</span>
+<span>                  <span class="st">"Скорость ветра: {result$wind$speed}\n"</span>,</span>
+<span>                  <span class="st">"Описание: {result$weather[[1]]$description}"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># отправляем информацию о погоде</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                  text    <span class="op">=</span> <span class="va">msg</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">answerCallbackQuery</span><span class="op">(</span>callback_query_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># создаём фильтры</span></span>
+<span><span class="co">## сообщения с текстом Погода</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">weather</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># проверяем текст сообщения</span></span>
+<span>  <span class="va">message</span><span class="op">$</span><span class="va">text</span> <span class="op">==</span> <span class="st">"Погода"</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># создаём обработчики</span></span>
+<span><span class="va">h_start</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'start'</span>, <span class="va">start</span><span class="op">)</span></span>
+<span><span class="va">h_weather</span>       <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">weather</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">weather</span><span class="op">)</span></span>
+<span><span class="va">h_query_handler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span></span>
+<span>              <span class="va">h_start</span> <span class="op">+</span></span>
+<span>              <span class="va">h_weather</span> <span class="op">+</span></span>
+<span>              <span class="va">h_query_handler</span></span>
+<span></span>
+<span><span class="co"># запускаем бота</span></span>
+<span><span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p></p>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
@@ -652,15 +653,15 @@
 <p>Метод <em>start</em> у нас запускается командой <code>/start</code>, что реализовано обработчиком <code>CommandHandler('start', start)</code>.</p>
 <p>Для запуска метода <em>weather</em> мы создали одноимённый фильтр:</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># создаём фильтры</span>
-<span class="co">## сообщения с текстом Погода</span>
-<span class="va">MessageFilters</span><span class="op">$</span><span class="va">weather</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># проверяем текст сообщения</span>
-  <span class="va">message</span><span class="op">$</span><span class="va">text</span> <span class="op">==</span> <span class="st">"Погода"</span>
-
-<span class="op">}</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># создаём фильтры</span></span>
+<span><span class="co">## сообщения с текстом Погода</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">weather</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># проверяем текст сообщения</span></span>
+<span>  <span class="va">message</span><span class="op">$</span><span class="va">text</span> <span class="op">==</span> <span class="st">"Погода"</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>И вызываем этот метод следующим обработчиком сообщений: <code>MessageHandler(weather, filters = MessageFilters$weather)</code>.</p>
 <p>И в конце концов, основной наш метод <em>answer_cb</em> реагирует на нажатие Inline кнопок, что реализовано специальным обработчиком: <code>CallbackQueryHandler(answer_cb)</code>.</p>
 <p>Внутри метода <em>answer_cb</em>, мы считываем отправленные с клавиатуры данные и записываем их в переменную <code>city</code>: <code>city &lt;- update$callback_query$data</code>. После чего запрашиваем из API данные о погоде, формируем и отправляем сообщение, и в конце концов используем метод <code>answerCallbackQuery</code> для того, что бы сообщить боту, о том, что мы обработали нажатие Inline кнопки.</p>
@@ -674,121 +675,121 @@
 <p>Как вы понимаете, в данном случае нам необходимо получить список статей, и для этого мы будем использовать специальный пакет <code>habR</code>, который позволяет запрашивать из хабры статьи и некоторую статистику по ним в R.</p>
 <p>Установить пакет <code>habR</code> можно только из github, для чего вам понадобится дополнительный пакет <code>devtools</code>. Для установки воспользуйтесь приведённым ниже кодом.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">'selesnow/habR'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'selesnow/habR'</span><span class="op">)</span></span></code></pre></div>
 <p>Теперь рассмотрим код построения описанного выше бота:</p>
 <p><em>Код бот который выводит список наиболее свежих статей по выбранному Хабу</em></p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">habR</span><span class="op">)</span>
-
-<span class="co"># создаём экземпляр класса Updater</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span>
-
-<span class="co"># создаём методы</span>
-<span class="co">## метод для запуска основной клавиатуры</span>
-<span class="va">start</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># создаём клавиатуру</span>
-  <span class="va">RKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup</a></span><span class="op">(</span>
-    keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Список статей"</span><span class="op">)</span>
-      <span class="op">)</span>
-    <span class="op">)</span>,
-    resize_keyboard <span class="op">=</span> <span class="cn">TRUE</span>,
-    one_time_keyboard <span class="op">=</span> <span class="cn">TRUE</span>
-  <span class="op">)</span>
-
-  <span class="co"># отправляем клавиатуру</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                  text <span class="op">=</span> <span class="st">'Выберите команду'</span>,
-                  reply_markup <span class="op">=</span> <span class="va">RKM</span><span class="op">)</span>
-
-<span class="op">}</span>
-
-<span class="co">## Метод вызова Inine клавиатуры</span>
-<span class="va">habs</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span>
-    inline_keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'R'</span>, callback_data <span class="op">=</span> <span class="st">'R'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Data Mining'</span>, callback_data <span class="op">=</span> <span class="st">'data_mining'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Data Engineering'</span>, callback_data <span class="op">=</span> <span class="st">'data_engineering'</span><span class="op">)</span>
-      <span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Big Data'</span>, callback_data <span class="op">=</span> <span class="st">'bigdata'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Python'</span>, callback_data <span class="op">=</span> <span class="st">'python'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Визуализация данных'</span>, callback_data <span class="op">=</span> <span class="st">'data_visualization'</span><span class="op">)</span>
-      <span class="op">)</span>
-    <span class="op">)</span>
-  <span class="op">)</span>
-
-  <span class="co"># Send Inline Keyboard</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                  text <span class="op">=</span> <span class="st">"Выберите Хаб"</span>,
-                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="co"># метод для сообщения погоды</span>
-<span class="va">answer_cb</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># получаем из сообщения город</span>
-  <span class="va">hub</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">data</span>
-
-  <span class="co"># сообщение о том, что данные по кнопке получены</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">answerCallbackQuery</span><span class="op">(</span>callback_query_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">id</span>,
-                          text <span class="op">=</span> <span class="st">'Подождите несколько минут, запрос обрабатывается'</span><span class="op">)</span>
-
-  <span class="co"># сообщение о том, что надо подождать пока бот получит данные</span>
-  <span class="va">mid</span> <span class="op">&lt;-</span> <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>,
-                         text    <span class="op">=</span> <span class="st">"Подождите несколько минут пока, я соберу данные по выбранному Хабу"</span><span class="op">)</span>
-
-  <span class="co"># парсим Хабр</span>
-  <span class="va">posts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">habr_hub_posts</span><span class="op">(</span><span class="va">hub</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span>
-
-  <span class="co"># удаляем сообщение о том, что надо подождать</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">deleteMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, <span class="va">mid</span><span class="op">$</span><span class="va">message_id</span><span class="op">)</span>
-
-  <span class="co"># формируем список кнопок</span>
-  <span class="va">keys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="va">posts</span><span class="op">$</span><span class="va">title</span><span class="op">[</span><span class="va">x</span><span class="op">]</span>, url <span class="op">=</span> <span class="va">posts</span><span class="op">$</span><span class="va">link</span><span class="op">[</span><span class="va">x</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-
-  <span class="co"># формируем клавиатуру</span>
-  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span>
-    inline_keyboard <span class="op">=</span>  <span class="va">keys</span>
-    <span class="op">)</span>
-
-  <span class="co"># отправляем информацию о погоде</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>,
-                  text    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"5 наиболее свежих статей из Хаба "</span>, <span class="va">hub</span><span class="op">)</span>,
-                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span>
-
-<span class="op">}</span>
-
-<span class="co"># создаём фильтры</span>
-<span class="co">## сообщения с текстом Погода</span>
-<span class="va">MessageFilters</span><span class="op">$</span><span class="va">hubs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="co"># проверяем текст сообщения</span>
-  <span class="va">message</span><span class="op">$</span><span class="va">text</span> <span class="op">==</span> <span class="st">"Список статей"</span>
-
-<span class="op">}</span>
-<span class="op">)</span>
-
-<span class="co"># создаём обработчики</span>
-<span class="va">h_start</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'start'</span>, <span class="va">start</span><span class="op">)</span>
-<span class="va">h_hubs</span>          <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">habs</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">hubs</span><span class="op">)</span>
-<span class="va">h_query_handler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb</span><span class="op">)</span>
-
-<span class="co"># добавляем обработчики в диспетчер</span>
-<span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span>
-  <span class="va">h_start</span> <span class="op">+</span>
-  <span class="va">h_hubs</span>  <span class="op">+</span>
-  <span class="va">h_query_handler</span>
-
-<span class="co"># запускаем бота</span>
-<span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">habR</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># создаём экземпляр класса Updater</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># создаём методы</span></span>
+<span><span class="co">## метод для запуска основной клавиатуры</span></span>
+<span><span class="va">start</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># создаём клавиатуру</span></span>
+<span>  <span class="va">RKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>    keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Список статей"</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    resize_keyboard <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    one_time_keyboard <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># отправляем клавиатуру</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                  text <span class="op">=</span> <span class="st">'Выберите команду'</span>,</span>
+<span>                  reply_markup <span class="op">=</span> <span class="va">RKM</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## Метод вызова Inine клавиатуры</span></span>
+<span><span class="va">habs</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>    inline_keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'R'</span>, callback_data <span class="op">=</span> <span class="st">'R'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Data Mining'</span>, callback_data <span class="op">=</span> <span class="st">'data_mining'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Data Engineering'</span>, callback_data <span class="op">=</span> <span class="st">'data_engineering'</span><span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Big Data'</span>, callback_data <span class="op">=</span> <span class="st">'bigdata'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Python'</span>, callback_data <span class="op">=</span> <span class="st">'python'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Визуализация данных'</span>, callback_data <span class="op">=</span> <span class="st">'data_visualization'</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Send Inline Keyboard</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                  text <span class="op">=</span> <span class="st">"Выберите Хаб"</span>,</span>
+<span>                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># метод для сообщения погоды</span></span>
+<span><span class="va">answer_cb</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># получаем из сообщения город</span></span>
+<span>  <span class="va">hub</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">data</span></span>
+<span></span>
+<span>  <span class="co"># сообщение о том, что данные по кнопке получены</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">answerCallbackQuery</span><span class="op">(</span>callback_query_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">callback_query</span><span class="op">$</span><span class="va">id</span>,</span>
+<span>                          text <span class="op">=</span> <span class="st">'Подождите несколько минут, запрос обрабатывается'</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># сообщение о том, что надо подождать пока бот получит данные</span></span>
+<span>  <span class="va">mid</span> <span class="op">&lt;-</span> <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                         text    <span class="op">=</span> <span class="st">"Подождите несколько минут пока, я соберу данные по выбранному Хабу"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># парсим Хабр</span></span>
+<span>  <span class="va">posts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">habr_hub_posts</span><span class="op">(</span><span class="va">hub</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># удаляем сообщение о том, что надо подождать</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">deleteMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, <span class="va">mid</span><span class="op">$</span><span class="va">message_id</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># формируем список кнопок</span></span>
+<span>  <span class="va">keys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="va">posts</span><span class="op">$</span><span class="va">title</span><span class="op">[</span><span class="va">x</span><span class="op">]</span>, url <span class="op">=</span> <span class="va">posts</span><span class="op">$</span><span class="va">link</span><span class="op">[</span><span class="va">x</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># формируем клавиатуру</span></span>
+<span>  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>    inline_keyboard <span class="op">=</span>  <span class="va">keys</span></span>
+<span>    <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># отправляем информацию о погоде</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                  text    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"5 наиболее свежих статей из Хаба "</span>, <span class="va">hub</span><span class="op">)</span>,</span>
+<span>                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># создаём фильтры</span></span>
+<span><span class="co">## сообщения с текстом Погода</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">hubs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># проверяем текст сообщения</span></span>
+<span>  <span class="va">message</span><span class="op">$</span><span class="va">text</span> <span class="op">==</span> <span class="st">"Список статей"</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># создаём обработчики</span></span>
+<span><span class="va">h_start</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'start'</span>, <span class="va">start</span><span class="op">)</span></span>
+<span><span class="va">h_hubs</span>          <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">habs</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">hubs</span><span class="op">)</span></span>
+<span><span class="va">h_query_handler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># добавляем обработчики в диспетчер</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span></span>
+<span>  <span class="va">h_start</span> <span class="op">+</span></span>
+<span>  <span class="va">h_hubs</span>  <span class="op">+</span></span>
+<span>  <span class="va">h_query_handler</span></span>
+<span></span>
+<span><span class="co"># запускаем бота</span></span>
+<span><span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p></p>
 <blockquote>
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
@@ -798,42 +799,42 @@
 </div>
 <p>Список доступных для выбора Хабов мы вбили хардкодом, в методе <code>habs</code>:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Метод вызова Inine клавиатуры</span>
-<span class="va">habs</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span>
-
-  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span>
-    inline_keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'R'</span>, callback_data <span class="op">=</span> <span class="st">'r'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Data Mining'</span>, callback_data <span class="op">=</span> <span class="st">'data_mining'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Data Engineering'</span>, callback_data <span class="op">=</span> <span class="st">'data_engineering'</span><span class="op">)</span>
-      <span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Big Data'</span>, callback_data <span class="op">=</span> <span class="st">'bigdata'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Python'</span>, callback_data <span class="op">=</span> <span class="st">'python'</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Визуализация данных'</span>, callback_data <span class="op">=</span> <span class="st">'data_visualization'</span><span class="op">)</span>
-      <span class="op">)</span>
-    <span class="op">)</span>
-  <span class="op">)</span>
-
-  <span class="co"># Send Inline Keyboard</span>
-  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,
-                  text <span class="op">=</span> <span class="st">"Выберите Хаб"</span>,
-                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Метод вызова Inine клавиатуры</span></span>
+<span><span class="va">habs</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>    inline_keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'R'</span>, callback_data <span class="op">=</span> <span class="st">'r'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Data Mining'</span>, callback_data <span class="op">=</span> <span class="st">'data_mining'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Data Engineering'</span>, callback_data <span class="op">=</span> <span class="st">'data_engineering'</span><span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Big Data'</span>, callback_data <span class="op">=</span> <span class="st">'bigdata'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Python'</span>, callback_data <span class="op">=</span> <span class="st">'python'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">'Визуализация данных'</span>, callback_data <span class="op">=</span> <span class="st">'data_visualization'</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Send Inline Keyboard</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
+<span>                  text <span class="op">=</span> <span class="st">"Выберите Хаб"</span>,</span>
+<span>                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>Список статей из указанного Хаба мы получаем командой <code>habr_hub_posts()</code>, из пакета <code>habR</code>. При этом указываем, что нам не требуется список статей за всё время, а только первая страница на которой располагаются 20 статей. Из полученной таблицы с помощью команды <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> оставляем только 5 самых верхних, которые и являются самыми свежими статьями.</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R">  <span class="co"># парсим Хабр</span>
-  <span class="va">posts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">habr_hub_posts</span><span class="op">(</span><span class="va">hub</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span>  <span class="co"># парсим Хабр</span></span>
+<span>  <span class="va">posts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">habr_hub_posts</span><span class="op">(</span><span class="va">hub</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p>Логика очень схожа с предыдущим ботом, но в данном случае Inline клавиатуру со списком статей мы генерируем динамически с помощью функции <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>.</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R">  <span class="co"># формируем список кнопок</span>
-  <span class="va">keys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="va">posts</span><span class="op">$</span><span class="va">title</span><span class="op">[</span><span class="va">x</span><span class="op">]</span>, url <span class="op">=</span> <span class="va">posts</span><span class="op">$</span><span class="va">link</span><span class="op">[</span><span class="va">x</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-
-  <span class="co"># формируем клавиатуру</span>
-  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span>
-    inline_keyboard <span class="op">=</span>  <span class="va">keys</span>
-    <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span>  <span class="co"># формируем список кнопок</span></span>
+<span>  <span class="va">keys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="va">posts</span><span class="op">$</span><span class="va">title</span><span class="op">[</span><span class="va">x</span><span class="op">]</span>, url <span class="op">=</span> <span class="va">posts</span><span class="op">$</span><span class="va">link</span><span class="op">[</span><span class="va">x</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># формируем клавиатуру</span></span>
+<span>  <span class="va">IKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardMarkup.html">InlineKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>    inline_keyboard <span class="op">=</span>  <span class="va">keys</span></span>
+<span>    <span class="op">)</span></span></code></pre></div>
 <p>В текст кнопки мы подставляем название статьи <code>posts$title[x]</code>, а в аргумент <code>url</code> ссылку на статью: <code>url = posts$link[x]</code>.</p>
 <p>Далее, создаём фильтр, обработчики и запускаем нашего бота.</p>
 </div>
@@ -919,7 +920,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-11.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
