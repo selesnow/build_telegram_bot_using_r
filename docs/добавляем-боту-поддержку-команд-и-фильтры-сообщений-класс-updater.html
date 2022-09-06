@@ -59,6 +59,7 @@
 <li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
 <li><a class="" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
 <li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C.html"><span class="header-section-number">7</span> Добавляем боту асинхронность</a></li>
+<li><a class="" href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html"><span class="header-section-number">8</span> Упаковываем бота в Docker контейнер</a></li>
 <li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
 <li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
 </ul>
@@ -112,7 +113,7 @@
 <p>Если вы никогда ранее не использовали ботов, и не в курсе, что такое команда, то команды боту необходимо отправлять с помощью прямого слеша <code>/</code> в качестве префикса.</p>
 <p>Начнём мы с простых команд, т.е. научим нашего бота здороваться по команде <code>/hi</code>.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
 <span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
@@ -163,7 +164,7 @@
 <p>Обычный <strong>MessageHandler</strong> будет реагировать на абсолютно все входящие сообщения. Поэтому зачастую обработчики сообщений используются вместе с фильтрами. Давайте научим бота здороваться не только по команде <code>/hi</code>, но и всегда, когда в сообщении отправленном боту встречается одно из следующих слов: привет, здравствуй, салют, хай, бонжур.</p>
 <p>Пока мы не будем писать какие-то новые методы, т.к. у нас уже есть метод с помощью которого бот с нами здоровается. От нас требуется только создать нужный фильтр и обработчик сообщений.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
 <span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
@@ -267,7 +268,7 @@
 <p>Приведённый ниже бот использует API производственного календаря <a href="https://isdayoff.ru/">isdayoff.ru</a>.</p>
 <p><spoiler title="Код 3: Бот, который сообщает по дате и стране "></spoiler></p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
 <span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
@@ -475,7 +476,7 @@ command2 - Another description</code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-17.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-09-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
