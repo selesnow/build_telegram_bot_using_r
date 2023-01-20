@@ -76,7 +76,7 @@ start <- function(bot, update) {
   )
 
   # отправляем клавиатуру
-  bot$sendMessage(update$message$chat_id,
+  bot$sendMessage(update$from_chat_id(),
                   text = 'Выберите команду',
                   reply_markup = RKM)
 
@@ -85,8 +85,8 @@ start <- function(bot, update) {
 ## метод возвразающий id чата
 chat_id <- function(bot, update) {
 
-  bot$sendMessage(update$message$chat_id,
-                  text = paste0("Чат id этого диалога: ", update$message$chat_id),
+  bot$sendMessage(update$from_chat_id(),
+                  text = paste0("Чат id этого диалога: ", update$from_chat_id()),
                   parse_mode = "Markdown")
 
 }
@@ -94,8 +94,8 @@ chat_id <- function(bot, update) {
 ## метод возвращающий имя
 my_name <- function(bot, update) {
 
-  bot$sendMessage(update$message$chat_id,
-                  text = paste0("Вас зовут ", update$message$from$first_name),
+  bot$sendMessage(update$from_chat_id(),
+                  text = paste0("Вас зовут ", update$effective_user()$first_name),
                   parse_mode = "Markdown")
 
 }
@@ -103,8 +103,8 @@ my_name <- function(bot, update) {
 ## метод возвращающий логин
 my_username <- function(bot, update) {
 
-  bot$sendMessage(update$message$chat_id,
-                  text = paste0("Ваш логин ", update$message$from$username),
+  bot$sendMessage(update$from_chat_id(),
+                  text = paste0("Ваш логин ", update$effective_user()$username),
                   parse_mode = "Markdown")
 
 }
@@ -222,7 +222,7 @@ RKM <- ReplyKeyboardMarkup(
 
 
 ```{r eval=FALSE}
-  bot$sendMessage(update$message$chat_id,
+  bot$sendMessage(update$from_chat_id(),
                   text = 'Выберите команду',
                   reply_markup = RKM)
 ```
@@ -348,7 +348,7 @@ test <- function(bot, update) {
   )
 
   # Отправляем клавиатуру в чат
-  bot$sendMessage(update$message$chat_id,
+  bot$sendMessage(update$from_chat_id(),
                   text = "Вы болете коронавирусом?",
                   reply_markup = IKM)
 }
@@ -433,7 +433,7 @@ test <- function(bot, update) {
   )
 
   # Отправляем клавиатуру в чат
-  bot$sendMessage(update$message$chat_id,
+  bot$sendMessage(update$from_chat_id(),
                   text = "Вы болете коронавирусом?",
                   reply_markup = IKM)
 }
@@ -534,7 +534,7 @@ start <- function(bot, update) {
   )
 
   # отправляем клавиатуру
-  bot$sendMessage(update$message$chat_id,
+  bot$sendMessage(update$from_chat_id(),
                   text = 'Выберите команду',
                   reply_markup = RKM)
 
@@ -569,7 +569,7 @@ weather <- function(bot, update) {
   )
 
   # Send Inline Keyboard
-  bot$sendMessage(chat_id = update$message$chat_id,
+  bot$sendMessage(chat_id = update$from_chat_id(),
                   text = "Выберите город",
                   reply_markup = IKM)
 }
@@ -708,7 +708,7 @@ start <- function(bot, update) {
   )
 
   # отправляем клавиатуру
-  bot$sendMessage(update$message$chat_id,
+  bot$sendMessage(update$from_chat_id(),
                   text = 'Выберите команду',
                   reply_markup = RKM)
 
@@ -733,7 +733,7 @@ habs <- function(bot, update) {
   )
 
   # Send Inline Keyboard
-  bot$sendMessage(chat_id = update$message$chat_id,
+  bot$sendMessage(chat_id = update$from_chat_id(),
                   text = "Выберите Хаб",
                   reply_markup = IKM)
 }

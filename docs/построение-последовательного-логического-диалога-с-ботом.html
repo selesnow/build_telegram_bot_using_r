@@ -319,21 +319,21 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <span>  <span class="co"># </span></span>
 <span>  </span>
 <span>  <span class="co"># Send query</span></span>
-<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, </span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, </span>
 <span>                  text <span class="op">=</span> <span class="st">"Введи своё имя"</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># переключаем состояние диалога в режим ожидания ввода имени</span></span>
-<span>  <span class="fu">set_state</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, state <span class="op">=</span> <span class="st">'wait_name'</span><span class="op">)</span></span>
+<span>  <span class="fu">set_state</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, state <span class="op">=</span> <span class="st">'wait_name'</span><span class="op">)</span></span>
 <span>  </span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># get current chat state</span></span>
 <span><span class="va">state</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
-<span>  <span class="va">chat_state</span> <span class="op">&lt;-</span> <span class="fu">get_state</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span><span class="op">)</span></span>
+<span>  <span class="va">chat_state</span> <span class="op">&lt;-</span> <span class="fu">get_state</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># Send state</span></span>
-<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, </span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, </span>
 <span>                  text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">chat_state</span><span class="op">)</span><span class="op">)</span></span>
 <span>  </span>
 <span><span class="op">}</span></span>
@@ -341,7 +341,7 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <span><span class="co"># reset dialog state</span></span>
 <span><span class="va">reset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
-<span>  <span class="fu">set_state</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, state <span class="op">=</span> <span class="st">'start'</span><span class="op">)</span></span>
+<span>  <span class="fu">set_state</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, state <span class="op">=</span> <span class="st">'start'</span><span class="op">)</span></span>
 <span>  </span>
 <span><span class="op">}</span></span>
 <span></span>
@@ -351,53 +351,53 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <span>  <span class="va">uname</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">text</span></span>
 <span>  </span>
 <span>  <span class="co"># Send message with name</span></span>
-<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, </span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, </span>
 <span>                  text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">uname</span>, <span class="st">", приятно познакомится, я бот!"</span><span class="op">)</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># Записываем имя в глобальную переменную</span></span>
 <span>  <span class="co">#username &lt;&lt;- uname</span></span>
-<span>  <span class="fu">set_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'name'</span>, <span class="va">uname</span><span class="op">)</span> </span>
+<span>  <span class="fu">set_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, <span class="st">'name'</span>, <span class="va">uname</span><span class="op">)</span> </span>
 <span>  </span>
 <span>  <span class="co"># Справшиваем возраст</span></span>
-<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, </span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, </span>
 <span>                  text <span class="op">=</span> <span class="st">"Сколько тебе лет?"</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># Меняем состояние на ожидание ввода имени</span></span>
-<span>  <span class="fu">set_state</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, state <span class="op">=</span> <span class="st">'wait_age'</span><span class="op">)</span></span>
+<span>  <span class="fu">set_state</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, state <span class="op">=</span> <span class="st">'wait_age'</span><span class="op">)</span></span>
 <span>  </span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># enter user age</span></span>
 <span><span class="va">enter_age</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
-<span>  <span class="va">uage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">text</span><span class="op">)</span></span>
+<span>  <span class="va">uage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">effective_message</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">text</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># проверяем было введено число или нет</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">uage</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="co"># если введено не число то переспрашиваем возраст</span></span>
-<span>    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, </span>
+<span>    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, </span>
 <span>                    text <span class="op">=</span> <span class="st">"Ты ввёл некорректные данные, введи число"</span><span class="op">)</span></span>
 <span>    </span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="co"># если введено число сообщаем что возраст принят</span></span>
-<span>    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, </span>
+<span>    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, </span>
 <span>                    text <span class="op">=</span> <span class="st">"ОК, возраст принят"</span><span class="op">)</span></span>
 <span>    </span>
 <span>    <span class="co"># записываем глобальную переменную с возрастом</span></span>
 <span>    <span class="co">#userage &lt;&lt;- uage</span></span>
-<span>    <span class="fu">set_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'age'</span>, <span class="va">uage</span><span class="op">)</span> </span>
+<span>    <span class="fu">set_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, <span class="st">'age'</span>, <span class="va">uage</span><span class="op">)</span> </span>
 <span>    </span>
 <span>    <span class="co"># сообщаем какие данные были собраны</span></span>
-<span>    <span class="va">username</span> <span class="op">&lt;-</span> <span class="fu">get_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'name'</span><span class="op">)</span></span>
-<span>    <span class="va">userage</span>  <span class="op">&lt;-</span> <span class="fu">get_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, <span class="st">'age'</span><span class="op">)</span></span>
+<span>    <span class="va">username</span> <span class="op">&lt;-</span> <span class="fu">get_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, <span class="st">'name'</span><span class="op">)</span></span>
+<span>    <span class="va">userage</span>  <span class="op">&lt;-</span> <span class="fu">get_chat_data</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, <span class="st">'age'</span><span class="op">)</span></span>
 <span>    </span>
-<span>    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, </span>
+<span>    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, </span>
 <span>                    text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Тебя зовут "</span>, <span class="va">username</span>, <span class="st">" и тебе "</span>, <span class="va">userage</span>, <span class="st">" лет. Будем знакомы"</span><span class="op">)</span><span class="op">)</span></span>
 <span>    </span>
 <span>    <span class="co"># возвращаем диалог в исходное состояние</span></span>
-<span>    <span class="fu">set_state</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, state <span class="op">=</span> <span class="st">'start'</span><span class="op">)</span></span>
+<span>    <span class="fu">set_state</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="fu">from_chat_id</span><span class="op">(</span><span class="op">)</span>, state <span class="op">=</span> <span class="st">'start'</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span>  </span>
 <span><span class="op">}</span></span></code></pre></div>

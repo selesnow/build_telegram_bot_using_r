@@ -27,13 +27,13 @@ updater <- Updater('ТОКЕН ВАШЕГО БОТА')
 say_hello <- function(bot, update) {
   
   # Имя пользователя с которым надо поздароваться
-  user_name <- update$message$from$first_name
+  user_name <- update$effective_user()$first_name
   
   # Отправка сообщения
-  bot$sendMessage(update$message$chat_id, 
+  bot$sendMessage(update$from_chat_id(), 
                   text = paste0("Моё почтение, ", user_name, "!"),
                   parse_mode = "Markdown",
-                  reply_to_message_id = update$message$message_id)
+                  reply_to_message_id = update$effective_message()$message_id)
 
 }
 
@@ -44,10 +44,10 @@ what_time <- function(bot, update) {
   cur_time <- as.character(Sys.time())
   
   # Отправка сообщения
-  bot$sendMessage(update$message$chat_id, 
+  bot$sendMessage(update$from_chat_id(), 
                   text = paste0("Текущее время, ", cur_time),
                                 parse_mode = "Markdown",
-                                reply_to_message_id = update$message$message_id)
+                                reply_to_message_id = update$effective_message()$message_id)
                   
   
 }
@@ -146,7 +146,7 @@ MessageFilters$admins <- BaseFilter(
   function(message) {
     
     # проверяем от кого отправлено сообщение
-    message$from$username %in% c('AlexeySeleznev', 'user1', 'user2')
+    message$effective_user()$username %in% c('AlexeySeleznev', 'user1', 'user2')
     
  }
 )
@@ -197,13 +197,13 @@ updater <- Updater('ТОКЕН ВАШЕГО БОТА')
 say_hello <- function(bot, update) {
   
   # Имя пользователя с которым надо поздароваться
-  user_name <- update$message$from$first_name
+  user_name <- update$effective_user()$first_name
   
   # Отправка сообщения
-  bot$sendMessage(update$message$chat_id, 
+  bot$sendMessage(update$from_chat_id(), 
                   text = paste0("Моё почтение, ", user_name, "!"),
                   parse_mode = "Markdown",
-                  reply_to_message_id = update$message$message_id)
+                  reply_to_message_id = update$effective_message()$message_id)
 
 }
 
@@ -214,10 +214,10 @@ what_time <- function(bot, update) {
   cur_time <- as.character(Sys.time())
   
   # Отправка сообщения
-  bot$sendMessage(update$message$chat_id, 
+  bot$sendMessage(update$from_chat_id(), 
                   text = paste0("Текущее время, ", cur_time),
                                 parse_mode = "Markdown",
-                                reply_to_message_id = update$message$message_id)
+                                reply_to_message_id = update$effective_message()$message_id)
                   
   
 }
@@ -341,24 +341,24 @@ updater <- Updater('ТОКЕН ВАШЕГО БОТА')
 say_hello <- function(bot, update) {
   
   # Имя пользователя с которым надо поздароваться
-  user_name <- update$message$from$username
+  user_name <- update$effective_user()$username
   
   # проверяем разрешено ли использовать данному пользователю этот метод
   if ( bot_check_usernames(c('AlexeySeleznev', 'user1', 'user2'), user_name) ) {
     
     # Отправка сообщения
-    bot$sendMessage(update$message$chat_id, 
+    bot$sendMessage(update$from_chat_id(), 
                     text = paste0("Моё почтение, ", user_name, "!"),
                     parse_mode = "Markdown",
-                    reply_to_message_id = update$message$message_id)
+                    reply_to_message_id = update$effective_message()$message_id)
       
   } else {
     
     # Отправка сообщения
-    bot$sendMessage(update$message$chat_id, 
+    bot$sendMessage(update$from_chat_id(), 
                     text = paste0("У вас нет прав для использования этого метода!"),
                     parse_mode = "Markdown",
-                    reply_to_message_id = update$message$message_id)
+                    reply_to_message_id = update$effective_message()$message_id)
     
   }
 
@@ -368,7 +368,7 @@ say_hello <- function(bot, update) {
 what_time <- function(bot, update) {
   
   # проверяем разрешено ли использовать данному пользователю этот метод
-  if ( bot_check_usernames(c('user1', 'user2'), update$message$from$username) ) {
+  if ( bot_check_usernames(c('user1', 'user2'), update$effective_user()$username) ) {
       
     # Запрашиваем текущее время
     cur_time <- as.character(Sys.time())
@@ -377,14 +377,14 @@ what_time <- function(bot, update) {
     bot$sendMessage(update$message$chat_id, 
                     text = paste0("Текущее время, ", cur_time),
                                   parse_mode = "Markdown",
-                                  reply_to_message_id = update$message$message_id)
+                                  reply_to_message_id = update$effective_message()$message_id)
   } else {
     
     # Отправка сообщения о том что у пользователя не достаточно прав
     bot$sendMessage(update$message$chat_id, 
                     text = paste0("У вас нет прав для использования этого метода!"),
                     parse_mode = "Markdown",
-                    reply_to_message_id = update$message$message_id)
+                    reply_to_message_id = update$effective_message()$message_id)
     
   }
                   
@@ -441,21 +441,21 @@ say_hello <- function(bot, update) {
   # проверяем разрешено ли использовать данному пользователю этот метод
   if ( bot_check_usernames(c('AlexeySeleznev', 'user1', 'user2'), user_name) 
        &
-       bot_check_chat_id(c(194336771, 1, 2), update$message$chat_id)) {
+       bot_check_chat_id(c(194336771, 1, 2), update$from_chat_id())) {
     
     # Отправка сообщения
-    bot$sendMessage(update$message$chat_id, 
+    bot$sendMessage(update$from_chat_id(), 
                     text = paste0("Моё почтение, ", user_name, "!"),
                     parse_mode = "Markdown",
-                    reply_to_message_id = update$message$message_id)
+                    reply_to_message_id = update$effective_message()$message_id)
       
   } else {
     
     # Отправка сообщения
-    bot$sendMessage(update$message$chat_id, 
+    bot$sendMessage(update$from_chat_id(), 
                     text = paste0("У вас нет прав для использования этого метода!"),
                     parse_mode = "Markdown",
-                    reply_to_message_id = update$message$message_id)
+                    reply_to_message_id = update$effective_message()$message_id)
     
   }
 
@@ -473,17 +473,17 @@ what_time <- function(bot, update) {
     cur_time <- as.character(Sys.time())
     
     # Отправка сообщения о том что у пользователя не достаточно прав
-    bot$sendMessage(update$message$chat_id, 
+    bot$sendMessage(update$from_chat_id(), 
                     text = paste0("Текущее время, ", cur_time),
                                   parse_mode = "Markdown",
-                                  reply_to_message_id = update$message$message_id)
+                                  reply_to_message_id = update$effective_message()$message_id)
   } else {
     
     # Отправка сообщения о том что у пользователя не достаточно прав
-    bot$sendMessage(update$message$chat_id, 
+    bot$sendMessage(update$from_chat_id(), 
                     text = paste0("У вас нет прав для использования этого метода!"),
                     parse_mode = "Markdown",
-                    reply_to_message_id = update$message$message_id)
+                    reply_to_message_id = update$effective_message()$message_id)
     
   }
                   
