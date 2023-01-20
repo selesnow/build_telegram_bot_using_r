@@ -7,7 +7,7 @@
 <title>Глава 5 Управление правами пользователей бота | Разработка telegram ботов на языке R</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="В этой главе мы разберёмся с тем, как управлять правами использования отдельных методов бота на различных уровнях.  5.1 Введение Ваш бот может выполнять совершенно любые задачи, и автоматизировать...">
-<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
 <meta property="og:title" content="Глава 5 Управление правами пользователей бота | Разработка telegram ботов на языке R">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/cover.png">
@@ -75,9 +75,9 @@
 </h1>
 <p>В этой главе мы разберёмся с тем, как управлять правами использования отдельных методов бота на различных уровнях.</p>
 <div class="inline-figure"><img src="https://habrastorage.org/webt/zx/1m/k2/zx1mk2dp30i1bh61-bf4iodlrra.png" align="center" width="80%"></div>
-<div id="введение-2" class="section level2" number="5.1">
+<div id="введение-4" class="section level2" number="5.1">
 <h2>
-<span class="header-section-number">5.1</span> Введение<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> Введение<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>Ваш бот может выполнять совершенно любые задачи, и автоматизировать как некоторые внутренние процессы, так и наладить коммуникации с клиентами.</p>
 <p>Т.е. бот может использоваться в многопользовательском режиме. При этом, вам может понадобиться разграничить права на использование бота. Например, некоторые пользователи смогут использовать абсолютно все возможности бота, а некоторым вы предоставите ограниченные права.</p>
@@ -89,7 +89,7 @@
 <li>
 <code>what_time</code> - команда, по которой бот сообщает текущую дату и время</li>
 </ul>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
@@ -212,7 +212,7 @@ $from_user
 <a href="https://tlgrm.ru/docs/bots/api#message">Message</a> - Этот объект представляет собой сообщение.</li>
 </ul>
 <p>Соответственно вы можете разделять права пользователей бота, и его методов используя любую, отправляемую с сообщением информацию, т.е. любые элементы объекта <code>message</code>. Для того, что бы ограничить круг пользователей которые могут использовать методы вашего бота достаточно создать фильтр:</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## список пользователей, с полными правами</span></span>
 <span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
@@ -223,7 +223,7 @@ $from_user
 <span> <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Где <code>c('AlexeySeleznev', 'user1', 'user2')</code> - вектор, с именами пользователей, которые могут использовать все функции бота. Далее этот фильтр мы используем при создании обработчиков.</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## фильтр для вызова команды say_hello</span></span>
 <span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
@@ -250,7 +250,7 @@ $from_user
 <span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">what_time</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span><span class="op">)</span></span></code></pre></div>
 <p>Теперь нашего бота могут использовать пользователи с логинами AlexeySeleznev, user1, user2. На сообщения отправленные боту другими пользователями он никак не будет реагировать.</p>
 <p>Изменённый код нашего бота на данный момент выглядит вот так:</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span></span>
@@ -334,7 +334,7 @@ $from_user
 <span class="header-section-number">5.2.2</span> Ограничиваем права на уровне чата<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0-%D0%BD%D0%B0-%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D0%B5-%D1%87%D0%B0%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h3>
 <p>Тем же способом мы можем создать фильтр не только по списку пользователей, но и по конкретному чату. Для этого достаточно создать ещё один фильтр:</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## список чатов в которых разрешено использовать бота</span></span>
 <span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">chats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
@@ -382,7 +382,7 @@ $from_user
 <span class="header-section-number">5.3.1</span> Ограничиваем права на уровне имени пользователя<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0-%D0%BD%D0%B0-%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D0%B5-%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Давайте создадим функцию, которая будет принимать данные для проверки имени пользователя.</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># функция для проверки прав пользователя</span></span>
 <span><span class="va">bot_check_usernames</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">admins</span>, <span class="va">username</span><span class="op">)</span> <span class="op">{</span></span>
@@ -393,7 +393,7 @@ $from_user
 <p>В аргумент <code>admins</code> далее нам надо передавать список пользователей, которым разрешено использовать данный метод, а в аргумент <code>username</code> имя пользователя, которого надо проверить в списке.</p>
 <p>Далее в каждый метод, который мы хотим защитить с помощью конструкции <code>IF</code> добавляем проверку, разрешено пользователю использовать данный метод или нет. В случае если у пользователя нет таких прав бот будет сообщать об этом в чате.</p>
 <p>Давайте, для примера, я исключу себя из списка пользователей, которым разрешено использовать метод <code>what_time</code>.</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
@@ -473,7 +473,7 @@ $from_user
 </h3>
 <p>Думаю у вас уже не возникнет трудностей при доработке ваших методов, таким образом, что бы их можно было использовать только в определённых чатах, тем не менее приведу пример.</p>
 <p>Напишем функцию, которая будет проверять входит ли текущий чат в список разрешенных.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bot_check_chat_id</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">allowed_chats</span>, <span class="va">current_chat</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
@@ -481,7 +481,7 @@ $from_user
 <span>    </span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Далее используем эту функции внутри наших методов:</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span></span>
@@ -591,7 +591,7 @@ $from_user
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
-<li><a class="nav-link" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-2"><span class="header-section-number">5.1</span> Введение</a></li>
+<li><a class="nav-link" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-4"><span class="header-section-number">5.1</span> Введение</a></li>
 <li>
 <a class="nav-link" href="#%D0%BE%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%BE%D0%B2-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9"><span class="header-section-number">5.2</span> Ограничиваем права пользователя с помощью фильтров сообщений</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#%D0%BE%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0-%D0%BD%D0%B0-%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D0%B5-%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F"><span class="header-section-number">5.2.1</span> Ограничиваем права на уровне имени пользователя</a></li>
@@ -627,7 +627,7 @@ $from_user
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-09-06.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2023-01-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Глава 3 Как добавить боту поддержку клавиатуры | Разработка telegram ботов на языке R</title>
 <meta name="author" content="Алексей Селезнёв">
-<meta name="description" content="3.1 Видео урок по добавлению боту клавиатуры    3.2 Конспект по добавлению клавиатуры В этой главе мы повысим юзабилити нашего бота за счёт добавления клавиатуры, которая сделает интерфейс бота...">
-<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta name="description" content="3.1 Видео урок по добавлению боту клавиатуры    3.2 Введение В этой главе мы повысим юзабилити нашего бота за счёт добавления клавиатуры, которая сделает интерфейс бота интуитивно понятным, и...">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
 <meta property="og:title" content="Глава 3 Как добавить боту поддержку клавиатуры | Разработка telegram ботов на языке R">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/cover.png">
-<meta property="og:description" content="3.1 Видео урок по добавлению боту клавиатуры    3.2 Конспект по добавлению клавиатуры В этой главе мы повысим юзабилити нашего бота за счёт добавления клавиатуры, которая сделает интерфейс бота...">
+<meta property="og:description" content="3.1 Видео урок по добавлению боту клавиатуры    3.2 Введение В этой главе мы повысим юзабилити нашего бота за счёт добавления клавиатуры, которая сделает интерфейс бота интуитивно понятным, и...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Глава 3 Как добавить боту поддержку клавиатуры | Разработка telegram ботов на языке R">
-<meta name="twitter:description" content="3.1 Видео урок по добавлению боту клавиатуры    3.2 Конспект по добавлению клавиатуры В этой главе мы повысим юзабилити нашего бота за счёт добавления клавиатуры, которая сделает интерфейс бота...">
+<meta name="twitter:description" content="3.1 Видео урок по добавлению боту клавиатуры    3.2 Введение В этой главе мы повысим юзабилити нашего бота за счёт добавления клавиатуры, которая сделает интерфейс бота интуитивно понятным, и...">
 <meta name="twitter:image" content="/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -80,16 +80,17 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QKHkL_GLy-M?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 </div>
-<div id="конспект-по-добавлению-клавиатуры" class="section level2" number="3.2">
+<div id="введение-2" class="section level2" number="3.2">
 <h2>
-<span class="header-section-number">3.2</span> Конспект по добавлению клавиатуры<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-%D0%BF%D0%BE-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2</span> Введение<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>В этой главе мы повысим юзабилити нашего бота за счёт добавления клавиатуры, которая сделает интерфейс бота интуитивно понятным, и простым в использовании.</p>
 <div class="inline-figure"><img src="https://habrastorage.org/webt/xv/xz/t0/xvxzt04r_e6svczshzxmppuilz8.png" align="center" width="80%"></div>
-<div id="какие-типы-клавиатур-поддерживает-телеграм-бот" class="section level3" number="3.2.1">
-<h3>
-<span class="header-section-number">3.2.1</span> Какие типы клавиатур поддерживает телеграм бот<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA%D0%B8%D0%B5-%D1%82%D0%B8%D0%BF%D1%8B-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B8%D0%B2%D0%B0%D0%B5%D1%82-%D1%82%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC-%D0%B1%D0%BE%D1%82"><i class="fas fa-link"></i></a>
-</h3>
+</div>
+<div id="какие-типы-клавиатур-поддерживает-телеграм-бот" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Какие типы клавиатур поддерживает телеграм бот<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA%D0%B8%D0%B5-%D1%82%D0%B8%D0%BF%D1%8B-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B8%D0%B2%D0%B0%D0%B5%D1%82-%D1%82%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC-%D0%B1%D0%BE%D1%82"><i class="fas fa-link"></i></a>
+</h2>
 <p>На момент написания книги <code>telegram.bot</code> позволяет вам создать клавиатуры двух типов:</p>
 <ul>
 <li>Reply - Основная, обычная клавиатура, которая находится под панелью ввода текста сообщения. Такая клавиатура просто отправляет боту текстовое сообщение, и в качестве текста отправит тот текст, который написан на самой кнопке.</li>
@@ -98,10 +99,10 @@
 <p>Для того, что бы бот открыл клавиатуру необходимо при отправке сообщения через метод <code>sendMessage()</code>, передать созданную ранее клавиатуру в аргумент <code>reply_markup</code>.</p>
 <p>Ниже мы разберём несколько примеров.</p>
 </div>
-<div id="reply-клавиатура" class="section level3" number="3.2.2">
-<h3>
-<span class="header-section-number">3.2.2</span> Reply клавиатура<a class="anchor" aria-label="anchor" href="#reply-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0"><i class="fas fa-link"></i></a>
-</h3>
+<div id="reply-клавиатура" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Reply клавиатура<a class="anchor" aria-label="anchor" href="#reply-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0"><i class="fas fa-link"></i></a>
+</h2>
 <p>Как я уже писал выше, это основная клавиатура управления ботом.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="st">"TOKEN"</span><span class="op">)</span></span>
@@ -282,17 +283,56 @@
 <code class="sourceCode R"><span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>,</span>
 <span>                  text <span class="op">=</span> <span class="st">'Выберите команду'</span>,</span>
 <span>                  reply_markup <span class="op">=</span> <span class="va">RKM</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div id="inline-клавиатура" class="section level3" number="3.2.3">
+<div id="как-запросить-у-пользователя-номер-телефона-и-локацию" class="section level3" number="3.4.1">
 <h3>
-<span class="header-section-number">3.2.3</span> Inline клавиатура<a class="anchor" aria-label="anchor" href="#inline-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4.1</span> Как запросить у пользователя номер телефона и локацию<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B8%D1%82%D1%8C-%D1%83-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F-%D0%BD%D0%BE%D0%BC%D0%B5%D1%80-%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D0%B0-%D0%B8-%D0%BB%D0%BE%D0%BA%D0%B0%D1%86%D0%B8%D1%8E"><i class="fas fa-link"></i></a>
 </h3>
+<p>При создании кнопок Reply клавиатуры мы используем функцию <code><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton()</a></code>, у которой доступны 2 дополнительные аргумента:</p>
+<ul>
+<li>
+<code>request_contact</code> - Запросить номер телефона пользователя</li>
+<li>
+<code>request_location</code> - Запросить локацию пользователя</li>
+</ul>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="st">"ТОКЕН ВАШЕГО БОТА"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">chat_id</span> <span class="op">&lt;-</span> <span class="st">"ID ВАШЕГО ЧАТА"</span></span>
+<span></span>
+<span><span class="co"># Create Custom Keyboard</span></span>
+<span><span class="va">text</span> <span class="op">&lt;-</span> <span class="st">"Поделитесь своими данными"</span></span>
+<span></span>
+<span><span class="va">RKM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/ReplyKeyboardMarkup.html">ReplyKeyboardMarkup</a></span><span class="op">(</span></span>
+<span>  keyboard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Поделиться номером телефона"</span>, request_contact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/KeyboardButton.html">KeyboardButton</a></span><span class="op">(</span><span class="st">"Поделиться местонахождением"</span>, request_location <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  resize_keyboard <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  one_time_keyboard <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Send Custom Keyboard</span></span>
+<span><span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">text</span>, reply_markup <span class="op">=</span> <span class="va">RKM</span><span class="op">)</span></span></code></pre></div>
+<p>Когда пользователь поделиться с ботом контактами, то в принятом от бота обновлении, в сообщении будет раздел <code>contact</code> со следующими данными:</p>
+<ul>
+<li>phone_number - номер телефона в международном формате</li>
+<li>first_name - Имя</li>
+<li>last_name - Фамилия</li>
+<li>user_id - Внутренний идентификатор пользователя в telegram</li>
+</ul>
+<p>Когда пользователь делиться местонахождением то в сообщении полученного ответа будет раздел <code>location</code> с информацией о координатах местонахождения пользователя, т.е. широта и долгота.</p>
+</div>
+</div>
+<div id="inline-клавиатура" class="section level2" number="3.5">
+<h2>
+<span class="header-section-number">3.5</span> Inline клавиатура<a class="anchor" aria-label="anchor" href="#inline-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0"><i class="fas fa-link"></i></a>
+</h2>
 <p>Как я уже писал выше, Inline клавиатура привязана к конкретному сообщению. С ней работать несколько сложнее чем с основной клавиатурой.</p>
 <p>Изначально вам необходимо добавить боту метод, для вызова Inline клавиатуры.</p>
 <p>Для ответа на нажатие Inline кнопки также можно использовать метод бота <code>answerCallbackQuery()</code>, который может вывести уведомление в интерфейсе telegram, пользователю нажавшему Inline кнопку.</p>
 <p>Данные отправленные с Inline кнопки не являются текстом, поэтому для их обработки необходимо создать специальный обработчик с помощью команды <code><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler()</a></code>.</p>
 <p>Код построения Inline клавиатуры который приводится в официальной справке пакета <code>telegram.bot</code>.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Initialize bot</span></span>
 <span><span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="st">"TOKEN"</span><span class="op">)</span></span>
 <span><span class="va">chat_id</span> <span class="op">&lt;-</span> <span class="st">"CHAT_ID"</span></span>
@@ -330,12 +370,12 @@
 <p>Inline кнопка может либо передавать боту какие-то данные с помощью аргумента <code>callback_data</code>, либо открывать какую-либо HTML страницу, заданную с помощью аргумента <code>url</code>.</p>
 <p>В результате будет список, в котором каждый элемент так же является списком Inline кнопок, которые необходимо объединить в один ряд.</p>
 <p>Далее мы рассмотрим несколько примеров ботов с Inline кнопками.</p>
-<div id="пример-простейшего-бота-с-поддержкой-inline-кнопок" class="section level4" number="3.2.3.1">
-<h4>
-<span class="header-section-number">3.2.3.1</span> Пример простейшего бота с поддержкой InLine кнопок<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%B5%D0%B9%D1%88%D0%B5%D0%B3%D0%BE-%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%BE%D0%B9-inline-%D0%BA%D0%BD%D0%BE%D0%BF%D0%BE%D0%BA"><i class="fas fa-link"></i></a>
-</h4>
+<div id="пример-простейшего-бота-с-поддержкой-inline-кнопок" class="section level3" number="3.5.1">
+<h3>
+<span class="header-section-number">3.5.1</span> Пример простейшего бота с поддержкой InLine кнопок<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%B5%D0%B9%D1%88%D0%B5%D0%B3%D0%BE-%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%BE%D0%B9-inline-%D0%BA%D0%BD%D0%BE%D0%BF%D0%BE%D0%BA"><i class="fas fa-link"></i></a>
+</h3>
 <p>Для начала мы напишем бота для экспресс тестирования на covid-19. По команде <code>/test</code>, он будет отправлять вам клавиатуру с двумя кнопками, в зависимости от нажатой кнопки он будет присылать вам сообщение с результатами вашего тестирования.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
@@ -421,7 +461,7 @@
 <code>pattern</code> - Фильтр по данным, которые привязаны к кнопке с помощью аргумента <code>callback_data</code>.</li>
 </ul>
 <p>Соответвенно с помощью аргумента <code>pattern</code> мы можем под нажатие каждой кнопки написать отдельный метод:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
@@ -496,15 +536,15 @@
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em>.</p>
 </blockquote>
 <p>Теперь мы написали 2 отдельных метода, т.е. по одному методу, под нажатие каждой кнопки, и использовали аргумент <code>pattern</code>, при создании их обработчиков:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">query_handler_yes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb_yes</span>, pattern <span class="op">=</span> <span class="st">'yes'</span><span class="op">)</span></span>
 <span><span class="va">query_handler_no</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CallbackQueryHandler.html">CallbackQueryHandler</a></span><span class="op">(</span><span class="va">answer_cb_no</span>, pattern <span class="op">=</span> <span class="st">'no'</span><span class="op">)</span></span></code></pre></div>
 <p>Заканчивается код метода <em>answer_cb</em> командой <code>bot$answerCallbackQuery(callback_query_id = update$callback_query$id)</code>, которая сообщает боту, что данные с inline клавиатуры получены.</p>
 </div>
-<div id="пример-бота-который-сообщает-текущую-погоду-по-выбранному-городу" class="section level4" number="3.2.3.2">
-<h4>
-<span class="header-section-number">3.2.3.2</span> Пример бота, который сообщает текущую погоду по выбранному городу<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D0%B1%D0%BE%D1%82%D0%B0-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D0%B9-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B0%D0%B5%D1%82-%D1%82%D0%B5%D0%BA%D1%83%D1%89%D1%83%D1%8E-%D0%BF%D0%BE%D0%B3%D0%BE%D0%B4%D1%83-%D0%BF%D0%BE-%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D0%BD%D0%BD%D0%BE%D0%BC%D1%83-%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%83"><i class="fas fa-link"></i></a>
-</h4>
+<div id="пример-бота-который-сообщает-текущую-погоду-по-выбранному-городу" class="section level3" number="3.5.2">
+<h3>
+<span class="header-section-number">3.5.2</span> Пример бота, который сообщает текущую погоду по выбранному городу<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D0%B1%D0%BE%D1%82%D0%B0-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D0%B9-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B0%D0%B5%D1%82-%D1%82%D0%B5%D0%BA%D1%83%D1%89%D1%83%D1%8E-%D0%BF%D0%BE%D0%B3%D0%BE%D0%B4%D1%83-%D0%BF%D0%BE-%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D0%BD%D0%BD%D0%BE%D0%BC%D1%83-%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%83"><i class="fas fa-link"></i></a>
+</h3>
 <p>Давайте попробуем написать бота, который запрашивает данные о погоде.</p>
 <p>Логика его работы будет следующая. Изначально командой <code>/start</code> вы вызываете основную клавиатуру, в которой присутствует всего одна кнопка “Погода”. Нажав на эту кнопку вы получаете сообщение с Inline клавиатурой, для выбора города, по которому требуется узнать текущую погоду. Выбираете один из городов, и получаете текущую погоду.</p>
 <p>В этом примере кода мы будем использовать несколько дополнительных пакетов:</p>
@@ -515,7 +555,7 @@
 <code>stringr</code> - пакет для работы с текстом, в нашем случае мы будем его использовать для формирования сообщения о погоде в выбранном городе.</li>
 </ul>
 <p><em>Код бота, который сообщает текущую погоду по выбранному городу</em></p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org">stringr</a></span><span class="op">)</span></span>
@@ -653,7 +693,7 @@
 </ul>
 <p>Метод <em>start</em> у нас запускается командой <code>/start</code>, что реализовано обработчиком <code>CommandHandler('start', start)</code>.</p>
 <p>Для запуска метода <em>weather</em> мы создали одноимённый фильтр:</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># создаём фильтры</span></span>
 <span><span class="co">## сообщения с текстом Погода</span></span>
 <span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">weather</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
@@ -667,20 +707,20 @@
 <p>И в конце концов, основной наш метод <em>answer_cb</em> реагирует на нажатие Inline кнопок, что реализовано специальным обработчиком: <code>CallbackQueryHandler(answer_cb)</code>.</p>
 <p>Внутри метода <em>answer_cb</em>, мы считываем отправленные с клавиатуры данные и записываем их в переменную <code>city</code>: <code>city &lt;- update$callback_query$data</code>. После чего запрашиваем из API данные о погоде, формируем и отправляем сообщение, и в конце концов используем метод <code>answerCallbackQuery</code> для того, что бы сообщить боту, о том, что мы обработали нажатие Inline кнопки.</p>
 </div>
-<div id="пример-бота-который-выводит-список-самых-свежих-статей-со-ссылками-по-указанному-хабу-из-habr.com." class="section level4" number="3.2.3.3">
-<h4>
-<span class="header-section-number">3.2.3.3</span> Пример бота, который выводит список самых свежих статей со ссылками по-указанному Хабу из <a href="https://habr.com/">habr.com</a>.<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D0%B1%D0%BE%D1%82%D0%B0-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D0%B9-%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D0%B8%D1%82-%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D1%81%D0%B0%D0%BC%D1%8B%D1%85-%D1%81%D0%B2%D0%B5%D0%B6%D0%B8%D1%85-%D1%81%D1%82%D0%B0%D1%82%D0%B5%D0%B9-%D1%81%D0%BE-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE-%D1%83%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%BD%D0%BE%D0%BC%D1%83-%D1%85%D0%B0%D0%B1%D1%83-%D0%B8%D0%B7-habr.com."><i class="fas fa-link"></i></a>
-</h4>
+<div id="пример-бота-который-выводит-список-самых-свежих-статей-со-ссылками-по-указанному-хабу-из-habr.com." class="section level3" number="3.5.3">
+<h3>
+<span class="header-section-number">3.5.3</span> Пример бота, который выводит список самых свежих статей со ссылками по-указанному Хабу из <a href="https://habr.com/">habr.com</a>.<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D0%B1%D0%BE%D1%82%D0%B0-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D0%B9-%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D0%B8%D1%82-%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D1%81%D0%B0%D0%BC%D1%8B%D1%85-%D1%81%D0%B2%D0%B5%D0%B6%D0%B8%D1%85-%D1%81%D1%82%D0%B0%D1%82%D0%B5%D0%B9-%D1%81%D0%BE-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE-%D1%83%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%BD%D0%BE%D0%BC%D1%83-%D1%85%D0%B0%D0%B1%D1%83-%D0%B8%D0%B7-habr.com."><i class="fas fa-link"></i></a>
+</h3>
 <p>Данного бота я привожу для того, что бы показать вам, как вывести Inline кнопки которые ведут на веб страницы.</p>
 <p>Логика данного бота схожа с предыдущим, изначально мы запускаем основную клавиатуру командой <code>/start</code>. Далее бот даёт нам на выбор список из 6 хабов, мы выбираем интересующий нас хаб, и получаем 5 самых свежих публикаций из выбранного Хаба.</p>
 <p>Как вы понимаете, в данном случае нам необходимо получить список статей, и для этого мы будем использовать специальный пакет <code>habR</code>, который позволяет запрашивать из хабры статьи и некоторую статистику по ним в R.</p>
 <p>Установить пакет <code>habR</code> можно только из github, для чего вам понадобится дополнительный пакет <code>devtools</code>. Для установки воспользуйтесь приведённым ниже кодом.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'selesnow/habR'</span><span class="op">)</span></span></code></pre></div>
 <p>Теперь рассмотрим код построения описанного выше бота:</p>
 <p><em>Код бот который выводит список наиболее свежих статей по выбранному Хабу</em></p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">habR</span><span class="op">)</span></span>
 <span></span>
@@ -799,7 +839,7 @@
 <img src="https://img.netpeak.ua/alsey/159905964234_kiss_178kb.png">
 </div>
 <p>Список доступных для выбора Хабов мы вбили хардкодом, в методе <code>habs</code>:</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Метод вызова Inine клавиатуры</span></span>
 <span><span class="va">habs</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
@@ -824,11 +864,11 @@
 <span>                  reply_markup <span class="op">=</span> <span class="va">IKM</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Список статей из указанного Хаба мы получаем командой <code>habr_hub_posts()</code>, из пакета <code>habR</code>. При этом указываем, что нам не требуется список статей за всё время, а только первая страница на которой располагаются 20 статей. Из полученной таблицы с помощью команды <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> оставляем только 5 самых верхних, которые и являются самыми свежими статьями.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># парсим Хабр</span></span>
 <span>  <span class="va">posts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">habr_hub_posts</span><span class="op">(</span><span class="va">hub</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p>Логика очень схожа с предыдущим ботом, но в данном случае Inline клавиатуру со списком статей мы генерируем динамически с помощью функции <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>.</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># формируем список кнопок</span></span>
 <span>  <span class="va">keys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/InlineKeyboardButton.html">InlineKeyboardButton</a></span><span class="op">(</span><span class="va">posts</span><span class="op">$</span><span class="va">title</span><span class="op">[</span><span class="va">x</span><span class="op">]</span>, url <span class="op">=</span> <span class="va">posts</span><span class="op">$</span><span class="va">link</span><span class="op">[</span><span class="va">x</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -840,27 +880,26 @@
 <p>Далее, создаём фильтр, обработчики и запускаем нашего бота.</p>
 </div>
 </div>
-<div id="заключение-2" class="section level3" number="3.2.4">
-<h3>
-<span class="header-section-number">3.2.4</span> Заключение<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-2"><i class="fas fa-link"></i></a>
-</h3>
+<div id="заключение-2" class="section level2" number="3.6">
+<h2>
+<span class="header-section-number">3.6</span> Заключение<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-2"><i class="fas fa-link"></i></a>
+</h2>
 <p>Теперь написанные вами боты будут значительно удобней в работе, за счёт того, что управление ими будет осуществляться с клавиатуры, а не вводом команд. Как минимум при взаимодействии с ботом через смартфон клавиатура ощутимо упростит процесс его использования.</p>
 <p>В следующей главе мы разберёмся как строить логический диалог с ботом, и работать с базами данных.</p>
 </div>
-</div>
-<div id="тесты-и-задания-2" class="section level2" number="3.3">
+<div id="тесты-и-задания-2" class="section level2" number="3.7">
 <h2>
-<span class="header-section-number">3.3</span> Тесты и задания<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-%D0%B8-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7</span> Тесты и задания<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-%D0%B8-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-2"><i class="fas fa-link"></i></a>
 </h2>
-<div id="тесты-2" class="section level3" number="3.3.1">
+<div id="тесты-2" class="section level3" number="3.7.1">
 <h3>
-<span class="header-section-number">3.3.1</span> Тесты<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7.1</span> Тесты<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Для закрепления материла рекомендую вам пройти тест доступный по <a href="https://onlinetestpad.com/t/build-tg-bot-in-r-3">ссылке</a>.</p>
 </div>
-<div id="задания-2" class="section level3" number="3.3.2">
+<div id="задания-2" class="section level3" number="3.7.2">
 <h3>
-<span class="header-section-number">3.3.2</span> Задания<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7.2</span> Задания<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-2"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li>Создайте бота, который будет поддерживать Reply клавиатуру. На Reply клавиатуре будет всего одна кнопка “Время”. По нажатию на неё будет появляться Inline клавиатура с выбором из 6 часовых поясов.</li>
@@ -891,18 +930,23 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B"><span class="header-section-number">3</span> Как добавить боту поддержку клавиатуры</a></li>
 <li><a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-%D1%83%D1%80%D0%BE%D0%BA-%D0%BF%D0%BE-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E-%D0%B1%D0%BE%D1%82%D1%83-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B"><span class="header-section-number">3.1</span> Видео урок по добавлению боту клавиатуры</a></li>
+<li><a class="nav-link" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-2"><span class="header-section-number">3.2</span> Введение</a></li>
+<li><a class="nav-link" href="#%D0%BA%D0%B0%D0%BA%D0%B8%D0%B5-%D1%82%D0%B8%D0%BF%D1%8B-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B8%D0%B2%D0%B0%D0%B5%D1%82-%D1%82%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC-%D0%B1%D0%BE%D1%82"><span class="header-section-number">3.3</span> Какие типы клавиатур поддерживает телеграм бот</a></li>
 <li>
-<a class="nav-link" href="#%D0%BA%D0%BE%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%82-%D0%BF%D0%BE-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B"><span class="header-section-number">3.2</span> Конспект по добавлению клавиатуры</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%D0%BA%D0%B0%D0%BA%D0%B8%D0%B5-%D1%82%D0%B8%D0%BF%D1%8B-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B8%D0%B2%D0%B0%D0%B5%D1%82-%D1%82%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC-%D0%B1%D0%BE%D1%82"><span class="header-section-number">3.2.1</span> Какие типы клавиатур поддерживает телеграм бот</a></li>
-<li><a class="nav-link" href="#reply-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0"><span class="header-section-number">3.2.2</span> Reply клавиатура</a></li>
-<li><a class="nav-link" href="#inline-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0"><span class="header-section-number">3.2.3</span> Inline клавиатура</a></li>
-<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-2"><span class="header-section-number">3.2.4</span> Заключение</a></li>
-</ul>
+<a class="nav-link" href="#reply-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0"><span class="header-section-number">3.4</span> Reply клавиатура</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%D0%BA%D0%B0%D0%BA-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B8%D1%82%D1%8C-%D1%83-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F-%D0%BD%D0%BE%D0%BC%D0%B5%D1%80-%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D0%B0-%D0%B8-%D0%BB%D0%BE%D0%BA%D0%B0%D1%86%D0%B8%D1%8E"><span class="header-section-number">3.4.1</span> Как запросить у пользователя номер телефона и локацию</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-%D0%B8-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-2"><span class="header-section-number">3.3</span> Тесты и задания</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-2"><span class="header-section-number">3.3.1</span> Тесты</a></li>
-<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-2"><span class="header-section-number">3.3.2</span> Задания</a></li>
+<a class="nav-link" href="#inline-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0"><span class="header-section-number">3.5</span> Inline клавиатура</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%B5%D0%B9%D1%88%D0%B5%D0%B3%D0%BE-%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%BE%D0%B9-inline-%D0%BA%D0%BD%D0%BE%D0%BF%D0%BE%D0%BA"><span class="header-section-number">3.5.1</span> Пример простейшего бота с поддержкой InLine кнопок</a></li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D0%B1%D0%BE%D1%82%D0%B0-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D0%B9-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B0%D0%B5%D1%82-%D1%82%D0%B5%D0%BA%D1%83%D1%89%D1%83%D1%8E-%D0%BF%D0%BE%D0%B3%D0%BE%D0%B4%D1%83-%D0%BF%D0%BE-%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D0%BD%D0%BD%D0%BE%D0%BC%D1%83-%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%83"><span class="header-section-number">3.5.2</span> Пример бота, который сообщает текущую погоду по выбранному городу</a></li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D0%B1%D0%BE%D1%82%D0%B0-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D0%B9-%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D0%B8%D1%82-%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D1%81%D0%B0%D0%BC%D1%8B%D1%85-%D1%81%D0%B2%D0%B5%D0%B6%D0%B8%D1%85-%D1%81%D1%82%D0%B0%D1%82%D0%B5%D0%B9-%D1%81%D0%BE-%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE-%D1%83%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%BD%D0%BE%D0%BC%D1%83-%D1%85%D0%B0%D0%B1%D1%83-%D0%B8%D0%B7-habr.com."><span class="header-section-number">3.5.3</span> Пример бота, который выводит список самых свежих статей со ссылками по-указанному Хабу из habr.com.</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-2"><span class="header-section-number">3.6</span> Заключение</a></li>
+<li>
+<a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-%D0%B8-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-2"><span class="header-section-number">3.7</span> Тесты и задания</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-2"><span class="header-section-number">3.7.1</span> Тесты</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-2"><span class="header-section-number">3.7.2</span> Задания</a></li>
 </ul>
 </li>
 </ul>
@@ -921,7 +965,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2022-09-06.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2023-01-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
