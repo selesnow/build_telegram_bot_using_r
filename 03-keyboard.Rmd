@@ -666,19 +666,28 @@ MessageFilters$weather <- BaseFilter(function(message) {
 
 Внутри метода *answer_cb*, мы считываем отправленные с клавиатуры данные и записываем их в переменную `city`: `city <- update$callback_query$data`. После чего запрашиваем из API данные о погоде, формируем и отправляем сообщение, и в конце концов используем метод `answerCallbackQuery` для того, что бы сообщить боту, о том, что мы обработали нажатие Inline кнопки.
 
-### Пример бота, который выводит список самых свежих статей со ссылками по-указанному Хабу из [habr.com](https://habr.com/).
+### Пример бота, который выводит список самых свежих статей со ссылками по-указанному Хабу из habr.com
 
 Данного бота я привожу для того, что бы показать вам, как вывести Inline кнопки которые ведут на веб страницы.
 
 Логика данного бота схожа с предыдущим, изначально мы запускаем основную клавиатуру командой `/start`. Далее бот даёт нам на выбор список из 6 хабов, мы выбираем интересующий нас хаб, и получаем 5 самых свежих публикаций из выбранного Хаба.
 
-Как вы понимаете, в данном случае нам необходимо получить список статей, и для этого мы будем использовать специальный пакет `habR`, который позволяет запрашивать из хабры статьи и некоторую статистику по ним в R.
+Как вы понимаете, в данном случае нам необходимо получить список статей, и для этого мы будем использовать пакет `tidyRSS`, который позволяет вам получать RSS feed (ленту) сайта в виде обычного дата фрейма в R, к счастью Хабр предоставляет RSS фид под каждый отдельный хаб.
 
-Установить пакет `habR` можно только из github, для чего вам понадобится дополнительный пакет `devtools`. Для установки воспользуйтесь приведённым ниже кодом.
+>RSS — это файл в формате .XML или .RSS, который используют сайты, чтобы передавать пользователю информацию об обновлениях. 
+
+Для начала установим пакет `tidyRSS`.
 
 ```{r eval=FALSE}
-install.packages('devtools')
-devtools::install_github('selesnow/habR')
+install.packages('`tidyRSS`')
+```
+
+Получить RRS Feed по какому то хабу можно примерно так:
+
+```{r eval=FALSE}
+library(tidyRSS)
+url <- 'https://habr.com/ru/rss/hub/r/'
+rss_fead <- tidyfeed(url)
 ```
 
 Теперь рассмотрим код построения описанного выше бота:
@@ -687,7 +696,7 @@ devtools::install_github('selesnow/habR')
 
 ```{r eval=FALSE}
 library(telegram.bot)
-library(habR)
+library(tidyRSS)
 
 # создаём экземпляр класса Updater
 updater <- Updater('ТОКЕН ВАШЕГО БОТА')
@@ -695,7 +704,7 @@ updater <- Updater('ТОКЕН ВАШЕГО БОТА')
 # создаём методы
 ## метод для запуска основной клавиатуры
 start <- function(bot, update) {
-
+  
   # создаём клавиатуру
   RKM <- ReplyKeyboardMarkup(
     keyboard = list(
@@ -706,21 +715,21 @@ start <- function(bot, update) {
     resize_keyboard = TRUE,
     one_time_keyboard = TRUE
   )
-
+  
   # отправляем клавиатуру
   bot$sendMessage(update$from_chat_id(),
                   text = 'Выберите команду',
                   reply_markup = RKM)
-
+  
 }
 
 ## Метод вызова Inine клавиатуры
 habs <- function(bot, update) {
-
+  
   IKM <- InlineKeyboardMarkup(
     inline_keyboard = list(
       list(
-        InlineKeyboardButton(text = 'R', callback_data = 'R'),
+        InlineKeyboardButton(text = 'R', callback_data = 'r'),
         InlineKeyboardButton(text = 'Data Mining', callback_data = 'data_mining'),
         InlineKeyboardButton(text = 'Data Engineering', callback_data = 'data_engineering')
       ),
@@ -731,7 +740,7 @@ habs <- function(bot, update) {
       )
     )
   )
-
+  
   # Send Inline Keyboard
   bot$sendMessage(chat_id = update$from_chat_id(),
                   text = "Выберите Хаб",
@@ -740,46 +749,47 @@ habs <- function(bot, update) {
 
 # метод для сообщения погоды
 answer_cb <- function(bot, update) {
-
-  # получаем из сообщения город
+  
+  # получаем из сообщения название хаба
   hub <- update$callback_query$data
-
+  
   # сообщение о том, что данные по кнопке получены
   bot$answerCallbackQuery(callback_query_id = update$callback_query$id,
                           text = 'Подождите несколько минут, запрос обрабатывается')
-
+  
   # сообщение о том, что надо подождать пока бот получит данные
   mid <- bot$sendMessage(chat_id = update$from_chat_id(),
                          text    = "Подождите несколько минут пока, я соберу данные по выбранному Хабу")
-
-  # парсим Хабр
-  posts <- head(habr_hub_posts(hub, 1), 5)
-
+  
+  # запрашиваем RSS Feed по Хабу
+  url   <- paste0('https://habr.com/ru/rss/hub/', hub, '/')
+  posts <- head(tidyfeed(url), 5)
+  
   # удаляем сообщение о том, что надо подождать
   bot$deleteMessage(update$from_chat_id(), mid$message_id)
-
+  
   # формируем список кнопок
-  keys <- lapply(1:5, function(x) list(InlineKeyboardButton(posts$title[x], url = posts$link[x])))
-
+  keys <- lapply(1:5, function(x) list(InlineKeyboardButton(posts$item_title[x], url = posts$item_link[x])))
+  
   # формируем клавиатуру
   IKM <- InlineKeyboardMarkup(
     inline_keyboard =  keys
-    )
-
+  )
+  
   # отправляем информацию о погоде
   bot$sendMessage(chat_id = update$from_chat_id(),
                   text    = paste0("5 наиболее свежих статей из Хаба ", hub),
                   reply_markup = IKM)
-
+  
 }
 
 # создаём фильтры
 ## сообщения с текстом Погода
 MessageFilters$hubs <- BaseFilter(function(message) {
-
+  
   # проверяем текст сообщения
   message$text == "Список статей"
-
+  
 }
 )
 
@@ -832,18 +842,22 @@ habs <- function(bot, update) {
 }
 ```
 
-Список статей из указанного Хаба мы получаем командой `habr_hub_posts()`, из пакета `habR`. При этом указываем, что нам не требуется список статей за всё время, а только первая страница на которой располагаются 20 статей. Из полученной таблицы с помощью команды `head()` оставляем только 5 самых верхних, которые и являются самыми свежими статьями.
+Список статей из указанного Хаба мы получаем командой `tidyfeed()`, из пакета `tidyRSS`. Из полученной таблицы с помощью команды `head()` оставляем только 5 самых верхних, которые и являются самыми свежими статьями.
 
 ```{r eval=FALSE}
-  # парсим Хабр
-  posts <- head(habr_hub_posts(hub, 1), 5)
+  # получаем из сообщения название хаба
+  hub <- update$callback_query$data
+  
+  # запрашиваем RSS Feed по Хабу
+  url   <- paste0('https://habr.com/ru/rss/hub/', hub, '/')
+  posts <- head(tidyfeed(url), 5)
 ```
 
 Логика очень схожа с предыдущим ботом, но в данном случае Inline клавиатуру со списком статей мы генерируем динамически с помощью функции `lapply()`.
 
 ```{r eval=FALSE}
   # формируем список кнопок
-  keys <- lapply(1:5, function(x) list(InlineKeyboardButton(posts$title[x], url = posts$link[x])))
+  keys <- lapply(1:5, function(x) list(InlineKeyboardButton(posts$item_title[x], url = posts$item_link[x])))
 
   # формируем клавиатуру
   IKM <- InlineKeyboardMarkup(
@@ -851,7 +865,7 @@ habs <- function(bot, update) {
     )
 ```
 
-В текст кнопки мы подставляем название статьи `posts$title[x]`, а в аргумент `url` ссылку на статью: `url = posts$link[x]`.
+В текст кнопки мы подставляем название статьи `posts$item_title[x]`, а в аргумент `url` ссылку на статью: `url = posts$item_link[x]`.
 
 Далее, создаём фильтр, обработчики и запускаем нашего бота.
 
