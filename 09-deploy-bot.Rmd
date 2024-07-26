@@ -1,0 +1,632 @@
+# Разворачиваем бота в облачных сервисах
+К этой главе вы уже обладаете всеми необходимыми навыками для разработки Telegram-ботов любой сложности. Единственное, что нам осталось рассмотреть, это развертывание созданных ботов в облачных сервисах. Это будет полезно тем, у кого нет арендованного сервера для запуска бота.
+
+В этой части мы также познакомимся с технологией Webhook, о которой ранее в книге не упоминалось.
+
+>Для того что бы повторить действия описанные в этой главе вам понадобится установить следующее ПО:
+>
+>* [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+>* [Google Cloud SDK Shell](https://cloud.google.com/sdk/docs/install-sdk)
+
+После установки Docker Desktop перезагрузите ПК,и запуститье эту программу.
+
+## Условные обозначения
+В этой главе мы много будем работать с командной сторокой, и облачными сервисами. В примерах команд, которые мы будем использовать вы увидите специальные обозначения =, они будут выделены квадратными скобками, и написаны большими буквами. Эти значения необходимо заменить на ваши:
+
+* `[PROJECT ID]` - Id проекта в Google Cloud
+* `[IMAGE NAME]` - Название Docker образа
+* `[CONTAINER NAME]` - Название Docker контейнера
+* `[JOB NAME]` - Название задания в Google Cloud Run
+* `[SCHEDULER JOB NAME]` - Название триггера в Google Cloud Run Job
+* `[SERVICE NAME]` - Название сервиса в Google Cloud Run
+
+Т.е. если вы решили назвать Docker образ "my-bot", а идентификатор вашего проекта в Google Cloud "tg-bot-091276". То следующую команду:
+
+```
+docker push gcr.io/[PROJECT ID]/[IMAGE NAME]
+```
+
+Необходимо заменить на:
+
+```
+docker push gcr.io/tg-bot-091276/my-bot
+```
+
+## Введение в Google Cloude Run
+Google Cloud Run — это полностью управляемый сервис от Google Cloud, который позволяет развёртывать и масштабировать контейнерные приложения. Он предназначен для запуска HTTP-приложений и других серверных функций без необходимости управления серверной инфраструктурой. Основные преимущества Cloud Run включают автоматическое масштабирование, оплату только за фактическое использование и интеграцию с другими сервисами Google Cloud.
+
+### Services и Jobs в Google Cloud Run
+Google Cloud Run позволяет вам создать 2 типа заданий:
+
+**Jobs (Задачи):**
+Cloud Run Jobs предназначены для выполнения одноразовых или периодических задач, которые не требуют HTTP-запросов. Это может быть полезно для различных сценариев, таких как обработка данных, резервное копирование, пакетная обработка и т. д. Ключевые характеристики задач:
+
+* Ограниченное выполнение: Задачи запускаются по требованию и выполняются один раз.
+* Асинхронные операции: Задачи могут выполняться в фоновом режиме, не требуя взаимодействия с пользователем.
+* Параллельные задания: Возможность запуска множества экземпляров задачи для параллельной обработки данных.
+
+Пример использования:
+
+* Ежедневное резервное копирование базы данных.
+* Обработка очередей задач из очереди сообщений.
+* Конвертация и обработка изображений по расписанию.
+
+**Services (Сервисы)**
+Cloud Run Services предназначены для обслуживания HTTP-запросов. Это означает, что они используются для развёртывания веб-приложений, API и других HTTP-сервисов. Вот некоторые ключевые характеристики сервисов:
+
+HTTP-триггеры: Сервисы обрабатывают HTTP-запросы и возвращают HTTP-ответы.
+Автоматическое масштабирование: Сервисы автоматически масштабируются в зависимости от нагрузки — от нуля до бесконечности контейнеров.
+Статическое и динамическое содержание: Могут обрабатывать как статические файлы, так и динамически генерируемые данные.
+Настройка URL и доменов: Возможность привязки пользовательских доменов и маршрутизации трафика.
+
+Пример использования:
+
+* Telegram боты.
+* RESTful API для мобильного приложения.
+* Прокси-сервис для обработки и маршрутизации HTTP-запросов
+
+То есть, с помощью Job мы можем настроить запуск скрипта по расписанию, например, уже знакомого нам по первой главе скрипта, который запрашивает курсы валют и отправляет их в Telegram. С помощью Service мы можем развернуть полноценного бота с поддержкой команд и клавиатур, который будет обрабатывать запросы пользователей. Далее разберёмся с обеими функциями Google Cloud Run.
+
+## Как настроить запуск скрипта по рассписанию с помощью Google Cloude Run Job
+### Видео
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zdqRR-3ZFkM?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### Обзор рабочего процесса
+Весь рабочий процесс по настройке запуска R-скрипта по расписанию выглядит следующим образом:
+
+1. Создайте и настройте проект в Google Cloud.
+2. Напишите R-скрипт, который планируете запускать по расписанию.
+3. Создайте Dockerfile для создания образа, на основе которого будет создаваться контейнер.
+4. Проведите тестовую сборку образа и запуск контейнера.
+5. С помощью Google Cloud SDK инициализируйте командную строку с вашим проектом в Google Cloud.
+6. Тегируйте и загрузите Docker-образ в Google Container Registry.
+7. Настройте Job в Google Cloud Run.
+8. Создайте триггер для запуска созданной Job.
+
+Теперь давайте рассмотрим каждый из этих шагов подробнее.
+
+### Настройка проекта в Google Cloud
+
+1. Переходим в [Google Cloud Console](https://console.cloud.google.com/welcome)
+2. С помощью выпадающего меню в верхнем левом углу экрана создаём новый проект
+3. Переходим в созданный проект
+4. Включаем в проекте необходимые API сервисы, в левом меню:
+    1. Cloud Run Admin API
+    2. Google Schedule API
+    3. Artifact Registry API
+
+![](img/9-1.png)
+
+При желании активировать необходимые API вы сможете позже через Google Cloud SDK.
+
+### Скрипт который будем разворачивать в Google Cloud Run
+Ниже приведен листинг скрипта, который мы будем запускать по расписанию:
+
+```{r, eval=FALSE}
+library(httr)
+library(jsonlite)
+library(telegram.bot)
+library(stringr)
+
+get_exchange_rate <- function(api_key) {
+  url <- paste0("https://api.exchangerate-api.com/v4/latest/USD?apikey=", api_key)
+  response <- GET(url)
+  data <- fromJSON(content(response, "text"))
+  return(data)
+}
+
+send_telegram_message <- function(bot_token, chat_id, message) {
+  bot <- Bot(token = bot_token)
+  bot$sendMessage(chat_id = chat_id, text = message)
+}
+
+# Функция для выполнения основного логики
+execute_script <- function() {
+  api_key   <- Sys.getenv("EXCHANGE_RATE_API_KEY")
+  bot_token <- Sys.getenv("TELEGRAM_BOT_TOKEN")
+  chat_id   <- Sys.getenv("TELEGRAM_CHAT_ID")
+  
+  exchange_rate <- get_exchange_rate(api_key)
+  message <- str_glue(
+    "Курс валют на {Sys.Date()}",
+    '-----------------------------',
+    "Курс EUR к USD: {exchange_rate$rates$EUR}", 
+    "Курс GBP к USD: {exchange_rate$rates$GBP}",
+    "Курс UAH к USD: {exchange_rate$rates$UAH}",
+    "Курс EGP к USD: {exchange_rate$rates$EGP}", 
+    .sep = '\n'
+    )
+  
+  send_telegram_message(bot_token, chat_id, message)
+}
+
+# Выполнение скрипта
+execute_script()
+```
+
+Чтобы использовать этот же код, вам необходимо получить API-ключ на сайте exchangerate-api.com. Файл с R-кодом в данном случае называется currency_rates_alert.R, и это имя файла будет использоваться на следующем шаге.
+
+### Создаём Dockerfile
+С Dockerfile и функционалом Docker вы познакомились в предыдущей главе [Упаковываем бота в Docker контейнер]. Для нашего скрипта нужен следующий Dockerfile:
+
+```{Dockerfile eval=FALSE}
+FROM rocker/r-base:latest
+
+SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
+USER 0
+RUN apt-get update && apt-get install -y r-base r-base-core r-base-dev \
+    libcurl4-openssl-dev libssl-dev && \
+    rm -r /var/lib/apt/lists/*
+
+# Установка необходимых пакетов
+RUN R -e "install.packages(c('httr', 'jsonlite', 'telegram.bot', 'stringr'), repos = 'http://cran.us.r-project.org')"
+
+# Копирование R-скрипта в контейнер
+COPY currency_rates_alert.R /app/currency_rates_alert.R
+
+# Установка переменных окружения (замените на свои значения)
+ENV EXCHANGE_RATE_API_KEY=ВАШ_API_КЛЮЧ_К_EXCHANGERATE_API
+ENV TELEGRAM_BOT_TOKEN=ТОКЕН_ВАШЕГО_БОТА
+ENV TELEGRAM_CHAT_ID=ID_ЧАТА_КУДА_НАДО_ПРИСЛАТЬ_СООБЩЕНИЕ
+
+# Запуск R-скрипта
+CMD ["Rscript", "/app/currency_rates_alert.R"]
+```
+
+В Dockerfile замените `ВАШ_API_КЛЮЧ_К_EXCHANGERATE_API`, `ТОКЕН_ВАШЕГО_БОТА` и `ID_ЧАТА_КУДА_НАДО_ПРИСЛАТЬ_СООБЩЕНИЕ` на ваши значения. Так же если файл с вашим R скриптом имеет другое название, то и в Dockerfile его необходимо изменить с `currency_rates_alert.R`.
+
+### Тестовая сборка образа и запуск контейнера
+Когда ваш скрипт готов и вы убедились, что он работает, запустив его предварительно в интерактивном режиме RStudio, протестируйте сборку образа и запуск контейнера локально.
+
+давайте перейдём в директорию с нашим проектом, т.е. в папку, в которой у вас хранится R скрипт и Dockerfile:
+
+```
+cd C:\Users\SAMSUNG\Documents\currency_rates_alert
+```
+
+Замените путь на ваш.
+
+Далее выполним сборку образа и запуск контейнера, для этого следующие команды:
+
+```
+docker build -t [IMAGE NAME] .
+docker run --name [CONTAINER NAME] --rm [IMAGE NAME]
+```
+
+Если контейнер был успешно собран и ваш скрипт выполнился, можно переходить к следующему шагу.
+
+>Подробности работы с Docker смотрите в главе [Упаковываем бота в Docker контейнер].
+
+### Инициализация Google Cloud SDK
+Если у вас еще не установлен Google Cloud SDK, следуйте [этой инструкции](https://cloud.google.com/sdk/docs/install-sdk) для его установки. После установки запустите Google Cloud SDK и выполните инициализацию:
+
+```
+gcloud init
+```
+
+Эта команда откроет веб-браузер, чтобы вы могли войти в Google Cloud и выбрать проект, который будете использовать. После завершения инициализации сохраните конфигурацию.
+
+Далее вам необходимо настроить Docker для работы с Google Container Registry:, воспользуйтесь для этого следующей командой:
+
+```
+gcloud auth configure-docker
+```
+
+Если при создании проекта вы не активировали нужные API, то на этом шаге вы можете сделать это из командной строки:
+
+```
+gcloud services enable run.googleapis.com
+gcloud services enable cloudscheduler.googleapis.com
+gcloud services enable artifactregistry.googleapis.com
+```
+
+Проверить список активированных в проекте API можно следующей командой:
+
+```
+gcloud services list --enabled
+```
+
+### Тегирование и загрузка Docker-образа в Google Container Registry
+После успешного локального тестирования можно приступать к отравке образа и разворачиванию контейнера в Google Cloud. Но до этого образ необходимо тегорировать. Тегирование Docker-образа необходимо для его идентификации и управления версиями. В контексте работы с Google Container Registry (GCR) тегирование помогает определить, какой именно образ вы хотите загрузить, развернуть или использовать в дальнейшем.
+
+```
+docker tag [IMAGE NAME] gcr.io/[PROJECT ID]/[IMAGE NAME]
+docker push gcr.io/[PROJECT ID]/[IMAGE NAME]
+```
+
+>Замените [PROJECT ID] на идентификатор вашего проекта в Google Cloud.
+
+### Настраиваем Job в Google Cloud Run
+Для удобства дальнейшей работы перейдите в веб интерфейс сервиса [Google Cloud Run](https://console.cloud.google.com/run/jobs) на вкладку Jobs и нажмите кнопку "Create Job".
+
+![](img/9-3.png)
+
+В поле "" нажмите кнопку "Select" и укажиет загруженный на прошлом шаге образ.
+
+![](img/9-4.png)
+![](img/9-5.png)
+
+После чего можете задать произвольное имя для джобы, и нажать "Create".
+
+### Тестирование созданной Job в Google Cloud Run
+Для тестирования просто откройте нужную Job и нажмите "Execute". Если задание успешно выполнися то можно переходить на вкладку TRIGGERS и создать расписание запуска.
+
+![](img/9-6.png)
+
+### Создаём тригер для запуска созданной Job
+Мы на финальном шаге, всё, что нам остаётся это создать триггер для запуска созданного задания. На вкладке "TRIGGERS" жмём кнопку "ADD SCHEDULER TRRIGER".
+
+В открывшемся диалоговом окне,в поле "Frequency" вам необходимо написать CRON выражение, для создания расписания запуска задания. В первой главе мы уже сталкивались с CRON выражении в разделе [Настраиваем запуск расписания отправки сообщения с помощью GitHub Actions]. Но я продублирую тут эту информацию. 
+
+CRON выражение состоит из 5 значений, любое из которых можно пропустить поставив `*`:
+
+* Минуты (0-59)
+* Часы (0-23)
+* День месяца (1-31)
+* Месяц (1-12)
+* День недели (0-6, где 0 — воскресенье)
+
+Т.е. если мы хотим настроить запуск нашего задание в 10:15 утра каждый понедельник то CRON выражение будет `15 10 * * 1`, т.е.:
+
+* 15 - это 15 минут
+* 10 - это 10 часов
+* Далее две звезды значит что мы пропускаем месяца и день месяца, они не будут учитываться в расписании.
+* 1 - понедельник. 
+
+Но я сейчас создам триггер для запуска скрипта в 10:15 на ежедневной основе, т.е. `15 10 * * *`.
+
+![](img/9-7.png)
+
+Так же вы можете нажать "Continue" вы можете настроить запуск задания от имени созданного вами сервисного аккаунта, но учтите что в таком случае вам необходимо для этого сервисного аккаунта в разделе IM выдать следующие разрешения:
+
+1. Откройте Google Cloud Console
+2. Перейдите в раздел "IAM & Admin" > "IAM"
+3. Найдите ваш сервисный аккаунт (service-account-name@ptoj_id.iam.gserviceaccount.com)
+4. Нажмите на карандаш рядом с ним для редактирования разрешений
+5. Добавьте следующие роли:
+
+* Cloud Run Invoker (roles/run.invoker): Эта роль позволяет сервисному аккаунту запускать Job.
+* Cloud Run Developer (roles/run.developer): Эта роль дает возможность создавать, обновлять и удалять Job, а также просматривать их логи.
+* Service Account User (roles/iam.serviceAccountUser): Эта роль нужна, если ваш Job выполняется от имени другого сервисного аккаунта.
+
+Но, на самом деле создать Job и добавить в неё триггер можно непосредственно из самой консоли:
+
+Создание Job:
+
+```
+gcloud run jobs create [JOB NAME] --image gcr.io/[PROJECT ID]/[IMAGE NAME] --platform managed
+```
+
+Добавление триггера:
+```
+gcloud scheduler jobs create http [SCHEDULER JOB NAME] \
+    --schedule "30 10 * * *" \
+    --http-method POST \
+    --uri https://YOUR_REGION-run.googleapis.com/v2/projects/YOUR_PROJECT_ID/locations/YOUR_REGION/jobs/YOUR_JOB_NAME:run \
+    --oauth-service-account-email YOUR_SERVICE_ACCOUNT_EMAIL \
+    --region YOUR_REGION
+```
+
+Но, как по мне проще создавать Job и добавить ей триггеры через Веб интерфейс.
+
+## Разворачиваем Telegram бота в Google Cloud Run Service
+Как я уже писал в начале этой главе в сервисе Google Cloud Run есть 2 типа заданий, разовое - Job, и постоянное фоновое - Service. Для того, что бы запустить бота, который будет крутится в фоновом режиме и обрабатывать входящие запросы нам необходимо использовать именно Service. 
+
+### Видео
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YCXTjodFmqo?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### Рабочий процесс
+При развёртывании бота в Google Cloud Run Service алгоритм ваших действий будет следующим:
+
+1. Напишите скрипт бота, которого планируете развернуть.
+2. Создайте Dockerfile для создания образа, на основе которого будет создаваться контейнер.
+3. Проведите тестовую сборку образа и запуск контейнера.
+4. Создайте и настройте проект в Google Cloud.
+5. С помощью Google Cloud SDK инициализируйте командную строку с вашим проектом в Google Cloud.
+6. Тегируйте и загрузите Docker-образ в Google Artifact Registry.
+7. Запустите бота в Google Cloud Run для того что бы получить Webhook URL.
+8. Исправьте в переменных среды Webhook URL, выполните повторную сборку, отправку и развёртку вашего бота в Google Cloud Run.
+
+
+### Webhook вместо polling
+Прилшло время более подробно разобраться с тем, как устроен механизм получения ботом обновлений, и совсем немного окунутся в историю развития клиент серверных технологий.
+
+#### Разница между механизмами polling и webhook
+В ранние годы веб-технологий, когда серверные технологии и базы данных только начинали развиваться, коммуникация между клиентом (в нашем случае машиной на которой работает скрипт вашего бота) и сервером (в нашем случае сервер Telegram API) была довольно простой. Клиенты периодически отправляли запросы к серверу для проверки наличия новых данных. Такой механизм получил название polling. 
+
+Polling — это метод, при котором бот регулярно (с определённым интервалом) отправляет запросы к серверу Telegram для проверки наличия новых обновлений.  Внутри класса Updater технически это реализуется так:
+
+1. Бот делает запросы к Telegram API с помощью метода `getUpdates`.
+2. Если есть новые сообщения или обновления, сервер Telegram отправляет их боту.
+3. Бот обрабатывает эти обновления и отвечает на них.
+
+До этого момента во всех примерах, которые я приводил в этой книге мы с вами использовали именно этот механиз получения обновлений. Делали мы это только потому, что его максимально просто запустить на локальной машине. Polling будет работать даже если к машине на которой вы развернули бота нет доступа из внешних ресурсов, firewall блокирует любые попытки достучатся до вашего ПК извне так как нет необходимости в открытых портах для входящих соединений, и даже если у вас динамический IP адрес.
+
+Polling был простым и понятным методом, но с увеличением количества пользователей и данных его эффективность стала проблемой. На смену polling пришел Webhook, который был разработан для решения проблем, связанных с эффективностью и нагрузкой при использовании polling. Webhook представляет собой более современный подход к получению обновлений и был внедрён для улучшения производительности и уменьшения задержек. Работает он по следующей схеме:
+
+1. Бот регистрирует URL для webhook с помощью метода `setWebhook`.
+2. Когда есть новое обновление, Telegram отправляет запрос на указанный URL.
+3. Бот получает и обрабатывает обновление в реальном времени.
+
+Схематично сравнить эти два механизма можно следующим образом:
+
+![](img/10-pooling-webhook-infographics.png)
+
+Если провести аналогию из реального мира, то представьте, что у вас есть старый почтовый ящик, и каждый день вы отправляетесь к нему, чтобы проверить, пришла ли новая почта. Вы открываете ящик и смотрите, есть ли что-то новое. Если нет, вы возвращаетесь домой и снова идёте проверять на следующий день. Это и есть polling. Теперь представьте, что у вас есть специальный почтальон, который приходит к вам домой каждый раз, когда приходит новая почта. Вместо того, чтобы самому ходить к почтовому ящику, почтальон вам сам звонит в дверь и приносит письмо прямо к вам. Это и есть webhook.
+
+Так вот, запустить механизм polling легко и просто на локальной машине, т.к. от вас не требуется практически никаких дополнительных настроект, но вот облачные технологии стремятся к тому, что бы экономить выделенные ресурсы, поэтому они позволяют вам развернуть бота используя технологию Webhook, Google Cloud Run не является тут исключением. К тому же технология Webhook позволит вам экономить на использовании раздичных облачных систем для развёртования бота, т.к. зачастую вы там платите только за используемые ресурсы.
+
+#### Реализация webhook в пакете telegram.bot
+Изначально пакет `telegram.bot` включал в свой функционал только polling, метод обновления данных webhook в него был добавлен только в версии 3.0.0 сторонним разработчиком, но сделано это было по моей просьбе, кому интересно история добавления этого метода началась в этой [ветке](https://github.com/virtualstaticvoid/heroku-buildpack-r/issues/162) на GitHub, а [тут]9https://github.com/ebeneditos/telegram.bot/pull/27) уже был добавлен класс `Webhook` в пакет.
+
+Класс `Webhook` очень похож на `Updater`, ниже пример работы с ним:
+
+```{r eval=FALSE}
+# Создаём метод start
+start <- function(bot, update) {
+ bot$sendMessage(
+   chat_id = update$message$chat_id,
+   text = sprintf(
+     "Hello %s!",
+     update$message$from$first_name
+   )
+ )
+}
+
+# Инициализируем экземпляр класса Webhook
+webhook <- Webhook(
+  webhook_url = "https://example.com/webhook", 
+  token       = Sys.getenv("TOKEN"), 
+  verbose     = TRUE
+)
+
+# wire up handler
+webhook <- webhook + CommandHandler("start", start)
+
+# start polling
+webhook$start_server(host = "0.0.0.0", port = 8080)
+
+# stop polling
+webhook$stop_server()
+```
+ 
+
+Т.е. процесс такой же как и при создании `Updater`, но помимо токена бота вам ещё необходимо указать webhook url, на который telegram будет присылать для бота обновления. О том как его получить мы поговорим немного позже. Далее, так же как и с Updater, вы просто добавляете в Webhook все обработчики, и запускаете процесс обработки обновления методом `start_server()`, который является аналогом `start_polling()`.
+
+### Код бота запрашивающего курсы валют
+В этом разделе мы продолжим развивать тему прошлого раздела о получении информации курсов валют, но теперь мы напишем полноценного бота, которого в любой момент можно спросить курс любой валюты. 
+
+Код нашего бота:
+
+```{r eval=FALSE}
+library(telegram.bot)
+library(httr)
+library(jsonlite)
+
+# Метод запроса курса валют
+get_cur_rate <- function(bot, update, args) {
+  
+  currency_code <- toupper(args)
+  api_key <- Sys.getenv('EXCHANGERATE_API_KEY')
+  url     <- paste0("https://api.exchangerate-api.com/v4/latest/USD?apikey=", api_key)
+  
+  response <- GET(url)
+  data <- fromJSON(content(response, "text"))
+  
+  if (!currency_code %in% names(data$rates)) {
+    bot$sendMessage(chat_id = update$message$chat_id, text = paste0(args, " is Invalid currency code."))
+    return(NULL)
+  }
+  
+  rate <- data$rates[[currency_code]]
+  message <- sprintf("Курс %s к USD: %f", currency_code, rate)
+  bot$sendMessage(chat_id = update$message$chat_id, text = message)
+  
+}
+
+# Создаём Webhook
+webhook <- Webhook(
+  webhook_url = Sys.getenv('WEBHOOK_URL'), 
+  token       = bot_token('CURBOT'), 
+  verbose     = TRUE
+  )
+
+# Добавляем обработчики
+webhook <- webhook + CommandHandler("get_cur_rate", get_cur_rate, pass_args = T)
+
+# Запускаем Webhook
+webhook$start_server(
+  host = "0.0.0.0",
+  port = 8080
+)
+```
+
+В основе метода `get_cur_rate` лежит логика, описанная в прошлом разделе. Бот получает сообщение в котором указан код валют, далее запрашивает курсы из exchangerate-api, парсит результат, и отправляет в ответе курс по указанной ранее валюте.
+
+Далее мы инициализируем объект класса Webhook, и передаём в аргумент `webhook_url` значение переменной среды `WEBHOOK_URL`, а в аргумент `token`, значение переменной `R_TELEGRAM_BOT_CURBOT`. Значения этих переменных мы будем задавать в Dockerfile.
+
+### Собираем Docker образ
+Для сборки нужного Docker образа мы прописываем следующий Dockerfile:
+
+```{Dockerfile eval=FALSE}
+# Use the official R base image
+FROM rocker/r-ver:4.1.0
+
+# Set the shell
+SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
+
+# Install necessary system dependencies
+USER root
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install necessary R packages
+RUN R -e "install.packages(c('httr', 'jsonlite'))"
+RUN R -e "install.packages('telegram.bot', repos = 'http://cran.us.r-project.org')"
+
+ENV EXCHANGERATE_API_KEY=[ВАШ КЛЮЧ В exchangerate-api.com]
+ENV R_TELEGRAM_BOT_CURBOT=[ТОКЕН ВАШЕГО БОТА]
+ENV WEBHOOK_URL=https://my-service.a.run.app/webhook
+
+# Copy the R script to the container
+COPY curbot.R /app/curbot.R
+
+# Set the working directory
+WORKDIR /app
+
+# Run the R script
+CMD ["Rscript", "/app/curbot.R"]
+
+```
+
+На данном этапе этапе мы ещё не знаем URL нашего сервиса, поэтому в переменную WEBHOOK_URL пока что прописываем совершенно любой URL, можно даже не работающий. На второй итерации развёртки мы будем заменять значение этой переменной.
+
+Далее выполним локальную сборку образа, и тестовый локальный запуск контейнера.
+
+```
+docker build -t [IMAGE NAME] .
+docker run --name [CONTAINER NAME] --rm [IMAGE NAME]
+```
+
+Если контейнер был успешно запущен на этом этапе в консоли вы увидите примерно такое сообщение:
+
+```
+Starting webhook server...
+Listening on '0.0.0.0:8080'...
+Configuring webhook 'https://currency-bot-xxxxxxxx-ew.a.run.app'...
+Waiting for requests...
+```
+
+Это говорит о том, что контейнер был успешно запущен. Теперь перейдите в Docker и остановите этот контейнер, ваш бот на этом этапе отвечать на запросы не будет.
+
+![](img/9-8.png)
+
+### Создание и настройка проекта в Google Cloud
+1. Переходим в [Google Cloud Console](https://console.cloud.google.com/welcome)
+2. С помощью выпадающего меню в верхнем левом углу экрана создаём новый проект
+3. Переходим в созданный проект
+4. Включаем в проекте необходимые API сервисы, в левом меню:
+    1. Cloud Run Admin API
+    2. Artifact Registry API
+    
+Включить данные API можно будет и с помощью Google Cloud SDK на следующем шаге.
+
+![](img/9-1.png)
+
+### Инициализация Google Cloud SDK и настройка Docker
+Так же как и в разделе [Как настроить запуск скрипта по рассписанию с помощью Google Cloude Run Job] перед тем как что либо публиковать в Google Cloud нам необходимо там авторизоваться, и настроить Docker на работу с Google Cloud Platform, делается это двумя командами.
+
+```
+gcloud init
+```
+
+Далее запуститься процесс инициализации, просто следуйте инструкциям, вам необходимо будет пройти авторизацию через браузер, выбрать нужный проект, и указать регион по умолчанию.
+
+Далее необходимо настроить Docker для работы с Google Cloud.
+
+```
+gcloud auth configure-docker
+```
+
+Если а прошлом шаге вы пропустили процесс активации необходимых API в вашем Google Cloud проекте, то на даном этапе вы можете это сделать прямо из Google Cloud SDK Shell:
+
+```
+gcloud services enable run.googleapis.com
+gcloud services enable artifactregistry.googleapis.com
+```
+
+### Отправка Docker образа в Google Cloud и первый запуск бота
+После успешного локального тестирования мы можем тегировать и отправить наш Docker образ в Google Artifact Registry, для этого выполним следующие команды.
+
+```
+docker tag curbot gcr.io/[PROJECT ID]/[IMAGE NAME]
+docker push gcr.io/[PROJECT ID]/[IMAGE NAME]
+```
+
+Теперь пришло время первого запуска бота, выполняем следующую команду.
+
+```
+gcloud run deploy [SERVICE NAME] --image gcr.io/[PROJECT ID]/[IMAGE NAME] --platform managed --allow-unauthenticated
+```
+
+В случае успешного запуска в консоли вы увидите подобное сообщение:
+
+```
+Deploying container to Cloud Run service [SERVICE NAME] in project [PROJECT ID] region [africa-south1]
+OK Deploying new service... Done.
+OK Creating Revision...
+OK Routing traffic...
+OK Setting IAM Policy...
+Done.
+Service [SERVICE NAME] revision [currency-tg-bot-00001-6r2] has been deployed and is serving 100 percent of traffic.
+Service URL: https://currency-tg-bot-lmgsq7kjta-bq.a.run.app
+```
+
+Наш бот по прежнему не реагирует на сообщения, поскольку у него прописан неверный webhook URL. На данном этапе нам необходим было просто получить из Google Cloud Service URL нашего бота, который вы можете найти в последней строке сообщения, которое получили после успешного запуска сервиса. Останавливаем бота и копируем это URL, он нам понадобится на следующем шаге.
+
+```
+gcloud run services delete [SERVICE NAME] --platform managed
+```
+
+### Прописываем правильный Webhook URL и перезапускаем бота
+Итак, теперь у нас есть Service URL, полученный на прошлом шагу, в моём примере это https://currency-tg-bot-lmgsq7kjta-bq.a.run.app, для того, что бы из этого URL дслеать рабоичй Webhook URL достаточно просто добавить `/webhook`. Т.е. редактируем значение переменной `WEBHOOK_URL` в нашем Dickorfie:
+
+```{Dockerfile eval=FALSE}
+# Use the official R base image
+FROM rocker/r-ver:4.1.0
+
+# Set the shell
+SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
+
+# Install necessary system dependencies
+USER root
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install necessary R packages
+RUN R -e "install.packages(c('httr', 'jsonlite', 'httpuv'))"
+RUN R -e "install.packages('telegram.bot', repos = 'http://cran.us.r-project.org')"
+
+ENV EXCHANGERATE_API_KEY=[ВАШ КЛЮЧ В exchangerate-api.com]
+ENV R_TELEGRAM_BOT_CURBOT=[ТОКЕН ВАШЕГО БОТА]
+ENV WEBHOOK_URL=https://currency-tg-bot-lmgsq7kjta-bq.a.run.app/webhook
+
+# Copy the R script to the container
+COPY curbot.R /app/curbot.R
+
+# Set the working directory
+WORKDIR /app
+
+# Run the R script
+CMD ["Rscript", "/app/curbot.R"]
+```
+
+Теперь необходимо локально пересобрать образ, протегировать его, отправить новую версию образа в Google Cloud и запустить на его основе сервис.
+
+```
+docker build -t [IMAGE NAME] .
+docker tag curbot gcr.io/[PROJECT ID]/[IMAGE NAME]
+docker push gcr.io/[PROJECT ID]/[IMAGE NAME]
+gcloud run deploy [SERVICE NAME] --image gcr.io/[PROJECT ID]/[IMAGE NAME] --platform managed --allow-unauthenticated
+```
+
+Если всё прошло успешно вы вновь получите примерно следующее сообщение:
+
+```
+Deploying container to Cloud Run service [currency-tg-bot] in project [curbot-430507] region [africa-south1]
+OK Deploying new service... Done.
+OK Creating Revision...
+OK Routing traffic...
+OK Setting IAM Policy...
+Done.
+Service [currency-tg-bot] revision [currency-tg-bot-00001-kqg] has been deployed and is serving 100 percent of traffic.
+Service URL: https://currency-tg-bot-lmgsq7kjta-bq.a.run.app
+```
+
+поздравляю, теперь ваш ботразвёрнут на Google Cloud Run Service, и готов к использованию:
+
+![](img/9-9.png)

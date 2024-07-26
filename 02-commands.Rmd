@@ -1,15 +1,17 @@
 # Добавляем боту поддержку команд и фильтры сообщений, класс Updater
+В этой главе мы разберёмся как оживить нашего бота и добавим ему поддержку команд, а также познакомимся с классом `Updater`.
+
+В ходе главы мы напишем нескольких простых ботов:
+
+* Простейший бот, который будет приветствовать вас;
+* Бот который по заданной дате и стране возвращает вам тип дня из производственного календаря;
+* Бот переводящий голосовые сообщения в текстовый формат;
+* Бот собирающий статистику по активности в telegram чатах.
+
+последний будет по заданной дате и коду страны определять является ли день в данной стране выходным или рабочим согласно производственного календаря. Но, как и прежде цель книги ознакомить вас с интерфейсом пакета `telegram.bot` для решения ваших собственных задач.
 
 ## Видео по добавлению боту поддержки команд
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nT5_WYwGfG8?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-## Введение
-
-В этой главе мы разберёмся как оживить нашего бота и добавим ему поддержку команд, а также познакомимся с классом `Updater`.
-
-В ходе главы мы напишем нескольких простых ботов, последний будет по заданной дате и коду страны определять является ли день в данной стране выходным или рабочим согласно производственного календаря. Но, как и прежде цель книги ознакомить вас с интерфейсом пакета `telegram.bot` для решения ваших собственных задач.
-
-<img src="https://habrastorage.org/webt/qu/zh/a1/quzha12axnh68qnfap4yo1jbevm.png" align="center" width="80%" />
 
 ## Класс Updater
 `Updater` - это класс, который упрощает вам разработку телеграм бота, и использует под капотом класс `Dispetcher`. Назначение класса `Updater` заключается в том, что бы получить обновления от бота (в предыдущей главе мы использовали для этой цели метод `getUpdates()`), и передать их далее в `Dispetcher`.
@@ -329,7 +331,240 @@ updater$start_polling()
 
 Наш бот запущен в фоновом режиме, и будет работать до тех пор, пока вы не остановите задачу, или не выключите ваш ПК или сервер на котором его запустили.
 
-## Как добавить бота в группу
+## Обработка голосовых сообщений. Переводим голосовое сообщение в текст
+
+давайте разберём ещё один довольно полезный пример, напишем бота, который будет принимать голосовые сообщение, при чём эти голосовые сообщения можно пересылать из любого другого чата, а на выходе давать вам его текстовую расшифровку.
+
+### Функция для преобразования голоса в текст
+
+Для начала нам необходимо разработать основу, т.е. функцию, которая на вход получит аудио файл, и преобразует его в текст. Для этого можно использовать Google Speech-to-Text API. Это условно бесплатный сервис, бесплатно вы можете в месяц конвертировать до 60 минут аудиоо в текст. Этот лимит в будущем возможно будет изменён.
+
+Прежде всего, нам нужно настроить проект в Google Cloud:
+
+1. Зайдите на [console.cloud.google.com](https://console.cloud.google.com/) и создайте новый проект.
+2. Включите API Speech-to-Text в разделе "APIs & Services".
+3. Создайте учетные данные (Service Account Key) для доступа к API:
+    3.1. Перейдите в "APIs & Services" > "Credentials"
+    3.2. Нажмите "Create Credentials" > "Service Account Key"
+    3.3. Выберите роль "Project" > "Owner"
+    3.4. Скачайте JSON файл с ключом
+
+Теперь установим пакеты, которые нам понадобятся:
+
+```{r eval=FALSE}
+install.packages(c("tuneR", "seewave", "googledrive", "googleAuthR", "googleLanguageR", "av"))
+```
+
+Теперь рассмотрим сам код функции, которая ляжет в основу нашего будущего бота:
+
+```{r eval=FALSE}
+library(tuneR)
+library(seewave)
+library(googledrive)
+library(googleAuthR)
+library(googleLanguageR)
+library(av)
+
+speech_to_text_from_audio <- function(audio_file_path) {
+  # Определяем расширение файла
+  file_ext <- tolower(tools::file_ext(audio_file_path))
+  
+  # Создаем временный WAV файл
+  temp_wav_file <- tempfile(fileext = ".wav")
+  
+  # Обработка в зависимости от типа файла
+  if (file_ext == "mp3") {
+    audio <- readMP3(audio_file_path)
+  } else if (file_ext == "wav") {
+    audio <- readWave(audio_file_path)
+  } else if (file_ext == "ogg") {
+    # Конвертируем OGG в WAV
+    av_audio_convert(audio_file_path, temp_wav_file)
+    audio <- readWave(temp_wav_file)
+  } else {
+    stop("Неподдерживаемый формат файла. Поддерживаются только MP3, WAV и OGG.")
+  }
+  
+  # Если аудио стерео, конвертируем в моно
+  if (audio@stereo) {
+    audio <- mono(audio, "both")
+  }
+  
+  # Изменяем частоту дискретизации на 16000 Гц, только если текущая частота отличается
+  if (audio@samp.rate != 16000) {
+    audio_resampled <- resamp(audio, g = 16000, output = "Wave")
+  } else {
+    audio_resampled <- audio
+  }
+  
+  # Записываем обработанное аудио во временный WAV файл
+  writeWave(audio_resampled, temp_wav_file)
+  
+  # Выполняем распознавание речи
+  result <- tryCatch({
+    gl_speech(temp_wav_file, 
+              languageCode = "ru-RU",
+              sampleRateHertz = 16000)$transcript
+  }, error = function(e) {
+    return(paste("Ошибка при распознавании речи:", e$message))
+  })
+  
+  # Удаляем временный WAV файл
+  file.remove(temp_wav_file)
+  
+  # Возвращаем результат
+  return(result$transcript)
+}
+```
+
+Голосовые сообщения в telegram хранятся в ogg формате, который данная функция успешно преобразовывает в текст. Для теста можете скачать [voice.ogg](/files/voice.ogg) файл и протестировать работу описанной выше функции.
+
+Перед запуском не забудьте заменить "path/to/your/google_cloud_credentials.json" на путь к скачанному вами из Google Cloud ключу сервисного аккаунта.
+
+```{r eval=FALSE}
+# Пример использования:
+# Не забудьте аутентифицироваться перед использованием функции
+gl_auth("path/to/your/google_cloud_credentials.json")
+
+# Теперь вы можете использовать функцию так:
+ogg_file <- "path/to/your/voice.ogg"
+
+transcript_ogg <- speech_to_text_from_audio(ogg_file)
+```
+
+
+На выходе получите следующий текст:
+
+```
+небольшая начитка для тестирования преобразования голоса в текст с помощью языка R
+```
+
+### Код бота преобразуещего голосовое сообщение в текст
+
+Теперь давайте напишем бота, в основе которого будет лежать данная функция, он будет получать любое голосовое сообщение, переводить его в текстовый формат и отправлять в виде текстового сообщения.
+
+Примечание! Для того, что бы приведённый ниже код работал вам необходимо заранее сохранить токен бота в переменную среды, и заменить "my_bot" на указанное в названии переменной среды имя вашего бота. Так же необходимо заменить "path/to/your/google_cloud_credentials.json" на путь к скачанному вами из Google Cloud ключу сервисного аккаунта.
+
+```{r eval=FALSE}
+library(telegram.bot)
+library(tuneR)
+library(seewave)
+library(googledrive)
+library(googleAuthR)
+library(googleLanguageR)
+library(av)
+
+# Функция для преобразования аудио в текст (используем ранее созданную функцию)
+speech_to_text_from_audio <- function(audio_file_path) {
+  # Определяем расширение файла
+  file_ext <- tolower(tools::file_ext(audio_file_path))
+  
+  # Создаем временный WAV файл
+  temp_wav_file <- tempfile(fileext = ".wav")
+  
+  # Обработка в зависимости от типа файла
+  if (file_ext == "mp3") {
+    audio <- readMP3(audio_file_path)
+  } else if (file_ext == "wav") {
+    audio <- readWave(audio_file_path)
+  } else if (file_ext == "ogg") {
+    # Конвертируем OGG в WAV
+    av_audio_convert(audio_file_path, temp_wav_file)
+    audio <- readWave(temp_wav_file)
+  } else {
+    stop("Неподдерживаемый формат файла. Поддерживаются только MP3, WAV и OGG.")
+  }
+  
+  # Если аудио стерео, конвертируем в моно
+  if (audio@stereo) {
+    audio <- mono(audio, "both")
+  }
+  
+  # Изменяем частоту дискретизации на 16000 Гц, только если текущая частота отличается
+  if (audio@samp.rate != 16000) {
+    audio_resampled <- resamp(audio, g = 16000, output = "Wave")
+  } else {
+    audio_resampled <- audio
+  }
+  
+  # Записываем обработанное аудио во временный WAV файл
+  writeWave(audio_resampled, temp_wav_file)
+  
+  # Выполняем распознавание речи
+  result <- tryCatch({
+    gl_speech(temp_wav_file, 
+              languageCode = "ru-RU",
+              sampleRateHertz = 16000)$transcript
+  }, error = function(e) {
+    return(paste("Ошибка при распознавании речи:", e$message))
+  })
+  
+  # Удаляем временный WAV файл
+  file.remove(temp_wav_file)
+  
+  # Возвращаем результат
+  return(result$transcript)
+}
+
+# Аутентификация в Google Cloud (делаем это перед запуском бота)
+# Не забудьте аутентифицироваться в Google Cloud перед запуском бота
+gl_auth("path/to/your/google_cloud_credentials.json")
+
+# Функция для обработки голосовых сообщений
+handle_voice <- function(bot, update) {
+  # Получаем информацию о голосовом сообщении
+  voice <- update$message$voice
+  
+  # Получаем файл
+  file <- bot$getFile(voice$file_id)
+  
+  # Создаем временный файл для сохранения голосового сообщения
+  temp_file <- tempfile(fileext = ".ogg")
+  
+  # Получаем полный URL для скачивания файла
+  file_url  <- paste0("https://api.telegram.org/file/bot", bot_token('my_bot'), "/", file$file_path)
+  
+  # Скачиваем файл
+  download.file(file_url, temp_file, mode = "wb")
+  
+  # Преобразуем голосовое сообщение в текст
+  text <- speech_to_text_from_audio(temp_file)
+  
+  # Отправляем текст обратно пользователю
+  bot$sendMessage(chat_id = update$message$chat_id,
+                  text = paste("Расшифровка вашего голосового сообщения:\n\n", text))
+  
+  # Удаляем временный файл
+  file.remove(temp_file)
+}
+
+# Функция для обработки текстовых сообщений
+handle_text <- function(bot, update) {
+  bot$sendMessage(chat_id = update$message$chat_id,
+                  text = "Пожалуйста, отправьте голосовое сообщение для расшифровки.")
+}
+
+# Создание и настройка updater
+updater <- Updater(bot_token('my_bot'))
+
+# Добавляем обработчики с правильными фильтрами
+updater <- updater + CommandHandler("start", handle_text)
+updater <- updater + MessageHandler(handle_voice, MessageFilters$voice)
+updater <- updater + MessageHandler(handle_text, MessageFilters$text)
+
+# Запуск бота
+updater$start_polling()
+```
+
+Пример работы этого бота:
+![](http://img.netpeak.ua/alsey/58QGTN.png)
+
+## Бот для сбора статистики из Telegram чатов
+Боты довольно функциональны, в том числе они могут быть модераторами чатов, или просто собирать статистику по активности в группах. В этом разделе я приведу пример бота, который собирает во внутреннюю базу данных статистику о сообщениях и новых учатсниках чатов, в которые он добавлен в роли администратора. Так же мы добавим боту команду, которая будет выводить статистику за любой указанный период.
+
+>Что бы бот мог собирать статистику из чата, или быть его модератором, у него обязательно должны быть в этом чате админские права.
+
+### Как добавить бота в группу
 Для того, что бы использовать бота в публичных или закрытых группах, изначально проверьте соответвующую настройку в [BotFather](http://t.me/BotFather). По умолчанию эта настройка должна быть включена. Находится она тут: `/mybots` -> `@bot_username` -> Bot Settings -> Allow Groups?. Если настройка включена то вы увидите следующее сообщение:
 
 ![](http://img.netpeak.ua/alsey/160404844191_kiss_22kb.png)
@@ -337,6 +572,454 @@ updater$start_polling()
 Далее добааляете бота в нужные группы и используете его через команды. Если вам необходимо сделать так, что бы бот прослушивал не только команды, но и все сообщения в группе, то вам необходимо назначить его администратором, посе чего вы увидите что бот имеет доступ ко всем сообщениям.
 
 ![](http://img.netpeak.ua/alsey/160404861398_kiss_36kb.png)
+
+### Подготовка базы данных для хранения статистики
+Ранее в этой книге мы рассматривали ботов, которые получают с данными полученными на лету, т.е. данные которые в моменте запрашиваются, используются и далее они нам не нужны. В данном случае задача в том, что бы собирать статистику из чатов, и потом при необходимости её запрашивать, поэтому для начала нам надо развернуть базу данных. 
+
+В нашем случае в базе будет всего 2 таблицы, в одну мы будем собирать данные о сообщениях, а в другую о добавленных пользователях. использовать мы будет встраивамаю в нашего бота SQLite базу. 
+
+Таблица для хранения данных о сообщениях:
+```{sql eval = FALSE}
+-- message definition
+
+CREATE TABLE `message` (
+  `chat_id` REAL,
+  `chat_title` TEXT,
+  `msg_id` INTEGER,
+  `timestamp` TEXT,
+  `date` TEXT,
+  `user_id` INTEGER,
+  `user_first_name` TEXT,
+  `user_last_name` TEXT,
+  `tg_username` TEXT,
+  `text` TEXT,
+  `is_link` INTEGER,
+  `links` INTEGER
+);
+```
+
+Таблица для хранения данных о новых участниках:
+```{sql eval = FALSE}
+-- new_users definition
+
+CREATE TABLE `new_users` (
+  `chat_id` REAL,
+  `chat_title` TEXT,
+  `msg_id` INTEGER,
+  `timestamp` TEXT,
+  `date` TEXT,
+  `users_add_id` REAL,
+  `users_add_first_name` TEXT,
+  `users_add_last_name` TEXT,
+  `users_add_tg_username` TEXT,
+  `new_user_id` REAL,
+  `new_user_first_name` TEXT,
+  `new_user_last_name` TEXT,
+  `new_user_tg_username` TEXT
+);
+```
+
+### Методы бота
+Для того, что бы код нашего бота был более читаем, код каждого из его методов я разделю на отдельные файлы, зачастую такой способ хранения функций используется при разработке пакетов. В нашем случае у бота будет всего 3 функции, давайте с помощью пакета `usethis` создадим файлы для этих функций.
+
+```{r eval=FALSE}
+usethis::use_r('get_message')  # функция для сбора данных о сообщениях
+usethis::use_r('get_new_user') # функция для сбора данных о новых участниках
+usethis::use_r('chat_stat')    # функция запроса статистики по чатам
+usethis::use_r('to_tg_table')  # Вспомогательная функция приволящая data.frame в формат таблицы для отправки в telegram
+```
+
+Функцию `to_tg_table()` мы с вами рассматривали в первой главе, остальные 3 функции разработаны специально для этого бота. Функция `usethis::use_r()` создаёт в вашем проекте каталог R, и в нём файлы с заданными в единственном её аргументе названием.
+
+теперь приведу пример кода для каждого метода:
+
+```{r eval=FALSE}
+get_message <- function(bot, update) {
+  
+  msg <- update$effective_message()
+  
+  # анализ ссылок в сообщении
+  if (map_lgl(msg$entities, ~ .x$type == "url") %>% sum(na.rm = T) %>% .[1] > 0) {
+    is_link <- TRUE
+    link    <- map_chr(
+      msg$entities,
+      ~ str_sub(msg$text, .x$offset, .x$offset + .x$length)
+    ) %>% 
+      str_remove_all('\\n') %>% 
+      str_c(collapse = ', ')
+      
+      str_sub(string = msg$text, msg$entities[[1]]$offset, msg$entities[[1]]$offset + msg$entities[[1]]$length)
+  } else {
+    is_link <- FALSE
+    link    <- NA
+  }
+  
+  msg_info <- tibble(
+    chat_id         = msg$chat$id,
+    chat_title      = msg$chat$title,
+    msg_id          = msg$message_id,
+    timestamp       = as.character(as.POSIXct(msg$date,  origin = "1970-01-01")),
+    date            = as.character(as.Date(as.POSIXlt(msg$date,  origin = "1970-01-01"))),
+    user_id         = msg$from$id,
+    user_first_name = ifelse(length(gsub("[^\x01-\x7F]", "", msg$from$first_name)) == 0, NA_character_, gsub("[^\x01-\x7F]", "", msg$from$first_name)),
+    user_last_name  = ifelse(length(gsub("[^\x01-\x7F]", "", msg$from$last_name)) == 0, NA_character_, gsub("[^\x01-\x7F]", "", msg$from$last_name)),
+    tg_username     = msg$from$username,
+    text            = msg$text,
+    is_link         = is_link,
+    links           = link
+  )
+  
+  con <- dbConnect(SQLite(), here(db_name))
+  dbWriteTable(conn = con, name = msg_tbl, value = msg_info, append = TRUE, overwrite = FALSE)
+  dbDisconnect(con)
+  
+}
+```
+
+Данная функция перехватает каждое текстовое сообщение в чате, далее проверяет его на наличие ссылок, и собирает информацию об этом сообщении:
+
+* Идентификатор чата в котором было перехвачено это сообщение
+* Название чата
+* Идентификатор сообщения
+* Дата и время когда было отправлено сообщение
+* Дата когда было отправлено сообщение
+* ID пользователя в telegram, который отправил сообщение
+* Имя пользователя (если указано в telegram)
+* Фамилия пользователя (если указано в telegram)
+* Username в telegram
+* текст сообщения
+* есть ли в сообщении хотя бы одна ссылка
+* Представленные в сообщение ссылки через запятую
+
+Далее функция записывает собранную информацию в таблицу message нашей базы данных.
+
+```{r eval=FALSE}
+get_new_user <- function(bot, update) {
+  
+  msg <- update$effective_message()
+  
+  msg_info <- tibble(
+    chat_id               = msg$chat$id,
+    chat_title            = msg$chat$title,
+    msg_id                = msg$message_id,
+    timestamp             = as.character(as.POSIXct(msg$date,  origin = "1970-01-01")),
+    date                  = as.character(as.Date(as.POSIXlt(msg$date,  origin = "1970-01-01"))),
+    users_add_id          = msg$from$id,
+    users_add_first_name  = ifelse(length(gsub("[^\x01-\x7F]", "", msg$from$first_name)) == 0, NA_character_, gsub("[^\x01-\x7F]", "", msg$from$first_name)),
+    users_add_last_name   = ifelse(length(gsub("[^\x01-\x7F]", "", msg$from$last_name)) == 0, NA_character_, gsub("[^\x01-\x7F]", "", msg$from$last_name)),
+    users_add_tg_username = msg$from$username,
+    new_user_id           = msg$new_chat_member$id,
+    new_user_first_name   = ifelse(length(gsub("[^\x01-\x7F]", "", msg$new_chat_member$first_name)) == 0, NA_character_, gsub("[^\x01-\x7F]", "", msg$new_chat_member$first_name)),
+    new_user_last_name    = ifelse(length(gsub("[^\x01-\x7F]", "", msg$new_chat_member$last_name)) == 0, NA_character_, gsub("[^\x01-\x7F]", "", msg$new_chat_member$last_name)),
+    new_user_tg_username  = msg$new_chat_member$username
+  )
+  
+  con <- dbConnect(SQLite(), here(db_name))
+  dbWriteTable(conn = con, name = new_user_tbl, value = msg_info, append = TRUE, overwrite = FALSE)
+  dbDisconnect(con)
+  
+}
+```
+
+Данная функция схожа с предыдущей, но она собирает информацию о добавленном участнике чата. 
+
+* Идентификатор чата в котором было перехвачено это сообщение
+* Название чата
+* Идентификатор сообщения
+* дата и время когда был добавлен пользователь
+* Дата когда был добавлен пользователь
+* Идентификатор пользователя, который добавил новго участника в чат
+* Имя пользователя, который добавил новго участника в чат (если указано в telegram)
+* Фамилия пользователя, который добавил новго участника в чат (если указано в telegram)
+* Username в telegram, который добавил новго участника в чат
+* Идентификатор добавленого участника
+* Имя пользователя, добавленого участника (если указано в telegram)
+* Фамилия пользователя, добавленого участника (если указано в telegram)
+* Username в telegram, добавленого участника
+
+Собранную информацию данный метод дописывает в таблицу new_users.
+
+```{r eval=FALSE}
+chat_stat <- function(bot, update, args) {
+  
+  function_list <- ls("package:timeperiodsR") %>% .[grepl(pattern = '^previous|^this', x = .)]
+  func_names <- str_c(ls("package:timeperiodsR") %>% .[grepl(pattern = "^previous|^this", x = .)], collapse = ", ")
+  
+  if (is.null(args)) {
+    
+    bot$sendMessage(
+      update$from_chat_id(),
+      text       = str_glue('Вы не указали период за который необходимо получить статистику, доступные периоды: {func_names}. \n По умолчанию устанавливаю период this_month.'),
+      parse_mode = 'html'
+    )
+    
+    args <- 'this_month'
+  }
+  
+  if (!args[1] %in% function_list) {
+    
+    bot$sendMessage(
+      update$from_chat_id(),
+      text       = str_glue('Вы указали некорректный период ({args}), доступные периоды: {func_names}. \n По умолчанию устанавливаю период this_month.'),
+      parse_mode = 'html'
+    )
+    args <- 'this_month'
+  }
+  
+  bot$sendChatAction(
+    update$from_chat_id(),
+    action = "typing"
+  )
+  
+  period <- do.call(args[1], list(x = Sys.Date()))
+  
+  con <- dbConnect(SQLite(), here(db_name))
+  
+  messages <- dbGetQuery(
+    conn = con, 
+    statement = str_glue(
+      'SELECT * 
+      FROM message
+      WHERE date(date) BETWEEN "{period$start}" AND "{period$end}" '
+    ))
+  
+  new_users <- dbGetQuery(
+    conn = con, 
+    statement = str_glue(
+      'SELECT * 
+      FROM new_users
+      WHERE date(date) BETWEEN "{period$start}" AND "{period$end}" '
+    ))
+  
+  dbDisconnect(con)
+  
+  chats <- unique(messages$chat_title)
+  
+  for (chat in chats) {
+    
+    chat_msg_data  <- filter(messages, chat_title == chat)
+    chat_new_users <- filter(new_users, chat_title == chat)
+    
+    active_users <- n_distinct(chat_msg_data$user_id)
+    total_msg    <- n_distinct(chat_msg_data$msg_id)
+    events_links <- filter(chat_msg_data, str_detect(links, 'calendar.google.com')) %>% nrow()
+    total_links  <- sum(chat_msg_data$is_link)
+    new_users_n  <- nrow(chat_new_users)
+    
+    top_active_users <- chat_msg_data %>% 
+      count(tg_username, user_first_name, user_last_name, sort = T) %>% 
+      mutate(user_last_name = replace_na(user_last_name, '')) %>% 
+      mutate(tg_username = if_else(is.na(tg_username), str_glue('{user_first_name} {user_last_name}'), tg_username)) %>% 
+      select(tg_username, n) %>% 
+      slice_head(n = 5) %>% 
+      mutate(tg_username = str_to_lower(tg_username)) %>% 
+      select('contacts_telegram', 'n') %>% 
+      rename( msg = n ) 
+    
+    ggplot(top_active_users, aes(y = forcats::fct_reorder(contacts_telegram, msg, median), x = msg)) +
+      geom_col(aes(fill = msg)) +
+      theme(axis.text.y = element_text(size = 8), 
+            plot.subtitle = element_text(size = 10)) +
+      scale_fill_gradient(high=hcl(15,100,75), low=hcl(195,100,75)) +
+      xlab("Ник") +
+      ylab('К-во сообщений') +
+      guides(fill=FALSE) +
+      ggtitle(label = chat, subtitle = 'Top 5 участников по активности')
+    
+    ggsave('top5.png', device = 'png', units = 'cm', width = 13, height = 8)
+    
+    top_active_users <- to_tg_table(top_active_users)
+    
+    tg_msg <- str_glue(
+      'Чат *{chat}*',
+      'Период: {format(period$start, "%d.%m.%Y")} - {format(period$end, "%d.%m.%Y")}',
+      '',
+      'Общая статистика:',
+      'Активных пользователей: {active_users}',
+      'Всего сообщений: {total_msg}',
+      'Сообщений с ссылками: {total_links}',
+      'Новых пользователей: {new_users_n}',
+      '',
+      'Самые активные пользователи:',
+      top_active_users,
+      .sep = '\n'
+    )
+    
+    bot$sendPhoto(
+      update$from_chat_id(),
+      photo      = 'top5.png',
+      caption    = tg_msg,
+      parse_mode = 'Markdown'
+    )
+    
+    Sys.sleep(1)
+    
+  }
+  
+}
+```
+
+Данная функция запрашивает из базы данных собранную статистику за указанный период, формирует график и таблицу и отправляет вам в telegram.
+
+Этот метод позволяет передать аргумент, в качестве аргумента вы моете указать произвольный период, за который зотите получить статистику. В качестве преиода необходимо указать одну из функций пакета `timeperiodsR` с префиксом `previous` млм `this`, например `this_month`, `previous_quarter` и т.д.
+
+Далее запрашивает за указанный период статистику из таблиц message и new_users, на основе статистики строит таблицу и график по 5 наиболее активным пользователям за указанный период. Формирует и отправляет сообщение со статистикой, выглядит в итоге оно примерно так:
+
+![](img/2-chatstat.png)
+
+```{r eval=FALSE}
+# функция для перевода data.frame в telegram таблицу 
+to_tg_table <- function( table, align = NULL, indents = 3, parse_mode = 'Markdown' ) {
+  
+  # если выравнивание не задано то выравниваем по левому краю
+  if ( is.null(align) ) {
+    
+    col_num <- length(table)
+    align   <- str_c( rep('l', col_num), collapse = '' )
+    
+  }
+  
+  # проверяем правильно ли заданно выравнивание
+  if ( length(table) != nchar(align) ) {
+    
+    align <- NULL
+    
+  }
+  
+  # новое выравнивание столбцов 
+  side <- sapply(1:nchar(align), 
+                 function(x) { 
+                   letter <- substr(align, x, x)
+                   switch (letter,
+                           'l' = 'right',
+                           'r' = 'left',
+                           'c' = 'both',
+                           'left'
+                   )
+                 })
+  
+  # сохраняем имена
+  t_names      <- names(table)
+  
+  # вычисляем ширину столбцов
+  names_length <- sapply(t_names, nchar) 
+  value_length <- sapply(table, function(x) max(nchar(as.character(x))))
+  max_length   <- ifelse(value_length > names_length, value_length, names_length)
+  
+  # подгоняем размер имён столбцов под их ширину + указанное в indents к-во пробелов 
+  t_names <- mapply(str_pad, 
+                    string = t_names, 
+                    width  = max_length + indents, 
+                    side   = side)
+  
+  # объединяем названия столбцов
+  str_names <- str_c(t_names, collapse = '')
+  
+  # аргументы для фукнции str_pad
+  rules <- list(string = table, width = max_length + indents, side = side)
+  
+  # поочереди переводим каждый столбец к нужному виду
+  t_str <-   pmap_df( rules, str_pad )%>%
+    unite("data", everything(), remove = TRUE, sep = '') %>%
+    unlist(data) %>%
+    str_c(collapse = '\n') 
+  
+  # если таблица занимает более 4096 символов обрезаем её
+  if ( nchar(t_str) >= 4021 ) {
+    
+    warning('Таблица составляет более 4096 символов!')
+    t_str <- substr(t_str, 1, 4021)
+    
+  }
+  
+  # символы выделения блока кода согласно выбранной разметке
+  code_block <- switch(parse_mode, 
+                       'Markdown' = c('```', '```'),
+                       'HTML' = c('<code>', '</code>'))
+  
+  # переводим в code
+  res <- str_c(code_block[1], str_names, t_str, code_block[2], sep = '\n')
+  
+  return(res)
+}
+```
+
+Эту функцию мы уже разбирали в первой главе книги.
+
+### Код бота сбора статистики
+С методами бота мы разобрались, ниже привожу пример кода самого бота. Не забудьте подставить имя своего бота в функцию `bot_token()`, или замените её на токен вашего бота.
+
+```{r eval=FALSE}
+Sys.setlocale(locale = 'russian')
+
+library(telegram.bot)
+library(RSQLite)
+library(purrr)
+library(stringr)
+library(dplyr)
+library(here)
+library(tidyr)
+library(timeperiodsR)
+library(ggplot2)
+
+# Переменные
+db_name        <- 'chatstat.db'
+msg_tbl        <- 'message'
+new_user_tbl   <- 'new_users'
+bot_start_time <- Sys.time()
+
+# Чтение методов бота из каталога R
+funcs <- dir(here('R'))
+walk(here("R", funcs), source)
+
+# Инициализация бота
+updater <- Updater(bot_token("Chat stat bot"))
+updater$bot$clean_updates()
+
+# фильтры
+# фильтр для обработки сообщений msg
+MessageFilters$save_msg <- BaseFilter(function(message) {
+  
+  if ( !is.null(message$text) ) {
+    TRUE
+  } else {
+    FALSE
+  }
+}
+
+)
+
+# фильтр для обработки добавленных в чат участников
+MessageFilters$new_users <- BaseFilter(function(message) {
+  
+  if ( !is.null(message$new_chat_member) ) {
+    TRUE
+  } else {
+    FALSE
+  }
+}
+
+)
+
+# обработчики
+h_save_msg <- MessageHandler(get_message, MessageFilters$save_msg & ! MessageFilters$command)
+h_new_user <- MessageHandler(get_new_user, MessageFilters$new_users & ! MessageFilters$command)
+h_stat     <- CommandHandler('chat_stat', chat_stat, pass_args = T)
+
+# диспетчер
+updater <-
+  updater +
+  h_save_msg +
+  h_new_user +
+  h_stat
+
+# запуск  бота
+updater$start_polling()
+```
+
+Далее добавляете созданного вами бота в ваши чаты, даёте ему права администратора, и он в фоновом режиме собирает статистику в свою внутреннюю базу. При необходимости можно использовать вместо SQLite какую то клиент серверную или облачную базу, в таком случае на основе собранной статистику без проблем вы сможете строить дашборды в различных BI системах.
+
+Боты могут не только собирать статистику по активности в чатах, но так же модерировать их, считать карму её участников, отвечать на какие либо вопросы участников чата.
 
 ## Как добавить описание команд в интерфейс бота
 Теперь вы умеете создавать полноценных ботов, которых помимо вас могут использовать другие пользователи. Но, для того, что бы облегчить поиск нужных команд вы можете добавить их в интефейс бота.
