@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Предисловие | Разработка telegram ботов на языке R</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content="Добро пожаловать в мир разработки Telegram-ботов с использованием языка R! Эта книга — ваш детализированный и практический путеводитель в увлекательный процесс создания, настройки и развертывания...">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="Предисловие | Разработка telegram ботов на языке R">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/cover.png">
+<meta property="og:description" content="Добро пожаловать в мир разработки Telegram-ботов с использованием языка R! Эта книга — ваш детализированный и практический путеводитель в увлекательный процесс создания, настройки и развертывания...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Предисловие | Разработка telegram ботов на языке R">
+<meta name="twitter:description" content="Добро пожаловать в мир разработки Telegram-ботов с использованием языка R! Эта книга — ваш детализированный и практический путеводитель в увлекательный процесс создания, настройки и развертывания...">
+<meta name="twitter:image" content="/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114798296-1');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Разработка telegram ботов на языке R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="active" href="%D0%BF%D1%80%D0%B5%D0%B4%D0%B8%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D0%B5-1.html">Предисловие</a></li>
+<li><a class="" href="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram.html"><span class="header-section-number">1</span> Создаём бота, и отправляем с его помощью сообщения в telegram</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html"><span class="header-section-number">2</span> Добавляем боту поддержку команд и фильтры сообщений, класс Updater</a></li>
+<li><a class="" href="%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B.html"><span class="header-section-number">3</span> Как добавить боту поддержку клавиатуры</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html"><span class="header-section-number">4</span> Построение последовательного, логического диалога с ботом</a></li>
+<li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C.html"><span class="header-section-number">7</span> Добавляем боту асинхронность</a></li>
+<li><a class="" href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html"><span class="header-section-number">8</span> Упаковываем бота в Docker контейнер</a></li>
+<li><a class="" href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html"><span class="header-section-number">9</span> Разворачиваем бота в облачных сервисах</a></li>
+<li><a class="" href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-9.html">Заключение</a></li>
+<li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="предисловие-1" class="section level1 unnumbered">
+<h1>Предисловие<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B4%D0%B8%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D0%B5-1"><i class="fas fa-link"></i></a>
+</h1>
+<p>Добро пожаловать в мир разработки Telegram-ботов с использованием языка R! Эта книга — ваш детализированный и практический путеводитель в увлекательный процесс создания, настройки и развертывания ботов. Независимо от того, являетесь ли вы новичком в разработке ботов или просто хотите расширить свои навыки, эта книга предоставит вам все необходимые инструменты и знания.</p>
+<p>Мы начнем с самого начала, и вам не потребуется предварительных знаний в области разработки ботов. Постепенно, шаг за шагом, мы пройдем весь процесс, начиная с создания базового бота и заканчивая его развертыванием на платформе Google Cloud Run.</p>
+<p>Вы узнаете:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Основы создания бота</strong>: Мы начнем с нуля, разберем, как создать простого Telegram-бота, который будет выполнять базовые функции и взаимодействовать с пользователями. Вы научитесь настраивать основные параметры и использовать API Telegram для запуска своего первого бота.</li>
+<li>
+<strong>Команды и фильтры</strong>: Вы увидите, как добавлять команды для управления ботом и настраивать фильтры для обработки сообщений. Это позволит вашему боту выполнять задачи по заданию команд и эффективно обрабатывать входящие сообщения.</li>
+<li>
+<strong>Клавиатуры</strong>: В этой части книги мы погрузимся в создание и настройку двух типов клавиатур: reply и inline. Вы научитесь добавлять интерактивные элементы в чат, которые помогут пользователям легко выбирать варианты и взаимодействовать с ботом.</li>
+<li>
+<strong>Строительство диалогов</strong>: Мы изучим, как создавать сложные последовательности диалогов, чтобы бот мог вести более естественное и осмысленное взаимодействие с пользователями. Это поможет вашему боту лучше понимать запросы и предоставлять полезные ответы.</li>
+<li>
+<strong>Управление правами пользователей</strong>: В этой главе мы разберем, как настраивать права доступа для различных пользователей, чтобы контролировать, кто и как может взаимодействовать с вашим ботом. Это повысит безопасность и гибкость вашего проекта.</li>
+<li>
+<strong>Повышение стабильности</strong>: Мы обсудим методы улучшения надежности вашего бота, такие как обработка ошибок и оптимизация производительности. Это поможет вам создать более стабильное и устойчивое приложение.</li>
+<li>
+<strong>Асинхронность</strong>: Узнаете, как внедрить асинхронные операции для улучшения производительности вашего бота. Мы рассмотрим, как обрабатывать множество задач одновременно, чтобы ваш бот работал быстрее и эффективнее.</li>
+<li>**Упаковка в Docker*: Научитесь создавать Docker-контейнеры для вашего бота. Это упростит развертывание и управление его окружением, обеспечивая совместимость и переносимость.</li>
+<li>
+<strong>Развертывание на Google Cloud Run</strong>: В завершающей главе мы изучим, как развернуть вашего бота на Google Cloud Run. Это обеспечит его масштабируемость и доступность, а также упростит управление ресурсами и мониторинг.</li>
+</ol>
+<p>Каждая глава содержит практические примеры и пошаговые инструкции, которые помогут вам не только понять теоретические аспекты, но и применять их на практике. Мы также обсудим общие проблемы и решения, которые могут возникнуть на пути разработки, чтобы вы могли быстрее находить ответы и двигаться вперед.</p>
+<p>Эта книга — ваш надежный помощник в создании и развитии Telegram-ботов. Надеюсь, что вы найдете её полезной, увлекательной и вдохновляющей на пути к созданию успешного бота. Желаю вам увлекательного и продуктивного путешествия в мир ботов!</p>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Введение</a></div>
+<div class="next"><a href="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram.html"><span class="header-section-number">1</span> Создаём бота, и отправляем с его помощью сообщения в telegram</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B4%D0%B8%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D0%B5-1">Предисловие</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2024-07-30.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
