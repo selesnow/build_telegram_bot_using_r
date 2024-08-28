@@ -61,7 +61,8 @@
 <li><a class="" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
 <li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C.html"><span class="header-section-number">7</span> Добавляем боту асинхронность</a></li>
 <li><a class="" href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html"><span class="header-section-number">8</span> Упаковываем бота в Docker контейнер</a></li>
-<li><a class="" href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-8.html">Заключение</a></li>
+<li><a class="" href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html"><span class="header-section-number">9</span> Разворачиваем бота в облачных сервисах</a></li>
+<li><a class="" href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-9.html">Заключение</a></li>
 <li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
 <li><a class="active" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
 </ul>
@@ -84,7 +85,7 @@
 <li>Отправьте с помощью созданного бота в telegram первые 20 строк из встроенного в R набора данных <code>ToothGrowth</code>.</li>
 </ol>
 <p><em>Решение:</em></p>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/">purrr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org">stringr</a></span><span class="op">)</span></span>
@@ -185,7 +186,7 @@
 </h2>
 <p>Создайте бота, который будет по команде <code>/sum</code> и переданное в качестве дополнительных параметров произвольное количество перечисленных через пробел чисел, возвращать их сумму.</p>
 <p><em>Решение:</em></p>
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Создаём жкземпляр класса Updater</span></span>
@@ -233,7 +234,7 @@
 <p>Формат запроса к API: <code>http://worldtimeapi.org/api/timezone/{area}/:{location}</code>.</p>
 <p>Где <a href="https://github.com/hypertidy/area">area</a> это континент, например Europe, а <code>{location}</code> это город, например Kiev. Дату и время надо брать в ответе из компонента <code>datetime</code>.</p>
 <p><em>Решение:</em></p>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org">stringr</a></span><span class="op">)</span></span>
@@ -344,14 +345,14 @@
 <p>Вы по очереди в каждой из попыток вводите числа, если введённое число меньше чем то, которое загадал бот то бот пишет “моё число больше”, иначе бот пишет “моё число меньше”. Если вы ввели правильное число то бот пишет что вы выйграли, и переводит диалог в исходное состояние.</p>
 <p><em>Решение:</em></p>
 <p>Создаём таблицу в базе данных для хранеия числа и текущей попытки.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb121-1"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb121-1" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> chat_data (</span>
-<span id="cb121-2"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb121-2" tabindex="-1"></a>    chat_id BIGINT  <span class="kw">PRIMARY</span> <span class="kw">KEY</span></span>
-<span id="cb121-3"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb121-3" tabindex="-1"></a>                    <span class="kw">UNIQUE</span>,</span>
-<span id="cb121-4"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb121-4" tabindex="-1"></a>    attempt    <span class="dt">INTEGER</span>,</span>
-<span id="cb121-5"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb121-5" tabindex="-1"></a>    <span class="dt">number</span>     <span class="dt">INTEGER</span></span>
-<span id="cb121-6"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb121-6" tabindex="-1"></a>);</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb168-1"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb168-1" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> chat_data (</span>
+<span id="cb168-2"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb168-2" tabindex="-1"></a>    chat_id BIGINT  <span class="kw">PRIMARY</span> <span class="kw">KEY</span></span>
+<span id="cb168-3"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb168-3" tabindex="-1"></a>                    <span class="kw">UNIQUE</span>,</span>
+<span id="cb168-4"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb168-4" tabindex="-1"></a>    attempt    <span class="dt">INTEGER</span>,</span>
+<span id="cb168-5"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb168-5" tabindex="-1"></a>    <span class="dt">number</span>     <span class="dt">INTEGER</span></span>
+<span id="cb168-6"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html#cb168-6" tabindex="-1"></a>);</span></code></pre></div>
 <p>Далее создаём функции для работы с бахой данных.</p>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># write chat data</span></span>
 <span><span class="co"># write chat data</span></span>
 <span><span class="va">set_chat_data</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">field</span>, <span class="va">value</span><span class="op">)</span> <span class="op">{</span></span>
@@ -394,7 +395,7 @@
 <span>  </span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Основной код бота выглядит так:</p>
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rsqlite.r-dbi.org">RSQLite</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org">DBI</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
@@ -488,7 +489,7 @@
 </h2>
 <p>Возьмите <a href="-updater.html#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-1">задачу 2.1</a> из второй главы, и ограничьте использование единственного метода, доступного в созданном боте, так, что бы он работал только когда его запрашиваете вы.</p>
 <p><em>Решение:</em></p>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Создаём жкземпляр класса Updater</span></span>
@@ -558,7 +559,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2024-07-30.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2024-08-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
