@@ -7,7 +7,7 @@
 <title>Глава 8 Упаковываем бота в Docker контейнер | Разработка telegram ботов на языке R</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="В восьмой главе нашего руководства мы сосредоточимся на упаковке вашего Telegram-бота в Docker-контейнер. Вы узнаете, как создать и настроить Docker-образ для вашего бота, что позволит вам легко...">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
 <meta property="og:title" content="Глава 8 Упаковываем бота в Docker контейнер | Разработка telegram ботов на языке R">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/cover.png">
@@ -18,7 +18,7 @@
 <meta name="twitter:image" content="/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -140,14 +140,14 @@
 </ol>
 <p>Все эти доработки нам потребовались для демонстрации некоторых дополнительных возможностей, которые даёт Docker.</p>
 <p>Меню file -&gt; New file -&gt; R script (или сочетание клавиш Ctrl+Shift+N). Далее скопируйте приведённый ниже код бота, и сохраните его с именем <code>bot.R</code>.</p>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org">stringr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://s-fleck.github.io/lgr/">lgr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Включаем логгер</span></span>
-<span><span class="va">lg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://s-fleck.github.io/lgr/reference/get_logger.html">get_logger</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">lg</span><span class="op">$</span><span class="fu">set_appenders</span><span class="op">(</span><span class="va"><a href="https://s-fleck.github.io/lgr/reference/AppenderFile.html">AppenderFile</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>file <span class="op">=</span> <span class="st">'log/bot.log'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">lg</span> <span class="op">&lt;-</span> <span class="fu">get_logger</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">lg</span><span class="op">$</span><span class="fu">set_appenders</span><span class="op">(</span><span class="va">AppenderFile</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>file <span class="op">=</span> <span class="st">'log/bot.log'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">lg</span><span class="op">$</span><span class="fu">info</span><span class="op">(</span><span class="st">'Bot start'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Включаем параллельный план вычислений</span></span>
@@ -156,7 +156,7 @@
 <span></span>
 <span><span class="co"># Инициализируем бота</span></span>
 <span><span class="va">lg</span><span class="op">$</span><span class="fu">info</span><span class="op">(</span><span class="st">'Make updater'</span><span class="op">)</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/bot_token.html">bot_token</a></span><span class="op">(</span><span class="st">'botname'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span>  <span class="fu">Updater</span><span class="op">(</span><span class="fu">bot_token</span><span class="op">(</span><span class="st">'botname'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># Очищаем очередь бота от старых сообщений</span></span>
 <span><span class="va">lg</span><span class="op">$</span><span class="fu">info</span><span class="op">(</span><span class="st">'Clean update queue'</span><span class="op">)</span></span>
 <span><span class="va">updater</span><span class="op">$</span><span class="va">bot</span><span class="op">$</span><span class="fu">clean_updates</span><span class="op">(</span><span class="op">)</span></span>
@@ -222,10 +222,10 @@
 <span></span>
 <span><span class="co"># создаём обработчик</span></span>
 <span><span class="va">lg</span><span class="op">$</span><span class="fu">info</span><span class="op">(</span><span class="st">'Make handlers'</span><span class="op">)</span></span>
-<span><span class="va">slow_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'slow'</span>, <span class="va">slow_fun</span><span class="op">)</span></span>
-<span><span class="va">fast_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'fast'</span>, <span class="va">fast_fun</span><span class="op">)</span></span>
-<span><span class="va">stop_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'stop'</span>, <span class="va">stop</span><span class="op">)</span></span>
-<span><span class="va">crush_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'crush'</span>, <span class="va">crush</span><span class="op">)</span></span>
+<span><span class="va">slow_hendler</span> <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'slow'</span>, <span class="va">slow_fun</span><span class="op">)</span></span>
+<span><span class="va">fast_hendler</span> <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'fast'</span>, <span class="va">fast_fun</span><span class="op">)</span></span>
+<span><span class="va">stop_hendler</span> <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'stop'</span>, <span class="va">stop</span><span class="op">)</span></span>
+<span><span class="va">crush_hendler</span> <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'crush'</span>, <span class="va">crush</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># добавляем в диспетчер</span></span>
 <span><span class="va">lg</span><span class="op">$</span><span class="fu">info</span><span class="op">(</span><span class="st">'Add handlers to dispatcher'</span><span class="op">)</span></span>
@@ -254,19 +254,20 @@
 <p>Теперь необходимо создать в рабочей директории проекта обычный текстовый файл, и дать ему имя <code>Dockerfile</code>.</p>
 <div class="inline-figure"><img src="img/8-4.png"></div>
 <p>Докер файл будет содержать следующие команды:</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb100-1"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-1" tabindex="-1"></a><span class="kw">FROM</span> rocker/r-ver:4.2.1</span>
-<span id="cb100-2"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-2" tabindex="-1"></a></span>
-<span id="cb100-3"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-3" tabindex="-1"></a><span class="kw">RUN</span> <span class="fu">mkdir</span> /home/bot</span>
-<span id="cb100-4"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-4" tabindex="-1"></a><span class="kw">RUN</span> <span class="fu">mkdir</span> /home/bot/log</span>
-<span id="cb100-5"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-5" tabindex="-1"></a></span>
-<span id="cb100-6"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-6" tabindex="-1"></a><span class="kw">ENV</span> R_TELEGRAM_BOT_botname ТОКЕН_ВАШЕГО_БОТА</span>
-<span id="cb100-7"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-7" tabindex="-1"></a></span>
-<span id="cb100-8"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-8" tabindex="-1"></a><span class="kw">COPY</span> bot.R /home/bot/bot.R</span>
-<span id="cb100-9"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-9" tabindex="-1"></a></span>
-<span id="cb100-10"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-10" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages(c('telegram.bot', 'stringr', 'future', 'promises','fastmap', 'lgr'))"</span></span>
-<span id="cb100-11"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-11" tabindex="-1"></a></span>
-<span id="cb100-12"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-12" tabindex="-1"></a><span class="kw">CMD</span> <span class="bu">cd</span> /home/bot <span class="dt">\</span></span>
-<span id="cb100-13"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb100-13" tabindex="-1"></a>  <span class="kw">&amp;&amp;</span>  <span class="ex">R</span> <span class="at">-e</span> <span class="st">"source('/home/bot/bot.R')"</span></span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb106-1"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-1" tabindex="-1"></a><span class="kw">FROM</span> rocker/r-ver:4.2.1</span>
+<span id="cb106-2"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-2" tabindex="-1"></a></span>
+<span id="cb106-3"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-3" tabindex="-1"></a><span class="kw">RUN</span> <span class="fu">mkdir</span> /home/bot</span>
+<span id="cb106-4"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-4" tabindex="-1"></a><span class="kw">RUN</span> <span class="fu">mkdir</span> /home/bot/log</span>
+<span id="cb106-5"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-5" tabindex="-1"></a></span>
+<span id="cb106-6"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-6" tabindex="-1"></a><span class="kw">ENV</span> R_TELEGRAM_BOT_botname ТОКЕН_ВАШЕГО_БОТА</span>
+<span id="cb106-7"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-7" tabindex="-1"></a></span>
+<span id="cb106-8"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-8" tabindex="-1"></a><span class="kw">COPY</span> bot.R /home/bot/bot.R</span>
+<span id="cb106-9"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-9" tabindex="-1"></a></span>
+<span id="cb106-10"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-10" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages(c('telegram.bot', 'stringr', 'future', 'promises','fastmap', 'lgr'))"</span></span>
+<span id="cb106-11"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-11" tabindex="-1"></a></span>
+<span id="cb106-12"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-12" tabindex="-1"></a><span class="kw">CMD</span> <span class="bu">cd</span> /home/bot <span class="dt">\</span></span>
+<span id="cb106-13"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb106-13" tabindex="-1"></a>  <span class="kw">&amp;&amp;</span>  <span class="ex">R</span> <span class="at">-e</span> <span class="st">"source('/home/bot/bot.R')"</span></span></code></pre></div>
+<pre><code>## dockerfile</code></pre>
 <p>Тут давайте остановимся и разберём отдельно каждую команду:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -285,12 +286,14 @@
 <code>&amp;&amp; R -e "source('/home/analysis/bot.R')"</code>, объединяется с предыдущей командой, и запускает скрипт бота.</li>
 </ol>
 <p>Если вам необходимы определённые версии используемых пакетов то вы можете заменить команду из 5 пункта на:</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb101-1"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb101-1" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages('remotes'); </span><span class="dt">\</span></span>
-<span id="cb101-2"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb101-2" tabindex="-1"></a><span class="st">  remotes::install_version('package_name', '0.1.2')"</span></span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb108-1"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb108-1" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages('remotes'); </span><span class="dt">\</span></span>
+<span id="cb108-2"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb108-2" tabindex="-1"></a><span class="st">  remotes::install_version('package_name', '0.1.2')"</span></span></code></pre></div>
+<pre><code>## dockerfile</code></pre>
 <p>Или установить пакет из снимка MRAN на определённую дату:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb102-1"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb102-1" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"options(repos = </span><span class="dt">\</span></span>
-<span id="cb102-2"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb102-2" tabindex="-1"></a><span class="st">  list(CRAN = 'http://mran.revolutionanalytics.com/snapshot/2022-08-01/')); </span><span class="dt">\</span></span>
-<span id="cb102-3"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb102-3" tabindex="-1"></a><span class="st">  install.packages('package_name')"</span></span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb110-1"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb110-1" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"options(repos = </span><span class="dt">\</span></span>
+<span id="cb110-2"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb110-2" tabindex="-1"></a><span class="st">  list(CRAN = 'http://mran.revolutionanalytics.com/snapshot/2022-08-01/')); </span><span class="dt">\</span></span>
+<span id="cb110-3"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#cb110-3" tabindex="-1"></a><span class="st">  install.packages('package_name')"</span></span></code></pre></div>
+<pre><code>## dockerfile</code></pre>
 </div>
 <div id="создание-образа" class="section level2" number="8.7">
 <h2>
@@ -404,12 +407,12 @@
 </h2>
 <p>По умолчанию контейнер является полностью изолированным, т.е. все файлы, которые создаются внутри контейнера, удаляются после его запуска, и все данные которые были в эти файлы записаны, также удаляются.</p>
 <p>В ходе работы нашего бота пишется лог, сам файл лога <code>bot.log</code> создаётся внутри контейнера в папке <code>log</code>, и за пределами самого контейнера он не доступен. В коде нашего бота за создание лога отвечает следующие команды:</p>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://s-fleck.github.io/lgr/">lgr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Включаем логгер</span></span>
-<span><span class="va">lg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://s-fleck.github.io/lgr/reference/get_logger.html">get_logger</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">lg</span><span class="op">$</span><span class="fu">set_appenders</span><span class="op">(</span><span class="va"><a href="https://s-fleck.github.io/lgr/reference/AppenderFile.html">AppenderFile</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>file <span class="op">=</span> <span class="st">'log/bot.log'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">lg</span> <span class="op">&lt;-</span> <span class="fu">get_logger</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">lg</span><span class="op">$</span><span class="fu">set_appenders</span><span class="op">(</span><span class="va">AppenderFile</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>file <span class="op">=</span> <span class="st">'log/bot.log'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">lg</span><span class="op">$</span><span class="fu">info</span><span class="op">(</span><span class="st">'Bot start'</span><span class="op">)</span></span></code></pre></div>
 <blockquote>
 <p>Если вы до этого момента не знакомы с процессом логирования, то рекомендую либо ознакомиться со статьёй “<a href="https://habr.com/ru/post/529118/">Логирование выполнения скриптов на языке R, пакет lgr</a>”, либо видео уроком “<a href="https://www.youtube.com/watch?v=xA8YGxQH1Ws">Логирование процесса выполнения скриптов на языке R (пакеты lgr / lgrExtra)</a>”.</p>
@@ -571,7 +574,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2024-08-28.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2025-04-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

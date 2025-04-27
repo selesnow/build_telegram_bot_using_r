@@ -7,7 +7,7 @@
 <title>Глава 5 Управление правами пользователей бота | Разработка telegram ботов на языке R</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="В пятой главе нашего руководства мы сосредоточимся на управлении правами пользователей вашего Telegram-бота. Вы узнаете, как настраивать и контролировать доступ к различным функциям, чтобы сделать...">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
 <meta property="og:title" content="Глава 5 Управление правами пользователей бота | Разработка telegram ботов на языке R">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/cover.png">
@@ -18,7 +18,7 @@
 <meta name="twitter:image" content="/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -93,11 +93,11 @@
 <li>
 <code>what_time</code> - команда, по которой бот сообщает текущую дату и время</li>
 </ul>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu">Updater</span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Пишем метод для приветсвия</span></span>
 <span><span class="co">## команда приветствия</span></span>
@@ -130,8 +130,8 @@
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># обработчики</span></span>
-<span><span class="va">h_hello</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'say_hello'</span>, <span class="va">say_hello</span><span class="op">)</span></span>
-<span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'what_time'</span>, <span class="va">what_time</span><span class="op">)</span></span>
+<span><span class="va">h_hello</span> <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'say_hello'</span>, <span class="va">say_hello</span><span class="op">)</span></span>
+<span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'what_time'</span>, <span class="va">what_time</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># добавляем обработчики в диспетчер</span></span>
 <span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">h_hello</span> <span class="op">+</span> <span class="va">h_time</span></span>
@@ -153,8 +153,8 @@
 <h3>
 <span class="header-section-number">5.2.1</span> Ограничиваем права на уровне имени пользователя<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0-%D0%BD%D0%B0-%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D0%B5-%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F"><i class="fas fa-link"></i></a>
 </h3>
-<p>Для создания собственных фильтров вам необходимо с помощью функции <code><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter()</a></code> добавить новый элемент в объект <code>MessageFilters</code>. Более подробно об этом я рассказывал во <a href="https://habr.com/ru/post/515148/">второй статье</a> из данной серии.</p>
-<p>В анонимную функцию, которую вы прописываете внутри <code><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter()</a></code> передаётся всего один аргумент - <code>message</code>. Это сообщение которое вы, или другой пользователей отправляет боту, со всеми его метаданными. Данный объект имеет следующую структуру:</p>
+<p>Для создания собственных фильтров вам необходимо с помощью функции <code>BaseFilter()</code> добавить новый элемент в объект <code>MessageFilters</code>. Более подробно об этом я рассказывал во <a href="https://habr.com/ru/post/515148/">второй статье</a> из данной серии.</p>
+<p>В анонимную функцию, которую вы прописываете внутри <code>BaseFilter()</code> передаётся всего один аргумент - <code>message</code>. Это сообщение которое вы, или другой пользователей отправляет боту, со всеми его метаданными. Данный объект имеет следующую структуру:</p>
 <pre><code>$message_id
 [1] 1174
 
@@ -216,9 +216,9 @@ $from_user
 <a href="https://tlgrm.ru/docs/bots/api#message">Message</a> - Этот объект представляет собой сообщение.</li>
 </ul>
 <p>Соответственно вы можете разделять права пользователей бота, и его методов используя любую, отправляемую с сообщением информацию, т.е. любые элементы объекта <code>message</code>. Для того, что бы ограничить круг пользователей которые могут использовать методы вашего бота достаточно создать фильтр:</p>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## список пользователей, с полными правами</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
@@ -227,9 +227,9 @@ $from_user
 <span> <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Где <code>c('AlexeySeleznev', 'user1', 'user2')</code> - вектор, с именами пользователей, которые могут использовать все функции бота. Далее этот фильтр мы используем при создании обработчиков.</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## фильтр для вызова команды say_hello</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
@@ -239,7 +239,7 @@ $from_user
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## фильтр для вызова команды what_time</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
@@ -250,16 +250,16 @@ $from_user
 <span></span>
 <span></span>
 <span><span class="co"># обработчики</span></span>
-<span><span class="va">h_hello</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">say_hello</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span><span class="op">)</span></span>
-<span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">what_time</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">h_hello</span> <span class="op">&lt;-</span> <span class="fu">MessageHandler</span><span class="op">(</span><span class="va">say_hello</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span><span class="op">)</span></span>
+<span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu">MessageHandler</span><span class="op">(</span><span class="va">what_time</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span><span class="op">)</span></span></code></pre></div>
 <p>Теперь нашего бота могут использовать пользователи с логинами AlexeySeleznev, user1, user2. На сообщения отправленные боту другими пользователями он никак не будет реагировать.</p>
 <p>Изменённый код нашего бота на данный момент выглядит вот так:</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu">Updater</span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Пишем метод для приветсвия</span></span>
 <span><span class="co">## команда приветствия</span></span>
@@ -293,7 +293,7 @@ $from_user
 <span></span>
 <span><span class="co"># фильтры</span></span>
 <span><span class="co">## список пользователей, с полными правами</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
@@ -303,7 +303,7 @@ $from_user
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## фильтр для вызова команды say_hello</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
@@ -313,7 +313,7 @@ $from_user
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## фильтр для вызова команды what_time</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
@@ -324,8 +324,8 @@ $from_user
 <span></span>
 <span></span>
 <span><span class="co"># обработчики</span></span>
-<span><span class="va">h_hello</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">say_hello</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span><span class="op">)</span></span>
-<span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">what_time</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span><span class="op">)</span></span>
+<span><span class="va">h_hello</span> <span class="op">&lt;-</span> <span class="fu">MessageHandler</span><span class="op">(</span><span class="va">say_hello</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span><span class="op">)</span></span>
+<span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu">MessageHandler</span><span class="op">(</span><span class="va">what_time</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># добавляем обработчики в диспетчер</span></span>
 <span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">h_hello</span> <span class="op">+</span> <span class="va">h_time</span></span>
@@ -338,9 +338,9 @@ $from_user
 <span class="header-section-number">5.2.2</span> Ограничиваем права на уровне чата<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0-%D0%BD%D0%B0-%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D0%B5-%D1%87%D0%B0%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h3>
 <p>Тем же способом мы можем создать фильтр не только по списку пользователей, но и по конкретному чату. Для этого достаточно создать ещё один фильтр:</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## список чатов в которых разрешено использовать бота</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">chats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">chats</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
@@ -351,7 +351,7 @@ $from_user
 <span></span>
 <span></span>
 <span><span class="co">## фильтр для вызова команды say_hello</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
@@ -361,7 +361,7 @@ $from_user
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## фильтр для вызова команды what_time</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="co"># проверяем от кого отправлено сообщение</span></span>
@@ -372,8 +372,8 @@ $from_user
 <span></span>
 <span></span>
 <span><span class="co"># обработчики</span></span>
-<span><span class="va">h_hello</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">say_hello</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">chats</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span><span class="op">)</span></span>
-<span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">what_time</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">chats</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">h_hello</span> <span class="op">&lt;-</span> <span class="fu">MessageHandler</span><span class="op">(</span><span class="va">say_hello</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">chats</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">say_hello</span><span class="op">)</span></span>
+<span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu">MessageHandler</span><span class="op">(</span><span class="va">what_time</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">admins</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">chats</span> <span class="op">&amp;</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">what_time</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div id="ограничиваем-права-пользователя-внутри-кода-методов" class="section level2" number="5.3">
@@ -386,7 +386,7 @@ $from_user
 <span class="header-section-number">5.3.1</span> Ограничиваем права на уровне имени пользователя<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0-%D0%BD%D0%B0-%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D0%B5-%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Давайте создадим функцию, которая будет принимать данные для проверки имени пользователя.</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># функция для проверки прав пользователя</span></span>
 <span><span class="va">bot_check_usernames</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">admins</span>, <span class="va">username</span><span class="op">)</span> <span class="op">{</span></span>
@@ -397,11 +397,11 @@ $from_user
 <p>В аргумент <code>admins</code> далее нам надо передавать список пользователей, которым разрешено использовать данный метод, а в аргумент <code>username</code> имя пользователя, которого надо проверить в списке.</p>
 <p>Далее в каждый метод, который мы хотим защитить с помощью конструкции <code>IF</code> добавляем проверку, разрешено пользователю использовать данный метод или нет. В случае если у пользователя нет таких прав бот будет сообщать об этом в чате.</p>
 <p>Давайте, для примера, я исключу себя из списка пользователей, которым разрешено использовать метод <code>what_time</code>.</p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu">Updater</span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Пишем метод для приветсвия</span></span>
 <span><span class="co">## команда приветствия</span></span>
@@ -459,8 +459,8 @@ $from_user
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># обработчики</span></span>
-<span><span class="va">h_hello</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'say_hello'</span>, <span class="va">say_hello</span><span class="op">)</span></span>
-<span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'what_time'</span>, <span class="va">what_time</span><span class="op">)</span></span>
+<span><span class="va">h_hello</span> <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'say_hello'</span>, <span class="va">say_hello</span><span class="op">)</span></span>
+<span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'what_time'</span>, <span class="va">what_time</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># добавляем обработчики в диспетчер</span></span>
 <span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">h_hello</span> <span class="op">+</span> <span class="va">h_time</span></span>
@@ -477,7 +477,7 @@ $from_user
 </h3>
 <p>Думаю у вас уже не возникнет трудностей при доработке ваших методов, таким образом, что бы их можно было использовать только в определённых чатах, тем не менее приведу пример.</p>
 <p>Напишем функцию, которая будет проверять входит ли текущий чат в список разрешенных.</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bot_check_chat_id</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">allowed_chats</span>, <span class="va">current_chat</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
@@ -485,12 +485,12 @@ $from_user
 <span>    </span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Далее используем эту функции внутри наших методов:</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu">Updater</span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Пишем метод для приветсвия</span></span>
 <span><span class="co">## команда приветствия</span></span>
@@ -552,8 +552,8 @@ $from_user
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># обработчики</span></span>
-<span><span class="va">h_hello</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'say_hello'</span>, <span class="va">say_hello</span><span class="op">)</span></span>
-<span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'what_time'</span>, <span class="va">what_time</span><span class="op">)</span></span>
+<span><span class="va">h_hello</span> <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'say_hello'</span>, <span class="va">say_hello</span><span class="op">)</span></span>
+<span><span class="va">h_time</span>  <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'what_time'</span>, <span class="va">what_time</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># добавляем обработчики в диспетчер</span></span>
 <span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">h_hello</span> <span class="op">+</span> <span class="va">h_time</span></span>
@@ -631,7 +631,7 @@ $from_user
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2024-08-28.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2025-04-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

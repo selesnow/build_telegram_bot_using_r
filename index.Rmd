@@ -20,6 +20,20 @@ cover-image: "cover.png"
 description: "Этот веб учебник поможет вам освоить процесс разработки telegram ботов используя язык программирования R."
 ---
 
+```{r, include=FALSE}
+knitr::knit_engines$set(
+  dockerfile = function(options) {
+    knitr::engine_output(options, options$code, "dockerfile")
+  },
+  Dockerfile = function(options) {
+    knitr::engine_output(options, options$code, "dockerfile")
+  },
+  json = function(options) {
+    knitr::engine_output(options, options$code, "json")
+  }
+)
+```
+
 # Введение {-}
 
 ------

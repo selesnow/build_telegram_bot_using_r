@@ -7,7 +7,7 @@
 <title>Глава 2 Добавляем боту поддержку команд и фильтры сообщений, класс Updater | Разработка telegram ботов на языке R</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="Во второй главе нашего руководства мы продолжим развитие вашего Telegram-бота, сосредоточив внимание на добавлении команд и фильтров сообщений. Вы узнаете, как реализовать команды, которые...">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
 <meta property="og:title" content="Глава 2 Добавляем боту поддержку команд и фильтры сообщений, класс Updater | Разработка telegram ботов на языке R">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/cover.png">
@@ -18,7 +18,7 @@
 <meta name="twitter:image" content="/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -115,7 +115,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu">Updater</span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Пишем метод для приветсвия</span></span>
 <span><span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
@@ -131,7 +131,7 @@
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># создаём обработчик</span></span>
-<span><span class="va">hi_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'hi'</span>, <span class="va">say_hello</span><span class="op">)</span></span>
+<span><span class="va">hi_hendler</span> <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'hi'</span>, <span class="va">say_hello</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># добаляем обработчик в диспетчер</span></span>
 <span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">hi_hendler</span></span>
@@ -168,7 +168,7 @@
 <ol style="list-style-type: decimal">
 <li>Создаём экземпляр класса <code>Updater</code>;</li>
 <li>Создаём методы, т.е. функции которые будет выполнять наш бот. В примере кода это функция <code>say_hello()</code>. Функции, которые вами будут использоваться как методы бота должны иметь два обязательных аргумента - <em>bot</em> и <em>update</em>, и один необязательный - <em>args</em>. Аргумент <em>bot</em>, это и есть ваш бот, с его помощью вы можете отвечать на сообщения, отправлять сообщения, или использовать любые другие доступные боту методы. Аргумент <em>update</em> это то, что бот получил от пользователя, по сути, то что в первой главе мы получали методом <code>getUpdates()</code>. Аргумент <em>args</em> позволяет вам обрабатывать дополнительные данные отправленные пользователем вместе с командой, к этой теме мы ещё вернёмся немного позже;</li>
-<li>Создаём обработчики, т.е. связываем какие-то действия пользователя с созданными на прошлом шаге методами. По сути обработчик это триггер, событие которое вызывает какую-то функцию бота. В нашем примере таким триггером является отправка команды <code>/hi</code>, и реализуется командой <code>hi_hendler &lt;- CommandHandler('hi', say_hello)</code>. Первый аргумент функции <code><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler()</a></code> позволяет вам задать команду, в нашем случае <code>hi</code>, на которую будет реагировать бот. Второй аргумент позволяет указать метод бота, мы будем вызывать метод <code>say_hello</code>, который будет выполняться если пользователь вызвал указанную в первом аргументе команду;</li>
+<li>Создаём обработчики, т.е. связываем какие-то действия пользователя с созданными на прошлом шаге методами. По сути обработчик это триггер, событие которое вызывает какую-то функцию бота. В нашем примере таким триггером является отправка команды <code>/hi</code>, и реализуется командой <code>hi_hendler &lt;- CommandHandler('hi', say_hello)</code>. Первый аргумент функции <code>CommandHandler()</code> позволяет вам задать команду, в нашем случае <code>hi</code>, на которую будет реагировать бот. Второй аргумент позволяет указать метод бота, мы будем вызывать метод <code>say_hello</code>, который будет выполняться если пользователь вызвал указанную в первом аргументе команду;</li>
 <li>Далее добавляем созданный обработчик в диспетчер нашего экземпляра класса <code>Updater</code>. Добавлять обработчики можно несколькими способами, в примере выше я использовал простейший, с помощью знака <code>+</code>, т.е. <code>updater &lt;- updater + hi_hendler</code>. То же самое можно сделать с помощью метода <code>add_handler()</code>, который относится к классу <code>Dispatcher</code>, найти этот метод можно так: <code>updater$dispatcher$add_handler()</code>;</li>
 <li>Запускаем бота с помощью команды <code>start_polling()</code>.</li>
 </ol>
@@ -184,7 +184,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu">Updater</span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Пишем метод для приветсвия</span></span>
 <span><span class="co">## команда приветвия</span></span>
@@ -202,7 +202,7 @@
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># создаём фильтры</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">hi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">hi</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
 <span>  <span class="co"># проверяем, встречается ли в тексте сообщения слова: привет, здравствуй, салют, хай, бонжур</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span>x           <span class="op">=</span> <span class="va">message</span><span class="op">$</span><span class="va">text</span>,</span>
@@ -212,8 +212,8 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём обработчик</span></span>
-<span><span class="va">hi_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'hi'</span>, <span class="va">say_hello</span><span class="op">)</span> <span class="co"># обработчик команды hi</span></span>
-<span><span class="va">hi_txt_hnd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">say_hello</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">hi</span><span class="op">)</span></span>
+<span><span class="va">hi_hendler</span> <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'hi'</span>, <span class="va">say_hello</span><span class="op">)</span> <span class="co"># обработчик команды hi</span></span>
+<span><span class="va">hi_txt_hnd</span> <span class="op">&lt;-</span> <span class="fu">MessageHandler</span><span class="op">(</span><span class="va">say_hello</span>, filters <span class="op">=</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">hi</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># добаляем обработчики в диспетчер</span></span>
 <span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span></span>
@@ -229,10 +229,10 @@
 <img src="https://img.netpeak.ua/alsey/159787794513_kiss_226kb.png">
 </div>
 <p>Итак, в первую очередь мы научили бота не просто здороваться, а отвечать на приветствие. Сделали мы это с помощью аргумента <em>reply_to_message_id</em>, который доступен в методе <code>sendMessage()</code>, в который необходимо передать id сообщения на которое требуется ответить. Получить id сообщения можно вот так: <code>update$message$message_id</code>.</p>
-<p>Но главное, что мы сделали - добавили боту фильтр с помощью функции <code><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter()</a></code>:</p>
+<p>Но главное, что мы сделали - добавили боту фильтр с помощью функции <code>BaseFilter()</code>:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># создаём фильтры</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">hi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">hi</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span></span>
 <span></span>
 <span>  <span class="co"># анонимная фильтрующая функция</span></span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
@@ -245,8 +245,8 @@
 <span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Как вы могли заметить, фильтры необходимо добавлять в объект <strong>MessageFilters</strong>, в котором изначально уже есть небольшой набор готовых фильтров. В нашем примере в объект <strong>MessageFilters</strong> мы добавили элемент <em>hi</em>, это новый фильтр.</p>
-<p>В функцию <code><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter()</a></code> вам необходимо передать фильтрующую функцию. По сути, фильтр - это просто функция, которая получает экземпляр сообщения и возвращает <em>TRUE</em> или <em>FALSE</em>. В нашем примере, мы написали простейшую функцию, которая с помощью базовой функции <code><a href="https://rdrr.io/r/base/grep.html">grepl()</a></code> проверяет текст сообщения, и если он соответствует регулярному выражению <code>привет|здравствуй|салют|хай|бонжур</code> возвращает <em>TRUE</em>.</p>
-<p>Далее мы создаём обработчик сообщений <code>hi_txt_hnd &lt;- MessageHandler(say_hello, filters = MessageFilters$hi)</code>. Первый аргумент функции <code><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler()</a></code> - метод, который будет вызывать обработчик, а второй аргумент - это фильтр по которому он будет вызываться. В нашем случае это созданный нами фильтр <code>MessageFilters$hi</code>.</p>
+<p>В функцию <code>BaseFilter()</code> вам необходимо передать фильтрующую функцию. По сути, фильтр - это просто функция, которая получает экземпляр сообщения и возвращает <em>TRUE</em> или <em>FALSE</em>. В нашем примере, мы написали простейшую функцию, которая с помощью базовой функции <code><a href="https://rdrr.io/r/base/grep.html">grepl()</a></code> проверяет текст сообщения, и если он соответствует регулярному выражению <code>привет|здравствуй|салют|хай|бонжур</code> возвращает <em>TRUE</em>.</p>
+<p>Далее мы создаём обработчик сообщений <code>hi_txt_hnd &lt;- MessageHandler(say_hello, filters = MessageFilters$hi)</code>. Первый аргумент функции <code>MessageHandler()</code> - метод, который будет вызывать обработчик, а второй аргумент - это фильтр по которому он будет вызываться. В нашем случае это созданный нами фильтр <code>MessageFilters$hi</code>.</p>
 <p>Ну и в итоге, мы добавляем в диспетчер созданный только, что обработчик <em>hi_txt_hnd</em>.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span></span>
@@ -272,7 +272,7 @@
 </ul>
 <p>Если вы хотите совместить некоторые фильтры в одном обработчике просто используйте знак <code>|</code> - в качестве логического <strong>ИЛИ</strong>, и знак <code>&amp;</code> в качестве логического <strong>И</strong>. Например, если вы хотите что бы бот вызывал один и тот же метод когда он получает видео, изображение или документ используйте следующий пример создания обработчика сообщений:</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">handler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">callback</span>,</span>
+<code class="sourceCode R"><span><span class="va">handler</span> <span class="op">&lt;-</span> <span class="fu">MessageHandler</span><span class="op">(</span><span class="va">callback</span>,</span>
 <span>  <span class="va">MessageFilters</span><span class="op">$</span><span class="va">video</span> <span class="op">|</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">photo</span> <span class="op">|</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">document</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -288,7 +288,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># создаём экземпляр класса Updater</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu">Updater</span><span class="op">(</span><span class="st">'ТОКЕН ВАШЕГО БОТА'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Пишем метод для приветсвия</span></span>
 <span><span class="co">## команда приветвия</span></span>
@@ -360,7 +360,7 @@
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># создаём обработчик</span></span>
-<span><span class="va">date_hendler</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'check_date'</span>, <span class="va">check_date</span>, pass_args <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">date_hendler</span> <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'check_date'</span>, <span class="va">check_date</span>, pass_args <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># добаляем обработчик в диспетчер</span></span>
 <span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="va">date_hendler</span></span>
@@ -373,7 +373,7 @@
 </blockquote>
 <p>Мы создали бота, который в арсенале имеет всего один метод <code>check_date</code>, данный метод вызывается одноимённой командой.</p>
 <p>Но, помимо имени команды, данный метод ждёт от вас введения двух параметров, код страны и дату. Далее бот проверяется, является ли заданный день в указанной стране выходным, сокращённым или рабочим согласно официального производственного календаря.</p>
-<p>Что бы создаваемый нами метод принимал дополнительные параметры вместе с командой, используйте аргумент <code>pass_args = TRUE</code> в функции <code><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler()</a></code>, и при создании метода, помимо обязательных аргументов <em>bot</em>, <em>update</em> создайте опциональный - <em>args</em>. Созданный таким образом метод будет принимать параметры, которые вы передаёте боту после названия команды. Параметры необходимо между собой разделять пробелом, в метод они поступят в виде текстового вектора.</p>
+<p>Что бы создаваемый нами метод принимал дополнительные параметры вместе с командой, используйте аргумент <code>pass_args = TRUE</code> в функции <code>CommandHandler()</code>, и при создании метода, помимо обязательных аргументов <em>bot</em>, <em>update</em> создайте опциональный - <em>args</em>. Созданный таким образом метод будет принимать параметры, которые вы передаёте боту после названия команды. Параметры необходимо между собой разделять пробелом, в метод они поступят в виде текстового вектора.</p>
 <p>Давайте запустим, и протестируем нашего бота.</p>
 <div class="inline-figure"><img src="http://img.netpeak.ua/alsey/159803059802_kiss_204kb.png"></div>
 </div>
@@ -382,19 +382,134 @@
 <span class="header-section-number">2.7</span> Запускаем бота в фоновом режиме<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D1%84%D0%BE%D0%BD%D0%BE%D0%B2%D0%BE%D0%BC-%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%D0%B5"><i class="fas fa-link"></i></a>
 </h2>
 <p>Последний шаг который нам осталось выполнить - запустить бота в фоновом режиме.</p>
+<p>Есть несколько вариантов запуска:</p>
+<ol style="list-style-type: decimal">
+<li>Запуск отдельно процесса церез планировщик заданий</li>
+<li>Запуск как отдельную службу Windows</li>
+</ol>
+<div id="запускаем-бота-через-планировщик-заданий-windows" class="section level3" number="2.7.1">
+<h3>
+<span class="header-section-number">2.7.1</span> Запускаем бота через планировщик заданий Windows<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-%D0%BF%D0%BB%D0%B0%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D1%89%D0%B8%D0%BA-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9-windows"><i class="fas fa-link"></i></a>
+</h3>
 <p>Для этого следуйте по описанному ниже алгоритму:</p>
 <ol style="list-style-type: decimal">
 <li>Сохраните код бота в файл с расширением R. При работе в RStudio это делается через меню <em>File</em>, командой <em>Save As…</em>.</li>
 <li>Добавьте путь к папке bin, которая в свою очередь находится в папке в которую вы установили язык R в переменную Path, инструкция <a href="https://www.java.com/ru/download/help/path.xml">тут</a>.</li>
-<li>Создайте обычный текстовый файл, в котором пропишите 1 строку: <code>R CMD BATCH C:\Users\Alsey\Documents\my_bot.R</code>. Вместо *C:_bot.R* пропишите путь к своему скрипту бота. При этом важно, что бы в пути не встречалась кириллица и пробелы, т.к. это может вызвать проблемы при запуске бота. Сохраните его, и замените его расширение с <em>txt</em> на <em>bat</em>.</li>
-<li>Откройте планировщик заданий Windows, есть множество способов это сделать, например откройте любую папку и в адресс введите <code>%windir%\system32\taskschd.msc /s</code>. Другие способы запуска можно найти <a href="https://remontka.pro/open-task-scheduler-windows/">тут</a>.</li>
-<li>В верхнем правом меню планировщика нажмите “Создать задачу…”.</li>
-<li>На вкладке “Общие” задайте произвольное имя вашей задаче, и переключатель перевидите в состояние “Выполнять для всех пользователей”.</li>
-<li>Перейдите на вкладку “Действия”, нажмите “Создать”. В поле “Программа или сценарий” нажмите “Обзор”, найдите созданный на втором шаге <em>bat</em> файл, и нажмите ОК.</li>
+<li>Откройте планировщик задач Windows и создайте новую задачу.</li>
+<li>На вкладке “Общие” задайте имя задаче, и поставьте галочку “Выполнять для всех пользователей”</li>
+<li>На вкладке “Триггеры” создайте новый триггер, в поле “Начать задачу” выберите “При запуске”</li>
+<li>На вкладке “Действие” нажмите создать, далее:</li>
+<li>Программа или сценарий: R</li>
+<li>Добавить аргументы: CMD BATCH bot.R</li>
+<li>Рабочая папка: Укажите путь к папаке в которой лежит файл с кодом бота (bot.R)</li>
 <li>Жмём ОК, при необходимости вводим пароль от вашей учётной записи операционной системы.</li>
 <li>Находим в планировщике созданную задачу, выделяем и в нижнем правом углу жмём кнопку “Выполнить”.</li>
 </ol>
 <p>Наш бот запущен в фоновом режиме, и будет работать до тех пор, пока вы не остановите задачу, или не выключите ваш ПК или сервер на котором его запустили.</p>
+</div>
+<div id="запуск-бота-как-отдельной-службы" class="section level3" number="2.7.2">
+<h3>
+<span class="header-section-number">2.7.2</span> Запуск бота как отдельной службы<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D0%B1%D0%BE%D1%82%D0%B0-%D0%BA%D0%B0%D0%BA-%D0%BE%D1%82%D0%B4%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9-%D1%81%D0%BB%D1%83%D0%B6%D0%B1%D1%8B"><i class="fas fa-link"></i></a>
+</h3>
+<p>Более предпочтительным способом запуска бота является запуск в виде отдельной службы Windows, это даёт ряд преимуществ:</p>
+<ol style="list-style-type: decimal">
+<li>Постоянная работа без таймеров, служба стартует вместе с системой и работает постоянно, без необходимости циклического перезапуска или ручной настройки расписания.</li>
+<li>Автоматический перезапуск при сбоях, если бот “упал” по ошибке, служба Windows сама его перезапустит, если настроено Recovery (восстановление после сбоя).</li>
+<li>Более чистое управление, легко стартовать, останавливать и перезапускать через стандартные средства (services.msc, sc, PowerShell), а не искать задачу в планировщике.</li>
+<li>Логирование прямо в системные логи, ошибки и статусы работы можно писать в Windows Event Log, всё централизованно.</li>
+<li>Более быстрая реакция на события системы, служба может реагировать на события старта/остановки системы, например, если сервер ребутнулся — бот стартанёт без задержек.</li>
+<li>Нет лишних окон и процессов, Task Scheduler часто запускает процессы в фоновом режиме через cmd или powershell, а служба работает как чистый системный процесс без привязки к сессии пользователя.</li>
+<li>Уведомления об ошибках через стандартные средства Windows, при желании можно добавить отправку уведомлений прямо из событий службы.</li>
+</ol>
+<p>Для запуска бота в виде отдельной службы Windows проще всего использовать специальную утилиту nssm.</p>
+<ol style="list-style-type: decimal">
+<li>Скачайте NSSM</li>
+</ol>
+<ul>
+<li>Перейдите на <a href="https://nssm.cc/download">https://nssm.cc/download</a>
+</li>
+<li>Скачайте архив и распакуйте его, например, в <code>C:\nssm\</code>
+</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Запустите <code>nssm.exe</code> от имени администратора</li>
+</ol>
+<ul>
+<li>Откройте <code>cmd</code> или <code>PowerShell</code> от имени администратора</li>
+<li>Перейдите в папку <code>nssm</code>, например:</li>
+</ul>
+<pre><code>cd C:\nssm\win64</code></pre>
+<ul>
+<li>Запустите:</li>
+</ul>
+<pre><code>nssm install</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Заполните поля в окне установки службы</li>
+</ol>
+<ul>
+<li>
+<strong>Application → Path:</strong>
+<ul>
+<li>Укажите путь к Rscript.exe или Python.exe</li>
+</ul>
+</li>
+</ul>
+<pre><code>C:\Program Files\R\R-4.3.2\bin\x64\Rscript.exe</code></pre>
+<ul>
+<li>
+<strong>Arguments:</strong>
+<ul>
+<li>Укажите путь к скрипту с ботом</li>
+</ul>
+</li>
+</ul>
+<pre><code>C:\path\to\your\bot_script.R</code></pre>
+<ul>
+<li>
+<strong>Startup directory:</strong>
+<ul>
+<li>Укажите папку со скриптом</li>
+</ul>
+</li>
+</ul>
+<pre><code>C:\path\to\your\</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Дополнительная настройка службы</li>
+</ol>
+<ul>
+<li>
+<strong>Details:</strong>
+<ul>
+<li>Задайте имя службы, например:</li>
+</ul>
+</li>
+</ul>
+<pre><code>TelegramBotService</code></pre>
+<ul>
+<li>
+<strong>Log on:</strong>
+<ul>
+<li>Укажите пользователя, от имени которого будет запущен бот</li>
+</ul>
+</li>
+<li>
+<strong>Shutdown:</strong>
+<ul>
+<li>Включите корректное завершение процесса</li>
+</ul>
+</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>Сохраните и запустите службу</li>
+</ol>
+<ul>
+<li>Нажмите <strong>Install service</strong>
+</li>
+<li>Запустите службу через <code>services.msc</code>
+</li>
+</ul>
+<p>В этом разделе мы рассмотрели варианты локального запуска бота, к теме деплоя telegram мы вернёмся в главе <a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85">Разворачиваем бота в облачных сервисах</a>.</p>
+</div>
 </div>
 <div id="обработка-голосовых-сообщений.-переводим-голосовое-сообщение-в-текст" class="section level2" number="2.8">
 <h2>
@@ -417,10 +532,10 @@
 3.4. Скачайте JSON файл с ключом</li>
 </ol>
 <p>Теперь установим пакеты, которые нам понадобятся:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tuneR"</span>, <span class="st">"seewave"</span>, <span class="st">"googledrive"</span>, <span class="st">"googleAuthR"</span>, <span class="st">"googleLanguageR"</span>, <span class="st">"av"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Теперь рассмотрим сам код функции, которая ляжет в основу нашего будущего бота:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tuner.R-forge.R-project.org">tuneR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rug.mnhn.fr/seewave/">seewave</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org">googledrive</a></span><span class="op">)</span></span>
@@ -437,35 +552,35 @@
 <span>  </span>
 <span>  <span class="co"># Обработка в зависимости от типа файла</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="va">file_ext</span> <span class="op">==</span> <span class="st">"mp3"</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/readMP3.html">readMP3</a></span><span class="op">(</span><span class="va">audio_file_path</span><span class="op">)</span></span>
+<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu">readMP3</span><span class="op">(</span><span class="va">audio_file_path</span><span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">file_ext</span> <span class="op">==</span> <span class="st">"wav"</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/readWave.html">readWave</a></span><span class="op">(</span><span class="va">audio_file_path</span><span class="op">)</span></span>
+<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu">readWave</span><span class="op">(</span><span class="va">audio_file_path</span><span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">file_ext</span> <span class="op">==</span> <span class="st">"ogg"</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="co"># Конвертируем OGG в WAV</span></span>
-<span>    <span class="fu"><a href="https://docs.ropensci.org/av/reference/encoding.html">av_audio_convert</a></span><span class="op">(</span><span class="va">audio_file_path</span>, <span class="va">temp_wav_file</span><span class="op">)</span></span>
-<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/readWave.html">readWave</a></span><span class="op">(</span><span class="va">temp_wav_file</span><span class="op">)</span></span>
+<span>    <span class="fu">av_audio_convert</span><span class="op">(</span><span class="va">audio_file_path</span>, <span class="va">temp_wav_file</span><span class="op">)</span></span>
+<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu">readWave</span><span class="op">(</span><span class="va">temp_wav_file</span><span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"Неподдерживаемый формат файла. Поддерживаются только MP3, WAV и OGG."</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span>  </span>
 <span>  <span class="co"># Если аудио стерео, конвертируем в моно</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="va">audio</span><span class="op">@</span><span class="va">stereo</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/MonoStereo.html">mono</a></span><span class="op">(</span><span class="va">audio</span>, <span class="st">"both"</span><span class="op">)</span></span>
+<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu">mono</span><span class="op">(</span><span class="va">audio</span>, <span class="st">"both"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span>  </span>
 <span>  <span class="co"># Изменяем частоту дискретизации на 16000 Гц, только если текущая частота отличается</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="va">audio</span><span class="op">@</span><span class="va">samp.rate</span> <span class="op">!=</span> <span class="fl">16000</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">audio_resampled</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/seewave/man/resamp.html">resamp</a></span><span class="op">(</span><span class="va">audio</span>, g <span class="op">=</span> <span class="fl">16000</span>, output <span class="op">=</span> <span class="st">"Wave"</span><span class="op">)</span></span>
+<span>    <span class="va">audio_resampled</span> <span class="op">&lt;-</span> <span class="fu">resamp</span><span class="op">(</span><span class="va">audio</span>, g <span class="op">=</span> <span class="fl">16000</span>, output <span class="op">=</span> <span class="st">"Wave"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
 <span>    <span class="va">audio_resampled</span> <span class="op">&lt;-</span> <span class="va">audio</span></span>
 <span>  <span class="op">}</span></span>
 <span>  </span>
 <span>  <span class="co"># Записываем обработанное аудио во временный WAV файл</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/writeWave.html">writeWave</a></span><span class="op">(</span><span class="va">audio_resampled</span>, <span class="va">temp_wav_file</span><span class="op">)</span></span>
+<span>  <span class="fu">writeWave</span><span class="op">(</span><span class="va">audio_resampled</span>, <span class="va">temp_wav_file</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># Выполняем распознавание речи</span></span>
 <span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://docs.ropensci.org/googleLanguageR/reference/gl_speech.html">gl_speech</a></span><span class="op">(</span><span class="va">temp_wav_file</span>, </span>
+<span>    <span class="fu">gl_speech</span><span class="op">(</span><span class="va">temp_wav_file</span>, </span>
 <span>              languageCode <span class="op">=</span> <span class="st">"ru-RU"</span>,</span>
 <span>              sampleRateHertz <span class="op">=</span> <span class="fl">16000</span><span class="op">)</span><span class="op">$</span><span class="va">transcript</span></span>
 <span>  <span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span>
@@ -480,10 +595,10 @@
 <span><span class="op">}</span></span></code></pre></div>
 <p>Голосовые сообщения в telegram хранятся в ogg формате, который данная функция успешно преобразовывает в текст. Для теста можете скачать <a href="/files/voice.ogg">voice.ogg</a> файл и протестировать работу описанной выше функции.</p>
 <p>Перед запуском не забудьте заменить “path/to/your/google_cloud_credentials.json” на путь к скачанному вами из Google Cloud ключу сервисного аккаунта.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Пример использования:</span></span>
 <span><span class="co"># Не забудьте аутентифицироваться перед использованием функции</span></span>
-<span><span class="fu"><a href="https://docs.ropensci.org/googleLanguageR/reference/gl_auth.html">gl_auth</a></span><span class="op">(</span><span class="st">"path/to/your/google_cloud_credentials.json"</span><span class="op">)</span></span>
+<span><span class="fu">gl_auth</span><span class="op">(</span><span class="st">"path/to/your/google_cloud_credentials.json"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Теперь вы можете использовать функцию так:</span></span>
 <span><span class="va">ogg_file</span> <span class="op">&lt;-</span> <span class="st">"path/to/your/voice.ogg"</span></span>
@@ -498,7 +613,7 @@
 </h3>
 <p>Теперь давайте напишем бота, в основе которого будет лежать данная функция, он будет получать любое голосовое сообщение, переводить его в текстовый формат и отправлять в виде текстового сообщения.</p>
 <p>Примечание! Для того, что бы приведённый ниже код работал вам необходимо заранее сохранить токен бота в переменную среды, и заменить “my_bot” на указанное в названии переменной среды имя вашего бота. Так же необходимо заменить “path/to/your/google_cloud_credentials.json” на путь к скачанному вами из Google Cloud ключу сервисного аккаунта.</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tuner.R-forge.R-project.org">tuneR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rug.mnhn.fr/seewave/">seewave</a></span><span class="op">)</span></span>
@@ -517,35 +632,35 @@
 <span>  </span>
 <span>  <span class="co"># Обработка в зависимости от типа файла</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="va">file_ext</span> <span class="op">==</span> <span class="st">"mp3"</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/readMP3.html">readMP3</a></span><span class="op">(</span><span class="va">audio_file_path</span><span class="op">)</span></span>
+<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu">readMP3</span><span class="op">(</span><span class="va">audio_file_path</span><span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">file_ext</span> <span class="op">==</span> <span class="st">"wav"</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/readWave.html">readWave</a></span><span class="op">(</span><span class="va">audio_file_path</span><span class="op">)</span></span>
+<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu">readWave</span><span class="op">(</span><span class="va">audio_file_path</span><span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">file_ext</span> <span class="op">==</span> <span class="st">"ogg"</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="co"># Конвертируем OGG в WAV</span></span>
-<span>    <span class="fu"><a href="https://docs.ropensci.org/av/reference/encoding.html">av_audio_convert</a></span><span class="op">(</span><span class="va">audio_file_path</span>, <span class="va">temp_wav_file</span><span class="op">)</span></span>
-<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/readWave.html">readWave</a></span><span class="op">(</span><span class="va">temp_wav_file</span><span class="op">)</span></span>
+<span>    <span class="fu">av_audio_convert</span><span class="op">(</span><span class="va">audio_file_path</span>, <span class="va">temp_wav_file</span><span class="op">)</span></span>
+<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu">readWave</span><span class="op">(</span><span class="va">temp_wav_file</span><span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"Неподдерживаемый формат файла. Поддерживаются только MP3, WAV и OGG."</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span>  </span>
 <span>  <span class="co"># Если аудио стерео, конвертируем в моно</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="va">audio</span><span class="op">@</span><span class="va">stereo</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/MonoStereo.html">mono</a></span><span class="op">(</span><span class="va">audio</span>, <span class="st">"both"</span><span class="op">)</span></span>
+<span>    <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu">mono</span><span class="op">(</span><span class="va">audio</span>, <span class="st">"both"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span>  </span>
 <span>  <span class="co"># Изменяем частоту дискретизации на 16000 Гц, только если текущая частота отличается</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="va">audio</span><span class="op">@</span><span class="va">samp.rate</span> <span class="op">!=</span> <span class="fl">16000</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">audio_resampled</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/seewave/man/resamp.html">resamp</a></span><span class="op">(</span><span class="va">audio</span>, g <span class="op">=</span> <span class="fl">16000</span>, output <span class="op">=</span> <span class="st">"Wave"</span><span class="op">)</span></span>
+<span>    <span class="va">audio_resampled</span> <span class="op">&lt;-</span> <span class="fu">resamp</span><span class="op">(</span><span class="va">audio</span>, g <span class="op">=</span> <span class="fl">16000</span>, output <span class="op">=</span> <span class="st">"Wave"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
 <span>    <span class="va">audio_resampled</span> <span class="op">&lt;-</span> <span class="va">audio</span></span>
 <span>  <span class="op">}</span></span>
 <span>  </span>
 <span>  <span class="co"># Записываем обработанное аудио во временный WAV файл</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/writeWave.html">writeWave</a></span><span class="op">(</span><span class="va">audio_resampled</span>, <span class="va">temp_wav_file</span><span class="op">)</span></span>
+<span>  <span class="fu">writeWave</span><span class="op">(</span><span class="va">audio_resampled</span>, <span class="va">temp_wav_file</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># Выполняем распознавание речи</span></span>
 <span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://docs.ropensci.org/googleLanguageR/reference/gl_speech.html">gl_speech</a></span><span class="op">(</span><span class="va">temp_wav_file</span>, </span>
+<span>    <span class="fu">gl_speech</span><span class="op">(</span><span class="va">temp_wav_file</span>, </span>
 <span>              languageCode <span class="op">=</span> <span class="st">"ru-RU"</span>,</span>
 <span>              sampleRateHertz <span class="op">=</span> <span class="fl">16000</span><span class="op">)</span><span class="op">$</span><span class="va">transcript</span></span>
 <span>  <span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span>
@@ -561,7 +676,7 @@
 <span></span>
 <span><span class="co"># Аутентификация в Google Cloud (делаем это перед запуском бота)</span></span>
 <span><span class="co"># Не забудьте аутентифицироваться в Google Cloud перед запуском бота</span></span>
-<span><span class="fu"><a href="https://docs.ropensci.org/googleLanguageR/reference/gl_auth.html">gl_auth</a></span><span class="op">(</span><span class="st">"path/to/your/google_cloud_credentials.json"</span><span class="op">)</span></span>
+<span><span class="fu">gl_auth</span><span class="op">(</span><span class="st">"path/to/your/google_cloud_credentials.json"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Функция для обработки голосовых сообщений</span></span>
 <span><span class="va">handle_voice</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
@@ -575,7 +690,7 @@
 <span>  <span class="va">temp_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".ogg"</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># Получаем полный URL для скачивания файла</span></span>
-<span>  <span class="va">file_url</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"https://api.telegram.org/file/bot"</span>, <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/bot_token.html">bot_token</a></span><span class="op">(</span><span class="st">'my_bot'</span><span class="op">)</span>, <span class="st">"/"</span>, <span class="va">file</span><span class="op">$</span><span class="va">file_path</span><span class="op">)</span></span>
+<span>  <span class="va">file_url</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"https://api.telegram.org/file/bot"</span>, <span class="fu">bot_token</span><span class="op">(</span><span class="st">'my_bot'</span><span class="op">)</span>, <span class="st">"/"</span>, <span class="va">file</span><span class="op">$</span><span class="va">file_path</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># Скачиваем файл</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">file_url</span>, <span class="va">temp_file</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span>
@@ -598,12 +713,12 @@
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Создание и настройка updater</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/bot_token.html">bot_token</a></span><span class="op">(</span><span class="st">'my_bot'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu">Updater</span><span class="op">(</span><span class="fu">bot_token</span><span class="op">(</span><span class="st">'my_bot'</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Добавляем обработчики с правильными фильтрами</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">"start"</span>, <span class="va">handle_text</span><span class="op">)</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">handle_voice</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">voice</span><span class="op">)</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">handle_text</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">text</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">"start"</span>, <span class="va">handle_text</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="fu">MessageHandler</span><span class="op">(</span><span class="va">handle_voice</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">voice</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="va">updater</span> <span class="op">+</span> <span class="fu">MessageHandler</span><span class="op">(</span><span class="va">handle_text</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">text</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Запуск бота</span></span>
 <span><span class="va">updater</span><span class="op">$</span><span class="fu">start_polling</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -636,54 +751,54 @@
 <p>Ранее в этой книге мы рассматривали ботов, которые получают с данными полученными на лету, т.е. данные которые в моменте запрашиваются, используются и далее они нам не нужны. В данном случае задача в том, что бы собирать статистику из чатов, и потом при необходимости её запрашивать, поэтому для начала нам надо развернуть базу данных.</p>
 <p>В нашем случае в базе будет всего 2 таблицы, в одну мы будем собирать данные о сообщениях, а в другую о добавленных пользователях. использовать мы будет встраивамаю в нашего бота SQLite базу.</p>
 <p>Таблица для хранения данных о сообщениях:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb43-1"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-1" tabindex="-1"></a><span class="co">-- message definition</span></span>
-<span id="cb43-2"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-2" tabindex="-1"></a></span>
-<span id="cb43-3"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-3" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> `message` (</span>
-<span id="cb43-4"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-4" tabindex="-1"></a>  `chat_id` <span class="dt">REAL</span>,</span>
-<span id="cb43-5"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-5" tabindex="-1"></a>  `chat_title` TEXT,</span>
-<span id="cb43-6"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-6" tabindex="-1"></a>  `msg_id` <span class="dt">INTEGER</span>,</span>
-<span id="cb43-7"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-7" tabindex="-1"></a>  `timestamp` TEXT,</span>
-<span id="cb43-8"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-8" tabindex="-1"></a>  `date` TEXT,</span>
-<span id="cb43-9"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-9" tabindex="-1"></a>  `user_id` <span class="dt">INTEGER</span>,</span>
-<span id="cb43-10"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-10" tabindex="-1"></a>  `user_first_name` TEXT,</span>
-<span id="cb43-11"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-11" tabindex="-1"></a>  `user_last_name` TEXT,</span>
-<span id="cb43-12"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-12" tabindex="-1"></a>  `tg_username` TEXT,</span>
-<span id="cb43-13"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-13" tabindex="-1"></a>  `text` TEXT,</span>
-<span id="cb43-14"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-14" tabindex="-1"></a>  `is_link` <span class="dt">INTEGER</span>,</span>
-<span id="cb43-15"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-15" tabindex="-1"></a>  `links` <span class="dt">INTEGER</span></span>
-<span id="cb43-16"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb43-16" tabindex="-1"></a>);</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb49-1"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-1" tabindex="-1"></a><span class="co">-- message definition</span></span>
+<span id="cb49-2"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-2" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-3" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> `message` (</span>
+<span id="cb49-4"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-4" tabindex="-1"></a>  `chat_id` <span class="dt">REAL</span>,</span>
+<span id="cb49-5"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-5" tabindex="-1"></a>  `chat_title` TEXT,</span>
+<span id="cb49-6"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-6" tabindex="-1"></a>  `msg_id` <span class="dt">INTEGER</span>,</span>
+<span id="cb49-7"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-7" tabindex="-1"></a>  `timestamp` TEXT,</span>
+<span id="cb49-8"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-8" tabindex="-1"></a>  `date` TEXT,</span>
+<span id="cb49-9"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-9" tabindex="-1"></a>  `user_id` <span class="dt">INTEGER</span>,</span>
+<span id="cb49-10"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-10" tabindex="-1"></a>  `user_first_name` TEXT,</span>
+<span id="cb49-11"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-11" tabindex="-1"></a>  `user_last_name` TEXT,</span>
+<span id="cb49-12"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-12" tabindex="-1"></a>  `tg_username` TEXT,</span>
+<span id="cb49-13"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-13" tabindex="-1"></a>  `text` TEXT,</span>
+<span id="cb49-14"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-14" tabindex="-1"></a>  `is_link` <span class="dt">INTEGER</span>,</span>
+<span id="cb49-15"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-15" tabindex="-1"></a>  `links` <span class="dt">INTEGER</span></span>
+<span id="cb49-16"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb49-16" tabindex="-1"></a>);</span></code></pre></div>
 <p>Таблица для хранения данных о новых участниках:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb44-1"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-1" tabindex="-1"></a><span class="co">-- new_users definition</span></span>
-<span id="cb44-2"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-2" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-3" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> `new_users` (</span>
-<span id="cb44-4"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-4" tabindex="-1"></a>  `chat_id` <span class="dt">REAL</span>,</span>
-<span id="cb44-5"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-5" tabindex="-1"></a>  `chat_title` TEXT,</span>
-<span id="cb44-6"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-6" tabindex="-1"></a>  `msg_id` <span class="dt">INTEGER</span>,</span>
-<span id="cb44-7"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-7" tabindex="-1"></a>  `timestamp` TEXT,</span>
-<span id="cb44-8"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-8" tabindex="-1"></a>  `date` TEXT,</span>
-<span id="cb44-9"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-9" tabindex="-1"></a>  `users_add_id` <span class="dt">REAL</span>,</span>
-<span id="cb44-10"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-10" tabindex="-1"></a>  `users_add_first_name` TEXT,</span>
-<span id="cb44-11"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-11" tabindex="-1"></a>  `users_add_last_name` TEXT,</span>
-<span id="cb44-12"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-12" tabindex="-1"></a>  `users_add_tg_username` TEXT,</span>
-<span id="cb44-13"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-13" tabindex="-1"></a>  `new_user_id` <span class="dt">REAL</span>,</span>
-<span id="cb44-14"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-14" tabindex="-1"></a>  `new_user_first_name` TEXT,</span>
-<span id="cb44-15"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-15" tabindex="-1"></a>  `new_user_last_name` TEXT,</span>
-<span id="cb44-16"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-16" tabindex="-1"></a>  `new_user_tg_username` TEXT</span>
-<span id="cb44-17"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb44-17" tabindex="-1"></a>);</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb50-1"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-1" tabindex="-1"></a><span class="co">-- new_users definition</span></span>
+<span id="cb50-2"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-2" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-3" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> `new_users` (</span>
+<span id="cb50-4"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-4" tabindex="-1"></a>  `chat_id` <span class="dt">REAL</span>,</span>
+<span id="cb50-5"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-5" tabindex="-1"></a>  `chat_title` TEXT,</span>
+<span id="cb50-6"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-6" tabindex="-1"></a>  `msg_id` <span class="dt">INTEGER</span>,</span>
+<span id="cb50-7"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-7" tabindex="-1"></a>  `timestamp` TEXT,</span>
+<span id="cb50-8"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-8" tabindex="-1"></a>  `date` TEXT,</span>
+<span id="cb50-9"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-9" tabindex="-1"></a>  `users_add_id` <span class="dt">REAL</span>,</span>
+<span id="cb50-10"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-10" tabindex="-1"></a>  `users_add_first_name` TEXT,</span>
+<span id="cb50-11"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-11" tabindex="-1"></a>  `users_add_last_name` TEXT,</span>
+<span id="cb50-12"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-12" tabindex="-1"></a>  `users_add_tg_username` TEXT,</span>
+<span id="cb50-13"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-13" tabindex="-1"></a>  `new_user_id` <span class="dt">REAL</span>,</span>
+<span id="cb50-14"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-14" tabindex="-1"></a>  `new_user_first_name` TEXT,</span>
+<span id="cb50-15"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-15" tabindex="-1"></a>  `new_user_last_name` TEXT,</span>
+<span id="cb50-16"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-16" tabindex="-1"></a>  `new_user_tg_username` TEXT</span>
+<span id="cb50-17"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html#cb50-17" tabindex="-1"></a>);</span></code></pre></div>
 </div>
 <div id="методы-бота" class="section level3" number="2.9.3">
 <h3>
 <span class="header-section-number">2.9.3</span> Методы бота<a class="anchor" aria-label="anchor" href="#%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h3>
 <p>Для того, что бы код нашего бота был более читаем, код каждого из его методов я разделю на отдельные файлы, зачастую такой способ хранения функций используется при разработке пакетов. В нашем случае у бота будет всего 3 функции, давайте с помощью пакета <code>usethis</code> создадим файлы для этих функций.</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_r.html">use_r</a></span><span class="op">(</span><span class="st">'get_message'</span><span class="op">)</span>  <span class="co"># функция для сбора данных о сообщениях</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_r.html">use_r</a></span><span class="op">(</span><span class="st">'get_new_user'</span><span class="op">)</span> <span class="co"># функция для сбора данных о новых участниках</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_r.html">use_r</a></span><span class="op">(</span><span class="st">'chat_stat'</span><span class="op">)</span>    <span class="co"># функция запроса статистики по чатам</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_r.html">use_r</a></span><span class="op">(</span><span class="st">'to_tg_table'</span><span class="op">)</span>  <span class="co"># Вспомогательная функция приволящая data.frame в формат таблицы для отправки в telegram</span></span></code></pre></div>
 <p>Функцию <code>to_tg_table()</code> мы с вами рассматривали в первой главе, остальные 3 функции разработаны специально для этого бота. Функция <code><a href="https://usethis.r-lib.org/reference/use_r.html">usethis::use_r()</a></code> создаёт в вашем проекте каталог R, и в нём файлы с заданными в единственном её аргументе названием.</p>
 <p>теперь приведу пример кода для каждого метода:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_message</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="fu">effective_message</span><span class="op">(</span><span class="op">)</span></span>
@@ -740,7 +855,7 @@
 <li>Представленные в сообщение ссылки через запятую</li>
 </ul>
 <p>Далее функция записывает собранную информацию в таблицу message нашей базы данных.</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_new_user</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="va">update</span><span class="op">$</span><span class="fu">effective_message</span><span class="op">(</span><span class="op">)</span></span>
@@ -783,7 +898,7 @@
 <li>Username в telegram, добавленого участника</li>
 </ul>
 <p>Собранную информацию данный метод дописывает в таблицу new_users.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chat_stat</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span>, <span class="va">args</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="va">function_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="st">"package:timeperiodsR"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">'^previous|^this'</span>, x <span class="op">=</span> <span class="va">.</span><span class="op">)</span><span class="op">]</span></span>
@@ -860,7 +975,7 @@
 <span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="st">'contacts_telegram'</span>, <span class="st">'n'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span> msg <span class="op">=</span> <span class="va">n</span> <span class="op">)</span> </span>
 <span>    </span>
-<span>    <span class="fu">ggplot</span><span class="op">(</span><span class="va">top_active_users</span>, <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">contacts_telegram</span>, <span class="va">msg</span>, <span class="va">median</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">msg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">ggplot</span><span class="op">(</span><span class="va">top_active_users</span>, <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu">fct_reorder</span><span class="op">(</span><span class="va">contacts_telegram</span>, <span class="va">msg</span>, <span class="va">median</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">msg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>      <span class="fu">geom_col</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>fill <span class="op">=</span> <span class="va">msg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>      <span class="fu">theme</span><span class="op">(</span>axis.text.y <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>, </span>
 <span>            plot.subtitle <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -905,7 +1020,7 @@
 <p>Этот метод позволяет передать аргумент, в качестве аргумента вы моете указать произвольный период, за который зотите получить статистику. В качестве преиода необходимо указать одну из функций пакета <code>timeperiodsR</code> с префиксом <code>previous</code> млм <code>this</code>, например <code>this_month</code>, <code>previous_quarter</code> и т.д.</p>
 <p>Далее запрашивает за указанный период статистику из таблиц message и new_users, на основе статистики строит таблицу и график по 5 наиболее активным пользователям за указанный период. Формирует и отправляет сообщение со статистикой, выглядит в итоге оно примерно так:</p>
 <div class="inline-figure"><img src="img/2-chatstat.png"></div>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># функция для перевода data.frame в telegram таблицу </span></span>
 <span><span class="va">to_tg_table</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span> <span class="va">table</span>, <span class="va">align</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">indents</span> <span class="op">=</span> <span class="fl">3</span>, <span class="va">parse_mode</span> <span class="op">=</span> <span class="st">'Markdown'</span> <span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
@@ -986,8 +1101,8 @@
 <h3>
 <span class="header-section-number">2.9.4</span> Код бота сбора статистики<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%B4-%D0%B1%D0%BE%D1%82%D0%B0-%D1%81%D0%B1%D0%BE%D1%80%D0%B0-%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D0%B8"><i class="fas fa-link"></i></a>
 </h3>
-<p>С методами бота мы разобрались, ниже привожу пример кода самого бота. Не забудьте подставить имя своего бота в функцию <code><a href="https://rdrr.io/pkg/telegram.bot/man/bot_token.html">bot_token()</a></code>, или замените её на токен вашего бота.</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<p>С методами бота мы разобрались, ниже привожу пример кода самого бота. Не забудьте подставить имя своего бота в функцию <code>bot_token()</code>, или замените её на токен вашего бота.</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/locales.html">Sys.setlocale</a></span><span class="op">(</span>locale <span class="op">=</span> <span class="st">'russian'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
@@ -1011,12 +1126,12 @@
 <span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">walk</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="va">funcs</span><span class="op">)</span>, <span class="va">source</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Инициализация бота</span></span>
-<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Updater.html">Updater</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/bot_token.html">bot_token</a></span><span class="op">(</span><span class="st">"Chat stat bot"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">updater</span> <span class="op">&lt;-</span> <span class="fu">Updater</span><span class="op">(</span><span class="fu">bot_token</span><span class="op">(</span><span class="st">"Chat stat bot"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">updater</span><span class="op">$</span><span class="va">bot</span><span class="op">$</span><span class="fu">clean_updates</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># фильтры</span></span>
 <span><span class="co"># фильтр для обработки сообщений msg</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">save_msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">save_msg</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="kw">if</span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">message</span><span class="op">$</span><span class="va">text</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="cn">TRUE</span></span>
@@ -1028,7 +1143,7 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># фильтр для обработки добавленных в чат участников</span></span>
-<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">new_users</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/BaseFilter.html">BaseFilter</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">MessageFilters</span><span class="op">$</span><span class="va">new_users</span> <span class="op">&lt;-</span> <span class="fu">BaseFilter</span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="kw">if</span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">message</span><span class="op">$</span><span class="va">new_chat_member</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="cn">TRUE</span></span>
@@ -1040,9 +1155,9 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># обработчики</span></span>
-<span><span class="va">h_save_msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">get_message</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">save_msg</span> <span class="op">&amp;</span> <span class="op">!</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">command</span><span class="op">)</span></span>
-<span><span class="va">h_new_user</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/MessageHandler.html">MessageHandler</a></span><span class="op">(</span><span class="va">get_new_user</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">new_users</span> <span class="op">&amp;</span> <span class="op">!</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">command</span><span class="op">)</span></span>
-<span><span class="va">h_stat</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">'chat_stat'</span>, <span class="va">chat_stat</span>, pass_args <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">h_save_msg</span> <span class="op">&lt;-</span> <span class="fu">MessageHandler</span><span class="op">(</span><span class="va">get_message</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">save_msg</span> <span class="op">&amp;</span> <span class="op">!</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">command</span><span class="op">)</span></span>
+<span><span class="va">h_new_user</span> <span class="op">&lt;-</span> <span class="fu">MessageHandler</span><span class="op">(</span><span class="va">get_new_user</span>, <span class="va">MessageFilters</span><span class="op">$</span><span class="va">new_users</span> <span class="op">&amp;</span> <span class="op">!</span> <span class="va">MessageFilters</span><span class="op">$</span><span class="va">command</span><span class="op">)</span></span>
+<span><span class="va">h_stat</span>     <span class="op">&lt;-</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">'chat_stat'</span>, <span class="va">chat_stat</span>, pass_args <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># диспетчер</span></span>
 <span><span class="va">updater</span> <span class="op">&lt;-</span></span>
@@ -1112,7 +1227,12 @@ command2 - Another description</code></pre>
 <li><a class="nav-link" href="#%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%BF%D0%B5%D1%80%D0%B2%D1%83%D1%8E-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%83-%D0%B1%D0%BE%D1%82%D1%83-%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4"><span class="header-section-number">2.4</span> Добавляем первую команду боту, обработчик команд</a></li>
 <li><a class="nav-link" href="#%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA-%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BE%D0%B2%D1%8B%D1%85-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B"><span class="header-section-number">2.5</span> Обработчик текстовых сообщений и фильтры</a></li>
 <li><a class="nav-link" href="#%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D1%81-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%B0%D0%BC%D0%B8"><span class="header-section-number">2.6</span> Добавление команд с параметрами</a></li>
-<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D1%84%D0%BE%D0%BD%D0%BE%D0%B2%D0%BE%D0%BC-%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%D0%B5"><span class="header-section-number">2.7</span> Запускаем бота в фоновом режиме</a></li>
+<li>
+<a class="nav-link" href="#%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D1%84%D0%BE%D0%BD%D0%BE%D0%B2%D0%BE%D0%BC-%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%D0%B5"><span class="header-section-number">2.7</span> Запускаем бота в фоновом режиме</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-%D0%BF%D0%BB%D0%B0%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D1%89%D0%B8%D0%BA-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9-windows"><span class="header-section-number">2.7.1</span> Запускаем бота через планировщик заданий Windows</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D0%B1%D0%BE%D1%82%D0%B0-%D0%BA%D0%B0%D0%BA-%D0%BE%D1%82%D0%B4%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9-%D1%81%D0%BB%D1%83%D0%B6%D0%B1%D1%8B"><span class="header-section-number">2.7.2</span> Запуск бота как отдельной службы</a></li>
+</ul>
+</li>
 <li>
 <a class="nav-link" href="#%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%B3%D0%BE%D0%BB%D0%BE%D1%81%D0%BE%D0%B2%D1%8B%D1%85-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9.-%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%BE%D0%B4%D0%B8%D0%BC-%D0%B3%D0%BE%D0%BB%D0%BE%D1%81%D0%BE%D0%B2%D0%BE%D0%B5-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-%D1%82%D0%B5%D0%BA%D1%81%D1%82"><span class="header-section-number">2.8</span> Обработка голосовых сообщений. Переводим голосовое сообщение в текст</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-%D0%B4%D0%BB%D1%8F-%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F-%D0%B3%D0%BE%D0%BB%D0%BE%D1%81%D0%B0-%D0%B2-%D1%82%D0%B5%D0%BA%D1%81%D1%82"><span class="header-section-number">2.8.1</span> Функция для преобразования голоса в текст</a></li>
@@ -1151,7 +1271,7 @@ command2 - Another description</code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2024-08-28.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2025-04-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
