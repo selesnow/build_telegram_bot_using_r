@@ -88,7 +88,7 @@ knitr::knit_engines$set(
 В 2018 году я создал Telegram-канал [R4marketing](https://t.me/R4marketing), где делюсь полезными русскоязычными материалами по языку R: ссылками на статьи, доклады, вебинары и заметками. В 2020 году запустил [YouTube канал](https://bit.ly/36kliAp) с видеоуроками по языку R и аналитике в целом.
 
 ## Видео введение в курс {-}
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iMZlUowNh5M?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KbCYJvVr4lk?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Правки и предложения {-}
 
