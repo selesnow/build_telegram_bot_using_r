@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Глава 9 Разворачиваем бота в облачных сервисах | Разработка telegram ботов на языке R</title>
+<title>Глава 10 Разворачиваем бота в облачных сервисах | Разработка telegram ботов на языке R</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="Поздравляю с завершением предыдущих этапов! Мы подходим к финальной части нашего путешествия, и в этой главе мы сосредоточимся на важном шаге — развертывании вашего бота на Google Cloud Run. Это...">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Глава 9 Разворачиваем бота в облачных сервисах | Разработка telegram ботов на языке R">
+<meta property="og:title" content="Глава 10 Разворачиваем бота в облачных сервисах | Разработка telegram ботов на языке R">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/cover.png">
 <meta property="og:description" content="Поздравляю с завершением предыдущих этапов! Мы подходим к финальной части нашего путешествия, и в этой главе мы сосредоточимся на важном шаге — развертывании вашего бота на Google Cloud Run. Это...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Глава 9 Разворачиваем бота в облачных сервисах | Разработка telegram ботов на языке R">
+<meta name="twitter:title" content="Глава 10 Разворачиваем бота в облачных сервисах | Разработка telegram ботов на языке R">
 <meta name="twitter:description" content="Поздравляю с завершением предыдущих этапов! Мы подходим к финальной части нашего путешествия, и в этой главе мы сосредоточимся на важном шаге — развертывании вашего бота на Google Cloud Run. Это...">
 <meta name="twitter:image" content="/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -53,16 +53,17 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Введение</a></li>
 <li><a class="" href="%D0%BF%D1%80%D0%B5%D0%B4%D0%B8%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D0%B5.html">Предисловие</a></li>
-<li><a class="" href="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram.html"><span class="header-section-number">1</span> Создаём бота, и отправляем с его помощью сообщения в telegram</a></li>
+<li><a class="" href="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram.html"><span class="header-section-number">1</span> Создаём бота и отправляем с его помощью сообщения в telegram</a></li>
 <li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-%D0%B8-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-updater.html"><span class="header-section-number">2</span> Добавляем боту поддержку команд и фильтры сообщений, класс Updater</a></li>
 <li><a class="" href="%D0%BA%D0%B0%D0%BA-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B1%D0%BE%D1%82%D1%83-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83-%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B.html"><span class="header-section-number">3</span> Как добавить боту поддержку клавиатуры</a></li>
 <li><a class="" href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html"><span class="header-section-number">4</span> Построение последовательного, логического диалога с ботом</a></li>
-<li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">5</span> Управление правами пользователей бота</a></li>
-<li><a class="" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Повышаем стабильность работы бота</a></li>
-<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C.html"><span class="header-section-number">7</span> Добавляем боту асинхронность</a></li>
-<li><a class="" href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html"><span class="header-section-number">8</span> Упаковываем бота в Docker контейнер</a></li>
-<li><a class="active" href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html"><span class="header-section-number">9</span> Разворачиваем бота в облачных сервисах</a></li>
-<li><a class="" href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-9.html">Заключение</a></li>
+<li><a class="" href="%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B8%D1%80%D1%83%D0%B5%D0%BC-%D0%B2-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8%D1%81%D0%BA%D1%83%D1%81%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9-%D0%B8%D0%BD%D1%82%D0%B5%D0%BB%D0%BB%D0%B5%D0%BA%D1%82.html"><span class="header-section-number">5</span> Интегрируем в бота искусственный интеллект</a></li>
+<li><a class="" href="%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">6</span> Управление правами пользователей бота</a></li>
+<li><a class="" href="%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B0%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%B1%D0%BE%D1%82%D0%B0.html"><span class="header-section-number">7</span> Повышаем стабильность работы бота</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D1%83-%D0%B0%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C.html"><span class="header-section-number">8</span> Добавляем боту асинхронность</a></li>
+<li><a class="" href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html"><span class="header-section-number">9</span> Упаковываем бота в Docker контейнер</a></li>
+<li><a class="active" href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html"><span class="header-section-number">10</span> Разворачиваем бота в облачных сервисах</a></li>
+<li><a class="" href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-10.html">Заключение</a></li>
 <li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.html">Обновления</a></li>
 <li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87.html">Решение задач</a></li>
 </ul>
@@ -72,9 +73,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="разворачиваем-бота-в-облачных-сервисах" class="section level1" number="9">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="разворачиваем-бота-в-облачных-сервисах" class="section level1" number="10">
 <h1>
-<span class="header-section-number">Глава 9</span> Разворачиваем бота в облачных сервисах<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Глава 10</span> Разворачиваем бота в облачных сервисах<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85"><i class="fas fa-link"></i></a>
 </h1>
 <p>Поздравляю с завершением предыдущих этапов! Мы подходим к финальной части нашего путешествия, и в этой главе мы сосредоточимся на важном шаге — развертывании вашего бота на Google Cloud Run. Это позволит вашему боту работать в облаке, обеспечивая масштабируемость и надежность.</p>
 <p>Важной частью этого процесса является настройка технологии Webhook, которая позволяет вашему боту получать обновления в реальном времени. Мы подробно рассмотрим, как настроить Webhook для вашего бота, чтобы он мог эффективно обрабатывать входящие сообщения и команды от пользователей. Эта технология обеспечивает мгновенную доставку данных и позволяет вашему боту реагировать на события практически моментально.</p>
@@ -90,13 +91,13 @@
 </ul>
 </blockquote>
 <p>После установки Docker Desktop перезагрузите ПК,и запуститье эту программу.</p>
-<div id="google-cloud-run" class="section level2" number="9.1">
+<div id="google-cloud-run" class="section level2" number="10.1">
 <h2>
-<span class="header-section-number">9.1</span> Google Cloud Run<a class="anchor" aria-label="anchor" href="#google-cloud-run"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1</span> Google Cloud Run<a class="anchor" aria-label="anchor" href="#google-cloud-run"><i class="fas fa-link"></i></a>
 </h2>
-<div id="условные-обозначения" class="section level3" number="9.1.1">
+<div id="условные-обозначения" class="section level3" number="10.1.1">
 <h3>
-<span class="header-section-number">9.1.1</span> Условные обозначения<a class="anchor" aria-label="anchor" href="#%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5-%D0%BE%D0%B1%D0%BE%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D1%8F"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.1</span> Условные обозначения<a class="anchor" aria-label="anchor" href="#%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5-%D0%BE%D0%B1%D0%BE%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D1%8F"><i class="fas fa-link"></i></a>
 </h3>
 <p>В этой главе мы много будем работать с командной сторокой, и облачными сервисами. В примерах команд, которые мы будем использовать вы увидите специальные обозначения =, они будут выделены квадратными скобками, и написаны большими буквами. Эти значения необходимо заменить на ваши:</p>
 <ul>
@@ -118,14 +119,14 @@
 <p>Необходимо заменить на:</p>
 <pre><code>docker push gcr.io/tg-bot-091276/my-bot</code></pre>
 </div>
-<div id="введение-в-google-cloude-run" class="section level3" number="9.1.2">
+<div id="введение-в-google-cloude-run" class="section level3" number="10.1.2">
 <h3>
-<span class="header-section-number">9.1.2</span> Введение в Google Cloude Run<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-google-cloude-run"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.2</span> Введение в Google Cloude Run<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-google-cloude-run"><i class="fas fa-link"></i></a>
 </h3>
 <p>Google Cloud Run — это полностью управляемый сервис от Google Cloud, который позволяет развёртывать и масштабировать контейнерные приложения. Он предназначен для запуска HTTP-приложений и других серверных функций без необходимости управления серверной инфраструктурой. Основные преимущества Cloud Run включают автоматическое масштабирование, оплату только за фактическое использование и интеграцию с другими сервисами Google Cloud.</p>
-<div id="services-и-jobs-в-google-cloud-run" class="section level4" number="9.1.2.1">
+<div id="services-и-jobs-в-google-cloud-run" class="section level4" number="10.1.2.1">
 <h4>
-<span class="header-section-number">9.1.2.1</span> Services и Jobs в Google Cloud Run<a class="anchor" aria-label="anchor" href="#services-%D0%B8-jobs-%D0%B2-google-cloud-run"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.2.1</span> Services и Jobs в Google Cloud Run<a class="anchor" aria-label="anchor" href="#services-%D0%B8-jobs-%D0%B2-google-cloud-run"><i class="fas fa-link"></i></a>
 </h4>
 <p>Google Cloud Run позволяет вам создать 2 типа заданий:</p>
 <p><strong>Jobs (Задачи):</strong>
@@ -156,20 +157,20 @@ Cloud Run Services предназначены для обслуживания HT
 <p>То есть, с помощью Job мы можем настроить запуск скрипта по расписанию, например, уже знакомого нам по первой главе скрипта, который запрашивает курсы валют и отправляет их в Telegram. С помощью Service мы можем развернуть полноценного бота с поддержкой команд и клавиатур, который будет обрабатывать запросы пользователей. Далее разберёмся с обеими функциями Google Cloud Run.</p>
 </div>
 </div>
-<div id="как-настроить-запуск-скрипта-по-рассписанию-с-помощью-google-cloude-run-job" class="section level3" number="9.1.3">
+<div id="как-настроить-запуск-скрипта-по-рассписанию-с-помощью-google-cloude-run-job" class="section level3" number="10.1.3">
 <h3>
-<span class="header-section-number">9.1.3</span> Как настроить запуск скрипта по рассписанию с помощью Google Cloude Run Job<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-%D0%BF%D0%BE-%D1%80%D0%B0%D1%81%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8E-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-google-cloude-run-job"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3</span> Как настроить запуск скрипта по рассписанию с помощью Google Cloude Run Job<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-%D0%BF%D0%BE-%D1%80%D0%B0%D1%81%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8E-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-google-cloude-run-job"><i class="fas fa-link"></i></a>
 </h3>
-<div id="видео" class="section level4" number="9.1.3.1">
+<div id="видео" class="section level4" number="10.1.3.1">
 <h4>
-<span class="header-section-number">9.1.3.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE"><i class="fas fa-link"></i></a>
 </h4>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zdqRR-3ZFkM?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
 </iframe>
 </div>
-<div id="обзор-рабочего-процесса-1" class="section level4" number="9.1.3.2">
+<div id="обзор-рабочего-процесса-1" class="section level4" number="10.1.3.2">
 <h4>
-<span class="header-section-number">9.1.3.2</span> Обзор рабочего процесса<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3.2</span> Обзор рабочего процесса<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>Весь рабочий процесс по настройке запуска R-скрипта по расписанию выглядит следующим образом:</p>
 <ol style="list-style-type: decimal">
@@ -184,9 +185,9 @@ Cloud Run Services предназначены для обслуживания HT
 </ol>
 <p>Теперь давайте рассмотрим каждый из этих шагов подробнее.</p>
 </div>
-<div id="настройка-проекта-в-google-cloud" class="section level4" number="9.1.3.3">
+<div id="настройка-проекта-в-google-cloud" class="section level4" number="10.1.3.3">
 <h4>
-<span class="header-section-number">9.1.3.3</span> Настройка проекта в Google Cloud<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0-%D0%B2-google-cloud"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3.3</span> Настройка проекта в Google Cloud<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0-%D0%B2-google-cloud"><i class="fas fa-link"></i></a>
 </h4>
 <ol style="list-style-type: decimal">
 <li>Переходим в <a href="https://console.cloud.google.com/welcome">Google Cloud Console</a>
@@ -204,12 +205,12 @@ Cloud Run Services предназначены для обслуживания HT
 <div class="inline-figure"><img src="img/9-1.png"></div>
 <p>При желании активировать необходимые API вы сможете позже через Google Cloud SDK.</p>
 </div>
-<div id="скрипт-который-будем-разворачивать-в-google-cloud-run" class="section level4" number="9.1.3.4">
+<div id="скрипт-который-будем-разворачивать-в-google-cloud-run" class="section level4" number="10.1.3.4">
 <h4>
-<span class="header-section-number">9.1.3.4</span> Скрипт который будем разворачивать в Google Cloud Run<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D0%B9-%D0%B1%D1%83%D0%B4%D0%B5%D0%BC-%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D1%82%D1%8C-%D0%B2-google-cloud-run"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3.4</span> Скрипт который будем разворачивать в Google Cloud Run<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D0%B9-%D0%B1%D1%83%D0%B4%D0%B5%D0%BC-%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D1%82%D1%8C-%D0%B2-google-cloud-run"><i class="fas fa-link"></i></a>
 </h4>
 <p>Ниже приведен листинг скрипта, который мы будем запускать по расписанию:</p>
-<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jeroen.r-universe.dev/jsonlite">jsonlite</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
@@ -223,7 +224,7 @@ Cloud Run Services предназначены для обслуживания HT
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">send_telegram_message</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot_token</span>, <span class="va">chat_id</span>, <span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu">Bot</span><span class="op">(</span>token <span class="op">=</span> <span class="va">bot_token</span><span class="op">)</span></span>
+<span>  <span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="va">bot_token</span><span class="op">)</span></span>
 <span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">chat_id</span>, text <span class="op">=</span> <span class="va">message</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
@@ -251,38 +252,38 @@ Cloud Run Services предназначены для обслуживания HT
 <span><span class="fu">execute_script</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Чтобы использовать этот же код, вам необходимо получить API-ключ на сайте exchangerate-api.com. Файл с R-кодом в данном случае называется currency_rates_alert.R, и это имя файла будет использоваться на следующем шаге.</p>
 </div>
-<div id="создаём-dockerfile" class="section level4" number="9.1.3.5">
+<div id="создаём-dockerfile" class="section level4" number="10.1.3.5">
 <h4>
-<span class="header-section-number">9.1.3.5</span> Создаём Dockerfile<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-dockerfile"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3.5</span> Создаём Dockerfile<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-dockerfile"><i class="fas fa-link"></i></a>
 </h4>
 <p>С Dockerfile и функционалом Docker вы познакомились в предыдущей главе <a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80">Упаковываем бота в Docker контейнер</a>. Для нашего скрипта нужен следующий Dockerfile:</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb130-1"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-1" tabindex="-1"></a><span class="kw">FROM</span> rocker/r-base:latest</span>
-<span id="cb130-2"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-2" tabindex="-1"></a></span>
-<span id="cb130-3"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-3" tabindex="-1"></a><span class="kw">SHELL</span> [<span class="st">"/bin/bash"</span>, <span class="st">"-o"</span>, <span class="st">"pipefail"</span>, <span class="st">"-e"</span>, <span class="st">"-u"</span>, <span class="st">"-x"</span>, <span class="st">"-c"</span>]</span>
-<span id="cb130-4"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-4" tabindex="-1"></a><span class="kw">USER</span> 0</span>
-<span id="cb130-5"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-5" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> r-base r-base-core r-base-dev <span class="dt">\</span></span>
-<span id="cb130-6"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-6" tabindex="-1"></a>    libcurl4-openssl-dev libssl-dev <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
-<span id="cb130-7"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-7" tabindex="-1"></a>    <span class="fu">rm</span> <span class="at">-r</span> /var/lib/apt/lists/<span class="pp">*</span></span>
-<span id="cb130-8"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-8" tabindex="-1"></a></span>
-<span id="cb130-9"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-9" tabindex="-1"></a><span class="co"># Установка необходимых пакетов</span></span>
-<span id="cb130-10"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-10" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages(c('httr', 'jsonlite', 'telegram.bot', 'stringr'), repos = 'http://cran.us.r-project.org')"</span></span>
-<span id="cb130-11"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-11" tabindex="-1"></a></span>
-<span id="cb130-12"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-12" tabindex="-1"></a><span class="co"># Копирование R-скрипта в контейнер</span></span>
-<span id="cb130-13"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-13" tabindex="-1"></a><span class="kw">COPY</span> currency_rates_alert.R /app/currency_rates_alert.R</span>
-<span id="cb130-14"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-14" tabindex="-1"></a></span>
-<span id="cb130-15"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-15" tabindex="-1"></a><span class="co"># Установка переменных окружения (замените на свои значения)</span></span>
-<span id="cb130-16"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-16" tabindex="-1"></a><span class="kw">ENV</span> EXCHANGE_RATE_API_KEY=ВАШ_API_КЛЮЧ_К_EXCHANGERATE_API</span>
-<span id="cb130-17"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-17" tabindex="-1"></a><span class="kw">ENV</span> TELEGRAM_BOT_TOKEN=ТОКЕН_ВАШЕГО_БОТА</span>
-<span id="cb130-18"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-18" tabindex="-1"></a><span class="kw">ENV</span> TELEGRAM_CHAT_ID=ID_ЧАТА_КУДА_НАДО_ПРИСЛАТЬ_СООБЩЕНИЕ</span>
-<span id="cb130-19"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-19" tabindex="-1"></a></span>
-<span id="cb130-20"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-20" tabindex="-1"></a><span class="co"># Запуск R-скрипта</span></span>
-<span id="cb130-21"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb130-21" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"Rscript"</span>, <span class="st">"/app/currency_rates_alert.R"</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb146-1"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-1" tabindex="-1"></a><span class="kw">FROM</span> rocker/r-base:latest</span>
+<span id="cb146-2"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-2" tabindex="-1"></a></span>
+<span id="cb146-3"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-3" tabindex="-1"></a><span class="kw">SHELL</span> [<span class="st">"/bin/bash"</span>, <span class="st">"-o"</span>, <span class="st">"pipefail"</span>, <span class="st">"-e"</span>, <span class="st">"-u"</span>, <span class="st">"-x"</span>, <span class="st">"-c"</span>]</span>
+<span id="cb146-4"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-4" tabindex="-1"></a><span class="kw">USER</span> 0</span>
+<span id="cb146-5"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-5" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> r-base r-base-core r-base-dev <span class="dt">\</span></span>
+<span id="cb146-6"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-6" tabindex="-1"></a>    libcurl4-openssl-dev libssl-dev <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb146-7"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-7" tabindex="-1"></a>    <span class="fu">rm</span> <span class="at">-r</span> /var/lib/apt/lists/<span class="pp">*</span></span>
+<span id="cb146-8"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-8" tabindex="-1"></a></span>
+<span id="cb146-9"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-9" tabindex="-1"></a><span class="co"># Установка необходимых пакетов</span></span>
+<span id="cb146-10"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-10" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages(c('httr', 'jsonlite', 'telegram.bot', 'stringr'), repos = 'http://cran.us.r-project.org')"</span></span>
+<span id="cb146-11"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-11" tabindex="-1"></a></span>
+<span id="cb146-12"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-12" tabindex="-1"></a><span class="co"># Копирование R-скрипта в контейнер</span></span>
+<span id="cb146-13"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-13" tabindex="-1"></a><span class="kw">COPY</span> currency_rates_alert.R /app/currency_rates_alert.R</span>
+<span id="cb146-14"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-14" tabindex="-1"></a></span>
+<span id="cb146-15"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-15" tabindex="-1"></a><span class="co"># Установка переменных окружения (замените на свои значения)</span></span>
+<span id="cb146-16"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-16" tabindex="-1"></a><span class="kw">ENV</span> EXCHANGE_RATE_API_KEY=ВАШ_API_КЛЮЧ_К_EXCHANGERATE_API</span>
+<span id="cb146-17"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-17" tabindex="-1"></a><span class="kw">ENV</span> TELEGRAM_BOT_TOKEN=ТОКЕН_ВАШЕГО_БОТА</span>
+<span id="cb146-18"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-18" tabindex="-1"></a><span class="kw">ENV</span> TELEGRAM_CHAT_ID=ID_ЧАТА_КУДА_НАДО_ПРИСЛАТЬ_СООБЩЕНИЕ</span>
+<span id="cb146-19"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-19" tabindex="-1"></a></span>
+<span id="cb146-20"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-20" tabindex="-1"></a><span class="co"># Запуск R-скрипта</span></span>
+<span id="cb146-21"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb146-21" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"Rscript"</span>, <span class="st">"/app/currency_rates_alert.R"</span>]</span></code></pre></div>
 <pre><code>## dockerfile</code></pre>
 <p>В Dockerfile замените <code>ВАШ_API_КЛЮЧ_К_EXCHANGERATE_API</code>, <code>ТОКЕН_ВАШЕГО_БОТА</code> и <code>ID_ЧАТА_КУДА_НАДО_ПРИСЛАТЬ_СООБЩЕНИЕ</code> на ваши значения. Так же если файл с вашим R скриптом имеет другое название, то и в Dockerfile его необходимо изменить с <code>currency_rates_alert.R</code>.</p>
 </div>
-<div id="тестовая-сборка-образа-и-запуск-контейнера" class="section level4" number="9.1.3.6">
+<div id="тестовая-сборка-образа-и-запуск-контейнера" class="section level4" number="10.1.3.6">
 <h4>
-<span class="header-section-number">9.1.3.6</span> Тестовая сборка образа и запуск контейнера<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2%D0%B0%D1%8F-%D1%81%D0%B1%D0%BE%D1%80%D0%BA%D0%B0-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B0-%D0%B8-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3.6</span> Тестовая сборка образа и запуск контейнера<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2%D0%B0%D1%8F-%D1%81%D0%B1%D0%BE%D1%80%D0%BA%D0%B0-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B0-%D0%B8-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%B0"><i class="fas fa-link"></i></a>
 </h4>
 <p>Когда ваш скрипт готов и вы убедились, что он работает, запустив его предварительно в интерактивном режиме RStudio, протестируйте сборку образа и запуск контейнера локально.</p>
 <p>давайте перейдём в директорию с нашим проектом, т.е. в папку, в которой у вас хранится R скрипт и Dockerfile:</p>
@@ -296,9 +297,9 @@ docker run --name [CONTAINER NAME] --rm [IMAGE NAME]</code></pre>
 <p>Подробности работы с Docker смотрите в главе <a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html#%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80">Упаковываем бота в Docker контейнер</a>.</p>
 </blockquote>
 </div>
-<div id="инициализация-google-cloud-sdk" class="section level4" number="9.1.3.7">
+<div id="инициализация-google-cloud-sdk" class="section level4" number="10.1.3.7">
 <h4>
-<span class="header-section-number">9.1.3.7</span> Инициализация Google Cloud SDK<a class="anchor" aria-label="anchor" href="#%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-google-cloud-sdk"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3.7</span> Инициализация Google Cloud SDK<a class="anchor" aria-label="anchor" href="#%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-google-cloud-sdk"><i class="fas fa-link"></i></a>
 </h4>
 <p>Если у вас еще не установлен Google Cloud SDK, следуйте <a href="https://cloud.google.com/sdk/docs/install-sdk">этой инструкции</a> для его установки. После установки запустите Google Cloud SDK и выполните инициализацию:</p>
 <pre><code>gcloud init</code></pre>
@@ -312,9 +313,9 @@ gcloud services enable artifactregistry.googleapis.com</code></pre>
 <p>Проверить список активированных в проекте API можно следующей командой:</p>
 <pre><code>gcloud services list --enabled</code></pre>
 </div>
-<div id="тегирование-и-загрузка-docker-образа-в-google-container-registry" class="section level4" number="9.1.3.8">
+<div id="тегирование-и-загрузка-docker-образа-в-google-container-registry" class="section level4" number="10.1.3.8">
 <h4>
-<span class="header-section-number">9.1.3.8</span> Тегирование и загрузка Docker-образа в Google Container Registry<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D0%B3%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-docker-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B0-%D0%B2-google-container-registry"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3.8</span> Тегирование и загрузка Docker-образа в Google Container Registry<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D0%B3%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-docker-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B0-%D0%B2-google-container-registry"><i class="fas fa-link"></i></a>
 </h4>
 <p>После успешного локального тестирования можно приступать к отравке образа и разворачиванию контейнера в Google Cloud. Но до этого образ необходимо тегорировать. Тегирование Docker-образа необходимо для его идентификации и управления версиями. В контексте работы с Google Container Registry (GCR) тегирование помогает определить, какой именно образ вы хотите загрузить, развернуть или использовать в дальнейшем.</p>
 <pre><code>docker tag [IMAGE NAME] gcr.io/[PROJECT ID]/[IMAGE NAME]
@@ -323,9 +324,9 @@ docker push gcr.io/[PROJECT ID]/[IMAGE NAME]</code></pre>
 <p>Замените [PROJECT ID] на идентификатор вашего проекта в Google Cloud.</p>
 </blockquote>
 </div>
-<div id="настраиваем-job-в-google-cloud-run" class="section level4" number="9.1.3.9">
+<div id="настраиваем-job-в-google-cloud-run" class="section level4" number="10.1.3.9">
 <h4>
-<span class="header-section-number">9.1.3.9</span> Настраиваем Job в Google Cloud Run<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%B0%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-job-%D0%B2-google-cloud-run"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3.9</span> Настраиваем Job в Google Cloud Run<a class="anchor" aria-label="anchor" href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%B0%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-job-%D0%B2-google-cloud-run"><i class="fas fa-link"></i></a>
 </h4>
 <p>Для удобства дальнейшей работы перейдите в веб интерфейс сервиса <a href="https://console.cloud.google.com/run/jobs">Google Cloud Run</a> на вкладку Jobs и нажмите кнопку “Create Job”.</p>
 <div class="inline-figure"><img src="img/9-3.png"></div>
@@ -333,16 +334,16 @@ docker push gcr.io/[PROJECT ID]/[IMAGE NAME]</code></pre>
 <p><img src="img/9-4.png"><img src="img/9-5.png"></p>
 <p>После чего можете задать произвольное имя для джобы, и нажать “Create”.</p>
 </div>
-<div id="тестирование-созданной-job-в-google-cloud-run" class="section level4" number="9.1.3.10">
+<div id="тестирование-созданной-job-в-google-cloud-run" class="section level4" number="10.1.3.10">
 <h4>
-<span class="header-section-number">9.1.3.10</span> Тестирование созданной Job в Google Cloud Run<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%BD%D0%BE%D0%B9-job-%D0%B2-google-cloud-run"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3.10</span> Тестирование созданной Job в Google Cloud Run<a class="anchor" aria-label="anchor" href="#%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%BD%D0%BE%D0%B9-job-%D0%B2-google-cloud-run"><i class="fas fa-link"></i></a>
 </h4>
 <p>Для тестирования просто откройте нужную Job и нажмите “Execute”. Если задание успешно выполнися то можно переходить на вкладку TRIGGERS и создать расписание запуска.</p>
 <div class="inline-figure"><img src="img/9-6.png"></div>
 </div>
-<div id="создаём-тригер-для-запуска-созданной-job" class="section level4" number="9.1.3.11">
+<div id="создаём-тригер-для-запуска-созданной-job" class="section level4" number="10.1.3.11">
 <h4>
-<span class="header-section-number">9.1.3.11</span> Создаём тригер для запуска созданной Job<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D1%82%D1%80%D0%B8%D0%B3%D0%B5%D1%80-%D0%B4%D0%BB%D1%8F-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%BD%D0%BE%D0%B9-job"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3.11</span> Создаём тригер для запуска созданной Job<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D1%82%D1%80%D0%B8%D0%B3%D0%B5%D1%80-%D0%B4%D0%BB%D1%8F-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%BD%D0%BE%D0%B9-job"><i class="fas fa-link"></i></a>
 </h4>
 <p>Мы на финальном шаге, всё, что нам остаётся это создать триггер для запуска созданного задания. На вкладке “TRIGGERS” жмём кнопку “ADD SCHEDULER TRRIGER”.</p>
 <p>В открывшемся диалоговом окне,в поле “Frequency” вам необходимо написать CRON выражение, для создания расписания запуска задания. В первой главе мы уже сталкивались с CRON выражении в разделе <a href="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B8-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D1%81-%D0%B5%D0%B3%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-telegram.html#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%B0%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D1%80%D0%B0%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B8-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%B8%D1%8F-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-github-actions">Настраиваем запуск расписания отправки сообщения с помощью GitHub Actions</a>. Но я продублирую тут эту информацию.</p>
@@ -389,21 +390,21 @@ docker push gcr.io/[PROJECT ID]/[IMAGE NAME]</code></pre>
 <p>Но, как по мне проще создавать Job и добавить ей триггеры через Веб интерфейс.</p>
 </div>
 </div>
-<div id="разворачиваем-telegram-бота-в-google-cloud-run-service" class="section level3" number="9.1.4">
+<div id="разворачиваем-telegram-бота-в-google-cloud-run-service" class="section level3" number="10.1.4">
 <h3>
-<span class="header-section-number">9.1.4</span> Разворачиваем Telegram бота в Google Cloud Run Service<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-telegram-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-google-cloud-run-service"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.4</span> Разворачиваем Telegram бота в Google Cloud Run Service<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-telegram-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-google-cloud-run-service"><i class="fas fa-link"></i></a>
 </h3>
 <p>Как я уже писал в начале этой главе в сервисе Google Cloud Run есть 2 типа заданий, разовое - Job, и постоянное фоновое - Service. Для того, что бы запустить бота, который будет крутится в фоновом режиме и обрабатывать входящие запросы нам необходимо использовать именно Service.</p>
-<div id="видео-1" class="section level4" number="9.1.4.1">
+<div id="видео-1" class="section level4" number="10.1.4.1">
 <h4>
-<span class="header-section-number">9.1.4.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.4.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-1"><i class="fas fa-link"></i></a>
 </h4>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/YCXTjodFmqo?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
 </iframe>
 </div>
-<div id="рабочий-процесс" class="section level4" number="9.1.4.2">
+<div id="рабочий-процесс" class="section level4" number="10.1.4.2">
 <h4>
-<span class="header-section-number">9.1.4.2</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.4.2</span> Рабочий процесс<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81"><i class="fas fa-link"></i></a>
 </h4>
 <p>При развёртывании бота в Google Cloud Run Service алгоритм ваших действий будет следующим:</p>
 <ol style="list-style-type: decimal">
@@ -417,14 +418,14 @@ docker push gcr.io/[PROJECT ID]/[IMAGE NAME]</code></pre>
 <li>Исправьте в переменных среды Webhook URL, выполните повторную сборку, отправку и развёртку вашего бота в Google Cloud Run.</li>
 </ol>
 </div>
-<div id="webhook-вместо-polling" class="section level4" number="9.1.4.3">
+<div id="webhook-вместо-polling" class="section level4" number="10.1.4.3">
 <h4>
-<span class="header-section-number">9.1.4.3</span> Webhook вместо polling<a class="anchor" aria-label="anchor" href="#webhook-%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%BE-polling"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.4.3</span> Webhook вместо polling<a class="anchor" aria-label="anchor" href="#webhook-%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%BE-polling"><i class="fas fa-link"></i></a>
 </h4>
 <p>Прилшло время более подробно разобраться с тем, как устроен механизм получения ботом обновлений, и совсем немного окунутся в историю развития клиент серверных технологий.</p>
-<div id="разница-между-механизмами-polling-и-webhook" class="section level5" number="9.1.4.3.1">
+<div id="разница-между-механизмами-polling-и-webhook" class="section level5" number="10.1.4.3.1">
 <h5>
-<span class="header-section-number">9.1.4.3.1</span> Разница между механизмами polling и webhook<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%BD%D0%B8%D1%86%D0%B0-%D0%BC%D0%B5%D0%B6%D0%B4%D1%83-%D0%BC%D0%B5%D1%85%D0%B0%D0%BD%D0%B8%D0%B7%D0%BC%D0%B0%D0%BC%D0%B8-polling-%D0%B8-webhook"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.4.3.1</span> Разница между механизмами polling и webhook<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%BD%D0%B8%D1%86%D0%B0-%D0%BC%D0%B5%D0%B6%D0%B4%D1%83-%D0%BC%D0%B5%D1%85%D0%B0%D0%BD%D0%B8%D0%B7%D0%BC%D0%B0%D0%BC%D0%B8-polling-%D0%B8-webhook"><i class="fas fa-link"></i></a>
 </h5>
 <p>В ранние годы веб-технологий, когда серверные технологии и базы данных только начинали развиваться, коммуникация между клиентом (в нашем случае машиной на которой работает скрипт вашего бота) и сервером (в нашем случае сервер Telegram API) была довольно простой. Клиенты периодически отправляли запросы к серверу для проверки наличия новых данных. Такой механизм получил название polling.</p>
 <p>Polling — это метод, при котором бот регулярно (с определённым интервалом) отправляет запросы к серверу Telegram для проверки наличия новых обновлений. Внутри класса Updater технически это реализуется так:</p>
@@ -445,13 +446,13 @@ docker push gcr.io/[PROJECT ID]/[IMAGE NAME]</code></pre>
 <p>Если провести аналогию из реального мира, то представьте, что у вас есть старый почтовый ящик, и каждый день вы отправляетесь к нему, чтобы проверить, пришла ли новая почта. Вы открываете ящик и смотрите, есть ли что-то новое. Если нет, вы возвращаетесь домой и снова идёте проверять на следующий день. Это и есть polling. Теперь представьте, что у вас есть специальный почтальон, который приходит к вам домой каждый раз, когда приходит новая почта. Вместо того, чтобы самому ходить к почтовому ящику, почтальон вам сам звонит в дверь и приносит письмо прямо к вам. Это и есть webhook.</p>
 <p>Так вот, запустить механизм polling легко и просто на локальной машине, т.к. от вас не требуется практически никаких дополнительных настроект, но вот облачные технологии стремятся к тому, что бы экономить выделенные ресурсы, поэтому они позволяют вам развернуть бота используя технологию Webhook, Google Cloud Run не является тут исключением. К тому же технология Webhook позволит вам экономить на использовании раздичных облачных систем для развёртования бота, т.к. зачастую вы там платите только за используемые ресурсы.</p>
 </div>
-<div id="реализация-webhook-в-пакете-telegram.bot" class="section level5" number="9.1.4.3.2">
+<div id="реализация-webhook-в-пакете-telegram.bot" class="section level5" number="10.1.4.3.2">
 <h5>
-<span class="header-section-number">9.1.4.3.2</span> Реализация webhook в пакете telegram.bot<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-webhook-%D0%B2-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B5-telegram.bot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.4.3.2</span> Реализация webhook в пакете telegram.bot<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-webhook-%D0%B2-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B5-telegram.bot"><i class="fas fa-link"></i></a>
 </h5>
 <p>Изначально пакет <code>telegram.bot</code> включал в свой функционал только polling, метод обновления данных webhook в него был добавлен только в версии 3.0.0 сторонним разработчиком, но сделано это было по моей просьбе, кому интересно история добавления этого метода началась в этой <a href="https://github.com/virtualstaticvoid/heroku-buildpack-r/issues/162">ветке</a> на GitHub, а [тут]9https://github.com/ebeneditos/telegram.bot/pull/27) уже был добавлен класс <code>Webhook</code> в пакет.</p>
 <p>Класс <code>Webhook</code> очень похож на <code>Updater</code>, ниже пример работы с ним:</p>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Создаём метод start</span></span>
 <span><span class="va">start</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span><span class="op">)</span> <span class="op">{</span></span>
 <span> <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span></span>
@@ -464,14 +465,14 @@ docker push gcr.io/[PROJECT ID]/[IMAGE NAME]</code></pre>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Инициализируем экземпляр класса Webhook</span></span>
-<span><span class="va">webhook</span> <span class="op">&lt;-</span> <span class="fu">Webhook</span><span class="op">(</span></span>
+<span><span class="va">webhook</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Webhook.html">Webhook</a></span><span class="op">(</span></span>
 <span>  webhook_url <span class="op">=</span> <span class="st">"https://example.com/webhook"</span>, </span>
 <span>  token       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"TOKEN"</span><span class="op">)</span>, </span>
 <span>  verbose     <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># wire up handler</span></span>
-<span><span class="va">webhook</span> <span class="op">&lt;-</span> <span class="va">webhook</span> <span class="op">+</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">"start"</span>, <span class="va">start</span><span class="op">)</span></span>
+<span><span class="va">webhook</span> <span class="op">&lt;-</span> <span class="va">webhook</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">"start"</span>, <span class="va">start</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># start polling</span></span>
 <span><span class="va">webhook</span><span class="op">$</span><span class="fu">start_server</span><span class="op">(</span>host <span class="op">=</span> <span class="st">"0.0.0.0"</span>, port <span class="op">=</span> <span class="fl">8080</span><span class="op">)</span></span>
@@ -481,275 +482,12 @@ docker push gcr.io/[PROJECT ID]/[IMAGE NAME]</code></pre>
 <p>Т.е. процесс такой же как и при создании <code>Updater</code>, но помимо токена бота вам ещё необходимо указать webhook url, на который telegram будет присылать для бота обновления. О том как его получить мы поговорим немного позже. Далее, так же как и с Updater, вы просто добавляете в Webhook все обработчики, и запускаете процесс обработки обновления методом <code>start_server()</code>, который является аналогом <code>start_polling()</code>.</p>
 </div>
 </div>
-<div id="код-бота-запрашивающего-курсы-валют" class="section level4" number="9.1.4.4">
+<div id="код-бота-запрашивающего-курсы-валют" class="section level4" number="10.1.4.4">
 <h4>
-<span class="header-section-number">9.1.4.4</span> Код бота запрашивающего курсы валют<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%B4-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B7%D0%B0%D0%BF%D1%80%D0%B0%D1%88%D0%B8%D0%B2%D0%B0%D1%8E%D1%89%D0%B5%D0%B3%D0%BE-%D0%BA%D1%83%D1%80%D1%81%D1%8B-%D0%B2%D0%B0%D0%BB%D1%8E%D1%82"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.4.4</span> Код бота запрашивающего курсы валют<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%B4-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B7%D0%B0%D0%BF%D1%80%D0%B0%D1%88%D0%B8%D0%B2%D0%B0%D1%8E%D1%89%D0%B5%D0%B3%D0%BE-%D0%BA%D1%83%D1%80%D1%81%D1%8B-%D0%B2%D0%B0%D0%BB%D1%8E%D1%82"><i class="fas fa-link"></i></a>
 </h4>
 <p>В этом разделе мы продолжим развивать тему прошлого раздела о получении информации курсов валют, но теперь мы напишем полноценного бота, которого в любой момент можно спросить курс любой валюты.</p>
 <p>Код нашего бота:</p>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jeroen.r-universe.dev/jsonlite">jsonlite</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Метод запроса курса валют</span></span>
-<span><span class="va">get_cur_rate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span>, <span class="va">args</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  </span>
-<span>  <span class="va">currency_code</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span><span class="op">(</span><span class="va">args</span><span class="op">)</span></span>
-<span>  <span class="va">api_key</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">'EXCHANGERATE_API_KEY'</span><span class="op">)</span></span>
-<span>  <span class="va">url</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"https://api.exchangerate-api.com/v4/latest/USD?apikey="</span>, <span class="va">api_key</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="va">response</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
-<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">response</span>, <span class="st">"text"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">currency_code</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">rates</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">args</span>, <span class="st">" is Invalid currency code."</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span>  </span>
-<span>  <span class="va">rate</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">rates</span><span class="op">[[</span><span class="va">currency_code</span><span class="op">]</span><span class="op">]</span></span>
-<span>  <span class="va">message</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Курс %s к USD: %f"</span>, <span class="va">currency_code</span>, <span class="va">rate</span><span class="op">)</span></span>
-<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, text <span class="op">=</span> <span class="va">message</span><span class="op">)</span></span>
-<span>  </span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="co"># Создаём Webhook</span></span>
-<span><span class="va">webhook</span> <span class="op">&lt;-</span> <span class="fu">Webhook</span><span class="op">(</span></span>
-<span>  webhook_url <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">'WEBHOOK_URL'</span><span class="op">)</span>, </span>
-<span>  token       <span class="op">=</span> <span class="fu">bot_token</span><span class="op">(</span><span class="st">'CURBOT'</span><span class="op">)</span>, </span>
-<span>  verbose     <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Добавляем обработчики</span></span>
-<span><span class="va">webhook</span> <span class="op">&lt;-</span> <span class="va">webhook</span> <span class="op">+</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">"get_cur_rate"</span>, <span class="va">get_cur_rate</span>, pass_args <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Запускаем Webhook</span></span>
-<span><span class="va">webhook</span><span class="op">$</span><span class="fu">start_server</span><span class="op">(</span></span>
-<span>  host <span class="op">=</span> <span class="st">"0.0.0.0"</span>,</span>
-<span>  port <span class="op">=</span> <span class="fl">8080</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>В основе метода <code>get_cur_rate</code> лежит логика, описанная в прошлом разделе. Бот получает сообщение в котором указан код валют, далее запрашивает курсы из exchangerate-api, парсит результат, и отправляет в ответе курс по указанной ранее валюте.</p>
-<p>Далее мы инициализируем объект класса Webhook, и передаём в аргумент <code>webhook_url</code> значение переменной среды <code>WEBHOOK_URL</code>, а в аргумент <code>token</code>, значение переменной <code>R_TELEGRAM_BOT_CURBOT</code>. Значения этих переменных мы будем задавать в Dockerfile.</p>
-</div>
-<div id="собираем-docker-образ" class="section level4" number="9.1.4.5">
-<h4>
-<span class="header-section-number">9.1.4.5</span> Собираем Docker образ<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B1%D0%B8%D1%80%D0%B0%D0%B5%D0%BC-docker-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7"><i class="fas fa-link"></i></a>
-</h4>
-<p>Для сборки нужного Docker образа мы прописываем следующий Dockerfile:</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb143-1"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-1" tabindex="-1"></a><span class="co"># Use the official R base image</span></span>
-<span id="cb143-2"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-2" tabindex="-1"></a><span class="kw">FROM</span> rocker/r-ver:4.1.0</span>
-<span id="cb143-3"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-3" tabindex="-1"></a></span>
-<span id="cb143-4"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-4" tabindex="-1"></a><span class="co"># Set the shell</span></span>
-<span id="cb143-5"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-5" tabindex="-1"></a><span class="kw">SHELL</span> [<span class="st">"/bin/bash"</span>, <span class="st">"-o"</span>, <span class="st">"pipefail"</span>, <span class="st">"-e"</span>, <span class="st">"-u"</span>, <span class="st">"-x"</span>, <span class="st">"-c"</span>]</span>
-<span id="cb143-6"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-6" tabindex="-1"></a></span>
-<span id="cb143-7"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-7" tabindex="-1"></a><span class="co"># Install necessary system dependencies</span></span>
-<span id="cb143-8"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-8" tabindex="-1"></a><span class="kw">USER</span> root</span>
-<span id="cb143-9"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-9" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> <span class="dt">\</span></span>
-<span id="cb143-10"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-10" tabindex="-1"></a>    libcurl4-openssl-dev <span class="dt">\</span></span>
-<span id="cb143-11"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-11" tabindex="-1"></a>    libssl-dev <span class="dt">\</span></span>
-<span id="cb143-12"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-12" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> /var/lib/apt/lists/<span class="pp">*</span></span>
-<span id="cb143-13"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-13" tabindex="-1"></a></span>
-<span id="cb143-14"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-14" tabindex="-1"></a><span class="co"># Install necessary R packages</span></span>
-<span id="cb143-15"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-15" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages(c('httr', 'jsonlite'))"</span></span>
-<span id="cb143-16"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-16" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages('telegram.bot', repos = 'http://cran.us.r-project.org')"</span></span>
-<span id="cb143-17"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-17" tabindex="-1"></a></span>
-<span id="cb143-18"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-18" tabindex="-1"></a><span class="kw">ENV</span> EXCHANGERATE_API_KEY=[ВАШ КЛЮЧ В exchangerate-api.com]</span>
-<span id="cb143-19"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-19" tabindex="-1"></a><span class="kw">ENV</span> R_TELEGRAM_BOT_CURBOT=[ТОКЕН ВАШЕГО БОТА]</span>
-<span id="cb143-20"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-20" tabindex="-1"></a><span class="kw">ENV</span> WEBHOOK_URL=https://my-service.a.run.app/webhook</span>
-<span id="cb143-21"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-21" tabindex="-1"></a></span>
-<span id="cb143-22"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-22" tabindex="-1"></a><span class="co"># Copy the R script to the container</span></span>
-<span id="cb143-23"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-23" tabindex="-1"></a><span class="kw">COPY</span> curbot.R /app/curbot.R</span>
-<span id="cb143-24"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-24" tabindex="-1"></a></span>
-<span id="cb143-25"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-25" tabindex="-1"></a><span class="co"># Set the working directory</span></span>
-<span id="cb143-26"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-26" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
-<span id="cb143-27"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-27" tabindex="-1"></a></span>
-<span id="cb143-28"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-28" tabindex="-1"></a><span class="co"># Run the R script</span></span>
-<span id="cb143-29"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb143-29" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"Rscript"</span>, <span class="st">"/app/curbot.R"</span>]</span></code></pre></div>
-<pre><code>## dockerfile</code></pre>
-<p>На данном этапе этапе мы ещё не знаем URL нашего сервиса, поэтому в переменную WEBHOOK_URL пока что прописываем совершенно любой URL, можно даже не работающий. На второй итерации развёртки мы будем заменять значение этой переменной.</p>
-<p>Далее выполним локальную сборку образа, и тестовый локальный запуск контейнера.</p>
-<pre><code>docker build -t [IMAGE NAME] .
-docker run --name [CONTAINER NAME] --rm [IMAGE NAME]</code></pre>
-<p>Если контейнер был успешно запущен на этом этапе в консоли вы увидите примерно такое сообщение:</p>
-<pre><code>Starting webhook server...
-Listening on '0.0.0.0:8080'...
-Configuring webhook 'https://currency-bot-xxxxxxxx-ew.a.run.app'...
-Waiting for requests...</code></pre>
-<p>Это говорит о том, что контейнер был успешно запущен. Теперь перейдите в Docker и остановите этот контейнер, ваш бот на этом этапе отвечать на запросы не будет.</p>
-<div class="inline-figure"><img src="img/9-8.png"></div>
-</div>
-<div id="создание-и-настройка-проекта-в-google-cloud" class="section level4" number="9.1.4.6">
-<h4>
-<span class="header-section-number">9.1.4.6</span> Создание и настройка проекта в Google Cloud<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0-%D0%B2-google-cloud"><i class="fas fa-link"></i></a>
-</h4>
-<ol style="list-style-type: decimal">
-<li>Переходим в <a href="https://console.cloud.google.com/welcome">Google Cloud Console</a>
-</li>
-<li>С помощью выпадающего меню в верхнем левом углу экрана создаём новый проект</li>
-<li>Переходим в созданный проект</li>
-<li>Включаем в проекте необходимые API сервисы, в левом меню:
-<ol style="list-style-type: decimal">
-<li>Cloud Run Admin API</li>
-<li>Artifact Registry API</li>
-</ol>
-</li>
-</ol>
-<p>Включить данные API можно будет и с помощью Google Cloud SDK на следующем шаге.</p>
-<div class="inline-figure"><img src="img/9-1.png"></div>
-</div>
-<div id="инициализация-google-cloud-sdk-и-настройка-docker" class="section level4" number="9.1.4.7">
-<h4>
-<span class="header-section-number">9.1.4.7</span> Инициализация Google Cloud SDK и настройка Docker<a class="anchor" aria-label="anchor" href="#%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-google-cloud-sdk-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-docker"><i class="fas fa-link"></i></a>
-</h4>
-<p>Так же как и в разделе <a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-%D0%BF%D0%BE-%D1%80%D0%B0%D1%81%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8E-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-google-cloude-run-job">Как настроить запуск скрипта по рассписанию с помощью Google Cloude Run Job</a> перед тем как что либо публиковать в Google Cloud нам необходимо там авторизоваться, и настроить Docker на работу с Google Cloud Platform, делается это двумя командами.</p>
-<pre><code>gcloud init</code></pre>
-<p>Далее запуститься процесс инициализации, просто следуйте инструкциям, вам необходимо будет пройти авторизацию через браузер, выбрать нужный проект, и указать регион по умолчанию.</p>
-<p>Далее необходимо настроить Docker для работы с Google Cloud.</p>
-<pre><code>gcloud auth configure-docker</code></pre>
-<p>Если а прошлом шаге вы пропустили процесс активации необходимых API в вашем Google Cloud проекте, то на даном этапе вы можете это сделать прямо из Google Cloud SDK Shell:</p>
-<pre><code>gcloud services enable run.googleapis.com
-gcloud services enable artifactregistry.googleapis.com</code></pre>
-</div>
-<div id="отправка-docker-образа-в-google-cloud-и-первый-запуск-бота" class="section level4" number="9.1.4.8">
-<h4>
-<span class="header-section-number">9.1.4.8</span> Отправка Docker образа в Google Cloud и первый запуск бота<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-docker-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B0-%D0%B2-google-cloud-%D0%B8-%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D0%B9-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
-</h4>
-<p>После успешного локального тестирования мы можем тегировать и отправить наш Docker образ в Google Artifact Registry, для этого выполним следующие команды.</p>
-<pre><code>docker tag curbot gcr.io/[PROJECT ID]/[IMAGE NAME]
-docker push gcr.io/[PROJECT ID]/[IMAGE NAME]</code></pre>
-<p>Теперь пришло время первого запуска бота, выполняем следующую команду.</p>
-<pre><code>gcloud run deploy [SERVICE NAME] --image gcr.io/[PROJECT ID]/[IMAGE NAME] --platform managed --allow-unauthenticated</code></pre>
-<p>В случае успешного запуска в консоли вы увидите подобное сообщение:</p>
-<pre><code>Deploying container to Cloud Run service [SERVICE NAME] in project [PROJECT ID] region [africa-south1]
-OK Deploying new service... Done.
-OK Creating Revision...
-OK Routing traffic...
-OK Setting IAM Policy...
-Done.
-Service [SERVICE NAME] revision [currency-tg-bot-00001-6r2] has been deployed and is serving 100 percent of traffic.
-Service URL: https://currency-tg-bot-lmgsq7kjta-bq.a.run.app</code></pre>
-<p>Наш бот по прежнему не реагирует на сообщения, поскольку у него прописан неверный webhook URL. На данном этапе нам необходим было просто получить из Google Cloud Service URL нашего бота, который вы можете найти в последней строке сообщения, которое получили после успешного запуска сервиса. Останавливаем бота и копируем это URL, он нам понадобится на следующем шаге.</p>
-<pre><code>gcloud run services delete [SERVICE NAME] --platform managed</code></pre>
-</div>
-<div id="прописываем-правильный-webhook-url-и-перезапускаем-бота" class="section level4" number="9.1.4.9">
-<h4>
-<span class="header-section-number">9.1.4.9</span> Прописываем правильный Webhook URL и перезапускаем бота<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%BE%D0%BF%D0%B8%D1%81%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-webhook-url-%D0%B8-%D0%BF%D0%B5%D1%80%D0%B5%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
-</h4>
-<p>Итак, теперь у нас есть Service URL, полученный на прошлом шагу, в моём примере это <a href="https://currency-tg-bot-lmgsq7kjta-bq.a.run.app" class="uri">https://currency-tg-bot-lmgsq7kjta-bq.a.run.app</a>, для того, что бы из этого URL дслеать рабоичй Webhook URL достаточно просто добавить <code>/webhook</code>. Т.е. редактируем значение переменной <code>WEBHOOK_URL</code> в нашем Dickorfie:</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb154-1"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-1" tabindex="-1"></a><span class="co"># Use the official R base image</span></span>
-<span id="cb154-2"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-2" tabindex="-1"></a><span class="kw">FROM</span> rocker/r-ver:4.1.0</span>
-<span id="cb154-3"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-3" tabindex="-1"></a></span>
-<span id="cb154-4"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-4" tabindex="-1"></a><span class="co"># Set the shell</span></span>
-<span id="cb154-5"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-5" tabindex="-1"></a><span class="kw">SHELL</span> [<span class="st">"/bin/bash"</span>, <span class="st">"-o"</span>, <span class="st">"pipefail"</span>, <span class="st">"-e"</span>, <span class="st">"-u"</span>, <span class="st">"-x"</span>, <span class="st">"-c"</span>]</span>
-<span id="cb154-6"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-6" tabindex="-1"></a></span>
-<span id="cb154-7"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-7" tabindex="-1"></a><span class="co"># Install necessary system dependencies</span></span>
-<span id="cb154-8"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-8" tabindex="-1"></a><span class="kw">USER</span> root</span>
-<span id="cb154-9"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-9" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> <span class="dt">\</span></span>
-<span id="cb154-10"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-10" tabindex="-1"></a>    libcurl4-openssl-dev <span class="dt">\</span></span>
-<span id="cb154-11"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-11" tabindex="-1"></a>    libssl-dev <span class="dt">\</span></span>
-<span id="cb154-12"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-12" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> /var/lib/apt/lists/<span class="pp">*</span></span>
-<span id="cb154-13"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-13" tabindex="-1"></a></span>
-<span id="cb154-14"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-14" tabindex="-1"></a><span class="co"># Install necessary R packages</span></span>
-<span id="cb154-15"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-15" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages(c('httr', 'jsonlite', 'httpuv'))"</span></span>
-<span id="cb154-16"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-16" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages('telegram.bot', repos = 'http://cran.us.r-project.org')"</span></span>
-<span id="cb154-17"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-17" tabindex="-1"></a></span>
-<span id="cb154-18"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-18" tabindex="-1"></a><span class="kw">ENV</span> EXCHANGERATE_API_KEY=[ВАШ КЛЮЧ В exchangerate-api.com]</span>
-<span id="cb154-19"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-19" tabindex="-1"></a><span class="kw">ENV</span> R_TELEGRAM_BOT_CURBOT=[ТОКЕН ВАШЕГО БОТА]</span>
-<span id="cb154-20"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-20" tabindex="-1"></a><span class="kw">ENV</span> WEBHOOK_URL=https://currency-tg-bot-lmgsq7kjta-bq.a.run.app/webhook</span>
-<span id="cb154-21"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-21" tabindex="-1"></a></span>
-<span id="cb154-22"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-22" tabindex="-1"></a><span class="co"># Copy the R script to the container</span></span>
-<span id="cb154-23"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-23" tabindex="-1"></a><span class="kw">COPY</span> curbot.R /app/curbot.R</span>
-<span id="cb154-24"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-24" tabindex="-1"></a></span>
-<span id="cb154-25"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-25" tabindex="-1"></a><span class="co"># Set the working directory</span></span>
-<span id="cb154-26"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-26" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
-<span id="cb154-27"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-27" tabindex="-1"></a></span>
-<span id="cb154-28"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-28" tabindex="-1"></a><span class="co"># Run the R script</span></span>
-<span id="cb154-29"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb154-29" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"Rscript"</span>, <span class="st">"/app/curbot.R"</span>]</span></code></pre></div>
-<pre><code>## dockerfile</code></pre>
-<p>Теперь необходимо локально пересобрать образ, протегировать его, отправить новую версию образа в Google Cloud и запустить на его основе сервис.</p>
-<pre><code>docker build -t [IMAGE NAME] .
-docker tag curbot gcr.io/[PROJECT ID]/[IMAGE NAME]
-docker push gcr.io/[PROJECT ID]/[IMAGE NAME]
-gcloud run deploy [SERVICE NAME] --image gcr.io/[PROJECT ID]/[IMAGE NAME] --platform managed --allow-unauthenticated</code></pre>
-<p>Если всё прошло успешно вы вновь получите примерно следующее сообщение:</p>
-<pre><code>Deploying container to Cloud Run service [currency-tg-bot] in project [curbot-430507] region [africa-south1]
-OK Deploying new service... Done.
-OK Creating Revision...
-OK Routing traffic...
-OK Setting IAM Policy...
-Done.
-Service [currency-tg-bot] revision [currency-tg-bot-00001-kqg] has been deployed and is serving 100 percent of traffic.
-Service URL: https://currency-tg-bot-lmgsq7kjta-bq.a.run.app</code></pre>
-<p>поздравляю, теперь ваш ботразвёрнут на Google Cloud Run Service, и готов к использованию:</p>
-<div class="inline-figure"><img src="img/9-9.png"></div>
-</div>
-</div>
-</div>
-<div id="heroku" class="section level2" number="9.2">
-<h2>
-<span class="header-section-number">9.2</span> Heroku<a class="anchor" aria-label="anchor" href="#heroku"><i class="fas fa-link"></i></a>
-</h2>
-<p>Heroku — это облачный сервис, который помогает разрабатывать, развертывать и управлять веб-приложениями без необходимости заниматься настройкой серверов и инфраструктуры. Вы просто пишете код вашего приложения и отправляете его в Heroku, а система автоматически обрабатывает его развертывание, масштабирование и управление.</p>
-<p>Heroku поддерживает разные языки программирования, такие как Ruby, Node.js, Python и в том числе R Она делает процесс разработки проще за счет автоматического развертывания из систем контроля версий (например, Git), управления конфигурацией через переменные среды и возможности добавления различных сервисов, таких как базы данных, через аддоны. Это позволяет разработчикам сосредоточиться на создании функционала, не тратя время на управление серверной инфраструктурой.</p>
-<p>Эта платформа подойдёт тем, кто не хочет заморачиваться с Docker, т.к. Heroku имеет специальные buildpacks для различных языков и сред. Для R-скриптов можно использовать buildpack для R, например heroku-buildpack-r. В этом случае вы просто загружаете ваш код и указываете необходимые зависимости в файлах, таких как init.R и Procfile.</p>
-<div id="разворачиваем-telegram-бота-на-heroku" class="section level3" number="9.2.1">
-<h3>
-<span class="header-section-number">9.2.1</span> Разворачиваем telegram бота на Heroku<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-telegram-%D0%B1%D0%BE%D1%82%D0%B0-%D0%BD%D0%B0-heroku"><i class="fas fa-link"></i></a>
-</h3>
-<div id="видео-2" class="section level4" number="9.2.1.1">
-<h4>
-<span class="header-section-number">9.2.1.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-2"><i class="fas fa-link"></i></a>
-</h4>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/TJRxWS0W7UY?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-</iframe>
-</div>
-<div id="обзор-рабочего-процесса-2" class="section level4" number="9.2.1.2">
-<h4>
-<span class="header-section-number">9.2.1.2</span> Обзор рабочего процесса<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-2"><i class="fas fa-link"></i></a>
-</h4>
-<p>Рабочий процесс по развёртыванию ваших ботов на платформе Heroku выглядит следующим образом.</p>
-<ol style="list-style-type: decimal">
-<li>Напишите код вашего бота.</li>
-<li>Добавьте в проект остальные необходимые файлы такие как: <code>Procfile</code>, <code>init.R</code>, <code>app.json</code>.</li>
-<li>Зарегистрируйтесь на <a href="https://heroku.com">Heroku</a>.</li>
-<li>Скачайте и установите утилиту <a href="https://devcenter.heroku.com/articles/heroku-cli">Heroku CLI</a>.</li>
-<li>Далее вся работа происходит в командной строке, для начала необходимо авторизоваться.</li>
-<li>Перейдите в папку вашего проекта и инициализируйте новый репозиторий Git.</li>
-<li>Создайте коммит со всеми изменениями.</li>
-<li>Добавьте изменения в рабочем каталоге в индекс (или stage area), чтобы они были включены в следующий коммит.</li>
-<li>Создайте новое приложение в Heroku.</li>
-<li>Запросите информацию о вашем приложение, что бы получить его URL.</li>
-<li>Создайте в приложении все необходимые перменные среды.</li>
-<li>Установите нужный buildpack для вашего приложения.</li>
-<li>Отправьте созданный ранее коммит на сервер Heroku и разверните приложение.</li>
-<li>Запустите рабочий процесс приложения.</li>
-</ol>
-</div>
-<div id="файлы-необходимые-для-разворачиваня-бота" class="section level4" number="9.2.1.3">
-<h4>
-<span class="header-section-number">9.2.1.3</span> Файлы необходимые для разворачиваня бота<a class="anchor" aria-label="anchor" href="#%D1%84%D0%B0%D0%B9%D0%BB%D1%8B-%D0%BD%D0%B5%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%D0%B8%D0%BC%D1%8B%D0%B5-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%BD%D1%8F-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
-</h4>
-<p>Для того, что бы Heroku понял, что ваш бот написан на языке R проекте должен присутствовать хотя бы один из ниже перечисленных файлов:</p>
-<ul>
-<li><code>init.R</code></li>
-<li><code>packrat/init/R</code></li>
-<li><code>renv/activate.R</code></li>
-<li><code>run.R</code></li>
-<li><code>app.R</code></li>
-<li><code>plumber.R</code></li>
-</ul>
-<p>Файлы app.R и plumber.R характерны соответвенно для Shiny приложений, и API написанных с помощью пакета Plumber. В нашем случае нам пондобятся следующие файлы в проекте бота:</p>
-<ul>
-<li>
-<code>bot.R</code> - код самого бота</li>
-<li>
-<code>Procfile</code> - Описание процесса, который будет запускаться в нашем приложении.</li>
-<li>
-<code>init.R</code> - Описание зависимостей, т.е. пакетов, которые необходимо установить для работы кода нашего бота, так же вы можете использовать более продвинутые техники управления зависимостями (пакеты <code>pacrat</code> или <code>renv</code>).</li>
-<li>
-<code>app.json</code> (опционально) - Используется для автоматизации процесса развертывания и описания приложения в рамках Heroku.</li>
-</ul>
-<p>Мы будем разворачивать того же бота, что и в предыдущем разделе, его код выглядит следующим образом:</p>
 <div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
@@ -777,14 +515,277 @@ Service URL: https://currency-tg-bot-lmgsq7kjta-bq.a.run.app</code></pre>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Создаём Webhook</span></span>
-<span><span class="va">webhook</span> <span class="op">&lt;-</span> <span class="fu">Webhook</span><span class="op">(</span></span>
+<span><span class="va">webhook</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Webhook.html">Webhook</a></span><span class="op">(</span></span>
 <span>  webhook_url <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">'WEBHOOK_URL'</span><span class="op">)</span>, </span>
-<span>  token       <span class="op">=</span> <span class="fu">bot_token</span><span class="op">(</span><span class="st">'CURBOT'</span><span class="op">)</span>, </span>
+<span>  token       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/bot_token.html">bot_token</a></span><span class="op">(</span><span class="st">'CURBOT'</span><span class="op">)</span>, </span>
 <span>  verbose     <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Добавляем обработчики</span></span>
-<span><span class="va">webhook</span> <span class="op">&lt;-</span> <span class="va">webhook</span> <span class="op">+</span> <span class="fu">CommandHandler</span><span class="op">(</span><span class="st">"get_cur_rate"</span>, <span class="va">get_cur_rate</span>, pass_args <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">webhook</span> <span class="op">&lt;-</span> <span class="va">webhook</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">"get_cur_rate"</span>, <span class="va">get_cur_rate</span>, pass_args <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Запускаем Webhook</span></span>
+<span><span class="va">webhook</span><span class="op">$</span><span class="fu">start_server</span><span class="op">(</span></span>
+<span>  host <span class="op">=</span> <span class="st">"0.0.0.0"</span>,</span>
+<span>  port <span class="op">=</span> <span class="fl">8080</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>В основе метода <code>get_cur_rate</code> лежит логика, описанная в прошлом разделе. Бот получает сообщение в котором указан код валют, далее запрашивает курсы из exchangerate-api, парсит результат, и отправляет в ответе курс по указанной ранее валюте.</p>
+<p>Далее мы инициализируем объект класса Webhook, и передаём в аргумент <code>webhook_url</code> значение переменной среды <code>WEBHOOK_URL</code>, а в аргумент <code>token</code>, значение переменной <code>R_TELEGRAM_BOT_CURBOT</code>. Значения этих переменных мы будем задавать в Dockerfile.</p>
+</div>
+<div id="собираем-docker-образ" class="section level4" number="10.1.4.5">
+<h4>
+<span class="header-section-number">10.1.4.5</span> Собираем Docker образ<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B1%D0%B8%D1%80%D0%B0%D0%B5%D0%BC-docker-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7"><i class="fas fa-link"></i></a>
+</h4>
+<p>Для сборки нужного Docker образа мы прописываем следующий Dockerfile:</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb159-1"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-1" tabindex="-1"></a><span class="co"># Use the official R base image</span></span>
+<span id="cb159-2"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-2" tabindex="-1"></a><span class="kw">FROM</span> rocker/r-ver:4.1.0</span>
+<span id="cb159-3"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-3" tabindex="-1"></a></span>
+<span id="cb159-4"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-4" tabindex="-1"></a><span class="co"># Set the shell</span></span>
+<span id="cb159-5"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-5" tabindex="-1"></a><span class="kw">SHELL</span> [<span class="st">"/bin/bash"</span>, <span class="st">"-o"</span>, <span class="st">"pipefail"</span>, <span class="st">"-e"</span>, <span class="st">"-u"</span>, <span class="st">"-x"</span>, <span class="st">"-c"</span>]</span>
+<span id="cb159-6"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-6" tabindex="-1"></a></span>
+<span id="cb159-7"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-7" tabindex="-1"></a><span class="co"># Install necessary system dependencies</span></span>
+<span id="cb159-8"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-8" tabindex="-1"></a><span class="kw">USER</span> root</span>
+<span id="cb159-9"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-9" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> <span class="dt">\</span></span>
+<span id="cb159-10"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-10" tabindex="-1"></a>    libcurl4-openssl-dev <span class="dt">\</span></span>
+<span id="cb159-11"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-11" tabindex="-1"></a>    libssl-dev <span class="dt">\</span></span>
+<span id="cb159-12"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-12" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> /var/lib/apt/lists/<span class="pp">*</span></span>
+<span id="cb159-13"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-13" tabindex="-1"></a></span>
+<span id="cb159-14"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-14" tabindex="-1"></a><span class="co"># Install necessary R packages</span></span>
+<span id="cb159-15"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-15" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages(c('httr', 'jsonlite'))"</span></span>
+<span id="cb159-16"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-16" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages('telegram.bot', repos = 'http://cran.us.r-project.org')"</span></span>
+<span id="cb159-17"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-17" tabindex="-1"></a></span>
+<span id="cb159-18"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-18" tabindex="-1"></a><span class="kw">ENV</span> EXCHANGERATE_API_KEY=[ВАШ КЛЮЧ В exchangerate-api.com]</span>
+<span id="cb159-19"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-19" tabindex="-1"></a><span class="kw">ENV</span> R_TELEGRAM_BOT_CURBOT=[ТОКЕН ВАШЕГО БОТА]</span>
+<span id="cb159-20"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-20" tabindex="-1"></a><span class="kw">ENV</span> WEBHOOK_URL=https://my-service.a.run.app/webhook</span>
+<span id="cb159-21"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-21" tabindex="-1"></a></span>
+<span id="cb159-22"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-22" tabindex="-1"></a><span class="co"># Copy the R script to the container</span></span>
+<span id="cb159-23"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-23" tabindex="-1"></a><span class="kw">COPY</span> curbot.R /app/curbot.R</span>
+<span id="cb159-24"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-24" tabindex="-1"></a></span>
+<span id="cb159-25"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-25" tabindex="-1"></a><span class="co"># Set the working directory</span></span>
+<span id="cb159-26"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-26" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
+<span id="cb159-27"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-27" tabindex="-1"></a></span>
+<span id="cb159-28"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-28" tabindex="-1"></a><span class="co"># Run the R script</span></span>
+<span id="cb159-29"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb159-29" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"Rscript"</span>, <span class="st">"/app/curbot.R"</span>]</span></code></pre></div>
+<pre><code>## dockerfile</code></pre>
+<p>На данном этапе этапе мы ещё не знаем URL нашего сервиса, поэтому в переменную WEBHOOK_URL пока что прописываем совершенно любой URL, можно даже не работающий. На второй итерации развёртки мы будем заменять значение этой переменной.</p>
+<p>Далее выполним локальную сборку образа, и тестовый локальный запуск контейнера.</p>
+<pre><code>docker build -t [IMAGE NAME] .
+docker run --name [CONTAINER NAME] --rm [IMAGE NAME]</code></pre>
+<p>Если контейнер был успешно запущен на этом этапе в консоли вы увидите примерно такое сообщение:</p>
+<pre><code>Starting webhook server...
+Listening on '0.0.0.0:8080'...
+Configuring webhook 'https://currency-bot-xxxxxxxx-ew.a.run.app'...
+Waiting for requests...</code></pre>
+<p>Это говорит о том, что контейнер был успешно запущен. Теперь перейдите в Docker и остановите этот контейнер, ваш бот на этом этапе отвечать на запросы не будет.</p>
+<div class="inline-figure"><img src="img/9-8.png"></div>
+</div>
+<div id="создание-и-настройка-проекта-в-google-cloud" class="section level4" number="10.1.4.6">
+<h4>
+<span class="header-section-number">10.1.4.6</span> Создание и настройка проекта в Google Cloud<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0-%D0%B2-google-cloud"><i class="fas fa-link"></i></a>
+</h4>
+<ol style="list-style-type: decimal">
+<li>Переходим в <a href="https://console.cloud.google.com/welcome">Google Cloud Console</a>
+</li>
+<li>С помощью выпадающего меню в верхнем левом углу экрана создаём новый проект</li>
+<li>Переходим в созданный проект</li>
+<li>Включаем в проекте необходимые API сервисы, в левом меню:
+<ol style="list-style-type: decimal">
+<li>Cloud Run Admin API</li>
+<li>Artifact Registry API</li>
+</ol>
+</li>
+</ol>
+<p>Включить данные API можно будет и с помощью Google Cloud SDK на следующем шаге.</p>
+<div class="inline-figure"><img src="img/9-1.png"></div>
+</div>
+<div id="инициализация-google-cloud-sdk-и-настройка-docker" class="section level4" number="10.1.4.7">
+<h4>
+<span class="header-section-number">10.1.4.7</span> Инициализация Google Cloud SDK и настройка Docker<a class="anchor" aria-label="anchor" href="#%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-google-cloud-sdk-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-docker"><i class="fas fa-link"></i></a>
+</h4>
+<p>Так же как и в разделе <a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-%D0%BF%D0%BE-%D1%80%D0%B0%D1%81%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8E-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-google-cloude-run-job">Как настроить запуск скрипта по рассписанию с помощью Google Cloude Run Job</a> перед тем как что либо публиковать в Google Cloud нам необходимо там авторизоваться, и настроить Docker на работу с Google Cloud Platform, делается это двумя командами.</p>
+<pre><code>gcloud init</code></pre>
+<p>Далее запуститься процесс инициализации, просто следуйте инструкциям, вам необходимо будет пройти авторизацию через браузер, выбрать нужный проект, и указать регион по умолчанию.</p>
+<p>Далее необходимо настроить Docker для работы с Google Cloud.</p>
+<pre><code>gcloud auth configure-docker</code></pre>
+<p>Если а прошлом шаге вы пропустили процесс активации необходимых API в вашем Google Cloud проекте, то на даном этапе вы можете это сделать прямо из Google Cloud SDK Shell:</p>
+<pre><code>gcloud services enable run.googleapis.com
+gcloud services enable artifactregistry.googleapis.com</code></pre>
+</div>
+<div id="отправка-docker-образа-в-google-cloud-и-первый-запуск-бота" class="section level4" number="10.1.4.8">
+<h4>
+<span class="header-section-number">10.1.4.8</span> Отправка Docker образа в Google Cloud и первый запуск бота<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-docker-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B0-%D0%B2-google-cloud-%D0%B8-%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D0%B9-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h4>
+<p>После успешного локального тестирования мы можем тегировать и отправить наш Docker образ в Google Artifact Registry, для этого выполним следующие команды.</p>
+<pre><code>docker tag curbot gcr.io/[PROJECT ID]/[IMAGE NAME]
+docker push gcr.io/[PROJECT ID]/[IMAGE NAME]</code></pre>
+<p>Теперь пришло время первого запуска бота, выполняем следующую команду.</p>
+<pre><code>gcloud run deploy [SERVICE NAME] --image gcr.io/[PROJECT ID]/[IMAGE NAME] --platform managed --allow-unauthenticated</code></pre>
+<p>В случае успешного запуска в консоли вы увидите подобное сообщение:</p>
+<pre><code>Deploying container to Cloud Run service [SERVICE NAME] in project [PROJECT ID] region [africa-south1]
+OK Deploying new service... Done.
+OK Creating Revision...
+OK Routing traffic...
+OK Setting IAM Policy...
+Done.
+Service [SERVICE NAME] revision [currency-tg-bot-00001-6r2] has been deployed and is serving 100 percent of traffic.
+Service URL: https://currency-tg-bot-lmgsq7kjta-bq.a.run.app</code></pre>
+<p>Наш бот по прежнему не реагирует на сообщения, поскольку у него прописан неверный webhook URL. На данном этапе нам необходим было просто получить из Google Cloud Service URL нашего бота, который вы можете найти в последней строке сообщения, которое получили после успешного запуска сервиса. Останавливаем бота и копируем это URL, он нам понадобится на следующем шаге.</p>
+<pre><code>gcloud run services delete [SERVICE NAME] --platform managed</code></pre>
+</div>
+<div id="прописываем-правильный-webhook-url-и-перезапускаем-бота" class="section level4" number="10.1.4.9">
+<h4>
+<span class="header-section-number">10.1.4.9</span> Прописываем правильный Webhook URL и перезапускаем бота<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%BE%D0%BF%D0%B8%D1%81%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-webhook-url-%D0%B8-%D0%BF%D0%B5%D1%80%D0%B5%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h4>
+<p>Итак, теперь у нас есть Service URL, полученный на прошлом шагу, в моём примере это <a href="https://currency-tg-bot-lmgsq7kjta-bq.a.run.app" class="uri">https://currency-tg-bot-lmgsq7kjta-bq.a.run.app</a>, для того, что бы из этого URL дслеать рабоичй Webhook URL достаточно просто добавить <code>/webhook</code>. Т.е. редактируем значение переменной <code>WEBHOOK_URL</code> в нашем Dickorfie:</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb170-1"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-1" tabindex="-1"></a><span class="co"># Use the official R base image</span></span>
+<span id="cb170-2"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-2" tabindex="-1"></a><span class="kw">FROM</span> rocker/r-ver:4.1.0</span>
+<span id="cb170-3"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-3" tabindex="-1"></a></span>
+<span id="cb170-4"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-4" tabindex="-1"></a><span class="co"># Set the shell</span></span>
+<span id="cb170-5"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-5" tabindex="-1"></a><span class="kw">SHELL</span> [<span class="st">"/bin/bash"</span>, <span class="st">"-o"</span>, <span class="st">"pipefail"</span>, <span class="st">"-e"</span>, <span class="st">"-u"</span>, <span class="st">"-x"</span>, <span class="st">"-c"</span>]</span>
+<span id="cb170-6"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-6" tabindex="-1"></a></span>
+<span id="cb170-7"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-7" tabindex="-1"></a><span class="co"># Install necessary system dependencies</span></span>
+<span id="cb170-8"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-8" tabindex="-1"></a><span class="kw">USER</span> root</span>
+<span id="cb170-9"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-9" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> <span class="dt">\</span></span>
+<span id="cb170-10"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-10" tabindex="-1"></a>    libcurl4-openssl-dev <span class="dt">\</span></span>
+<span id="cb170-11"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-11" tabindex="-1"></a>    libssl-dev <span class="dt">\</span></span>
+<span id="cb170-12"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-12" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> /var/lib/apt/lists/<span class="pp">*</span></span>
+<span id="cb170-13"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-13" tabindex="-1"></a></span>
+<span id="cb170-14"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-14" tabindex="-1"></a><span class="co"># Install necessary R packages</span></span>
+<span id="cb170-15"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-15" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages(c('httr', 'jsonlite', 'httpuv'))"</span></span>
+<span id="cb170-16"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-16" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">R</span> <span class="at">-e</span> <span class="st">"install.packages('telegram.bot', repos = 'http://cran.us.r-project.org')"</span></span>
+<span id="cb170-17"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-17" tabindex="-1"></a></span>
+<span id="cb170-18"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-18" tabindex="-1"></a><span class="kw">ENV</span> EXCHANGERATE_API_KEY=[ВАШ КЛЮЧ В exchangerate-api.com]</span>
+<span id="cb170-19"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-19" tabindex="-1"></a><span class="kw">ENV</span> R_TELEGRAM_BOT_CURBOT=[ТОКЕН ВАШЕГО БОТА]</span>
+<span id="cb170-20"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-20" tabindex="-1"></a><span class="kw">ENV</span> WEBHOOK_URL=https://currency-tg-bot-lmgsq7kjta-bq.a.run.app/webhook</span>
+<span id="cb170-21"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-21" tabindex="-1"></a></span>
+<span id="cb170-22"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-22" tabindex="-1"></a><span class="co"># Copy the R script to the container</span></span>
+<span id="cb170-23"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-23" tabindex="-1"></a><span class="kw">COPY</span> curbot.R /app/curbot.R</span>
+<span id="cb170-24"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-24" tabindex="-1"></a></span>
+<span id="cb170-25"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-25" tabindex="-1"></a><span class="co"># Set the working directory</span></span>
+<span id="cb170-26"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-26" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
+<span id="cb170-27"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-27" tabindex="-1"></a></span>
+<span id="cb170-28"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-28" tabindex="-1"></a><span class="co"># Run the R script</span></span>
+<span id="cb170-29"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb170-29" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"Rscript"</span>, <span class="st">"/app/curbot.R"</span>]</span></code></pre></div>
+<pre><code>## dockerfile</code></pre>
+<p>Теперь необходимо локально пересобрать образ, протегировать его, отправить новую версию образа в Google Cloud и запустить на его основе сервис.</p>
+<pre><code>docker build -t [IMAGE NAME] .
+docker tag curbot gcr.io/[PROJECT ID]/[IMAGE NAME]
+docker push gcr.io/[PROJECT ID]/[IMAGE NAME]
+gcloud run deploy [SERVICE NAME] --image gcr.io/[PROJECT ID]/[IMAGE NAME] --platform managed --allow-unauthenticated</code></pre>
+<p>Если всё прошло успешно вы вновь получите примерно следующее сообщение:</p>
+<pre><code>Deploying container to Cloud Run service [currency-tg-bot] in project [curbot-430507] region [africa-south1]
+OK Deploying new service... Done.
+OK Creating Revision...
+OK Routing traffic...
+OK Setting IAM Policy...
+Done.
+Service [currency-tg-bot] revision [currency-tg-bot-00001-kqg] has been deployed and is serving 100 percent of traffic.
+Service URL: https://currency-tg-bot-lmgsq7kjta-bq.a.run.app</code></pre>
+<p>поздравляю, теперь ваш ботразвёрнут на Google Cloud Run Service, и готов к использованию:</p>
+<div class="inline-figure"><img src="img/9-9.png"></div>
+</div>
+</div>
+</div>
+<div id="heroku" class="section level2" number="10.2">
+<h2>
+<span class="header-section-number">10.2</span> Heroku<a class="anchor" aria-label="anchor" href="#heroku"><i class="fas fa-link"></i></a>
+</h2>
+<p>Heroku — это облачный сервис, который помогает разрабатывать, развертывать и управлять веб-приложениями без необходимости заниматься настройкой серверов и инфраструктуры. Вы просто пишете код вашего приложения и отправляете его в Heroku, а система автоматически обрабатывает его развертывание, масштабирование и управление.</p>
+<p>Heroku поддерживает разные языки программирования, такие как Ruby, Node.js, Python и в том числе R Она делает процесс разработки проще за счет автоматического развертывания из систем контроля версий (например, Git), управления конфигурацией через переменные среды и возможности добавления различных сервисов, таких как базы данных, через аддоны. Это позволяет разработчикам сосредоточиться на создании функционала, не тратя время на управление серверной инфраструктурой.</p>
+<p>Эта платформа подойдёт тем, кто не хочет заморачиваться с Docker, т.к. Heroku имеет специальные buildpacks для различных языков и сред. Для R-скриптов можно использовать buildpack для R, например heroku-buildpack-r. В этом случае вы просто загружаете ваш код и указываете необходимые зависимости в файлах, таких как init.R и Procfile.</p>
+<div id="разворачиваем-telegram-бота-на-heroku" class="section level3" number="10.2.1">
+<h3>
+<span class="header-section-number">10.2.1</span> Разворачиваем telegram бота на Heroku<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-telegram-%D0%B1%D0%BE%D1%82%D0%B0-%D0%BD%D0%B0-heroku"><i class="fas fa-link"></i></a>
+</h3>
+<div id="видео-2" class="section level4" number="10.2.1.1">
+<h4>
+<span class="header-section-number">10.2.1.1</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-2"><i class="fas fa-link"></i></a>
+</h4>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/TJRxWS0W7UY?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+</iframe>
+</div>
+<div id="обзор-рабочего-процесса-2" class="section level4" number="10.2.1.2">
+<h4>
+<span class="header-section-number">10.2.1.2</span> Обзор рабочего процесса<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-2"><i class="fas fa-link"></i></a>
+</h4>
+<p>Рабочий процесс по развёртыванию ваших ботов на платформе Heroku выглядит следующим образом.</p>
+<ol style="list-style-type: decimal">
+<li>Напишите код вашего бота.</li>
+<li>Добавьте в проект остальные необходимые файлы такие как: <code>Procfile</code>, <code>init.R</code>, <code>app.json</code>.</li>
+<li>Зарегистрируйтесь на <a href="https://heroku.com">Heroku</a>.</li>
+<li>Скачайте и установите утилиту <a href="https://devcenter.heroku.com/articles/heroku-cli">Heroku CLI</a>.</li>
+<li>Далее вся работа происходит в командной строке, для начала необходимо авторизоваться.</li>
+<li>Перейдите в папку вашего проекта и инициализируйте новый репозиторий Git.</li>
+<li>Создайте коммит со всеми изменениями.</li>
+<li>Добавьте изменения в рабочем каталоге в индекс (или stage area), чтобы они были включены в следующий коммит.</li>
+<li>Создайте новое приложение в Heroku.</li>
+<li>Запросите информацию о вашем приложение, что бы получить его URL.</li>
+<li>Создайте в приложении все необходимые перменные среды.</li>
+<li>Установите нужный buildpack для вашего приложения.</li>
+<li>Отправьте созданный ранее коммит на сервер Heroku и разверните приложение.</li>
+<li>Запустите рабочий процесс приложения.</li>
+</ol>
+</div>
+<div id="файлы-необходимые-для-разворачиваня-бота" class="section level4" number="10.2.1.3">
+<h4>
+<span class="header-section-number">10.2.1.3</span> Файлы необходимые для разворачиваня бота<a class="anchor" aria-label="anchor" href="#%D1%84%D0%B0%D0%B9%D0%BB%D1%8B-%D0%BD%D0%B5%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%D0%B8%D0%BC%D1%8B%D0%B5-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%BD%D1%8F-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+</h4>
+<p>Для того, что бы Heroku понял, что ваш бот написан на языке R проекте должен присутствовать хотя бы один из ниже перечисленных файлов:</p>
+<ul>
+<li><code>init.R</code></li>
+<li><code>packrat/init/R</code></li>
+<li><code>renv/activate.R</code></li>
+<li><code>run.R</code></li>
+<li><code>app.R</code></li>
+<li><code>plumber.R</code></li>
+</ul>
+<p>Файлы app.R и plumber.R характерны соответвенно для Shiny приложений, и API написанных с помощью пакета Plumber. В нашем случае нам пондобятся следующие файлы в проекте бота:</p>
+<ul>
+<li>
+<code>bot.R</code> - код самого бота</li>
+<li>
+<code>Procfile</code> - Описание процесса, который будет запускаться в нашем приложении.</li>
+<li>
+<code>init.R</code> - Описание зависимостей, т.е. пакетов, которые необходимо установить для работы кода нашего бота, так же вы можете использовать более продвинутые техники управления зависимостями (пакеты <code>pacrat</code> или <code>renv</code>).</li>
+<li>
+<code>app.json</code> (опционально) - Используется для автоматизации процесса развертывания и описания приложения в рамках Heroku.</li>
+</ul>
+<p>Мы будем разворачивать того же бота, что и в предыдущем разделе, его код выглядит следующим образом:</p>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jeroen.r-universe.dev/jsonlite">jsonlite</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Метод запроса курса валют</span></span>
+<span><span class="va">get_cur_rate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot</span>, <span class="va">update</span>, <span class="va">args</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">currency_code</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span><span class="op">(</span><span class="va">args</span><span class="op">)</span></span>
+<span>  <span class="va">api_key</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">'EXCHANGERATE_API_KEY'</span><span class="op">)</span></span>
+<span>  <span class="va">url</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"https://api.exchangerate-api.com/v4/latest/USD?apikey="</span>, <span class="va">api_key</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">response</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">response</span>, <span class="st">"text"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">currency_code</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">rates</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">args</span>, <span class="st">" is Invalid currency code."</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="va">rate</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">rates</span><span class="op">[[</span><span class="va">currency_code</span><span class="op">]</span><span class="op">]</span></span>
+<span>  <span class="va">message</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Курс %s к USD: %f"</span>, <span class="va">currency_code</span>, <span class="va">rate</span><span class="op">)</span></span>
+<span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">update</span><span class="op">$</span><span class="va">message</span><span class="op">$</span><span class="va">chat_id</span>, text <span class="op">=</span> <span class="va">message</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Создаём Webhook</span></span>
+<span><span class="va">webhook</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Webhook.html">Webhook</a></span><span class="op">(</span></span>
+<span>  webhook_url <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">'WEBHOOK_URL'</span><span class="op">)</span>, </span>
+<span>  token       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/bot_token.html">bot_token</a></span><span class="op">(</span><span class="st">'CURBOT'</span><span class="op">)</span>, </span>
+<span>  verbose     <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Добавляем обработчики</span></span>
+<span><span class="va">webhook</span> <span class="op">&lt;-</span> <span class="va">webhook</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/CommandHandler.html">CommandHandler</a></span><span class="op">(</span><span class="st">"get_cur_rate"</span>, <span class="va">get_cur_rate</span>, pass_args <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Запускаем Webhook</span></span>
 <span><span class="va">webhook</span><span class="op">$</span><span class="fu">start_server</span><span class="op">(</span></span>
@@ -804,36 +805,36 @@ Service URL: https://currency-tg-bot-lmgsq7kjta-bq.a.run.app</code></pre>
 <p>ПРИМЕЧАНИЕ: Использование Packrat или renv — лучший способ управления зависимостями пакетов и их соответствующими версиями, поэтому этот init.Rфайл не требуется, если вы используете packratили renv.</p>
 </blockquote>
 <p>Я использую следующий пример <code>init.R</code> файла:</p>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">helpers.installPackages</span><span class="op">(</span><span class="st">"httr"</span>, <span class="st">"jsonlite"</span>, <span class="st">"telegram.bot"</span>, <span class="st">"stringr"</span><span class="op">)</span></span></code></pre></div>
 <p>Вспомогательная функция <code>helpers.installPackages</code>, упрощающая установку пакетов, включена в buildpack для удобства.</p>
 <p>Файл <code>app.json</code> используется для автоматизации процесса развертывания и описания приложения в рамках Heroku. Это полезно для использования с Heroku Review Apps и автоматическим развертыванием.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb161-1"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-1" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb161-2"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-2" tabindex="-1"></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"telegram-bot"</span><span class="fu">,</span></span>
-<span id="cb161-3"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-3" tabindex="-1"></a>  <span class="dt">"description"</span><span class="fu">:</span> <span class="st">"A Telegram bot deployed on Heroku"</span><span class="fu">,</span></span>
-<span id="cb161-4"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-4" tabindex="-1"></a>  <span class="dt">"repository"</span><span class="fu">:</span> <span class="st">"https://github.com/your-repo/your-bot-repo"</span><span class="fu">,</span></span>
-<span id="cb161-5"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-5" tabindex="-1"></a>  <span class="dt">"logo"</span><span class="fu">:</span> <span class="st">"https://example.com/logo.png"</span><span class="fu">,</span></span>
-<span id="cb161-6"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-6" tabindex="-1"></a>  <span class="dt">"keywords"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"telegram"</span><span class="ot">,</span> <span class="st">"bot"</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb161-7"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-7" tabindex="-1"></a>  <span class="dt">"env"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb161-8"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-8" tabindex="-1"></a>    <span class="dt">"R_TELEGRAM_BOT_CURBOT"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb161-9"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-9" tabindex="-1"></a>      <span class="dt">"description"</span><span class="fu">:</span> <span class="st">"Telegram Bot Token"</span><span class="fu">,</span></span>
-<span id="cb161-10"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-10" tabindex="-1"></a>      <span class="dt">"required"</span><span class="fu">:</span> <span class="kw">true</span></span>
-<span id="cb161-11"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-11" tabindex="-1"></a>    <span class="fu">},</span></span>
-<span id="cb161-12"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-12" tabindex="-1"></a>    <span class="dt">"EXCHANGERATE_API_KEY"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb161-13"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-13" tabindex="-1"></a>      <span class="dt">"description"</span><span class="fu">:</span> <span class="st">"Exchangerate api key"</span><span class="fu">,</span></span>
-<span id="cb161-14"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-14" tabindex="-1"></a>      <span class="dt">"required"</span><span class="fu">:</span> <span class="kw">true</span></span>
-<span id="cb161-15"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-15" tabindex="-1"></a>    <span class="fu">},</span></span>
-<span id="cb161-16"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-16" tabindex="-1"></a>    <span class="dt">"WEBHOOK_URL"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb161-17"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-17" tabindex="-1"></a>      <span class="dt">"description"</span><span class="fu">:</span> <span class="st">"Webhook URL"</span><span class="fu">,</span></span>
-<span id="cb161-18"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-18" tabindex="-1"></a>      <span class="dt">"required"</span><span class="fu">:</span> <span class="kw">true</span></span>
-<span id="cb161-19"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-19" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb161-20"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-20" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb161-21"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-21" tabindex="-1"></a>  <span class="dt">"buildpacks"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb161-22"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-22" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb161-23"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-23" tabindex="-1"></a>      <span class="dt">"url"</span><span class="fu">:</span> <span class="st">"https://github.com/virtualstaticvoid/heroku-buildpack-r.git"</span></span>
-<span id="cb161-24"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-24" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb161-25"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-25" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb161-26"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb161-26" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb177-1"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-1" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb177-2"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-2" tabindex="-1"></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"telegram-bot"</span><span class="fu">,</span></span>
+<span id="cb177-3"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-3" tabindex="-1"></a>  <span class="dt">"description"</span><span class="fu">:</span> <span class="st">"A Telegram bot deployed on Heroku"</span><span class="fu">,</span></span>
+<span id="cb177-4"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-4" tabindex="-1"></a>  <span class="dt">"repository"</span><span class="fu">:</span> <span class="st">"https://github.com/your-repo/your-bot-repo"</span><span class="fu">,</span></span>
+<span id="cb177-5"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-5" tabindex="-1"></a>  <span class="dt">"logo"</span><span class="fu">:</span> <span class="st">"https://example.com/logo.png"</span><span class="fu">,</span></span>
+<span id="cb177-6"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-6" tabindex="-1"></a>  <span class="dt">"keywords"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"telegram"</span><span class="ot">,</span> <span class="st">"bot"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb177-7"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-7" tabindex="-1"></a>  <span class="dt">"env"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb177-8"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-8" tabindex="-1"></a>    <span class="dt">"R_TELEGRAM_BOT_CURBOT"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb177-9"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-9" tabindex="-1"></a>      <span class="dt">"description"</span><span class="fu">:</span> <span class="st">"Telegram Bot Token"</span><span class="fu">,</span></span>
+<span id="cb177-10"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-10" tabindex="-1"></a>      <span class="dt">"required"</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb177-11"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-11" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb177-12"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-12" tabindex="-1"></a>    <span class="dt">"EXCHANGERATE_API_KEY"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb177-13"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-13" tabindex="-1"></a>      <span class="dt">"description"</span><span class="fu">:</span> <span class="st">"Exchangerate api key"</span><span class="fu">,</span></span>
+<span id="cb177-14"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-14" tabindex="-1"></a>      <span class="dt">"required"</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb177-15"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-15" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb177-16"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-16" tabindex="-1"></a>    <span class="dt">"WEBHOOK_URL"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb177-17"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-17" tabindex="-1"></a>      <span class="dt">"description"</span><span class="fu">:</span> <span class="st">"Webhook URL"</span><span class="fu">,</span></span>
+<span id="cb177-18"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-18" tabindex="-1"></a>      <span class="dt">"required"</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb177-19"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-19" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb177-20"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-20" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb177-21"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-21" tabindex="-1"></a>  <span class="dt">"buildpacks"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb177-22"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-22" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb177-23"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-23" tabindex="-1"></a>      <span class="dt">"url"</span><span class="fu">:</span> <span class="st">"https://github.com/virtualstaticvoid/heroku-buildpack-r.git"</span></span>
+<span id="cb177-24"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-24" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb177-25"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-25" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb177-26"><a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#cb177-26" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <pre><code>## json</code></pre>
 <p>Что это означает:</p>
 <ul>
@@ -846,9 +847,9 @@ Service URL: https://currency-tg-bot-lmgsq7kjta-bq.a.run.app</code></pre>
 <li>“buildpacks” — список buildpacks, которые будут использоваться для развертывания. Здесь указан buildpack для R.</li>
 </ul>
 </div>
-<div id="авторизация-и-инициализация-git-репозитория" class="section level4" number="9.2.1.4">
+<div id="авторизация-и-инициализация-git-репозитория" class="section level4" number="10.2.1.4">
 <h4>
-<span class="header-section-number">9.2.1.4</span> Авторизация и инициализация Git репозитория<a class="anchor" aria-label="anchor" href="#%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-git-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.1.4</span> Авторизация и инициализация Git репозитория<a class="anchor" aria-label="anchor" href="#%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-git-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F"><i class="fas fa-link"></i></a>
 </h4>
 <p>Далее для авторизации в командной строке выполняем команду:</p>
 <pre><code>heroku login</code></pre>
@@ -865,9 +866,9 @@ git commit -m "Initial commit"</code></pre>
 <code>git commit -m "Initial commit"</code> - Эта команда создает новый коммит в репозитории, включающий все изменения, добавленные в индекс с помощью git add. Флаг -m позволяет указать сообщение коммита прямо в командной строке. Сообщение “Initial commit” — это описание того, что делает этот коммит. Обычно первое сообщение коммита описывает начальную настройку репозитория или первые изменения в проекте.</li>
 </ul>
 </div>
-<div id="создаём-новое-приложение-и-запраиваем-его-url" class="section level4" number="9.2.1.5">
+<div id="создаём-новое-приложение-и-запраиваем-его-url" class="section level4" number="10.2.1.5">
 <h4>
-<span class="header-section-number">9.2.1.5</span> Создаём новое приложение и запраиваем его URL<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B7%D0%B0%D0%BF%D1%80%D0%B0%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B5%D0%B3%D0%BE-url"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.1.5</span> Создаём новое приложение и запраиваем его URL<a class="anchor" aria-label="anchor" href="#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%91%D0%BC-%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B7%D0%B0%D0%BF%D1%80%D0%B0%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B5%D0%B3%D0%BE-url"><i class="fas fa-link"></i></a>
 </h4>
 <p>Следующая команда создаст в вашем аккаунте Heroku новое приложение:</p>
 <pre><code>heroku create your-app-name</code></pre>
@@ -888,9 +889,9 @@ Stack:          heroku-22
 Web URL:        https://your-app-name-abcdefgh.herokuapp.com/</code></pre>
 <p>Из всей этой информации нам понадобится только Web URL, т.к. добавив к его пути webhook, мы получим тот WEBHOOK URL, который нам необходимо будет установить для нашего бота.</p>
 </div>
-<div id="добавляем-переменные-среды" class="section level4" number="9.2.1.6">
+<div id="добавляем-переменные-среды" class="section level4" number="10.2.1.6">
 <h4>
-<span class="header-section-number">9.2.1.6</span> Добавляем переменные среды<a class="anchor" aria-label="anchor" href="#%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D1%8B"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.1.6</span> Добавляем переменные среды<a class="anchor" aria-label="anchor" href="#%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D0%BC-%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D1%8B"><i class="fas fa-link"></i></a>
 </h4>
 <p>В коде нашего бота мы используем 3 переменные среды:</p>
 <ul>
@@ -904,9 +905,9 @@ Web URL:        https://your-app-name-abcdefgh.herokuapp.com/</code></pre>
 heroku config:set WEBHOOK_URL=https://your-app-name-abcdefgh.herokuapp.com/webhook
 heroku config:set EXCHANGERATE_API_KEY=Exchangerate API Ключ</code></pre>
 </div>
-<div id="установка-buildpack" class="section level4" number="9.2.1.7">
+<div id="установка-buildpack" class="section level4" number="10.2.1.7">
 <h4>
-<span class="header-section-number">9.2.1.7</span> Установка buildpack<a class="anchor" aria-label="anchor" href="#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-buildpack"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.1.7</span> Установка buildpack<a class="anchor" aria-label="anchor" href="#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-buildpack"><i class="fas fa-link"></i></a>
 </h4>
 <p>Buildpack — это инструмент, который автоматически устанавливает и настраивает необходимые зависимости для вашего приложения. Он помогает платформе как определить, как собрать и запустить ваше приложение.</p>
 <p>Вот основные моменты, зачем и как он используется:</p>
@@ -930,9 +931,9 @@ heroku config:set EXCHANGERATE_API_KEY=Exchangerate API Ключ</code></pre>
 <p>Для установки нужного для языка R buildpack используйте следующую команду:</p>
 <pre><code>heroku buildpacks:set https://github.com/virtualstaticvoid/heroku-buildpack-r.git</code></pre>
 </div>
-<div id="отправка-данных-в-heroku-и-запуск-бота" class="section level4" number="9.2.1.8">
+<div id="отправка-данных-в-heroku-и-запуск-бота" class="section level4" number="10.2.1.8">
 <h4>
-<span class="header-section-number">9.2.1.8</span> Отправка данных в Heroku и запуск бота<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%B2-heroku-%D0%B8-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.1.8</span> Отправка данных в Heroku и запуск бота<a class="anchor" aria-label="anchor" href="#%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%B2-heroku-%D0%B8-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D0%B1%D0%BE%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h4>
 <p>Последним шагом необзодимо отправить все изменения в Heroku и запустить рабочий процесс, делается жто следующими командами:</p>
 <pre><code>git push heroku master
@@ -948,9 +949,9 @@ heroku ps:scale web=1</code></pre>
 <p>Таким образом, после <code>git push heroku master</code> ваше приложение будет развернуто, но вам нужно выполнить <code>heroku ps:scale web=1</code>, чтобы запустить его и начать обработку запросов.</p>
 <p>Всё, ваш бот развёрнут на Heroku!</p>
 </div>
-<div id="переключение-между-разными-приложениями" class="section level4" number="9.2.1.9">
+<div id="переключение-между-разными-приложениями" class="section level4" number="10.2.1.9">
 <h4>
-<span class="header-section-number">9.2.1.9</span> Переключение между разными приложениями<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%B5%D1%80%D0%B5%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BC%D0%B5%D0%B6%D0%B4%D1%83-%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D0%BC%D0%B8-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F%D0%BC%D0%B8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.1.9</span> Переключение между разными приложениями<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%B5%D1%80%D0%B5%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BC%D0%B5%D0%B6%D0%B4%D1%83-%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D0%BC%D0%B8-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F%D0%BC%D0%B8"><i class="fas fa-link"></i></a>
 </h4>
 <p>В heroku у вас могут быть созданы несколько приложений, если вам необходимо будет переключаться между ними, то можете воспользоваться следующими командами:</p>
 <ul>
@@ -967,9 +968,9 @@ heroku ps:scale web=1</code></pre>
 <li><code>heroku config:set VAR_NAME=value -a &lt;app_name&gt;</code></li>
 </ul>
 </div>
-<div id="другие-полезные-команды-heroku-cli" class="section level4" number="9.2.1.10">
+<div id="другие-полезные-команды-heroku-cli" class="section level4" number="10.2.1.10">
 <h4>
-<span class="header-section-number">9.2.1.10</span> Другие полезные команды Heroku cli<a class="anchor" aria-label="anchor" href="#%D0%B4%D1%80%D1%83%D0%B3%D0%B8%D0%B5-%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B-heroku-cli"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.1.10</span> Другие полезные команды Heroku cli<a class="anchor" aria-label="anchor" href="#%D0%B4%D1%80%D1%83%D0%B3%D0%B8%D0%B5-%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B-heroku-cli"><i class="fas fa-link"></i></a>
 </h4>
 <p>Вот ещё несколько полезных команд, доступных в Heroku CLI:</p>
 <ul>
@@ -984,21 +985,21 @@ heroku ps:scale web=1</code></pre>
 </ul>
 </div>
 </div>
-<div id="как-настроить-запуск-r-скрипта-по-расписанию-в-heroku" class="section level3" number="9.2.2">
+<div id="как-настроить-запуск-r-скрипта-по-расписанию-в-heroku" class="section level3" number="10.2.2">
 <h3>
-<span class="header-section-number">9.2.2</span> Как настроить запуск R скрипта по расписанию в Heroku<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-r-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-%D0%BF%D0%BE-%D1%80%D0%B0%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8E-%D0%B2-heroku"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.2</span> Как настроить запуск R скрипта по расписанию в Heroku<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-r-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-%D0%BF%D0%BE-%D1%80%D0%B0%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8E-%D0%B2-heroku"><i class="fas fa-link"></i></a>
 </h3>
 <p>На предыдущем шаге мы развернули в Heroku полноценного бота, но возможно вам необходимо просто настроить отправку какого либо сообщение в telegtam по расписанию. Алгоритм очень похож с развёртыванием бота, но всё таки он немного упрощён.</p>
-<div id="подготовка-проекта" class="section level4" number="9.2.2.1">
+<div id="подготовка-проекта" class="section level4" number="10.2.2.1">
 <h4>
-<span class="header-section-number">9.2.2.1</span> Подготовка проекта<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.2.1</span> Подготовка проекта<a class="anchor" aria-label="anchor" href="#%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0"><i class="fas fa-link"></i></a>
 </h4>
 <p>Мы будем разворачивать тот же скрипт, отправляющий курсы валют, который рассматривали в разеделе <a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-%D0%BF%D0%BE-%D1%80%D0%B0%D1%81%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8E-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-google-cloude-run-job">Как настроить запуск скрипта по рассписанию с помощью Google Cloude Run Job</a>:</p>
 <p>Файл init.R:</p>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">helpers.installPackages</span><span class="op">(</span><span class="st">"httr"</span>, <span class="st">"jsonlite"</span>, <span class="st">"telegram.bot"</span>, <span class="st">"stringr"</span><span class="op">)</span></span></code></pre></div>
 <p>Файл script.R:</p>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jeroen.r-universe.dev/jsonlite">jsonlite</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebeneditos/telegram.bot">telegram.bot</a></span><span class="op">)</span></span>
@@ -1012,7 +1013,7 @@ heroku ps:scale web=1</code></pre>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">send_telegram_message</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">bot_token</span>, <span class="va">chat_id</span>, <span class="va">message</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu">Bot</span><span class="op">(</span>token <span class="op">=</span> <span class="va">bot_token</span><span class="op">)</span></span>
+<span>  <span class="va">bot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/telegram.bot/man/Bot.html">Bot</a></span><span class="op">(</span>token <span class="op">=</span> <span class="va">bot_token</span><span class="op">)</span></span>
 <span>  <span class="va">bot</span><span class="op">$</span><span class="fu">sendMessage</span><span class="op">(</span>chat_id <span class="op">=</span> <span class="va">chat_id</span>, text <span class="op">=</span> <span class="va">message</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
@@ -1039,9 +1040,9 @@ heroku ps:scale web=1</code></pre>
 <span><span class="co"># Выполнение скрипта</span></span>
 <span><span class="fu">execute_script</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="обзор-рабочего-процесса-3" class="section level4" number="9.2.2.2">
+<div id="обзор-рабочего-процесса-3" class="section level4" number="10.2.2.2">
 <h4>
-<span class="header-section-number">9.2.2.2</span> Обзор рабочего процесса<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.2.2</span> Обзор рабочего процесса<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B5%D0%B3%D0%BE-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%B0-3"><i class="fas fa-link"></i></a>
 </h4>
 <ol style="list-style-type: decimal">
 <li>В вашем приложение достаточно двух файлов:
@@ -1091,14 +1092,14 @@ heroku config:set TELEGRAM_CHAT_ID=&lt;ID чата в который будет�
 </div>
 </div>
 </div>
-<div id="какую-из-описанных-облачных-платформ-выбрать" class="section level2" number="9.3">
+<div id="какую-из-описанных-облачных-платформ-выбрать" class="section level2" number="10.3">
 <h2>
-<span class="header-section-number">9.3</span> Какую из описанных облачных платформ выбрать<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA%D1%83%D1%8E-%D0%B8%D0%B7-%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC-%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3</span> Какую из описанных облачных платформ выбрать<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%B0%D0%BA%D1%83%D1%8E-%D0%B8%D0%B7-%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC-%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C"><i class="fas fa-link"></i></a>
 </h2>
 <p>Развёртывание бота на Heroku и Google Cloud Run имеет свои особенности и преимущества, в зависимости от ваших требований и предпочтений. Вот некоторые ключевые моменты, которые могут помочь вам определиться:</p>
-<div id="преимущества-heroku" class="section level3" number="9.3.1">
+<div id="преимущества-heroku" class="section level3" number="10.3.1">
 <h3>
-<span class="header-section-number">9.3.1</span> Преимущества Heroku<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B8%D0%BC%D1%83%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B0-heroku"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.1</span> Преимущества Heroku<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B8%D0%BC%D1%83%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B0-heroku"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li>
@@ -1135,9 +1136,9 @@ heroku config:set TELEGRAM_CHAT_ID=&lt;ID чата в который будет�
 </li>
 </ol>
 </div>
-<div id="преимущества-google-cloud-run" class="section level3" number="9.3.2">
+<div id="преимущества-google-cloud-run" class="section level3" number="10.3.2">
 <h3>
-<span class="header-section-number">9.3.2</span> Преимущества Google Cloud Run<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B8%D0%BC%D1%83%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B0-google-cloud-run"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.2</span> Преимущества Google Cloud Run<a class="anchor" aria-label="anchor" href="#%D0%BF%D1%80%D0%B5%D0%B8%D0%BC%D1%83%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B0-google-cloud-run"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li>
@@ -1173,9 +1174,9 @@ heroku config:set TELEGRAM_CHAT_ID=&lt;ID чата в который будет�
 </li>
 </ol>
 </div>
-<div id="итог" class="section level3" number="9.3.3">
+<div id="итог" class="section level3" number="10.3.3">
 <h3>
-<span class="header-section-number">9.3.3</span> Итог<a class="anchor" aria-label="anchor" href="#%D0%B8%D1%82%D0%BE%D0%B3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.3</span> Итог<a class="anchor" aria-label="anchor" href="#%D0%B8%D1%82%D0%BE%D0%B3"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>Heroku лучше подходит для разработчиков, которые ищут простоту и удобство в развертывании, особенно если вы используете стандартные языки программирования и фреймворки, поддерживаемые Heroku. Он хорош для быстрого старта и имеет много встроенных функций и добавок.</li>
@@ -1184,43 +1185,43 @@ heroku config:set TELEGRAM_CHAT_ID=&lt;ID чата в который будет�
 <p>Выбор между Heroku и Google Cloud Run зависит от ваших требований к проекту и предпочтений в управлении приложением.</p>
 </div>
 </div>
-<div id="заключение-8" class="section level2" number="9.4">
+<div id="заключение-9" class="section level2" number="10.4">
 <h2>
-<span class="header-section-number">9.4</span> Заключение<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4</span> Заключение<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-9"><i class="fas fa-link"></i></a>
 </h2>
 <p>Поздравляю с завершением последней главы! Вы успешно развернули своего бота на Google Cloud Run и готовы к его масштабированию и поддержке в облаке. Надеюсь, вы получили все необходимые знания и навыки для успешного управления и развития вашего бота. Спасибо за участие в этом путешествии, и я надеюсь, что вы продолжите развиваться в мире разработки и анализа данных.</p>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html"><span class="header-section-number">8</span> Упаковываем бота в Docker контейнер</a></div>
-<div class="next"><a href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-9.html">Заключение</a></div>
+<div class="prev"><a href="%D1%83%D0%BF%D0%B0%D0%BA%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80.html"><span class="header-section-number">9</span> Упаковываем бота в Docker контейнер</a></div>
+<div class="next"><a href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-10.html">Заключение</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85"><span class="header-section-number">9</span> Разворачиваем бота в облачных сервисах</a></li>
+<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85"><span class="header-section-number">10</span> Разворачиваем бота в облачных сервисах</a></li>
 <li>
-<a class="nav-link" href="#google-cloud-run"><span class="header-section-number">9.1</span> Google Cloud Run</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5-%D0%BE%D0%B1%D0%BE%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D1%8F"><span class="header-section-number">9.1.1</span> Условные обозначения</a></li>
-<li><a class="nav-link" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-google-cloude-run"><span class="header-section-number">9.1.2</span> Введение в Google Cloude Run</a></li>
-<li><a class="nav-link" href="#%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-%D0%BF%D0%BE-%D1%80%D0%B0%D1%81%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8E-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-google-cloude-run-job"><span class="header-section-number">9.1.3</span> Как настроить запуск скрипта по рассписанию с помощью Google Cloude Run Job</a></li>
-<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-telegram-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-google-cloud-run-service"><span class="header-section-number">9.1.4</span> Разворачиваем Telegram бота в Google Cloud Run Service</a></li>
+<a class="nav-link" href="#google-cloud-run"><span class="header-section-number">10.1</span> Google Cloud Run</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5-%D0%BE%D0%B1%D0%BE%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D1%8F"><span class="header-section-number">10.1.1</span> Условные обозначения</a></li>
+<li><a class="nav-link" href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-google-cloude-run"><span class="header-section-number">10.1.2</span> Введение в Google Cloude Run</a></li>
+<li><a class="nav-link" href="#%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-%D0%BF%D0%BE-%D1%80%D0%B0%D1%81%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8E-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-google-cloude-run-job"><span class="header-section-number">10.1.3</span> Как настроить запуск скрипта по рассписанию с помощью Google Cloude Run Job</a></li>
+<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-telegram-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-google-cloud-run-service"><span class="header-section-number">10.1.4</span> Разворачиваем Telegram бота в Google Cloud Run Service</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#heroku"><span class="header-section-number">9.2</span> Heroku</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-telegram-%D0%B1%D0%BE%D1%82%D0%B0-%D0%BD%D0%B0-heroku"><span class="header-section-number">9.2.1</span> Разворачиваем telegram бота на Heroku</a></li>
-<li><a class="nav-link" href="#%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-r-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-%D0%BF%D0%BE-%D1%80%D0%B0%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8E-%D0%B2-heroku"><span class="header-section-number">9.2.2</span> Как настроить запуск R скрипта по расписанию в Heroku</a></li>
+<a class="nav-link" href="#heroku"><span class="header-section-number">10.2</span> Heroku</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-telegram-%D0%B1%D0%BE%D1%82%D0%B0-%D0%BD%D0%B0-heroku"><span class="header-section-number">10.2.1</span> Разворачиваем telegram бота на Heroku</a></li>
+<li><a class="nav-link" href="#%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-r-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-%D0%BF%D0%BE-%D1%80%D0%B0%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8E-%D0%B2-heroku"><span class="header-section-number">10.2.2</span> Как настроить запуск R скрипта по расписанию в Heroku</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#%D0%BA%D0%B0%D0%BA%D1%83%D1%8E-%D0%B8%D0%B7-%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC-%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C"><span class="header-section-number">9.3</span> Какую из описанных облачных платформ выбрать</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B8%D0%BC%D1%83%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B0-heroku"><span class="header-section-number">9.3.1</span> Преимущества Heroku</a></li>
-<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B8%D0%BC%D1%83%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B0-google-cloud-run"><span class="header-section-number">9.3.2</span> Преимущества Google Cloud Run</a></li>
-<li><a class="nav-link" href="#%D0%B8%D1%82%D0%BE%D0%B3"><span class="header-section-number">9.3.3</span> Итог</a></li>
+<a class="nav-link" href="#%D0%BA%D0%B0%D0%BA%D1%83%D1%8E-%D0%B8%D0%B7-%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC-%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C"><span class="header-section-number">10.3</span> Какую из описанных облачных платформ выбрать</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B8%D0%BC%D1%83%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B0-heroku"><span class="header-section-number">10.3.1</span> Преимущества Heroku</a></li>
+<li><a class="nav-link" href="#%D0%BF%D1%80%D0%B5%D0%B8%D0%BC%D1%83%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B0-google-cloud-run"><span class="header-section-number">10.3.2</span> Преимущества Google Cloud Run</a></li>
+<li><a class="nav-link" href="#%D0%B8%D1%82%D0%BE%D0%B3"><span class="header-section-number">10.3.3</span> Итог</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-8"><span class="header-section-number">9.4</span> Заключение</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-9"><span class="header-section-number">10.4</span> Заключение</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1237,7 +1238,7 @@ heroku config:set TELEGRAM_CHAT_ID=&lt;ID чата в который будет�
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2025-04-27.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2025-04-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
