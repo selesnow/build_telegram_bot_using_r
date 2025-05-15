@@ -207,11 +207,11 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <span><span class="va">cfg</span> <span class="op">&lt;-</span> <span class="fu">read.config</span><span class="op">(</span><span class="st">'config.cfg'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># подключение к SQLite</span></span>
-<span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu">dbConnect</span><span class="op">(</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span></span>
+<span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Создание таблиц в базе</span></span>
-<span><span class="fu">dbExecute</span><span class="op">(</span><span class="va">con</span>, statement <span class="op">=</span> <span class="fu">read_file</span><span class="op">(</span><span class="st">'create_db_data.sql'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">dbExecute</span><span class="op">(</span><span class="va">con</span>, statement <span class="op">=</span> <span class="fu">read_file</span><span class="op">(</span><span class="st">'create_db_state.sql'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExecute.html">dbExecute</a></span><span class="op">(</span><span class="va">con</span>, statement <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_file.html">read_file</a></span><span class="op">(</span><span class="st">'create_db_data.sql'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExecute.html">dbExecute</a></span><span class="op">(</span><span class="va">con</span>, statement <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_file.html">read_file</a></span><span class="op">(</span><span class="st">'create_db_state.sql'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="пишем-функции-для-работы-с-базой-данных" class="section level3" number="4.2.7">
 <h3>
@@ -226,22 +226,22 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <span><span class="co"># получить текущее состояние чата</span></span>
 <span><span class="va">get_state</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">chat_id</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
-<span>  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu">dbConnect</span><span class="op">(</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span></span>
+<span>  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="va">chat_state</span> <span class="op">&lt;-</span> <span class="fu">dbGetQuery</span><span class="op">(</span><span class="va">con</span>, <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_interp.html">str_interp</a></span><span class="op">(</span><span class="st">"SELECT state FROM chat_state WHERE chat_id == ${chat_id}"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">state</span></span>
+<span>  <span class="va">chat_state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_interp.html">str_interp</a></span><span class="op">(</span><span class="st">"SELECT state FROM chat_state WHERE chat_id == ${chat_id}"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">state</span></span>
 <span>  </span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">chat_state</span><span class="op">)</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># установить текущее состояние чата</span></span>
 <span><span class="va">set_state</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">state</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
-<span>  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu">dbConnect</span><span class="op">(</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span></span>
+<span>  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># upsert состояние чата</span></span>
-<span>  <span class="fu">dbExecute</span><span class="op">(</span><span class="va">con</span>, </span>
+<span>  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExecute.html">dbExecute</a></span><span class="op">(</span><span class="va">con</span>, </span>
 <span>            <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_interp.html">str_interp</a></span><span class="op">(</span><span class="st">"</span></span>
 <span><span class="st">            INSERT INTO chat_state (chat_id, state)</span></span>
 <span><span class="st">                VALUES(${chat_id}, '${state}') </span></span>
@@ -250,7 +250,7 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <span><span class="st">            "</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span>
 <span>  </span>
 <span><span class="op">}</span></span>
 <span></span>
@@ -258,10 +258,10 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <span><span class="va">set_chat_data</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">field</span>, <span class="va">value</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
 <span>  </span>
-<span>  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu">dbConnect</span><span class="op">(</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span></span>
+<span>  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># upsert состояние чата</span></span>
-<span>  <span class="fu">dbExecute</span><span class="op">(</span><span class="va">con</span>, </span>
+<span>  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExecute.html">dbExecute</a></span><span class="op">(</span><span class="va">con</span>, </span>
 <span>            <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_interp.html">str_interp</a></span><span class="op">(</span><span class="st">"</span></span>
 <span><span class="st">            INSERT INTO chat_data (chat_id, ${field})</span></span>
 <span><span class="st">                VALUES(${chat_id}, '${value}') </span></span>
@@ -270,7 +270,7 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <span><span class="st">            "</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span>
 <span>  </span>
 <span><span class="op">}</span></span>
 <span></span>
@@ -278,10 +278,10 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <span><span class="va">get_chat_data</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">chat_id</span>, <span class="va">field</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
 <span>  </span>
-<span>  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu">dbConnect</span><span class="op">(</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span></span>
+<span>  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, <span class="va">cfg</span><span class="op">$</span><span class="va">db_settings</span><span class="op">$</span><span class="va">db_path</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># upsert состояние чата</span></span>
-<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">dbGetQuery</span><span class="op">(</span><span class="va">con</span>, </span>
+<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery</a></span><span class="op">(</span><span class="va">con</span>, </span>
 <span>                     <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_interp.html">str_interp</a></span><span class="op">(</span><span class="st">"</span></span>
 <span><span class="st">            SELECT ${field}</span></span>
 <span><span class="st">            FROM chat_data</span></span>
@@ -289,7 +289,7 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <span><span class="st">            "</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">data</span><span class="op">[[</span><span class="va">field</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span>  </span>
@@ -299,7 +299,7 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 * <code>set_state()</code> - записать текущее состояние чата в БД
 * <code>get_chat_data()</code> - получить данные отправленные пользователем
 * <code>set_chat_data()</code> - записать данные полученные от пользователя</p>
-<p>Все функции достаточно простые, они либо читают данные из базы с помощью команды <code>dbGetQuery()</code>, либо совершают <code>UPSERT</code> операцию (изменение существующих данных или запись новых данных в БД), с помощью функции <code>dbExecute()</code>.</p>
+<p>Все функции достаточно простые, они либо читают данные из базы с помощью команды <code><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery()</a></code>, либо совершают <code>UPSERT</code> операцию (изменение существующих данных или запись новых данных в БД), с помощью функции <code><a href="https://dbi.r-dbi.org/reference/dbExecute.html">dbExecute()</a></code>.</p>
 <p>Синтаксис UPSERT операции выглядит следующим образом:</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb82-1"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb82-1" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> chat_data (chat_id, ${field})</span>
 <span id="cb82-2"><a href="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B4%D0%B8%D0%B0%D0%BB%D0%BE%D0%B3%D0%B0-%D1%81-%D0%B1%D0%BE%D1%82%D0%BE%D0%BC.html#cb82-2" tabindex="-1"></a><span class="kw">VALUES</span>(${chat_id}, <span class="st">'${value}'</span>) </span>
@@ -588,7 +588,7 @@ db_path=C:/ПУТЬ/К/ПАПКЕ/ПРОЕКТА/bot.db</code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2025-05-07.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2025-05-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -515,7 +515,7 @@
 <li>Запустите службу через <code>services.msc</code>
 </li>
 </ul>
-<p>В этом разделе мы рассмотрели варианты локального запуска бота, к теме деплоя telegram мы вернёмся в главе <a href="%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85.html#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85">Разворачиваем бота в облачных сервисах</a>.</p>
+<p>В этом разделе мы рассмотрели варианты локального запуска бота, к теме деплоя telegram мы вернёмся в главе <a href="#%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC-%D0%B1%D0%BE%D1%82%D0%B0-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%87%D0%BD%D1%8B%D1%85-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%D1%85">Разворачиваем бота в облачных сервисах</a>.</p>
 </div>
 </div>
 <div id="обработка-голосовых-сообщений.-переводим-голосовое-сообщение-в-текст" class="section level2" number="2.8">
@@ -982,7 +982,7 @@
 <span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="st">'contacts_telegram'</span>, <span class="st">'n'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span> msg <span class="op">=</span> <span class="va">n</span> <span class="op">)</span> </span>
 <span>    </span>
-<span>    <span class="fu">ggplot</span><span class="op">(</span><span class="va">top_active_users</span>, <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu">fct_reorder</span><span class="op">(</span><span class="va">contacts_telegram</span>, <span class="va">msg</span>, <span class="va">median</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">msg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">ggplot</span><span class="op">(</span><span class="va">top_active_users</span>, <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">contacts_telegram</span>, <span class="va">msg</span>, <span class="va">median</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">msg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>      <span class="fu">geom_col</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>fill <span class="op">=</span> <span class="va">msg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>      <span class="fu">theme</span><span class="op">(</span>axis.text.y <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>, </span>
 <span>            plot.subtitle <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1278,7 +1278,7 @@ command2 - Another description</code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2025-05-07.</p>
+    <p>"<strong>Разработка telegram ботов на языке R</strong>" was written by Алексей Селезнёв. It was last built on 2025-05-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
